@@ -6,7 +6,8 @@ namespace ErikWDev {
 	public class Programmeringsfredag {
 
 		public enum Uppgifter { 
-			ARMSTOD
+			ARMSTOD,
+			DUTUB
 		}
 
 		public static Uppgifter uppgift = Uppgifter.ARMSTOD;
@@ -16,6 +17,9 @@ namespace ErikWDev {
 				default:
 				case Uppgifter.ARMSTOD:
 					Armstod.Happiness (args);
+					break;
+				case Uppgifter.DUTUB:
+					DuTub.Efficiency (args);
 					break;
 			}
 		}
@@ -41,27 +45,21 @@ namespace ErikWDev {
 				if (current != 'I') {
 					char next = (i + 1 >= inputCharArray.Length ? inputCharArray[0] : inputCharArray[i + 1]);
 					char prev = (i - 1 >= 0 ? inputCharArray[i - 1] : inputCharArray[inputCharArray.Length - 1]);
-					bool nextIsOpen = (next == 'I' || next == 'H' || next == 'V' || next == 'h' || next == 'B');
-					bool prevIsOpen = (prev == 'I' || prev == 'H' || prev == 'V' || prev == 'v' || prev == 'B');
+					bool nextIsOpen = next != 'v' && next != 'A';
+					bool prevIsOpen = prev != 'h' && prev != 'A';
 
-					if (current == 'H') {
-						if (nextIsOpen) {
-							happiness++;
-							inputCharArray[i] = 'h';
-						}
-					} else if (current == 'V') {
-						if (prevIsOpen) {
-							happiness++;
-							inputCharArray[i] = 'v';
-						}
-					} else if (current == 'A') {
-						if (prevIsOpen) {
-							happiness++;
-							inputCharArray[i] = 'v';
-						} else if (nextIsOpen) {
-							happiness++;
-							inputCharArray[i] = 'h';
-						}
+					if (current == 'H' && nextIsOpen) {
+						happiness++;
+						inputCharArray[i] = 'h';
+					} else if (current == 'V' && prevIsOpen) {
+						happiness++;
+						inputCharArray[i] = 'v';
+					} else if (current == 'A' && prevIsOpen) {
+						happiness++;
+						inputCharArray[i] = 'v';
+					} else if (current == 'A' && nextIsOpen) {
+						happiness++;
+						inputCharArray[i] = 'h';
 					} else if (current == 'B') {
 						if (prevIsOpen && nextIsOpen) {
 							happiness++;
@@ -74,6 +72,20 @@ namespace ErikWDev {
 				}
 			}
 			return happiness;
+		}
+	}
+
+	class DuTub {
+		public static void Efficiency (string[] args) {
+			Console.WriteLine ("Number of videos: ");
+			int n = Int32.Parse(Console.ReadLine ());
+			Console.Clear ();
+
+
+			for (int i = 1; i <= n; i++) {
+				Console.Write ("Video " + i + " length: ");
+			}
+			Console.ReadLine ();
 		}
 	}
 }
