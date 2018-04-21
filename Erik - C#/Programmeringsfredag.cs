@@ -1,17 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Programmeringsfredag {
-    class Armstod {
-        static void Main(string[] args) {
+namespace ErikWDev {
+
+	public class Programmeringsfredag {
+
+		public enum Uppgifter { 
+			ARMSTOD
+		}
+
+		public static Uppgifter uppgift = Uppgifter.ARMSTOD;
+
+		static void Main (string[] args) {
+			switch (uppgift) {
+				default:
+				case Uppgifter.ARMSTOD:
+					Armstod.Happiness (args);
+					break;
+			}
+		}
+	}
+
+	class Armstod {
+		public static void Happiness (string[] arg) {
 			string input;
-			Console.WriteLine("Enter armstod configuration:");
+			Console.WriteLine ("Enter armstod configuration:");
 			input = Console.ReadLine ().ToUpper ();
 			Console.Clear ();
 			Console.WriteLine ("Configuration: " + input);
-			Console.WriteLine ("Happiness: " + CalculateHappiness (input));
+			Console.WriteLine ("Happiness: " + Armstod.CalculateHappiness (input));
 			Console.ReadLine ();
-        }
+		}
 
 		public static int CalculateHappiness (string input) {
 			int happiness = 0;
