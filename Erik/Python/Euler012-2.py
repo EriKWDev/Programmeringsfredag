@@ -9,9 +9,9 @@ def IsPrime2 (number):
         return True
     elif (number % 2 == 0 or number % 3 == 0):
         return False
-    i = 5
+    i = 6
     while (i * i <= number):
-        if (number % i == 0 or number % (i + 2) == 0):
+        if (number % (i - 1) == 0 or number % (i + 1) == 0):
             return False
         i += 6
     return True
