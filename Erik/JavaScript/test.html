@@ -1,0 +1,53 @@
+<script src="https://koda.nu/simple.js">
+     var message = "hello, World!";
+
+     updatesPerSecond = 100;
+     var G = 0.01;
+
+     var particles = [];
+     var currentIndex = 0;
+     var t = 10;
+
+     function Particle (x, y, size, index) {
+          this.x = x;
+          this.y = y;
+          this.size = size;
+          this.index = index;
+
+          this.update = function () {
+               circle (this.x, this.y, this.size, "white");
+               this.x += random (-10, 10);
+               this.y += random (-10, 10);
+          };
+     }
+
+     function SummonParticle (x, y, size) {
+          particles.push (new Particle (x, y, size, currentIndex));
+          currentIndex++;
+     }
+
+     function UpdateParticles () {
+          for (var i = 0; i < particles.length; i++) {
+               particles [i].update ();
+          }
+     }
+
+     function Graphics () {
+          clearScreen ();
+          fill ("black");
+     }
+
+     function update () {
+          Graphics ();
+          UpdateParticles ();
+
+          t -= 1;
+          if (t < 0 && mouse.left) {
+               for (var i = 0; i < 100; i++) {
+                    SummonParticle (mouse.x, mouse.y, 10);
+               }
+               t = 10;
+          }
+     }
+
+</script>

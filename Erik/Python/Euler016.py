@@ -10,4 +10,5 @@ def SumOfDigits (a):
         s += int (b[i])
     return s
 
+
 print (SumOfDigits (n))

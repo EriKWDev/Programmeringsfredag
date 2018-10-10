@@ -2,22 +2,28 @@
 #If d(a) = b and d(b) = a, where a is not equal to b, then a and b are an amicable pair and each of a and b are called amicable numbers.
 #Evaluate the sum of all the amicable numbers under 10000.
 
-#Answer:
+#Answer: 31626
 
-def PrimeFactors (n):
-    i = 1
-    pf = []
-    while (n > 1):
-        if (n % i == 0):
-            n = n / i
-            pf [i] += 1
-            if (i == 1):
-                i = 2
-        else:
-            i += 1
-    return pf
+import math
 
-def AllCombinations(n):
-    return 0
+def ProperDivisorSum (n) :
+    result = 0
+    i = 2
+    while i<= (math.sqrt (n)) :
+        if (n % i == 0) :
+            if (i == (n/i)) :
+                result += + i
+            else :
+                result += (i+n/i)
+        i = i + 1
+    return (result + 1)
 
-print PrimeFactors (12)
+def SumAllAmicableNumbersBelow (n) :
+    a = 0
+    for i in range (0, n) :
+        if ProperDivisorSum (ProperDivisorSum (i)) == i and ProperDivisorSum (i) != i:
+            print i
+            a += i
+    return a
+
+print SumAllAmicableNumbersBelow (10000)
