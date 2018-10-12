@@ -7,12 +7,26 @@
      var bullets = [];
      var enemies = [];
      var particles = [];
+	var dead = false;
 
      updatesPerSecond = 100;
 
      function Start () {
 
      }
+
+	function Restart () {
+		playerDistanceFromBottom = 50;
+		playerStats = {upgradeLevel: 0, score: 0, health: 3};
+		player = new Player (totalWidth/2, totalHeight-playerDistanceFromBottom, "white");
+
+		bullets = [];
+		enemies = [];
+		particles = [];
+		dead = false;
+
+		updatesPerSecond = 100;
+	}
 
      function update () {
           clearScreen ();
@@ -36,8 +50,8 @@
      function Particle (x, y, life) {
           this.x = x;
           this.y = y;
-          this.dirx = random (-2, 1)+1;
-          this.diry = random (-2, 1)+1;
+          this.dirx = Math.random() * (2 - -2) + -2;;
+          this.diry = Math.random() * (2 - -2) + -2;;
           this.life = life;
 
           this.update = function () {
@@ -48,21 +62,49 @@
           }
      }
 
-     function Explode (x, y, n) {
+     function Explode (x, y, n, life=100) {
           for (var i = 0; i < n; i++) {
-               particles.push (new Particle(x, y, 100));
+               particles.push (new Particle(x, y, life));
           }
      }
 
      function SummonEnemies () {
-          if (enemies.length <= 12) {
-               for (var i = 0; i < 10; i++) {
-                    enemies.push (new Enemy (random(50, totalWidth-50), "red", 200, 2, 0));
-               }
-               for (var i = 0; i < 10; i++) {
-                    enemies.push (new Enemy (random(50, totalWidth-50), "green", 400, 4, 0));
-               }
-          }
+          switch (playerStats.upgradeLevel) {
+			case 0: default:
+				if (enemies.length <= 12) {
+					for (var i = 0; i < 15; i++) {
+						enemies.push (new Enemy (random(50, totalWidth-50), "red", 200, 1, 0));
+					}
+					for (var i = 0; i < 10; i++) {
+						enemies.push (new Enemy (random(50, totalWidth-50), "green", 400, 4, 0, 0.3));
+					}
+				}
+				break;
+			case 1:
+				if (playerStats.score < 2500) {
+					if (enemies.length <= 10) {
+						for (var i = 0; i < 20; i++) {
+							enemies.push (new Enemy (random(50, totalWidth-50), "orange", 400, 8, 0, 0.3));
+						}
+						for (var i = 0; i < 3; i++) {
+							enemies.push (new Enemy (random(50, totalWidth-50), "purple", 2000, 7, 0, 0.8, true));
+						}
+					}
+				} else if (playerStats.score < 4000) {
+					if (enemies.length <= 8) {
+						for (var i = 0; i < 20; i++) {
+							enemies.push (new Enemy (random(50, totalWidth-50), "cyan", 250, 12, 0, 0.2));
+						}
+						for (var i = 0; i < 2; i++) {
+							enemies.push (new Enemy (random(50, totalWidth-50), "purple", 2000, 7, 0, 0.8, true));
+						}
+						for (var i = 0; i < 7; i++) {
+							enemies.push (new Enemy (random(50, totalWidth-50), "green", 3300, 9, 0, 0.9, true));
+						}
+					}
+				}
+				break;
+		}
      }
 
      function EnemyUpdate () {
@@ -79,16 +121,31 @@
                          killBullet = true;
                          bulletIndex = j;
 
-                         enemies[i].hurt (bullets [j].damage);
+					if (bullets[j].playerBullet)
+                         	enemies[i].hurt (bullets [j].damage);
+
                          if (enemies[i].health <= 0) {
                               killEnemy = true;
                               enemyIndex = i;
                          }
                     }
+
+				if (distance (player, bullets[j]) <= 12 && !bullets[j].playerBullet) {
+				    player.hurt (1);
+				    killBullet = true;
+				    bulletIndex = j;
+				}
                }
 
-               if (enemies[i].y > totalHeight + 30) {
+			if (distance (player, enemies[i]) <= 14) {
+			    player.hurt (1);
+			    killEnemy = true;
+			    enemyIndex = i;
+			}
+
+               if (enemies[i].y > totalHeight + 10) {
                     playerStats.score -= enemies[enemyIndex].killScore/4;
+				Explode (enemies[enemyIndex].x, enemies[enemyIndex].y, 20, 150);
                     enemies.splice (i, 1);
                }
           }
@@ -133,30 +190,42 @@
      function BackgroundGraphics () {
           fill ("black");
 
-          for (var  i = 0; i < 20; i++) {
-               circle (random(0,totalWidth), random(0,totalHeight), 1, "white");
+          for (var  i = 0; i < 15; i++) {
+               circle (Math.random() * totalWidth, Math.random() * totalHeight, 1, "white");
+
           }
 
           text (15, 30, 15, "Score : " + playerStats.score, "white");
-          text (15, 50, 15, "Ship Level : " + playerStats.upgradeLevel, "white");
+          text (15, 50, 15, "Ship Level : " + (playerStats.upgradeLevel + 1), "white");
           text (15, 70, 15, "Lives : " + playerStats.health, "white");
+
+		if (dead) {
+			updatesPerSecond = 5;
+			text (totalWidth/2 - 400, totalHeight/2, 35, "You died with a score of : " + playerStats.score, "white");
+			text (totalWidth/2 - 200, totalHeight/2 + 60, 35, "Press R to restart...", "white");
+			if (keyboard.r) {
+				Restart ();
+			}
+		}
      }
 
-     function Bullet (x, y, damage) {
-          this.speed = -10;
+     function Bullet (x, y, damage, playerBullet=true) {
+          this.speed =  (playerBullet ? -10 : 5);
 
           this.y = y;
           this.x = x;
           this.damage = 1;
+          this.playerBullet = playerBullet;
 
           this.update = function () {
                this.y += this.speed;
-               line (this.x, this.y, this.x, this.y-14, 3, "blue");
+
+               line (this.x, this.y, this.x, this.y-14, 3, (playerBullet ? "blue" : "red"));
                //circle (this.x, this.y-20, 3, "blue");
           };
      }
 
-     function Enemy (x, _color, attackDelay, health, movePattern) {
+     function Enemy (x, _color, attackDelay, health, movePattern, speed=0.5, usingBullets=false) {
           this.x = x;
           this.y = -40;
           this.attackDelay = attackDelay;
@@ -164,6 +233,13 @@
           this.movePattern = movePattern;
           this.color = _color;
           this.killScore = health*10;
+		this.usingBullets = usingBullets;
+		this.speed = speed;
+
+		var shootDelay = 130;
+		if (this.usingBullets == true) {
+			this.shootTimer = shootDelay;
+		}
 
           this.hurt = function (damage) {
                this.health -= damage;
@@ -171,24 +247,45 @@
 
           this.update = function () {
 
-               circle (this.x, this.y, 9, this.color);
+			if (!this.usingBullets)
+               	circle (this.x, this.y, 9, this.color);
+			else {
+				triangle (this.x, this.y+5, this.x-10, this.y-10, this.x+10, this.y-10, this.color);
+			}
+
+			if (this.usingBullets == true) {
+				this.shootTimer--;
+
+				if (this.shootTimer < 0) {
+					this.shootTimer = shootDelay;
+					this.Shoot ();
+				}
+			}
 
                switch (movePattern) {
                     case 0:
                     default:
+					this.x = x + Math.sin (this.y/80)*50;
                          if (this.y < 30) {
                               this.y += 2;
                          } else {
                               this.attackDelay -= 1;
                          }
                          if (this.attackDelay < 0) {
-                              this.y += 0.5;
-                              this.x = x + Math.sin (this.y/80)*50;
+                              this.y += this.speed;
                          }
                          break;
                }
           }
+
+		this.Shoot = function () {
+			bullets.push (new Bullet (this.x, this.y+10, 1, false));
+		};
      }
+
+	 function Die () {
+		 dead = true;
+	 }
 
      function Player (x, y, _color) {
           this.x = x;
@@ -197,31 +294,59 @@
           this.color = _color;
           var shootDelay = 10;
           var shootTimer = shootDelay;
+		var hurtDelay = 300;
+		var hurtTimer = hurtDelay;
 
           this.update = function () {
                this.upgradeLevel = playerStats.upgradeLevel;
                DrawShip (this.x, this.y, this.upgradeLevel, this.color);
 
                shootTimer -= 1;
+			if (hurtTimer > -10) {
+				hurtTimer -= 1;
+			}
+
                if (shootTimer < 0) {
                     shootTimer = shootDelay;
                     this.Shoot ();
                }
 
-               if (keyboard.right) {
-                    this.x += 4;
+               if (keyboard.right || keyboard.d) {
+                    this.x += 2 * (keyboard.shift ? 2 : 1);
                }
 
-               if (keyboard.left) {
-                    this.x -= 4;
+               if (keyboard.left || keyboard.a) {
+                    this.x -= 2 * (keyboard.shift ? 2 : 1);
+               }
+
+			if ((keyboard.up || keyboard.w) && this.y > totalHeight-playerDistanceFromBottom*5) {
+                    this.y -= 2 * (keyboard.shift ? 2 : 1);
+               }
+
+			if ((keyboard.down || keyboard.s) && this.y < totalHeight-playerDistanceFromBottom) {
+                    this.y += 2 * (keyboard.shift ? 2 : 1);
                }
 
                if (this.upgradeLevel == 0 && playerStats.score >= 1000) {
                     playerStats.upgradeLevel = 1;
+
                }
 
                this.BulletBehaviour ();
           };
+
+          this.hurt = function (damage) {
+			  if (hurtTimer < 0) {
+			       playerStats.health -= damage;
+				  playerStats.score -= 400;
+				  Explode (this.x, this.y, 100, 1000);
+				  if (playerStats.health <= 0) {
+					    Die ();
+				  }
+
+				  hurtTimer = 300;
+			  }
+          }
 
           this.BulletBehaviour = function () {
                for (var i = 0; i < bullets.length; i++) {
