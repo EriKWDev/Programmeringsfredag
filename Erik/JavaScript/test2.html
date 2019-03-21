@@ -90,16 +90,16 @@
 							enemies.push (new Enemy (random(50, totalWidth-50), "purple", 2000, 7, 0, 0.8, true));
 						}
 					}
-				} else if (playerStats.score < 4000) {
-					if (enemies.length <= 8) {
-						for (var i = 0; i < 20; i++) {
-							enemies.push (new Enemy (random(50, totalWidth-50), "cyan", 250, 12, 0, 0.2));
+				} else if (playerStats.score < 10000) {
+					if (enemies.length <= 13) {
+						for (var i = 0; i < 25; i++) {
+							enemies.push (new Enemy (random(50, totalWidth-50), "cyan", 250, 12, 0, 0.4));
 						}
 						for (var i = 0; i < 2; i++) {
 							enemies.push (new Enemy (random(50, totalWidth-50), "purple", 2000, 7, 0, 0.8, true));
 						}
 						for (var i = 0; i < 7; i++) {
-							enemies.push (new Enemy (random(50, totalWidth-50), "green", 3300, 9, 0, 0.9, true));
+							enemies.push (new Enemy (random(50, totalWidth-50), "green", 4300, 9, 0, 0.9, true));
 						}
 					}
 				}
@@ -187,6 +187,8 @@
           }
      }
 
+	var prevScore = 0;
+
      function BackgroundGraphics () {
           fill ("black");
 
@@ -199,7 +201,9 @@
           text (15, 50, 15, "Ship Level : " + (playerStats.upgradeLevel + 1), "white");
           text (15, 70, 15, "Lives : " + playerStats.health, "white");
 
+
 		if (dead) {
+			playerStats.score = prevScore;
 			updatesPerSecond = 5;
 			text (totalWidth/2 - 400, totalHeight/2, 35, "You died with a score of : " + playerStats.score, "white");
 			text (totalWidth/2 - 200, totalHeight/2 + 60, 35, "Press R to restart...", "white");
@@ -207,6 +211,7 @@
 				Restart ();
 			}
 		}
+		prevScore = playerStats.score
      }
 
      function Bullet (x, y, damage, playerBullet=true) {
