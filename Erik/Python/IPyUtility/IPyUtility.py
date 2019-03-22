@@ -53,6 +53,7 @@ class Window(QMainWindow):
 		devices = ["Camera1", "Camera2", "Camera3"]
 		for i in devices:
 			device_table.insertRow(1)
+			device_table.setItem()
 
 		layout = QVBoxLayout()
 		layout.addWidget(device_table)
