@@ -1,7 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QMenu, QApplication, QMainWindow, QAction, qApp, QVBoxLayout, QWidget, QTreeWidget, QTreeWidgetItem, QHeaderView
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import *
 from zeroconf import ServiceBrowser, Zeroconf
 import socket
 import ipaddress
