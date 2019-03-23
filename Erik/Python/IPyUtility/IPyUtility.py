@@ -19,14 +19,30 @@ class CameraListener:
 	def add_service(self, zeroconf, type, name):
 		info = zeroconf.get_service_info(type, name)
 
-		self.window.devices.append((info))
-		self.window.update_devices_tree()
+		new_camera = Camera(name, info.address)
+		# print(new_camera.name)
+		self.window.add_camera(new_camera)
+
+
+class Camera:
+	def __init__(self, name, byte_ip_address):
+		self.name = name.split(".")[0]
+		self.ip_address = str(self.byte_ip_address_to_ip_addres(byte_ip_address))
+		self.serial_number = "".join(self.name.split("AXIS")[1].split(" "))
+
+	def byte_ip_address_to_ip_addres(self, b):
+		return ipaddress.ip_address(int.from_bytes(b, "big"))
+
+		# devices_tree_item.setText(0, self.devices[i].name.split(".")[0])
+		# devices_tree_item.setText(1, str(self.byte_address_to_ip_addres(self.devices[i].address)))
+		# devices_tree_item.setText(2, self.devices[i].name.split("AXIS")[1])
 
 
 class Window(QMainWindow):
 
 	def __init__(self):
 		super().__init__()
+		self.devices = []
 		self.init_search_for_cameras()
 
 		# Menu Bar
@@ -43,6 +59,9 @@ class Window(QMainWindow):
 		# Create Menu Actions
 		self.quit_action = QAction("Exit", self)
 		self.quit_action.setShortcut("Ctrl+q")
+
+		self.refresh_action = QAction("Refresh", self)
+		self.refresh_action.setShortcut("Ctrl+r")
 
 		self.help_action = QAction("About AXIS IP Utility", self)
 		self.help_action.setShortcut("Ctrl+h")
@@ -69,6 +88,7 @@ class Window(QMainWindow):
 		tools_menu.addAction(self.assign_ip_address_action)
 		tools_menu.addAction(self.assign_serial_no_ip_address_action)
 		tools_menu.addAction(self.test_ip_address_action)
+		tools_menu.addAction(self.refresh_action)
 
 		help_menu.addAction(self.help_action)
 
@@ -87,16 +107,15 @@ class Window(QMainWindow):
 		self.devices_tree.customContextMenuRequested.connect(self.open_menu)
 		self.devices_tree.setContextMenuPolicy(Qt.CustomContextMenu)
 
-		self.update_devices_tree()
-
-		layout = QVBoxLayout()
-		layout.addWidget(self.devices_tree)
-		main_widget = QWidget()
-		main_widget.setLayout(layout)
-		self.setCentralWidget(main_widget)
+		self.layout = QVBoxLayout()
+		self.layout.addWidget(self.devices_tree)
+		self.main_widget = QWidget()
+		self.main_widget.setLayout(self.layout)
+		self.setCentralWidget(self.main_widget)
 
 		# Events
 		self.quit_action.triggered.connect(self.quit_trigger)
+		self.refresh_action.triggered.connect(self.refresh_trigger)
 		self.open_in_web_browser.triggered.connect(self.open_in_web_browser_trigger)
 		self.devices_tree.itemDoubleClicked.connect(self.open_in_web_browser_trigger)
 
@@ -112,27 +131,35 @@ class Window(QMainWindow):
 		else:
 			self.status_bar.showMessage("{} devices".format(len(self.devices)))
 
-	def update_devices_tree(self):
-		self.devices_tree.clear()
+	def add_camera(self, camera):
+		self.devices.append(camera)
 
-		for i in range(0, len(self.devices)):
-			devices_tree_item = QTreeWidgetItem(self.devices_tree)
-			# print(self.devices[i])
-			devices_tree_item.setText(0, self.devices[i].name.split(".")[0])
-			devices_tree_item.setText(1, str(self.byte_address_to_ip_addres(self.devices[i].address)))
-			devices_tree_item.setText(2, self.devices[i].name.split("AXIS")[1])
-			# print(ipaddress.ip_address(int.from_bytes(info.address, "big")))
+		devices_tree_item = QTreeWidgetItem(self.devices_tree)
+		devices_tree_item.setText(0, camera.name)
+		devices_tree_item.setText(1, camera.ip_address)
+		devices_tree_item.setText(2, camera.serial_number)
 
 		self.update_status_bar()
 
+	def refresh_trigger(self):
+		self.reset()
+		self.init_search_for_cameras()
+
+	def reset(self):
+		if(self.zeroconf):
+			self.zeroconf.close()
+
+		if(self.devices_tree):
+			self.devices_tree.clearSelection()
+			self.devices_tree.clear()
+
+		if(self.devices):
+			self.devices = []
+
 	def init_search_for_cameras(self):
-		self.devices = []
 		self.zeroconf = Zeroconf()
 		self.listener = CameraListener(self)
 		self.browser = ServiceBrowser(self.zeroconf, "_http._tcp.local.", self.listener)
-
-	def byte_address_to_ip_addres(self, b):
-		return ipaddress.ip_address(int.from_bytes(b, "big"))
 
 	def open_menu(self, position):
 		menu = QMenu()
@@ -145,7 +172,6 @@ class Window(QMainWindow):
 		if item:
 			ip_address = item[0].text(1)
 			url = "http://{}/".format(ip_address)
-			print(url)
 			webbrowser.open(url)
 
 	def quit_trigger(self):

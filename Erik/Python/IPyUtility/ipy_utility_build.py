@@ -1,6 +1,6 @@
 from setuptools import setup
 
 setup(
-app=["IPyUtilities.py"],
+app=["IPyUtility.py"],
 setup_requires=["py2app"],
 )
