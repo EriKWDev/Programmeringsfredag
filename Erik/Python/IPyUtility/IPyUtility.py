@@ -1,11 +1,13 @@
 import sys
-from PyQt5.QtWidgets import QMenu, QApplication, QMainWindow, QAction, qApp, QVBoxLayout, QWidget, QTreeWidget, QTreeWidgetItem, QHeaderView
+from PyQt5.QtWidgets import QMenu, QApplication, QMainWindow, QAction, qApp, QVBoxLayout, QWidget, QTreeWidget, QTreeWidgetItem, QHeaderView, QLabel
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QIcon
 from zeroconf import ServiceBrowser, Zeroconf
-import socket
-import ipaddress
-import webbrowser
-import random
+import os
+import socket								# Part of Zeroconf Scanner
+import ipaddress							# Convert bytes to ipaddresses
+import webbrowser							# Open camera in webbrowser
+import ctypes								# Fix Icon
 
 
 class CameraListener:
@@ -20,11 +22,6 @@ class CameraListener:
 		info = zeroconf.get_service_info(type, name)
 
 		new_camera = Camera(name, info.address)
-		# print(new_camera.name)
-		self.window.add_camera(new_camera)
-
-	def add_fake_service(self, name):
-		new_camera = Camera(name, bytes([192, random.randint(1, 240), random.randint(1,4), random.randint(1, 240)]))
 		self.window.add_camera(new_camera)
 
 
@@ -32,14 +29,10 @@ class Camera:
 	def __init__(self, name, byte_ip_address):
 		self.name = name.split(".")[0]
 		self.ip_address = str(self.byte_ip_address_to_ip_addres(byte_ip_address))
-		self.serial_number = "".join(self.name.split("AXIS")[1].split(" "))
+		self.serial_number = self.name
 
 	def byte_ip_address_to_ip_addres(self, b):
 		return ipaddress.ip_address(int.from_bytes(b, "big"))
-
-		# devices_tree_item.setText(0, self.devices[i].name.split(".")[0])
-		# devices_tree_item.setText(1, str(self.byte_address_to_ip_addres(self.devices[i].address)))
-		# devices_tree_item.setText(2, self.devices[i].name.split("AXIS")[1])
 
 
 class Window(QMainWindow):
@@ -85,6 +78,8 @@ class Window(QMainWindow):
 		self.open_in_web_browser = QAction("Open in Web Browser", self)
 		self.open_in_web_browser.setShortcut("Ctrl+o")
 
+		self.language_english_action = QAction("English", self)
+
 		# Add Menu Actions
 		file_menu.addAction(self.quit_action)
 
@@ -95,6 +90,8 @@ class Window(QMainWindow):
 		tools_menu.addAction(self.refresh_action)
 
 		help_menu.addAction(self.help_action)
+
+		view_language_menu.addAction(self.language_english_action)
 
 		# List
 		self.devices = []
@@ -124,21 +121,22 @@ class Window(QMainWindow):
 		self.open_in_web_browser.triggered.connect(self.open_in_web_browser_trigger)
 		self.devices_tree.itemDoubleClicked.connect(self.open_in_web_browser_trigger)
 
-		# DEBUGDEBUGDEBUGDEBUG TEST
-		for i in range (0, 47):
-			self.listener.add_fake_service("AXIS Camera #{} -KHFJKDFJKDJFH.sdfsdfdsf.sdfsdf".format(random.randint(2000, 6000)))
-
 		# Show Window
+		script_path = os.path.dirname(os.path.realpath(__file__))
+		self.setWindowIcon(QIcon("{}{}IPycon.png".format(script_path, os.path.sep)))
 		self.setWindowTitle("AXIS IP Utility in Python - Erik Wilhelm Gren 2019")
+		self.label = QLabel()
+		self.label.setText("Interface: {}".format(socket.gethostbyname(socket.gethostname())))
+		self.status_bar.addPermanentWidget(self.label)
 		self.update_status_bar()
 		self.resize(640, 300)
 		self.show()
 
 	def update_status_bar(self):
 		if len(self.devices) == 1:
-			self.status_bar.showMessage("{} device".format(len(self.devices)))
+			self.status_bar.showMessage("1 device", 60)
 		else:
-			self.status_bar.showMessage("{} devices".format(len(self.devices)))
+			self.status_bar.showMessage("{} devices".format(len(self.devices)), 60)
 
 	def search_devices(self, query):
 		pass
@@ -155,7 +153,7 @@ class Window(QMainWindow):
 
 	def refresh_trigger(self):
 		self.reset()
-		self.init_search_for_cameras() # SOMETHING'S BROKEN ON WINDOWS 10!
+		self.reset_search_for_cameras() # SOMETHING'S BROKEN ON WINDOWS 10!
 
 	def reset(self):
 		if(self.zeroconf):
@@ -169,6 +167,11 @@ class Window(QMainWindow):
 			self.devices = []
 
 		self.update_status_bar()
+
+	def reset_search_for_cameras(self):
+		self.zeroconf = Zeroconf()
+		self.listener = CameraListener(self)
+		self.browser = ServiceBrowser(self.zeroconf, "_http._tcp.local.", self.listener)
 
 	def init_search_for_cameras(self):
 		self.zeroconf = Zeroconf()
@@ -193,6 +196,9 @@ class Window(QMainWindow):
 
 
 if __name__ == "__main__":
+	app_id = "axis.iputility.ipyutility.0.2.1"
+	ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(app_id)
+
 	app = QApplication(sys.argv)
 	window = Window()
 
