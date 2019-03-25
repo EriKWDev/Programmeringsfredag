@@ -103,6 +103,8 @@ class Window(QMainWindow):
 		self.devices_tree.header().setSectionResizeMode(1, QHeaderView.Stretch)
 		self.devices_tree.header().setSectionResizeMode(2, QHeaderView.Stretch)
 
+		self.devices_tree.sortByColumn(0, 0)
+
 		self.devices_tree.customContextMenuRequested.connect(self.open_menu)
 		self.devices_tree.setContextMenuPolicy(Qt.CustomContextMenu)
 
