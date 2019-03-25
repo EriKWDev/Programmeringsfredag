@@ -5,6 +5,7 @@ from zeroconf import ServiceBrowser, Zeroconf
 import socket
 import ipaddress
 import webbrowser
+import random
 
 
 class CameraListener:
@@ -20,6 +21,10 @@ class CameraListener:
 
 		new_camera = Camera(name, info.address)
 		# print(new_camera.name)
+		self.window.add_camera(new_camera)
+
+	def add_fake_service(self, name):
+		new_camera = Camera(name, bytes([192, random.randint(1, 240), random.randint(1,4), random.randint(1, 240)]))
 		self.window.add_camera(new_camera)
 
 
@@ -94,6 +99,7 @@ class Window(QMainWindow):
 		# List
 		self.devices = []
 		self.devices_tree = QTreeWidget()
+		self.devices_tree.setSortingEnabled(True)
 
 		self.devices_tree.headerItem().setText(0, "Name")
 		self.devices_tree.headerItem().setText(1, "IP Address")
@@ -102,8 +108,6 @@ class Window(QMainWindow):
 		self.devices_tree.header().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 		self.devices_tree.header().setSectionResizeMode(1, QHeaderView.Stretch)
 		self.devices_tree.header().setSectionResizeMode(2, QHeaderView.Stretch)
-
-		self.devices_tree.sortByColumn(0, 0) #SORTSORT
 
 		self.devices_tree.customContextMenuRequested.connect(self.open_menu)
 		self.devices_tree.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -120,6 +124,10 @@ class Window(QMainWindow):
 		self.open_in_web_browser.triggered.connect(self.open_in_web_browser_trigger)
 		self.devices_tree.itemDoubleClicked.connect(self.open_in_web_browser_trigger)
 
+		# DEBUGDEBUGDEBUGDEBUG TEST
+		for i in range (0, 47):
+			self.listener.add_fake_service("AXIS Camera #{} -KHFJKDFJKDJFH.sdfsdfdsf.sdfsdf".format(random.randint(2000, 6000)))
+
 		# Show Window
 		self.setWindowTitle("AXIS IP Utility in Python - Erik Wilhelm Gren 2019")
 		self.update_status_bar()
@@ -131,6 +139,9 @@ class Window(QMainWindow):
 			self.status_bar.showMessage("{} device".format(len(self.devices)))
 		else:
 			self.status_bar.showMessage("{} devices".format(len(self.devices)))
+
+	def search_devices(self, query):
+		pass
 
 	def add_camera(self, camera):
 		self.devices.append(camera)
@@ -156,6 +167,8 @@ class Window(QMainWindow):
 
 		if(self.devices):
 			self.devices = []
+
+		self.update_status_bar()
 
 	def init_search_for_cameras(self):
 		self.zeroconf = Zeroconf()
