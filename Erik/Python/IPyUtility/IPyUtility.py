@@ -142,7 +142,7 @@ class Window(QMainWindow):
 
 	def refresh_trigger(self):
 		self.reset()
-		self.init_search_for_cameras()
+		self.init_search_for_cameras() # SOMETHING'S BROKEN ON WINDOWS 10!
 
 	def reset(self):
 		if(self.zeroconf):
