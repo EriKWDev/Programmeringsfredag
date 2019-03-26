@@ -1,3 +1,3 @@
 import webbrowser
 
-print(webbrowser._browsers)
+webbrowser.get(using="safari").open("https://google.com/")

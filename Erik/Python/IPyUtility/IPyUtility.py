@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QMenu, QApplication, QMainWindow, QAction, qApp, QVBoxLayout, QWidget, QTreeWidget, QTreeWidgetItem, QHeaderView, QLabel
+from PyQt5.QtWidgets import QMenu, QApplication, QMainWindow, QAction, qApp, QVBoxLayout, QWidget, QTreeWidget, QTreeWidgetItem, QHeaderView, QLabel, QLineEdit, QPushButton
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 from zeroconf import ServiceBrowser, Zeroconf
@@ -7,7 +7,7 @@ import os
 import socket								# Part of Zeroconf Scanner
 import ipaddress							# Convert bytes to ipaddresses
 import webbrowser							# Open camera in webbrowser
-import ctypes								# Fix Icon
+# import ctypes								# Fix Icon
 
 
 class CameraListener:
@@ -102,14 +102,22 @@ class Window(QMainWindow):
 		self.devices_tree.headerItem().setText(1, "IP Address")
 		self.devices_tree.headerItem().setText(2, "Serial Number")
 
-		self.devices_tree.header().setSectionResizeMode(0, QHeaderView.ResizeToContents)
-		self.devices_tree.header().setSectionResizeMode(1, QHeaderView.Stretch)
-		self.devices_tree.header().setSectionResizeMode(2, QHeaderView.Stretch)
+		self.devices_tree.setColumnWidth(0, 200)
+		self.devices_tree.setColumnWidth(1, 180)
+
+		self.devices_tree.header().setSectionResizeMode(0, QHeaderView.Interactive)
+		self.devices_tree.header().setSectionResizeMode(1, QHeaderView.Interactive)
+		self.devices_tree.header().setSectionResizeMode(2, QHeaderView.Interactive)
 
 		self.devices_tree.customContextMenuRequested.connect(self.open_menu)
 		self.devices_tree.setContextMenuPolicy(Qt.CustomContextMenu)
 
+		# Layout
+		self.text_filter = QLineEdit()
+		self.text_filter.setPlaceholderText("Type to filter...")
+
 		self.layout = QVBoxLayout()
+		self.layout.addWidget(self.text_filter)
 		self.layout.addWidget(self.devices_tree)
 		self.main_widget = QWidget()
 		self.main_widget.setLayout(self.layout)
@@ -118,6 +126,9 @@ class Window(QMainWindow):
 		# Events
 		self.quit_action.triggered.connect(self.quit_trigger)
 		self.refresh_action.triggered.connect(self.refresh_trigger)
+
+		self.text_filter.textChanged.connect(self.search_devices)
+
 		self.open_in_web_browser.triggered.connect(self.open_in_web_browser_trigger)
 		self.devices_tree.itemDoubleClicked.connect(self.open_in_web_browser_trigger)
 
@@ -125,6 +136,7 @@ class Window(QMainWindow):
 		script_path = os.path.dirname(os.path.realpath(__file__))
 		self.setWindowIcon(QIcon("{}{}IPycon.png".format(script_path, os.path.sep)))
 		self.setWindowTitle("AXIS IP Utility in Python - Erik Wilhelm Gren 2019")
+
 		self.label = QLabel()
 		self.label.setText("Interface: {}".format(socket.gethostbyname(socket.gethostname())))
 		self.status_bar.addPermanentWidget(self.label)
@@ -138,8 +150,22 @@ class Window(QMainWindow):
 		else:
 			self.status_bar.showMessage("{} devices".format(len(self.devices)), 60)
 
-	def search_devices(self, query):
-		pass
+	def search_devices(self):
+		query = self.text_filter.text()
+		print(query)
+		if query == "":
+			all_items = self.devices_tree.findItems("", Qt.MatchFlag(1), 0)
+			for item in all_items:
+				item.setHidden(False)
+		else:
+			all_items = self.devices_tree.findItems("", Qt.MatchFlag(1), 0)
+			for item in all_items:
+				item.setHidden(True)
+
+			items = self.devices_tree.findItems(query, Qt.MatchFlag(1), 0) + self.devices_tree.findItems(query, Qt.MatchFlag(1), 1)
+			for item in items:
+				item.setHidden(False)
+				print(item.text(0))
 
 	def add_camera(self, camera):
 		self.devices.append(camera)
@@ -196,11 +222,16 @@ class Window(QMainWindow):
 
 
 if __name__ == "__main__":
-	app_id = "axis.iputility.ipyutility.0.2.1"
-	ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(app_id)
+	#app_id = "axis.iputility.ipyutility.0.2.1"
+	#ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(app_id)
 
 	app = QApplication(sys.argv)
 	window = Window()
+
+	#for i in range(0, 5):
+	#	window.add_camera(Camera("AXIS Camera {} - ABCDEFG".format(i), bytes([192, 168, 0, i*i])))
+
+	#window.search_devices("0.16")
 
 	sys.exit(app.exec_())
 	window.zeroconf.close()
