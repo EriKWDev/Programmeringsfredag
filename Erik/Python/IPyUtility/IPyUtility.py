@@ -7,7 +7,7 @@ import os
 import socket								# Part of Zeroconf Scanner
 import ipaddress							# Convert bytes to ipaddresses
 import webbrowser							# Open camera in webbrowser
-# import ctypes								# Fix Icon
+import ctypes								# Fix Icon
 
 
 class CameraListener:
@@ -20,16 +20,23 @@ class CameraListener:
 
 	def add_service(self, zeroconf, type, name):
 		info = zeroconf.get_service_info(type, name)
-
-		new_camera = Camera(name, info.address)
+		print(type)
+		print(info)
+		print(zeroconf)
+		new_camera = Camera(name, info.address, info.server)
 		self.window.add_camera(new_camera)
 
 
 class Camera:
-	def __init__(self, name, byte_ip_address):
+	def __init__(self, name, byte_ip_address, server):
 		self.name = name.split(".")[0]
 		self.ip_address = str(self.byte_ip_address_to_ip_addres(byte_ip_address))
-		self.serial_number = self.name
+		if server.__contains__("axis-"):
+			server = server.split("-")[1].upper()
+		else:
+			server = name
+
+		self.serial_number = server.split(".")[0]
 
 	def byte_ip_address_to_ip_addres(self, b):
 		return ipaddress.ip_address(int.from_bytes(b, "big"))
@@ -102,8 +109,8 @@ class Window(QMainWindow):
 		self.devices_tree.headerItem().setText(1, "IP Address")
 		self.devices_tree.headerItem().setText(2, "Serial Number")
 
-		self.devices_tree.setColumnWidth(0, 200)
-		self.devices_tree.setColumnWidth(1, 180)
+		self.devices_tree.setColumnWidth(0, 260)
+		self.devices_tree.setColumnWidth(1, 130)
 
 		self.devices_tree.header().setSectionResizeMode(0, QHeaderView.Interactive)
 		self.devices_tree.header().setSectionResizeMode(1, QHeaderView.Interactive)
@@ -146,13 +153,13 @@ class Window(QMainWindow):
 
 	def update_status_bar(self):
 		if len(self.devices) == 1:
-			self.status_bar.showMessage("1 device", 60)
+			self.status_bar.showMessage("1 device")
 		else:
-			self.status_bar.showMessage("{} devices".format(len(self.devices)), 60)
+			self.status_bar.showMessage("{} devices".format(len(self.devices)))
 
 	def search_devices(self):
 		query = self.text_filter.text()
-		print(query)
+		# print(query)
 		if query == "":
 			all_items = self.devices_tree.findItems("", Qt.MatchFlag(1), 0)
 			for item in all_items:
@@ -162,10 +169,10 @@ class Window(QMainWindow):
 			for item in all_items:
 				item.setHidden(True)
 
-			items = self.devices_tree.findItems(query, Qt.MatchFlag(1), 0) + self.devices_tree.findItems(query, Qt.MatchFlag(1), 1)
+			items = self.devices_tree.findItems(query, Qt.MatchFlag(1), 0) + self.devices_tree.findItems(query, Qt.MatchFlag(1), 1) + self.devices_tree.findItems(query, Qt.MatchFlag(1), 2)
 			for item in items:
 				item.setHidden(False)
-				print(item.text(0))
+				# print(item.text(0))
 
 	def add_camera(self, camera):
 		self.devices.append(camera)
@@ -222,14 +229,14 @@ class Window(QMainWindow):
 
 
 if __name__ == "__main__":
-	#app_id = "axis.iputility.ipyutility.0.2.1"
-	#ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(app_id)
+	app_id = "axis.iputility.ipyutility.0.2.1"
+	ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(app_id)
 
 	app = QApplication(sys.argv)
 	window = Window()
 
-	#for i in range(0, 5):
-	#	window.add_camera(Camera("AXIS Camera {} - ABCDEFG".format(i), bytes([192, 168, 0, i*i])))
+	# for i in range(0, 5):
+	# 	window.add_camera(Camera("AXIS DEBUG {} - ABCDEFG".format(i), bytes([192, 168, 0, i*i])))
 
 	#window.search_devices("0.16")
 
