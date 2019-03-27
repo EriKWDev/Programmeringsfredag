@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QMenu, QApplication, QMainWindow, QAction, qApp, QVBoxLayout, QWidget, QTreeWidget, QTreeWidgetItem, QHeaderView, QLabel, QLineEdit, QPushButton
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QPixmap
 from zeroconf import ServiceBrowser, Zeroconf
 import os
 import socket								# Part of Zeroconf Scanner
@@ -133,8 +133,6 @@ class Window(QMainWindow):
 		self.devices_tree.itemDoubleClicked.connect(self.open_in_web_browser_trigger)
 
 		# Show Window
-		script_path = os.path.dirname(os.path.realpath(__file__))
-		self.setWindowIcon(QIcon("{}{}IPycon.png".format(script_path, os.path.sep)))
 		self.setWindowTitle("AXIS IP Utility in Python - Erik Wilhelm Gren 2019")
 
 		self.label = QLabel()
@@ -145,10 +143,10 @@ class Window(QMainWindow):
 		self.show()
 
 	def update_status_bar(self):
-		if len(self.devices) == 1:
-			self.status_bar.showMessage("1 device", 60)
-		else:
-			self.status_bar.showMessage("{} devices".format(len(self.devices)), 60)
+		self.set_status_bar(("{} device{}".format(len(self.devices), ("" if len(self.devices) == 1 else "s"))))
+
+	def set_status_bar(self, text):
+		self.status_bar.showMessage(text)
 
 	def search_devices(self):
 		query = self.text_filter.text()
@@ -157,6 +155,7 @@ class Window(QMainWindow):
 			all_items = self.devices_tree.findItems("", Qt.MatchFlag(1), 0)
 			for item in all_items:
 				item.setHidden(False)
+			self.update_status_bar()
 		else:
 			all_items = self.devices_tree.findItems("", Qt.MatchFlag(1), 0)
 			for item in all_items:
@@ -166,6 +165,7 @@ class Window(QMainWindow):
 			for item in items:
 				item.setHidden(False)
 				print(item.text(0))
+			self.set_status_bar("{} device{}".format(len(items), ("" if len(items) == 1 else "s")))
 
 	def add_camera(self, camera):
 		self.devices.append(camera)
@@ -226,12 +226,12 @@ if __name__ == "__main__":
 	#ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(app_id)
 
 	app = QApplication(sys.argv)
+	script_path = os.path.dirname(os.path.realpath(__file__))
+	app.setWindowIcon(QIcon(QPixmap("{}{}IPycon.png".format(script_path, os.path.sep))))
 	window = Window()
 
 	#for i in range(0, 5):
-	#	window.add_camera(Camera("AXIS Camera {} - ABCDEFG".format(i), bytes([192, 168, 0, i*i])))
-
-	#window.search_devices("0.16")
+	#	window.add_camera(Camera("AXIS DEBUG {} - ABCDEFG".format(i), bytes([192, 168, 0, i*i])))
 
 	sys.exit(app.exec_())
 	window.zeroconf.close()
