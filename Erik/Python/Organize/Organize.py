@@ -1,5 +1,5 @@
 import sys, os, ctypes
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGridLayout, QAction, QLabel, QTreeWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QGridLayout, QGroupBox, QVBoxLayout, QAction, QLabel, QTreeWidget
 from PyQt5.QtCore import Qt
 
 
@@ -8,19 +8,30 @@ class MainWindow(QMainWindow):
 		super().__init__()
 
 		# Create layout
-		self.grid_layout = QGridLayout()
-		self.setLayout(self.grid_layout)
+		self.files_group_box = QGroupBox("Explorer")
+		self.group_box_layout = QGroupBox
+		self.files_grid_layout = QGridLayout()
+		self.v_box_layout = QVBoxLayout()
+		self.files_group_box.setLayout(self.files_grid_layout)
+		self.v_box_layout.addWidget(self.files_group_box)
 
 		# Menus and Actions
 		self.add_menus()
 		self.add_actions()
+
+		# File Browser
+		self.file_tree = QTreeWidget()
+		self.file_tree.headerItem().setText(0, "Files")
+		self.file_tree.setColumnWidth(0, 260)
+		self.files_grid_layout.addWidget(self.file_tree, 0, 0)
 
 		# Status Bar
 		self.label = QLabel()
 		self.label.setText("Hello, World!")
 		self.status_bar.addPermanentWidget(self.label)
 
-		# Show Window
+		# Set Layout and Show Window
+		self.setLayout(self.v_box_layout)
 		self.init_window()
 
 	# Create and add menu_bar, status_bar, and root menus
