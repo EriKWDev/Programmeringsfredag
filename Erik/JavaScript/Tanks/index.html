@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Tanks Game</title>
+	</head>
+	<body>
+		<script src="https://koda.nu/simple.js">
+			updatesPerSecond = 60;
+
+			class Bullet {
+				constructor(owner, x, y, angle, speed, bounces, color=COLORS.gray1, scale=TANKSCALE) {
+					this.x = x;
+					this.y = y;
+					this.angle = angle;
+					this.speed = speed;
+					this.bounces = bounces;
+					this.color = color;
+					this.scale = scale;
+					this.tolerance = 50 * this.scale;
+					this.owner = owner;
+				}
+
+				update() {
+					if(this.x > totalWidth + this.tolerance  || this.x < -this.tolerance  || this.y > totalHeight + this.tolerance  || this.y < -this.tolerance) {
+						this.die();
+					}  else {
+						this.draw();
+						this.x += cos(this.angle) * this.speed;
+						this.y += sin(this.angle) * this.speed;
+					}
+				}
+
+				draw() {
+					save();
+					translate(this.x, this.y);
+					rotateRadians(this.angle);
+					cRectangle(0, 0, 10*this.scale, 5*this.scale, this.color);
+					restore();
+				}
+
+				die() {
+					this.owner.bullets.splice(this.owner.bullets.indexOf(this), 1);
+				}
+			}
+
+			class Tank {
+				constructor(x, y, colors, maxBullets=5, shootDelay=30, scale=TANKSCALE) {
+					this.x = x;
+				  	this.y = y;
+					this.colors = colors;
+					this.shootDelay = shootDelay;
+					this.shootTimer = 0;
+				    this.scale = scale;
+					this.length = 60*this.scale;
+				  	this.width = 45*this.scale;
+				  	this.aimAngle = 0;
+				  	this.angle = 0;
+					this.hasShot = false;
+					this.bullets = [];
+					this.maxBullets = maxBullets;
+					this.speed = 2;
+				}
+
+				update() {
+					for(let bullet of this.bullets) {
+						bullet.update();
+					}
+					this.aimAngle = -Math.atan2((this.y-mouse.y),(mouse.x-this.x));
+					drawTank(this.x, this.y, this.angle, this.aimAngle, this.width, this.length, this.colors)
+
+					let turnSpeed = 0.03;
+
+				    if(keyboard.up || keyboard.w) {
+				    	//this.angle = moveTowards(this.angle, this.aimAngle, turnSpeed);
+				      	this.x += cos(this.angle) * this.speed;
+				      	this.y += sin(this.angle) * this.speed;
+					} else if(keyboard.space) {
+						this.angle = moveTowards(this.angle, this.aimAngle, turnSpeed);
+				      	this.x += cos(this.angle) * this.speed;
+				      	this.y += sin(this.angle) * this.speed;
+				    } else if(keyboard.down || keyboard.s) {
+				    	this.angle = moveTowards(this.angle, this.aimAngle, turnSpeed);
+				      	this.x -= cos(this.angle) * this.speed;
+				      	this.y -= sin(this.angle) * this.speed;
+				    }
+
+					if(keyboard.right || keyboard.d) {
+						this.angle = moveTowards(this.angle, this.angle + turnSpeed*2, turnSpeed);
+					} else if(keyboard.left || keyboard.a) {
+						this.angle = moveTowards(this.angle, this.angle - turnSpeed*2, turnSpeed);
+					}
+
+					this.shootTimer--;
+
+					if(mouse.left && this.bullets.length < this.maxBullets) {
+						if(this.hasShot) {
+							if (this.shootTimer <= 0) {
+								this.shoot();
+							}
+						} else {
+							this.shoot();
+						}
+					} else if (!mouse.left) {
+						this.hasShot = false;
+					}
+				}
+
+				shoot() {
+					this.bullets.push(new Bullet(this, this.x+cos(this.aimAngle)*this.length/1.3, this.y+sin(this.aimAngle)*this.length/1.3, this.aimAngle, 3.5, 2));
+					this.shootTimer = this.shootDelay;
+					this.hasShot = true;
+				}
+			}
+
+			function drawTank(x, y, angle, aimAngle, width, length, colors) {
+				save();
+				translate(x, y);
+				rotateRadians(angle);
+				cRectangle(0, 0, length, width, colors.body);
+				rotateRadians(aimAngle-angle);
+				cRectangle(0, 0, width/2, width/2, colors.head);
+				cRectangle(length/2.12, 0, length/1.6, width/4, colors.gun);
+				restore();
+			}
+
+			function moveTowards(current, target, maxDelta) {
+				if(Math.abs(target - current) <= maxDelta) {
+					return target;
+				}
+				return current + Math.sign(target - current) * maxDelta * getTurnDirection(current, target);
+			}
+
+			function getTurnDirection(current, target) {
+				let diff =(target - current)%(2*pi);
+				return(Math.abs(diff) > pi ? -1 : 1)
+			}
+
+			function cRectangle(x, y, w, h, color) {
+				rectangle(x-w/2, y-h/2, w, h, color)
+			}
+
+			function tankColors(bodyc, headc, gunc) {
+				return {
+					body:bodyc,
+					head:headc,
+					gun:gunc
+				};
+			}
+
+			function getRandomBlockColor(seed) {
+				let c = randomFromSeed(30, 90, seed);
+				return "rgb(" + c + ", " + c + ", " + c + ")";
+			}
+
+			function randomFromSeed (min=0, max=1, seed=7) {
+				max = max;
+				min = min;
+
+				seed = (seed * 9301 + 49297) % 233280;
+				var rnd = seed / 233280;
+
+				return min + rnd * (max - min);
+			}
+
+			const COLORS = {
+				red1:"red",
+				orange1:"rgb(211, 84, 0)",
+				orange2:"rgb(230, 126, 34)",
+				orange3:"rgb(243, 156, 18)",
+				sand:"rgb(255, 251, 230)",
+				sand2:"rgb(240, 225, 215)",
+				gray1:"gray"
+			};
+
+			const MAP1 = {
+				name:"It Begins",
+				map:[
+					"BBBBBBBBBBBBBBBBBBBBB",
+					"B___________________B",
+					"B___________________B",
+					"B___B___B___________B",
+					"B___B___B___________B",
+					"B_______B___________B",
+					"B_______B___________B",
+					"B_______B___________B",
+					"B___B___B___________B",
+					"B___B___B___________B",
+					"B___________________B",
+					"B___________________B",
+					"BBBBBBBBBBBBBBBBBBBBB",
+				]
+			};
+
+			const TANKCOLORS1 = tankColors(COLORS.orange1, COLORS.orange2, COLORS.orange3);
+			const TANKSCALE = 1;
+
+			let playerTank = new Tank(100, 100, TANKCOLORS1);
+			let tanks = [];
+			let bullets = [];
+			tanks.push(playerTank);
+
+			function createLevel(MAP) {
+				let level = {
+					name:MAP.name,
+					height:MAP.map.length,
+					width:MAP.map[0].length,
+					tileWidth:totalWidth/MAP.map[0].length,
+					tileHeight:totalHeight/MAP.map.length,
+					map:MAP.map
+				};
+				return level;
+			}
+
+			let level1 = createLevel(MAP1);
+
+			function update() {
+				fill(COLORS.sand);
+
+				for(let x = 0; x < level1.width; x++) {
+					for(let y = 0; y < level1.height; y++) {
+						if (level1.map[y][x] == "B")
+							cRectangle(level1.tileWidth/2 + x*level1.tileWidth, level1.tileHeight/2 + y*level1.tileHeight, level1.tileWidth, level1.tileHeight, getRandomBlockColor(x*(y+y)/(x+y)));
+					}
+				}
+
+				for(let tank of tanks) {
+					tank.update();
+				}
+			}
+		</script>
+	</body>
+</html>
