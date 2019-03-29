@@ -93,7 +93,9 @@ class Window(QMainWindow):
 		tools_menu.addAction(self.assign_network_parameters_action)
 		tools_menu.addAction(self.assign_ip_address_action)
 		tools_menu.addAction(self.assign_serial_no_ip_address_action)
+		tools_menu.addSeparator()
 		tools_menu.addAction(self.test_ip_address_action)
+		tools_menu.addSeparator()
 		tools_menu.addAction(self.refresh_action)
 
 		help_menu.addAction(self.help_action)
