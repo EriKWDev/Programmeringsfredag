@@ -8,6 +8,99 @@
 		<script src="https://koda.nu/simple.js">
 			updatesPerSecond = 60;
 
+			class Trail {
+				constructor(x, y, angle, size) {
+					this.x = x;
+					this.y = y;
+					this.angle = angle;
+					this.size = size;
+				}
+
+				update() {
+					this.draw();
+				}
+
+				draw() {
+					save();
+					translate(this.x, this.y);
+					rotateRadians(this.angle);
+					let s = this.size/2.5;
+					cRectangle(0, s, this.size/7, s, "rgba(0, 0, 0, 0.3)");
+					cRectangle(0, -s, this.size/7, s, "rgba(0, 0, 0, 0.3)");
+					restore();
+				}
+			}
+
+
+			class Explosion {
+				constructor(x, y, radius, destroyTiles=true, time=20) {
+					this.x = x;
+					this.y = y;
+					this.radius = radius;
+					this.time = time;
+					this.destroyTiles = destroyTiles;
+					this.hasDestroyedTiles = false;
+				}
+
+				update() {
+					this.draw();
+
+					if(this.destroyTiles && !this.hasDestroyedTiles) {
+						for(let destroyableTile of currentLevel.destroyableTiles) {
+							if (distance(destroyableTile, this) < (this.radius + destroyableTile.width)) {
+								destroyableTile.destroy();
+							}
+						}
+						this.hasDestroyedTiles = true;
+					}
+
+					this.time--;
+					if(this.time <= 0) {
+						this.die();
+					}
+				}
+
+				draw() {
+					circle(this.x, this.y, this.radius, COLORS.red1);
+				}
+
+				die() {
+					explosions.splice(explosions.indexOf(this), 1);
+				}
+			}
+
+
+			class Mine {
+				constructor(owner, x, y, time, size=40) {
+					this.x = x;
+					this.y = y;
+					this.startTime = time;
+					this.time = time;
+					this.size = size;
+					this.owner = owner;
+				}
+
+				update() {
+					this.draw();
+					this.time--;
+					if(this.time <= 0) {
+						this.explode();
+					}
+				}
+
+				draw () {
+					let a = Math.abs(cos(this.startTime/(this.time)+pi/1.5));
+					circle(this.x, this.y, this.size*0.98, COLORS.red1);
+					circle(this.x, this.y, this.size, "rgba(255, 212, 28, " + a + ")");
+				}
+
+				explode() {
+					explosions.push(new Explosion(this.x, this.y, this.size*2.7));
+					this.owner.mines.splice(this.owner.mines.indexOf(this), 1);
+				}
+			}
+
+
 			class Bullet {
 				constructor(owner, x, y, angle, speed, bounces, color=COLORS.gray1, scale=TANKSCALE) {
 					this.x = x;
@@ -19,6 +112,8 @@
 					this.scale = scale;
 					this.tolerance = 50 * this.scale;
 					this.owner = owner;
+					this.hasCollided = false;
+					this.isColliding = false;
 				}
 
 				update() {
@@ -51,38 +146,63 @@
 					this.colors = colors;
 					this.shootDelay = shootDelay;
 					this.shootTimer = 0;
-				    this.scale = scale;
+				     this.scale = scale;
 					this.length = 60*this.scale;
 				  	this.width = 45*this.scale;
+					this.l2 = this.length/2;
+					this.w2 = this.width/2;
 				  	this.aimAngle = 0;
 				  	this.angle = 0;
 					this.hasShot = false;
-					this.bullets = [];
+					this.hasLaidMine = false;
 					this.maxBullets = maxBullets;
 					this.speed = 2;
+					this.bullets = [];
+					this.mines = [];
+					this.trails = [];
+					this.corner1 = {x:0, y:0, hasCollided:false, isColliding:false};
+					this.corner2 = {x:0, y:0, hasCollided:false, isColliding:false};
+					this.corner3 = {x:0, y:0, hasCollided:false, isColliding:false};
+					this.corner4 = {x:0, y:0, hasCollided:false, isColliding:false};
+					this.corners = [];
+					this.updateCorners();
+					this.trailDelay = 10 * this.scale;
+					this.trailTimer = 0;
 				}
 
 				update() {
+					for(let trail of this.trails) {
+						trail.update();
+					}
+
+					for(let mine of this.mines) {
+						mine.update();
+					}
+
 					for(let bullet of this.bullets) {
 						bullet.update();
 					}
+
 					this.aimAngle = -Math.atan2((this.y-mouse.y),(mouse.x-this.x));
-					drawTank(this.x, this.y, this.angle, this.aimAngle, this.width, this.length, this.colors)
+					drawTank(this.x, this.y, this.angle, this.aimAngle, this.width, this.length, this.colors);
 
 					let turnSpeed = 0.03;
 
-				    if(keyboard.up || keyboard.w) {
-				    	//this.angle = moveTowards(this.angle, this.aimAngle, turnSpeed);
+				    if((keyboard.up || keyboard.w) && !(this.corner1.isColliding || this.corner2.isColliding)) {
 				      	this.x += cos(this.angle) * this.speed;
 				      	this.y += sin(this.angle) * this.speed;
-					} else if(keyboard.space) {
-						this.angle = moveTowards(this.angle, this.aimAngle, turnSpeed);
-				      	this.x += cos(this.angle) * this.speed;
-				      	this.y += sin(this.angle) * this.speed;
-				    } else if(keyboard.down || keyboard.s) {
-				    	this.angle = moveTowards(this.angle, this.aimAngle, turnSpeed);
+						this.trail();
+					} else if((keyboard.down || keyboard.s) && !(this.corner3.isColliding || this.corner4.isColliding)) {
 				      	this.x -= cos(this.angle) * this.speed;
 				      	this.y -= sin(this.angle) * this.speed;
+						this.trail();
+				    }
+
+				    if(keyboard.space && !this.hasLaidMine) {
+					    this.mines.push(new Mine(this, this.x, this.y, 400));
+					    this.hasLaidMine = true;
+				    } else if (!keyboard.space) {
+					    this.hasLaidMine = false;
 				    }
 
 					if(keyboard.right || keyboard.d) {
@@ -95,32 +215,146 @@
 
 					if(mouse.left && this.bullets.length < this.maxBullets) {
 						if(this.hasShot) {
-							if (this.shootTimer <= 0) {
+							if(this.shootTimer <= 0) {
 								this.shoot();
 							}
 						} else {
 							this.shoot();
 						}
-					} else if (!mouse.left) {
+					} else if(!mouse.left) {
 						this.hasShot = false;
+					}
+
+					this.updateCorners();
+					if(DEBUG) {
+						for(let corner of this.corners) {
+							circle(corner.x, corner.y, 5, (corner.isColliding ? "red" : "green"));
+						}
 					}
 				}
 
+				trail() {
+					this.trailTimer--;
+					if(this.trailTimer <= 0) {
+						this.trails.push(new Trail(this.x, this.y, this.angle, this.width*0.8));
+						this.trailTimer = this.trailDelay;
+					}
+				}
+
+				updateCorners() {
+					let c = cos(this.angle);
+					let s = sin(this.angle);
+
+					let lc = this.l2*c;
+					let ls = this.l2*s;
+					let wc = this.w2*c;
+					let ws = this.w2*s;
+
+					this.corner1.x = this.x + lc + ws;
+					this.corner1.y = this.y + ls - wc;
+
+					this.corner2.x = this.x + lc - ws;
+					this.corner2.y = this.y + ls + wc;
+
+					this.corner3.x = this.x - lc - ws;
+					this.corner3.y = this.y - ls + wc;
+
+					this.corner4.x = this.x - lc + ws;
+					this.corner4.y = this.y - ls - wc;
+
+					this.corners = [this.corner1, this.corner2, this.corner3, this.corner4];
+				}
+
 				shoot() {
-					this.bullets.push(new Bullet(this, this.x+cos(this.aimAngle)*this.length/1.3, this.y+sin(this.aimAngle)*this.length/1.3, this.aimAngle, 3.5, 2));
+					this.bullets.push(new Bullet(this, this.x+cos(this.aimAngle)*this.length/1.3, this.y+sin(this.aimAngle)*this.length/1.3, this.aimAngle, TANKSCALE*3, 2));
 					this.shootTimer = this.shootDelay;
 					this.hasShot = true;
 				}
 			}
 
-			function drawTank(x, y, angle, aimAngle, width, length, colors) {
+
+			class Tile {
+				constructor(x, y, w, h, tileType) {
+					this.x = x;
+					this.y = y;
+					this.width = w;
+					this.height = h;
+					this.tileType = tileType;
+					this.color = this.tileTypeToColor();
+					this.cornerX = x - this.width/2;
+					this.cornerY = y - this.height/2;
+					this.destroyable = (tileType == tileType.toLowerCase());
+					this.destroyed = false;
+					this.timer = 30;
+				}
+
+				tileTypeToColor(tileType=this.tileType) {
+					switch(tileType) {
+						default:
+						case "B":
+							return COLORS.sand4;
+							break;
+						case "b":
+							return COLORS.sand1;
+							break;
+						case "H":
+							return COLORS.gray2;
+							break;
+					}
+				}
+
+				destroy() {
+					if(this.destroyable) {
+						this.destroyed = true;
+					}
+				}
+
+				pointCollides(position) {
+					if(this.destroyed)
+						return false;
+
+					if(this.tileType.toUpperCase() == "H")
+						return (distance(position, this) < this.width/2.3);
+
+					return (position.x >= this.cornerX && position.x <= this.cornerX + this.width && position.y >= this.cornerY && position.y <= this.cornerY + this.height);
+				}
+
+				update() {
+					this.draw();
+				}
+
+				draw(tileType=this.tileType) {
+					if(this.destroyed) {
+
+					} else {
+						switch(tileType) {
+							default:
+								cRectangle(this.x, this.y, this.width, this.height, this.color);
+								break;
+							case "H":
+								circle(this.x, this.y, this.width/3, COLORS.gray2);
+								circle(this.x, this.y, this.width/4, COLORS.gray1);
+								break;
+						}
+					}
+				}
+			}
+
+
+			function drawTank(x, y, angle, aimAngle, width, length, colors, enemy=false) {
 				save();
 				translate(x, y);
 				rotateRadians(angle);
 				cRectangle(0, 0, length, width, colors.body);
+
+				cRectangle(0, 0, width/3, width/1.5, colors.gun);
+				cRectangle(0, width/3, length, width/8, colors.head);
+				cRectangle(0, -width/3, length, width/8, colors.head);
+
 				rotateRadians(aimAngle-angle);
 				cRectangle(0, 0, width/2, width/2, colors.head);
-				cRectangle(length/2.12, 0, length/1.6, width/4, colors.gun);
+				cRectangle(length/2.12, 0, length/1.6, width/7, colors.gun);
+				cRectangle(length/1.3, 0, width/4, width/4, colors.gun);
 				restore();
 			}
 
@@ -133,11 +367,11 @@
 
 			function getTurnDirection(current, target) {
 				let diff =(target - current)%(2*pi);
-				return(Math.abs(diff) > pi ? -1 : 1)
+				return(Math.abs(diff) > pi ? -1 : 1);
 			}
 
 			function cRectangle(x, y, w, h, color) {
-				rectangle(x-w/2, y-h/2, w, h, color)
+				rectangle(x-w/2, y-h/2, w, h, color);
 			}
 
 			function tankColors(bodyc, headc, gunc) {
@@ -148,57 +382,46 @@
 				};
 			}
 
-			function getRandomBlockColor(seed) {
-				let c = randomFromSeed(30, 90, seed);
-				return "rgb(" + c + ", " + c + ", " + c + ")";
-			}
-
-			function randomFromSeed (min=0, max=1, seed=7) {
-				max = max;
-				min = min;
-
-				seed = (seed * 9301 + 49297) % 233280;
-				var rnd = seed / 233280;
-
-				return min + rnd * (max - min);
-			}
-
 			const COLORS = {
-				red1:"red",
-				orange1:"rgb(211, 84, 0)",
-				orange2:"rgb(230, 126, 34)",
-				orange3:"rgb(243, 156, 18)",
-				sand:"rgb(255, 251, 230)",
-				sand2:"rgb(240, 225, 215)",
-				gray1:"gray"
+				red1:"rgba(200, 10, 50, 1)",
+				brown1:"rgba(137, 95, 67, 1)",
+				brown2:"rgba(171, 119, 84, 1)",
+				brown3:"rgba(179, 132, 101, 1)",
+				green1:"rgba(70, 156, 48, 1)",
+				green2:"rgba(78, 176, 54, 1)",
+				green3:"rgba(104, 201, 79, 1)",
+				orange1:"rgba(211, 84, 0, 1)",
+				orange2:"rgba(230, 126, 34, 1)",
+				orange3:"rgba(243, 156, 18, 1)",
+				yellow1:"rgba(255, 212, 28, 1)",
+				sand1:"rgba(227, 185, 130, 1)",
+				sand2:"rgba(236, 204, 162, 1)",
+				sand3:"rgba(231, 196, 150, 1)",
+				sand4:"rgba(225, 191, 146, 1)",
+				gray1:"rgba(55, 55, 55, 1)",
+				gray2:"rgba(85, 85, 85, 1)",
+				gray3:"rgba(200, 200, 200, 1)"
 			};
 
 			const MAP1 = {
 				name:"It Begins",
 				map:[
+				    //OOOOOOOOO_M_OOOOOOOOO
 					"BBBBBBBBBBBBBBBBBBBBB",
 					"B___________________B",
 					"B___________________B",
-					"B___B___B___________B",
-					"B___B___B___________B",
-					"B_______B___________B",
-					"B_______B___________B",
-					"B_______B___________B",
-					"B___B___B___________B",
-					"B___B___B___________B",
+					"B_____B___B___B_____B",
+					"B_____B___B___H_____B",
+					"B___H_____b___B_____B",
+					"B_P_______b___b_____B",
+					"B_________b___B_____B",
+					"B_____B___B___H_____B",
+					"B_____B___B___B_____B",
 					"B___________________B",
 					"B___________________B",
 					"BBBBBBBBBBBBBBBBBBBBB",
 				]
 			};
-
-			const TANKCOLORS1 = tankColors(COLORS.orange1, COLORS.orange2, COLORS.orange3);
-			const TANKSCALE = 1;
-
-			let playerTank = new Tank(100, 100, TANKCOLORS1);
-			let tanks = [];
-			let bullets = [];
-			tanks.push(playerTank);
 
 			function createLevel(MAP) {
 				let level = {
@@ -207,25 +430,87 @@
 					width:MAP.map[0].length,
 					tileWidth:totalWidth/MAP.map[0].length,
 					tileHeight:totalHeight/MAP.map.length,
-					map:MAP.map
+					map:MAP.map,
+					tiles:[],
+					destroyableTiles:[],
+					holes:[]
 				};
-				return level;
-			}
 
-			let level1 = createLevel(MAP1);
+				for(let x = 0; x < level.width; x++) {
+					for(let y = 0; y < level.height; y++) {
+						let tileType = level.map[y][x];
+						if(tileType != "_") {
+							let newTile = new Tile(level.tileWidth/2 + x*level.tileWidth, level.tileHeight/2 + y*level.tileHeight, level.tileWidth, level.tileHeight, tileType);
 
-			function update() {
-				fill(COLORS.sand);
-
-				for(let x = 0; x < level1.width; x++) {
-					for(let y = 0; y < level1.height; y++) {
-						if (level1.map[y][x] == "B")
-							cRectangle(level1.tileWidth/2 + x*level1.tileWidth, level1.tileHeight/2 + y*level1.tileHeight, level1.tileWidth, level1.tileHeight, getRandomBlockColor(x*(y+y)/(x+y)));
+							if(tileType.toUpperCase() == "P") {
+							    PLAYERTANK.x = newTile.x;
+							    PLAYERTANK.y = newTile.y;
+						    } else if(tileType.toUpperCase() == "H") {
+							    level.holes.push(newTile);
+							    level.tiles.push(newTile);
+						    } else {
+								if(newTile.destroyable) {
+    									level.destroyableTiles.push(newTile);
+    								}
+    								level.tiles.push(newTile);
+						     }
+						}
 					}
 				}
 
+				return level;
+			}
+
+			var DEBUG = false;
+			const TANKCOLORS1 = tankColors(COLORS.orange1, COLORS.orange2, COLORS.orange3);
+			const TANKCOLORS2 = tankColors(COLORS.brown1, COLORS.brown2, COLORS.brown3);
+			const TANKCOLORS3 = tankColors(COLORS.green1, COLORS.green2, COLORS.green3);
+			const TANKSCALE = totalHeight/700;
+			var PLAYERTANK = new Tank(300, totalHeight/2, TANKCOLORS3);
+			const LEVELS = [
+				createLevel(MAP1)
+			];
+
+			var currentLevel = LEVELS[0];
+
+			let tanks = [];
+			let bullets = [];
+			let explosions = [];
+
+			tanks.push(PLAYERTANK);
+
+			function update() {
+				fill(COLORS.sand2);
+
+				for(let hole of currentLevel.holes) {
+					hole.update();
+				}
+
 				for(let tank of tanks) {
+					for(let corner of tank.corners) {
+						corner.isColliding = corner.hasCollided;
+						corner.hasCollided = false;
+					}
 					tank.update();
+				}
+
+				for(let explosion of explosions) {
+					explosion.update();
+				}
+
+				for(let tile of currentLevel.tiles) {
+					if(tile.tileType.toUpperCase() != "H")
+						tile.update();
+
+					for(let tank of tanks) {
+						if((tank.x - tile.x)*(tank.x - tile.x) + (tank.y - tile.y)*(tank.y-tile.y) < 25000) {
+							for(let corner of tank.corners) {
+								if(!corner.hasCollided) {
+									corner.hasCollided = tile.pointCollides(corner);
+								}
+							}
+						}
+					}
 				}
 			}
 		</script>
