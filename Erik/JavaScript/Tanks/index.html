@@ -123,12 +123,13 @@
 
 
 			class Bullet {
-				constructor(owner, x, y, angle, speed, bounces, color=COLORS.gray1, scale=TANKSCALE) {
+				constructor(owner, x, y, angle, speed, maxBounces, color=COLORS.gray1, scale=TANKSCALE) {
 					this.x = x;
 					this.y = y;
 					this.angle = angle;
 					this.speed = speed;
-					this.bounces = bounces;
+					this.maxBounces = maxBounces;
+					this.bounces = 0;
 					this.color = color;
 					this.scale = scale;
 					this.tolerance = 50 * this.scale;
@@ -137,15 +138,22 @@
 					this.isColliding = false;
 					this.vx = cos(this.angle) * this.speed;
 					this.vy = sin(this.angle) * this.speed;
+					this.collisionDelay = 20;
+					this.collisionTimer = 0;
 				}
 
 				update() {
+					this.collisionTimer--;
 					if(this.x > totalWidth + this.tolerance  || this.x < -this.tolerance  || this.y > totalHeight + this.tolerance  || this.y < -this.tolerance) {
 						this.die();
 					}  else {
 						this.draw();
 						this.x += this.vx;
 						this.y += this.vy;
+					}
+
+					if(this.bounces > this.maxBounces) {
+						this.explode();
 					}
 				}
 
@@ -157,18 +165,29 @@
 					restore();
 				}
 
+				explode() {
+					let radius = this.scale*10;
+					explosions.push(new Explosion(this.x, this.y, radius, false, false, 8));
+					this.die();
+				}
+
 				die() {
 					bullets.splice(bullets.indexOf(this), 1);
 					if(this.owner && this.owner.bullets > 0)
 						this.owner.bullets--;
 				}
 
-				bounce(side) {
-					switch(side) {
-						default:
-						case "up":
+				collide(side) {
+					if(side.up || side.down) {
+						this.vy *= -1;
+						this.collisionTimer = this.collisionDelay;
+						this.bounces++;
+					}
 
-							break;
+					if(side.left || side.right) {
+						this.vx *= -1;
+						this.collisionTimer = this.collisionDelay;
+						this.bounces++;
 					}
 				}
 			}
@@ -297,7 +316,7 @@
 				}
 
 				shoot() {
-					bullets.push(new Bullet(this, this.x+cos(this.aimAngle)*this.length/1.3, this.y+sin(this.aimAngle)*this.length/1.3, this.aimAngle, TANKSCALE*3, 2));
+					bullets.push(new Bullet(this, this.x+cos(this.aimAngle)*this.length/1.3, this.y+sin(this.aimAngle)*this.length/1.3, this.aimAngle, TANKSCALE*3, 1));
 					this.bullets++;
 					this.shootTimer = this.shootDelay;
 					this.hasShot = true;
@@ -347,8 +366,10 @@
 					this.height = h;
 					this.tileType = tileType;
 					this.color = this.tileTypeToColor();
-					this.cornerX = x - this.width/2;
-					this.cornerY = y - this.height/2;
+					this.halfWidth = this.width/2;
+					this.halfHeight = this.height/2;
+					this.cornerX = x - this.halfWidth;
+					this.cornerY = y - this.halfHeight;
 					this.destroyable =(tileType == tileType.toLowerCase());
 					this.destroyed = false;
 					this.timer = 30;
@@ -379,10 +400,43 @@
 					if(this.destroyed)
 						return false;
 
-					if(this.tileType.toUpperCase() == "H")
-						return(distance(position, this) < this.width/2.3);
+					let collides = false;
 
-					return(position.x >= this.cornerX && position.x <= this.cornerX + this.width && position.y >= this.cornerY && position.y <= this.cornerY + this.height);
+					if(this.tileType.toUpperCase() == "H") {
+						collides = (distance(position, this) < this.width/2.3)
+						return collides;
+					}
+
+					collides = (position.x >= this.cornerX && position.x <= this.cornerX + this.width && position.y >= this.cornerY && position.y <= this.cornerY + this.height);
+					return collides;
+				}
+
+				getSideOfCollision(position) {
+					let side = {up:false, down:false, left:false, right:false};
+
+					let collisionBoxWidth = this.halfWidth/6;
+
+					if(DEBUG) {
+						cRectangle(this.x, this.y, collisionBoxWidth*2, collisionBoxWidth*2, COLORS.green1);
+					}
+
+					if(position.x >= this.cornerX && position.x <= this.cornerX + this.width && position.y >= this.cornerY && position.y <= this.cornerY + collisionBoxWidth) {
+						side.up = true;
+					}
+
+					if(position.x >= this.cornerX && position.x <= this.cornerX + this.width && position.y >= this.cornerY+this.height-collisionBoxWidth && position.y <= this.cornerY + this.height) {
+						side.down = true;
+					}
+
+					if(position.x >= this.cornerX && position.x <= this.cornerX + collisionBoxWidth && position.y >= this.cornerY && position.y <= this.cornerY + this.height) {
+						side.left = true;
+					}
+
+					if(position.x >= this.cornerX + this.width - collisionBoxWidth && position.x <= this.cornerX + this.width && position.y >= this.cornerY && position.y <= this.cornerY + this.height) {
+						side.right = true;
+					}
+
+					return side;
 				}
 
 				update() {
@@ -475,12 +529,12 @@
 				map:[
 				    /*__________M_________*/
 					"BBBBBBBBBBBBBBBBBBBBB",
-					"B___________________B",
+					"B_______________P___B",
 					"B___________________B",
 					"B_____B___B___B_____B",
 					"B_____B___B___H_____B",
 					"B_________b___B_____B",
-			   /*M*/"B__P______b___b_____B",
+			   /*M*/"B_________b___b_____B",
 					"B_________b___B_____B",
 					"B_____B___B___H_____B",
 					"B_____B___B___B_____B",
@@ -593,11 +647,33 @@
 						tile.update();
 
 					for(let tank of tanks) {
-						if((tank.x - tile.x)*(tank.x - tile.x) +(tank.y - tile.y)*(tank.y-tile.y) < 25000) {
+						if((tank.x - tile.x)*(tank.x - tile.x) + (tank.y - tile.y)*(tank.y-tile.y) < 25000) {
 							for(let corner of tank.corners) {
 								if(!corner.hasCollided) {
 									corner.hasCollided = tile.pointCollides(corner);
 								}
+							}
+						}
+					}
+
+					for(let bullet of bullets) {
+						if(bullet.collisionTimer <= 0) {
+							if((bullet.x - tile.x)*(bullet.x - tile.x) + (bullet.y - tile.y)*(bullet.y - tile.y) < 25000) {
+								bullet.collide(tile.getSideOfCollision(bullet));
+							}
+						}
+
+						for(let tank of tanks) {
+							let radius = TANKSCALE*25;
+
+							if(DEBUG) {
+								circle(bullet.x, bullet.y, radius, "rgba(100, 200, 100, 0.01)");
+								circle(tank.x, tank.y, radius, "rgba(150, 220, 150, 0.01)");
+							}
+
+							if(distance(tank, bullet) < radius) {
+								bullet.explode();
+								tank.explode();
 							}
 						}
 					}
