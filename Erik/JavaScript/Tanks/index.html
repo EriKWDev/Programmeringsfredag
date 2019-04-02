@@ -529,12 +529,12 @@
 				map:[
 				    /*__________M_________*/
 					"BBBBBBBBBBBBBBBBBBBBB",
-					"B_______________P___B",
+					"B___________________B",
 					"B___________________B",
 					"B_____B___B___B_____B",
 					"B_____B___B___H_____B",
 					"B_________b___B_____B",
-			   /*M*/"B_________b___b_____B",
+			   /*M*/"B___P_____b___b_____B",
 					"B_________b___B_____B",
 					"B_____B___B___H_____B",
 					"B_____B___B___B_____B",
@@ -657,7 +657,7 @@
 					}
 
 					for(let bullet of bullets) {
-						if(bullet.collisionTimer <= 0) {
+						if(bullet.collisionTimer <= 0 && !tile.destroyed && tile.tileType.toUpperCase() != "H") {
 							if((bullet.x - tile.x)*(bullet.x - tile.x) + (bullet.y - tile.y)*(bullet.y - tile.y) < 25000) {
 								bullet.collide(tile.getSideOfCollision(bullet));
 							}
