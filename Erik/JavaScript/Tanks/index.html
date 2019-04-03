@@ -182,20 +182,23 @@
 						this.vy *= -1;
 						this.collisionTimer = this.collisionDelay;
 						this.bounces++;
+						this.angle = pi-this.angle;
 					}
 
 					if(side.left || side.right) {
 						this.vx *= -1;
 						this.collisionTimer = this.collisionDelay;
 						this.bounces++;
+						this.angle = pi-this.angle;
 					}
 				}
 			}
 
 			class Tank {
-				constructor(x, y, colors, maxBullets=5, maxMines=3, shootDelay=30, scale=TANKSCALE) {
+				constructor(x, y, colors, isPlayer=false, maxBullets=5, maxMines=3, shootDelay=30, scale=TANKSCALE) {
 					this.x = x;
 				  	this.y = y;
+					this.isPlayer = isPlayer;
 					this.colors = colors;
 					this.shootDelay = shootDelay;
 					this.shootTimer = 0;
@@ -214,6 +217,7 @@
 					this.speed = 2;
 					this.mines = 0;
 					this.trails = [];
+					this.canShoot = true;
 					this.corner1 = {x:0, y:0, hasCollided:false, isColliding:false};
 					this.corner2 = {x:0, y:0, hasCollided:false, isColliding:false};
 					this.corner3 = {x:0, y:0, hasCollided:false, isColliding:false};
@@ -222,6 +226,10 @@
 					this.updateCorners();
 					this.trailDelay = 10 * this.scale;
 					this.trailTimer = 0;
+					this.dead = false;
+					if(!this.isPlayer) {
+						this.aimAngle = -Math.atan2((this.y-PLAYERTANK.y),(PLAYERTANK.x-this.x));;
+					}
 				}
 
 				update() {
@@ -229,13 +237,39 @@
 						trail.update();
 					}
 
-					this.aimAngle = -Math.atan2((this.y-mouse.y),(mouse.x-this.x));
+					this.shootTimer--;
+
+				    if(this.isPlayer) {
+						this.aimAngle = -Math.atan2((this.y-mouse.y),(mouse.x-this.x));
+						if(GAMEISPLAYING)
+							this.playerMovement();
+					} else {
+						this.aimAngle = -Math.atan2((this.y-PLAYERTANK.y),(PLAYERTANK.x-this.x));
+						if(GAMEISPLAYING)
+							this.ai();
+					}
+
 					drawTank(this.x, this.y, this.angle, this.aimAngle, this.width, this.length, this.colors);
 
+					this.updateCorners();
+					if(DEBUG) {
+						for(let corner of this.corners) {
+							circle(corner.x, corner.y, 5,(corner.isColliding ? "red" : "green"));
+						}
+					}
+				}
+
+				ai() {
+
+				}
+
+				playerMovement() {
 					let turnSpeed = 0.03;
 					let moving = false;
 
-				    if((keyboard.up || keyboard.w) && !(this.corner1.isColliding || this.corner2.isColliding)) {
+
+
+					if((keyboard.up || keyboard.w) && !(this.corner1.isColliding || this.corner2.isColliding)) {
 				      	this.x += cos(this.angle) * this.speed;
 				      	this.y += sin(this.angle) * this.speed;
 						moving = true;
@@ -247,7 +281,7 @@
 						this.trail();
 				    }
 
-				    if(keyboard.space && !this.hasLaidMine && this.mines < this.maxMines) {
+					if(keyboard.space && !this.hasLaidMine && this.mines < this.maxMines) {
 					    mines.push(new Mine(this, this.x, this.y, 400));
 						this.mines++;
 					    this.hasLaidMine = true;
@@ -261,8 +295,6 @@
 						this.angle = moveTowards(this.angle, this.angle - turnSpeed*2, turnSpeed);
 					}
 
-					this.shootTimer--;
-
 					if(mouse.left && this.bullets < this.maxBullets) {
 						if(this.hasShot) {
 							if(this.shootTimer <= 0) {
@@ -273,13 +305,6 @@
 						}
 					} else if(!mouse.left) {
 						this.hasShot = false;
-					}
-
-					this.updateCorners();
-					if(DEBUG) {
-						for(let corner of this.corners) {
-							circle(corner.x, corner.y, 5,(corner.isColliding ? "red" : "green"));
-						}
 					}
 				}
 
@@ -323,12 +348,9 @@
 				}
 
 				explode() {
-					let radius = this.scale;
-					explosions.push(new Explosion(this.x, this.y, radius, false, false));
-
-					mines.splice(mines.indexOf(this), 1);
-					if(this.owner && this.owner.mines > 0)
-						this.owner.mines--;
+					let radius = this.scale*50;
+					if(!this.dead)
+						explosions.push(new Explosion(this.x, this.y, radius, false, false, 13));
 
 					this.die();
 				}
@@ -336,6 +358,7 @@
 				die() {
 					tanks.splice(tanks.indexOf(this), 1);
 					deadTanks.push(this);
+					this.dead = true;
 				}
 
 				deadUpdate() {
@@ -355,22 +378,34 @@
 					cRectangle(0, 0, this.width, this.width/5, COLORS.white);
 					restore();
 				}
+
+				isInsideCorners(point) {
+					return !(this.isLeft(this.corner1, this.corner2, point) &&
+							this.isLeft(this.corner2, this.corner3, point) &&
+							this.isLeft(this.corner3, this.corner4, point) &&
+							this.isLeft(this.corner4, this.corner1, point));
+				}
+
+				isLeft(P0, P1, P2) {
+					 return ((P1.x - P0.x)*(P2.y - P0.y) - (P2.x - P0.x)*(P1.y - P0.y));
+				}
 			}
 
 
 			class Tile {
-				constructor(x, y, w, h, tileType) {
+				constructor(x, y, w, h, tileType, neighbours=null) {
 					this.x = x;
 					this.y = y;
 					this.width = w;
 					this.height = h;
 					this.tileType = tileType;
+					this.neighbours = neighbours;
 					this.color = this.tileTypeToColor();
 					this.halfWidth = this.width/2;
 					this.halfHeight = this.height/2;
 					this.cornerX = x - this.halfWidth;
 					this.cornerY = y - this.halfHeight;
-					this.destroyable =(tileType == tileType.toLowerCase());
+					this.destroyable = (tileType == tileType.toLowerCase());
 					this.destroyed = false;
 					this.timer = 30;
 				}
@@ -422,17 +457,11 @@
 
 					if(position.x >= this.cornerX && position.x <= this.cornerX + this.width && position.y >= this.cornerY && position.y <= this.cornerY + collisionBoxWidth) {
 						side.up = true;
-					}
-
-					if(position.x >= this.cornerX && position.x <= this.cornerX + this.width && position.y >= this.cornerY+this.height-collisionBoxWidth && position.y <= this.cornerY + this.height) {
+					} else if(position.x >= this.cornerX && position.x <= this.cornerX + this.width && position.y >= this.cornerY+this.height-collisionBoxWidth && position.y <= this.cornerY + this.height) {
 						side.down = true;
-					}
-
-					if(position.x >= this.cornerX && position.x <= this.cornerX + collisionBoxWidth && position.y >= this.cornerY && position.y <= this.cornerY + this.height) {
+					} else if(position.x >= this.cornerX && position.x <= this.cornerX + collisionBoxWidth && position.y >= this.cornerY && position.y <= this.cornerY + this.height) {
 						side.left = true;
-					}
-
-					if(position.x >= this.cornerX + this.width - collisionBoxWidth && position.x <= this.cornerX + this.width && position.y >= this.cornerY && position.y <= this.cornerY + this.height) {
+					} else if(position.x >= this.cornerX + this.width - collisionBoxWidth && position.x <= this.cornerX + this.width && position.y >= this.cornerY && position.y <= this.cornerY + this.height) {
 						side.right = true;
 					}
 
@@ -521,7 +550,8 @@
 				gray1:"rgba(55, 55, 55, 1)",
 				gray2:"rgba(85, 85, 85, 1)",
 				gray3:"rgba(200, 200, 200, 1)",
-				white:"rgba(230, 230, 230, 1)"
+				white:"rgba(230, 230, 230, 1)",
+				startcolor:"rgba(40, 40, 40, 0.4)"
 			};
 
 			const MAP1 = {
@@ -534,11 +564,31 @@
 					"B_____B___B___B_____B",
 					"B_____B___B___H_____B",
 					"B_________b___B_____B",
-			   /*M*/"B___P_____b___b_____B",
+			   /*M*/"B___P_____b___b__0__B",
 					"B_________b___B_____B",
 					"B_____B___B___H_____B",
 					"B_____B___B___B_____B",
 					"B___________________B",
+					"B___________________B",
+					"BBBBBBBBBBBBBBBBBBBBB",
+				]
+			};
+
+			const MAP2 = {
+				name:"Walls",
+				map:[
+				    /*__________M_________*/
+					"BBBBBBBBBBBBBBBBBBBBB",
+					"B___________________B",
+					"B___________________B",
+					"B______________B____B",
+					"B______________B____B",
+					"B______________BBB__B",
+			   /*M*/"B___________________B",
+					"B__BBB______________B",
+					"B____B______________B",
+					"B____B______________B",
+					"B_P_________________B",
 					"B___________________B",
 					"BBBBBBBBBBBBBBBBBBBBB",
 				]
@@ -554,26 +604,36 @@
 					map:MAP.map,
 					tiles:[],
 					destroyableTiles:[],
-					holes:[]
+					holes:[],
+					playerSpawnpoint:{x:0,y:0},
+					tanks:[],
 				};
 
 				for(let x = 0; x < level.width; x++) {
 					for(let y = 0; y < level.height; y++) {
 						let tileType = level.map[y][x];
 						if(tileType != "_") {
+							let tileNeighbours;
 							let newTile = new Tile(level.tileWidth/2 + x*level.tileWidth, level.tileHeight/2 + y*level.tileHeight, level.tileWidth, level.tileHeight, tileType);
 
+							let neighbours = {up:false, down:false, left:false, right:false};
+							newTile.neighbours = neighbours;
+
 							if(tileType.toUpperCase() == "P") {
-							    PLAYERTANK.x = newTile.x;
-							    PLAYERTANK.y = newTile.y;
+								level.playerSpawnpoint.x = newTile.x;
+								level.playerSpawnpoint.y = newTile.y;
 						    } else if(tileType.toUpperCase() == "H") {
 							    level.holes.push(newTile);
 							    level.tiles.push(newTile);
-						    } else {
+						    } else if (tileType == "0") {
+								level.tanks.push(ENEMY0);
+							} else if (tileType == "1") {
+								level.tanks.push(ENEMY1);
+							} else {
 								if(newTile.destroyable) {
-    									level.destroyableTiles.push(newTile);
-    								}
-    								level.tiles.push(newTile);
+									level.destroyableTiles.push(newTile);
+								}
+								level.tiles.push(newTile);
 						     }
 						}
 					}
@@ -582,18 +642,34 @@
 				return level;
 			}
 
-			var DEBUG = false;
+			var DEBUG = true;
+
+			canvas.getContext("2d").textAlign = "center";;
+
 			const TANKCOLORS1 = tankColors(COLORS.orange1, COLORS.orange2, COLORS.orange3);
 			const TANKCOLORS2 = tankColors(COLORS.brown1, COLORS.brown2, COLORS.brown3);
 			const TANKCOLORS3 = tankColors(COLORS.green1, COLORS.green2, COLORS.green3);
 			const TANKSCALE = totalHeight/700;
-			var PLAYERTANK = new Tank(300, totalHeight/2, TANKCOLORS3);
+			const STARTDELAY = 180;
+			let startTimer = STARTDELAY;
+			var backgroundMusic = new Audio("http://66.90.93.122/ost/wii-play/qqvrntybtr/053%20-%20Tanks%20-%20Variation%201.mp3");
+
+			var PLAYERTANK = new Tank(300, totalHeight/2, TANKCOLORS3, true);
+			var ENEMY0 = new Tank(totalWidth-300, totalHeight/2, TANKCOLORS2);
+			var ENEMY1 = new Tank(totalWidth-300, totalHeight/2, TANKCOLORS1);
+			var GAMEISPLAYING = false;
+			var START = false;
+			var HASINITIATEDLEVEL = false;
+
 			const LEVELS = [
-				createLevel(MAP1)
+				createLevel(MAP1),
+				createLevel(MAP2),
 			];
 
-			var currentLevel = LEVELS[0];
+			let currentLevelId = 0;
+			var currentLevel = LEVELS[currentLevelId];
 
+			let hasPlayedMusic = false;
 			let tanks = [];
 			let deadTanks = [];
 			let bullets = [];
@@ -602,7 +678,7 @@
 
 			tanks.push(PLAYERTANK);
 
-			function update() {
+			function graphicsAndCollisions() {
 				fill(COLORS.sand2);
 
 				for(let hole of currentLevel.holes) {
@@ -658,20 +734,24 @@
 
 					for(let bullet of bullets) {
 						if(bullet.collisionTimer <= 0 && !tile.destroyed && tile.tileType.toUpperCase() != "H") {
-							if((bullet.x - tile.x)*(bullet.x - tile.x) + (bullet.y - tile.y)*(bullet.y - tile.y) < 25000) {
+							if((bullet.x - tile.x)*(bullet.x - tile.x) + (bullet.y - tile.y)*(bullet.y - tile.y) < 90*90) {
 								bullet.collide(tile.getSideOfCollision(bullet));
 							}
 						}
 
 						for(let tank of tanks) {
-							let radius = TANKSCALE*25;
+
+							let radius = TANKSCALE*27;
+							let sqrDistance = (tank.x - bullet.x)*(tank.x - bullet.x) + (tank.y - bullet.y)*(tank.y-bullet.y);
 
 							if(DEBUG) {
-								circle(bullet.x, bullet.y, radius, "rgba(100, 200, 100, 0.01)");
-								circle(tank.x, tank.y, radius, "rgba(150, 220, 150, 0.01)");
+								if(sqrDistance < radius*radius*30) {
+									circle(bullet.x, bullet.y, radius, "rgba(100, 200, 100, 0.01)");
+									circle(tank.x, tank.y, radius, "rgba(150, 220, 150, 0.01)");
+								}
 							}
 
-							if(distance(tank, bullet) < radius) {
+							if(sqrDistance < radius*radius) {
 								bullet.explode();
 								tank.explode();
 							}
@@ -679,6 +759,49 @@
 					}
 				}
 			}
+
+			function update() {
+				START = DEBUG;
+
+				if(!HASINITIATEDLEVEL) {
+					PLAYERTANK.x = currentLevel.playerSpawnpoint.x;
+					PLAYERTANK.y = currentLevel.playerSpawnpoint.y;
+					currentLevel.tanks.push(PLAYERTANK);
+					tanks = currentLevel.tanks;
+					HASINITIATEDLEVEL = true;
+				}
+
+				if(START) {
+					GAMEISPLAYING = (startTimer <= 0);
+
+					graphicsAndCollisions();
+
+					if(!hasPlayedMusic) {
+						backgroundMusic.pause();
+						backgroundMusic.play();
+						hasPlayedMusic = true;
+					}
+
+					if(!GAMEISPLAYING) {
+						startTimer -= 0.8;
+						circle(totalWidth/2, totalHeight/2, (startTimer*startTimer)*10, COLORS.startcolor);
+						text(totalWidth/2, totalHeight/2, 120 - currentLevel.name.length*3, currentLevel.name, COLORS.white);
+						text(totalWidth/2, totalHeight/2 + 80, 50, "Mission: " + (currentLevelId + 1), COLORS.white);
+						text(totalWidth/2, totalHeight/2 + 160, 50, "Tanks: " + (tanks.length - 1), COLORS.white);
+					} else {
+						let info =  "Mission: " + (currentLevelId + 1) + " – " + currentLevel.name;
+						text(totalWidth/2, totalHeight-currentLevel.tileHeight/4, currentLevel.tileHeight/2, info, COLORS.white);
+					}
+				} else {
+					clearScreen();
+					circle(totalWidth/2, totalHeight/2, 130, COLORS.red1);
+					text(totalWidth/2, totalHeight/2, 15, "Click here to start!", COLORS.white);
+					if(distance(totalWidth/2, totalHeight/2, mouse.x, mouse.y) < 130 && mouse.left) {
+						START = true;
+					}
+				}
+			}
+
 		</script>
 	</body>
 </html>
