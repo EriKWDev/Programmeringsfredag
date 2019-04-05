@@ -138,7 +138,7 @@
 					this.isColliding = false;
 					this.vx = cos(this.angle) * this.speed;
 					this.vy = sin(this.angle) * this.speed;
-					this.collisionDelay = 20;
+					this.collisionDelay = 2;
 					this.collisionTimer = 0;
 				}
 
@@ -205,7 +205,7 @@
 					this.colors = colors;
 					this.shootDelay = shootDelay;
 					this.shootTimer = 0;
-				     this.scale = scale;
+				    this.scale = scale;
 					this.length = 60*this.scale;
 				  	this.width = 45*this.scale;
 					this.l2 = this.length/2;
@@ -230,6 +230,7 @@
 					this.trailDelay = 10 * this.scale;
 					this.trailTimer = 0;
 					this.dead = false;
+					this.lastTile = null;
 
 					if(!this.isPlayer) {
 						this.aimAngle = -Math.atan2((this.y-PLAYERTANK.y),(PLAYERTANK.x-this.x));;
@@ -237,11 +238,16 @@
 				}
 
 				update() {
-					// if(this.isPlayer) {
-					// 	let p = getTileTypeAtPosition({x:this.x, y:this.y});
-					// 	console.log(p);
-					// }
+					let newTile = getTileAtPosition({x:this.x, y:this.y});
+					if(this.lastTile != newTile && newTile.tileType != "E"  && newTile.tileType != "H"  && newTile.tileType != "P") {
+						if(this.lastTile != null)
+							this.lastTile.tileType = "_";
+						newTile.tileType = (this.dead ? newTile.tileType : (this.isPlayer ? "P" : "E"));
+						this.lastTile = newTile;
 
+						printCurrentLevel();
+
+					}
 
 					for(let trail of this.trails) {
 						trail.update();
@@ -274,9 +280,9 @@
 				}
 
 				ai() {
-					if(this.shootTimer <= 0) {
+					/*if(this.shootTimer <= 0) {
 						this.shoot();
-					}
+					}*/
 				}
 
 				playerMovement() {
@@ -375,6 +381,10 @@
 					tanks.splice(tanks.indexOf(this), 1);
 					deadTanks.push(this);
 					this.dead = true;
+
+					let newTile = getTileAtPosition({x:this.x, y:this.y});
+					newTile.tileType = "_";
+					printCurrentLevel();
 				}
 
 				deadUpdate() {
@@ -409,9 +419,11 @@
 
 
 			class Tile {
-				constructor(x, y, w, h, tileType, neighbours=null) {
+				constructor(gridX, gridY, x, y, w, h, tileType, neighbours=null) {
 					this.x = x;
 					this.y = y;
+					this.gridX = gridX;
+					this.gridY = gridY;
 					this.width = w;
 					this.height = h;
 					this.tileType = tileType;
@@ -424,6 +436,12 @@
 					this.destroyable = (tileType == tileType.toLowerCase());
 					this.destroyed = false;
 					this.timer = 30;
+					this.neighbouringTiles = {up: null, down:null, left:null, right:null};
+
+					//A*
+					this.f = 0;
+					this.g = 0;
+					this.h = 0;
 				}
 
 				tileTypeToColor(tileType=this.tileType) {
@@ -444,6 +462,7 @@
 				destroy() {
 					if(this.destroyable) {
 						this.destroyed = true;
+						this.tileType = "_";
 					}
 				}
 
@@ -595,14 +614,14 @@
 				map:[
 					"_____________________",
 					"_______________P_____",
-					"_____bBbbbB__________",
-					"_____B____B__________",
+					"_1___BBbbbB__________",
+					"_____B____B_____H____",
 					"___BbBb___B__________",
 					"_____B________0______",
 					"_____B_______________",
 					"_____________________",
 					"_____________________",
-					"______________1______",
+					"_____________________",
 					"_____________________",
 					"_____________________",
 				]
@@ -618,7 +637,7 @@
 					"B_____B___B___B_____B",
 					"B_____B___B___H_____B",
 					"B_________b___B_____B",
-			     /*M*/"B___P_____b___b__0__B",
+			   /*M*/"B___P_____b___b__0__B",
 					"B_________b___B_____B",
 					"B_____B___B___H_____B",
 					"B_____B___B___B_____B",
@@ -638,7 +657,7 @@
 					"B______________B____B",
 					"B______________B____B",
 					"B______________BBB__B",
-			     /*M*/"B___________________B",
+			   /*M*/"B___________________B",
 					"B__BBB______________B",
 					"B____B______________B",
 					"B____B______________B",
@@ -648,6 +667,68 @@
 				]
 			};
 
+			function heuristic() {
+
+			}
+
+			function AStar(start=currentLevel.tileMap[1][1], goal=currentLevel.tileMap[currentLevel.height-1][currentLevel.width-1]) {
+				console.log("A* :");
+				console.log(start, goal);
+
+				let closedSet = [];
+				let openSet = [start];
+				let cameFrom = [];
+
+				while(openSet.length > 0) {
+					if(DEBUG) {
+						for(let open of openSet) {
+							circle(open.x, open.y, 15, "green");
+						}
+
+						for(let closed of closedSet) {
+							circle(closed.x, closed.y, 15, "red");
+						}
+					}
+
+					let nodeWithLowest = start;
+
+					for(let open of openSet) {
+						if(open.f < nodeWithLowest.f) {
+							nodeWithLowest = open;
+						}
+					}
+
+					let current = nodeWithLowest;
+
+					if(current === goal) {
+						console.log("Found Solution!");
+						return;
+					}
+
+					closedSet.push(current);
+					openSet.splice(openSet.indexOf(current), 1);
+
+					break;
+				}
+
+				//no solution
+				console.log("It is impossible to complete the path.");
+			}
+
+			function printCurrentLevel() {
+				let text = "\n";
+
+				for(let y = 0; y < currentLevel.height; y++) {
+					for(let x = 0; x < currentLevel.width; x++) {
+						text += currentLevel.tileMap[y][x].tileType;
+					}
+					text += "\n";
+				}
+				text += "\n";
+
+				console.log(text);
+			}
+
 			function createLevel(MAP) {
 				let level = {
 					name:MAP.name,
@@ -656,6 +737,7 @@
 					tileWidth:totalWidth/MAP.map[0].length,
 					tileHeight:totalHeight/MAP.map.length,
 					map:MAP.map,
+					tileMap:[],
 					tiles:[],
 					destroyableTiles:[],
 					holes:[],
@@ -663,22 +745,31 @@
 					tanks:[],
 				};
 
+				level.tileMap = new Array(level.height);
+
+				for(let y = 0; y < level.height; y++) {
+					level.tileMap[y] = new Array(level.width);
+				}
+
 				for(let x = 0; x < level.width; x++) {
 					for(let y = 0; y < level.height; y++) {
 						let tileType = level.map[y][x];
+
+						let tileNeighbours;
+						let newTile = new Tile(x, y, level.tileWidth/2 + x*level.tileWidth, level.tileHeight/2 + y*level.tileHeight, level.tileWidth, level.tileHeight, tileType);
+
+						let neighbours = {up:false, down:false, left:false, right:false};
+
+						neighbours.left = (x-1 < 0) || (level.map[y][x-1] == "B");
+						neighbours.right = (x+1 >= level.width) || (level.map[y][x+1] == "B");
+						neighbours.up = (y-1 < 0) || (level.map[y-1][x] == "B");
+						neighbours.down = (y+1 >= level.height) || (level.map[y+1][x] == "B");
+
+						newTile.neighbours = neighbours;
+
+						level.tileMap[y][x] = (newTile);
+
 						if(tileType != "_") {
-							let tileNeighbours;
-							let newTile = new Tile(level.tileWidth/2 + x*level.tileWidth, level.tileHeight/2 + y*level.tileHeight, level.tileWidth, level.tileHeight, tileType);
-
-							let neighbours = {up:false, down:false, left:false, right:false};
-
-							neighbours.left = (x-1 < 0) || (level.map[y][x-1] == "B");
-							neighbours.right = (x+1 >= level.width) || (level.map[y][x+1] == "B");
-							neighbours.up = (y-1 < 0) || (level.map[y-1][x] == "B");
-							neighbours.down = (y+1 >= level.height) || (level.map[y+1][x] == "B");
-
-							newTile.neighbours = neighbours;
-
 							if(tileType.toUpperCase() == "P") {
 								level.playerSpawnpoint.x = newTile.x;
 								level.playerSpawnpoint.y = newTile.y;
@@ -698,19 +789,33 @@
 					}
 				}
 
+				for(let x = 0; x < level.width; x++) {
+					for(let y = 0; y < level.height; y++) {
+						let neighbouringTiles = level.tileMap[y][x].neighbouringTiles;
+
+						neighbouringTiles.left = (x-1 < 0) || (level.tileMap[y][x-1]);
+						neighbouringTiles.right = (x+1 >= level.width) || (level.tileMap[y][x+1]);
+						neighbouringTiles.up = (y-1 < 0) || (level.tileMap[y-1][x]);
+						neighbouringTiles.down = (y+1 >= level.height) || (level.tileMap[y+1][x]);
+
+						level.tileMap[y][x].neighbouringTiles = neighbouringTiles;
+					}
+				}
+
 				return level;
 			}
 
-			function getTileTypeAtPosition(position) {
+			function getTileAtPosition(position) {
 				let x = Math.round(0.5 + position.x/currentLevel.tileWidth)-1;
 				let y = Math.round(0.5 + position.y/currentLevel.tileHeight)-1;
+
+				let tile = currentLevel.tileMap[y][x];
 
 				if(DEBUG) {
 					cRectangle(currentLevel.tileWidth/2 + x*currentLevel.tileWidth, currentLevel.tileHeight/2 + y*currentLevel.tileHeight, currentLevel.tileWidth, currentLevel.tileHeight, COLORS.gray0);
 				}
 
-				let tileType = currentLevel.map[y][x];
-				return tileType;
+				return tile;
 			}
 
 			function graphicsAndCollisions() {
@@ -771,6 +876,18 @@
 						if(bullet.collisionTimer <= 0 && !tile.destroyed && tile.tileType.toUpperCase() != "H") {
 							if((bullet.x - tile.x)*(bullet.x - tile.x) + (bullet.y - tile.y)*(bullet.y - tile.y) < 90*90) {
 								bullet.collide(tile.getSideOfCollision(bullet));
+							}
+						}
+
+						for(let bullet2 of bullets) {
+							if(bullet2 != bullet) {
+								let sqrDistance = (bullet2.x - bullet.x)*(bullet2.x - bullet.x) + (bullet2.y - bullet.y)*(bullet2.y-bullet.y)
+								let r = (TANKSCALE*TANKSCALE)*6.5*2;
+
+								if(sqrDistance < r) {
+									bullet.explode();
+									bullet2.explode();
+								}
 							}
 						}
 
