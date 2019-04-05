@@ -292,9 +292,10 @@
 					let newPath = AStar(getTileAtPosition({x:this.x, y:this.y}), PLAYERTANK.lastTile);
 					this.path =  newPath || this.path;
 					if(newPath) {
-						this.pathIndex = newPath.length-2;
+						this.pathIndex = newPath.length-1;
 						let nextTile = this.path[this.pathIndex];
-						this.pathAngle = -Math.atan2((this.y-nextTile.y),(nextTile.x-this.x));
+						if(nextTile)
+							this.pathAngle = -Math.atan2((this.y-nextTile.y),(nextTile.x-this.x));
 					}
 					this.recalculatePathTimer = this.recalculatePathDelay;
 				}
@@ -314,19 +315,26 @@
 
 					if(nextTile != null) {
 						if((thisTile.gridX == nextTile.gridX && thisTile.gridY == nextTile.gridY)) {
-							if(this.pathIndex >= 1)
+							if(this.pathIndex >= 1) {
 								this.pathIndex--;
-							nextTile = this.path[this.pathIndex];
-							this.pathAngle = -Math.atan2((this.y-nextTile.y),(nextTile.x-this.x));
-						} else {
-							if(!(this.corner1.isColliding || this.corner2.isColliding)) {
-								this.x += cos(this.angle) * this.speed;
-								this.y += sin(this.angle) * this.speed;
-								this.trail();
+								nextTile = this.path[this.pathIndex];
 								this.pathAngle = -Math.atan2((this.y-nextTile.y),(nextTile.x-this.x));
 							}
-							//this.angle = moveTowards(this.angle, this.pathAngle, 0.03);
-							this.angle = moveTowards(this.angle, this.pathAngle + 0.03*2, 0.03);
+
+						} else {
+							if(this.corner1.isColliding || this.corner2.isColliding) {
+								this.pathAngle = -Math.atan2((this.y-thisTile.y),(thisTile.x-this.x));
+							} else {
+								if(sin(this.angle) <= sin(this.pathAngle) + 0.03 && sin(this.angle) >= sin(this.pathAngle) - 0.03) {
+									this.x += cos(this.angle) * this.speed;
+									this.y += sin(this.angle) * this.speed;
+									this.trail();
+								}
+
+								//this.angle = moveTowards(this.angle, this.pathAngle, 0.03);
+								console.log("ANGLE", sin(this.angle), sin(this.pathAngle));
+							}
+							this.angle = moveTowards(this.angle, this.pathAngle, 0.03);
 						}
 					}
 
@@ -387,8 +395,8 @@
 				}
 
 				updateCorners() {
-					let c = cos(this.angle)*0.7;
-					let s = sin(this.angle)*0.7;
+					let c = cos(this.angle)*0.9;
+					let s = sin(this.angle)*0.9;
 
 					let lc = this.l2*c;
 					let ls = this.l2*s;
@@ -720,17 +728,23 @@
 			};
 
 			function heuristic(tile, goal) {
-				return Math.abs(tile.x-goal.x) + Math.abs(tile.y-goal.y);
+				//return Math.abs(tile.x-goal.x) + Math.abs(tile.y-goal.y);
+				//return(tile.x-goal.x)*(tile.y-goal.y);
+				return distance(tile, goal);
 			}
 
-			function AStarPath(current, l=30) {
+			function AStarPath(current, start, l=30) {
 				let path = [];
 				let temp = current;
 				for(let i = 0; i < l; i++) {
+
 					if(temp.previous == null) {
 						break;
 					}
-					path.push({x:temp.previous.x, y:temp.previous.y, gridX:temp.previous.gridX, gridY:temp.previous.gridY});
+
+					if(temp != start)
+						path.push({x:temp.previous.x, y:temp.previous.y, gridX:temp.previous.gridX, gridY:temp.previous.gridY});
+
 					temp = temp.previous;
 				}
 				return path;
@@ -768,7 +782,7 @@
 
 					if(current.gridX == goal.gridX && current.gridY == goal.gridY) {
 						//console.log("Path Found! : " + i);
-						return AStarPath(current, i);
+						return AStarPath(current, start, i);
 					}
 
 					openSet.splice(openSet.indexOf(current), 1);
@@ -776,7 +790,7 @@
 
 					for(let key in current.neighbouringTiles) {
 						let neighbouringTile = current.neighbouringTiles[key];
-						if (neighbouringTile != null && (neighbouringTile.tileType == "_" || neighbouringTile.tileType == "P")) {
+						if (neighbouringTile != null && neighbouringTile.tileType != "E" && (neighbouringTile.tileType == "_" || neighbouringTile.tileType == "P")) {
 
 							if(closedSet.includes(neighbouringTile)) {
 								continue;
