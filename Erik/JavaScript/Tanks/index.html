@@ -140,9 +140,19 @@
 					this.vy = sin(this.angle) * this.speed;
 					this.collisionDelay = 2;
 					this.collisionTimer = 0;
+					this.lastTile = null;
 				}
 
 				update() {
+
+					let newTile = getTileAtPosition({x:this.x, y:this.y});
+					if(this.lastTile != newTile && newTile.tileType == "_") {
+						if(this.lastTile != null)
+							this.lastTile.tileType = "_";
+						newTile.tileType = "O";
+						this.lastTile = newTile;
+					}
+
 					this.collisionTimer--;
 					if(this.x > totalWidth + this.tolerance  || this.x < -this.tolerance  || this.y > totalHeight + this.tolerance  || this.y < -this.tolerance) {
 						this.die();
@@ -219,7 +229,6 @@
 					this.maxMines = maxMines;
 					this.speed = 2;
 					this.mines = 0;
-					this.trails = [];
 					this.canShoot = true;
 					this.corner1 = {x:0, y:0, hasCollided:false, isColliding:false};
 					this.corner2 = {x:0, y:0, hasCollided:false, isColliding:false};
@@ -236,6 +245,9 @@
 					this.path = [];
 					this.pathIndex = 0;
 					this.pathAngle = 0;
+					this.backing = false;
+					this.backingDelay = 16;
+					this.backingTimer = 0;
 
 					if(!this.isPlayer) {
 						this.aimAngle = -Math.atan2((this.y-PLAYERTANK.y),(PLAYERTANK.x-this.x));;
@@ -249,17 +261,6 @@
 							this.lastTile.tileType = "_";
 						newTile.tileType = (this.dead ? newTile.tileType : (this.isPlayer ? "P" : "E"));
 						this.lastTile = newTile;
-						if(this.isPlayer) {
-							for(let tank of tanks) {
-								if(tank != PLAYERTANK) {
-									tank.recalculatePath();
-								}
-							}
-						}
-					}
-
-					for(let trail of this.trails) {
-						trail.update();
 					}
 
 					this.shootTimer--;
@@ -306,6 +307,12 @@
 						this.recalculatePath();
 					}
 
+					if(this.shootTimer <= 0) {
+						if(this.pointInSight({x:PLAYERTANK.x,y:PLAYERTANK.y})) {
+							this.shoot();
+						}
+					}
+
 					let thisTile = getTileAtPosition({x:this.x, y:this.y});
 					let nextTile = this.path[this.pathIndex];
 
@@ -320,22 +327,33 @@
 								nextTile = this.path[this.pathIndex];
 								this.pathAngle = -Math.atan2((this.y-nextTile.y),(nextTile.x-this.x));
 							}
-
 						} else {
 							if(this.corner1.isColliding || this.corner2.isColliding) {
-								this.pathAngle = -Math.atan2((this.y-thisTile.y),(thisTile.x-this.x));
-							} else {
-								if(sin(this.angle) <= sin(this.pathAngle) + 0.03 && sin(this.angle) >= sin(this.pathAngle) - 0.03) {
-									this.x += cos(this.angle) * this.speed;
-									this.y += sin(this.angle) * this.speed;
-									this.trail();
-								}
-
-								//this.angle = moveTowards(this.angle, this.pathAngle, 0.03);
-								console.log("ANGLE", sin(this.angle), sin(this.pathAngle));
+								this.backing = true;
+								this.backingTimer = this.backingDelay;
+							} else if (!this.backing) {
+								//if(sin(this.angle) <= sin(this.pathAngle) + 0.03 && sin(this.angle) >= sin(this.pathAngle) - 0.03) {
+								this.x += cos(this.angle) * this.speed;
+								this.y += sin(this.angle) * this.speed;
+								this.trail();
 							}
+
 							this.angle = moveTowards(this.angle, this.pathAngle, 0.03);
 						}
+
+						if(this.backing) {
+							this.pathAngle = -Math.atan2((this.y-nextTile.y),(nextTile.x-this.x));
+							this.backingTimer--;
+							this.angle = moveTowards(this.angle, this.pathAngle, 0.06);
+							if(this.backingTimer <= 0) {
+								this.backing = false;
+								this.backingTimer = this.backingDelay;
+							}
+
+							this.x -= cos(this.angle) * this.speed/2;
+							this.y -= sin(this.angle) * this.speed/2;
+						}
+
 					}
 
 					if(DEBUG) {
@@ -344,6 +362,43 @@
 						}
 					}
 
+				}
+
+				pointInSight(position) {
+					if(PLAYERTANK.dead) {
+						return false;
+					}
+
+					let currentCoords = getTileMapCoordsAtPosition({x:this.x, y:this.y});
+					let playerCoords = getTileMapCoordsAtPosition({x:position.x, y:position.y});
+
+					let dist = distance(currentCoords, playerCoords);
+					let dx = -(currentCoords.x - playerCoords.x) / dist;
+					let dy = -(currentCoords.y - playerCoords.y) / dist;
+					let currentTile = "_";
+
+					while(currentTile == "_" || currentTile == "O" || currentTile == "H") {
+						if(DEBUG) {
+							circle(currentCoords.x*currentLevel.tileWidth + currentLevel.tileWidth/2, currentCoords.y*currentLevel.tileHeight + currentLevel.tileHeight/2, 6, "yellow");
+						}
+
+						currentCoords.x += dx;
+						currentCoords.y += dy;
+						let rx = Math.round(currentCoords.x);
+						let ry = Math.round(currentCoords.y);
+						if(rx == Math.round(playerCoords.x) && ry == Math.round(playerCoords.y)) {
+							return true;
+						}
+
+						console.log(dx,dy,rx,ry);
+
+						currentTile = currentLevel.tileMap[ry][rx].tileType;
+						if(!currentTile) {
+							return false;
+						}
+					}
+
+					return false;
 				}
 
 				playerMovement() {
@@ -389,7 +444,7 @@
 				trail() {
 					this.trailTimer--;
 					if(this.trailTimer <= 0) {
-						this.trails.push(new Trail(this.x, this.y, this.angle, this.width*0.8));
+						trails.push(new Trail(this.x, this.y, this.angle, this.width*0.8));
 						this.trailTimer = this.trailDelay;
 					}
 				}
@@ -445,10 +500,6 @@
 				}
 
 				deadUpdate() {
-					for(let trail of this.trails) {
-						trail.update();
-					}
-
 					this.drawMarker();
 				}
 
@@ -601,7 +652,6 @@
 				}
 			}
 
-
 			function drawTank(x, y, angle, aimAngle, width, length, colors, enemy=false) {
 				save();
 				translate(x, y);
@@ -751,9 +801,6 @@
 			}
 
 			function AStar(start=currentLevel.tileMap[1][1], goal=currentLevel.tileMap[currentLevel.height-1][currentLevel.width-1]) {
-				//console.log("A* :");
-				//console.log(start, goal);
-
 				let closedSet = [];
 				let openSet = [start];
 
@@ -781,7 +828,6 @@
 					let current = nodeWithLowest;
 
 					if(current.gridX == goal.gridX && current.gridY == goal.gridY) {
-						//console.log("Path Found! : " + i);
 						return AStarPath(current, start, i);
 					}
 
@@ -790,7 +836,7 @@
 
 					for(let key in current.neighbouringTiles) {
 						let neighbouringTile = current.neighbouringTiles[key];
-						if (neighbouringTile != null && neighbouringTile.tileType != "E" && (neighbouringTile.tileType == "_" || neighbouringTile.tileType == "P")) {
+						if (neighbouringTile != null && neighbouringTile.tileType != "O" && (neighbouringTile.tileType == "_" || neighbouringTile.tileType == "P")) {
 
 							if(closedSet.includes(neighbouringTile)) {
 								continue;
@@ -907,14 +953,20 @@
 				return level;
 			}
 
-			function getTileAtPosition(position) {
+			function getTileMapCoordsAtPosition(position) {
 				let x = Math.round(0.5 + position.x/currentLevel.tileWidth)-1;
 				let y = Math.round(0.5 + position.y/currentLevel.tileHeight)-1;
 
-				let tile = currentLevel.tileMap[y][x];
+				return {x:x, y:y};
+			}
+
+			function getTileAtPosition(position) {
+				let coords = getTileMapCoordsAtPosition(position);
+
+				let tile = currentLevel.tileMap[coords.y][coords.x];
 
 				if(DEBUG) {
-					cRectangle(currentLevel.tileWidth/2 + x*currentLevel.tileWidth, currentLevel.tileHeight/2 + y*currentLevel.tileHeight, currentLevel.tileWidth, currentLevel.tileHeight, COLORS.gray0);
+					cRectangle(currentLevel.tileWidth/2 + coords.x*currentLevel.tileWidth, currentLevel.tileHeight/2 + coords.y*currentLevel.tileHeight, currentLevel.tileWidth, currentLevel.tileHeight, COLORS.gray0);
 				}
 
 				return tile;
@@ -927,6 +979,10 @@
 					hole.update();
 				}
 
+				for(let trail of trails) {
+					trail.update();
+				}
+
 				for(let deadTank of deadTanks) {
 					deadTank.deadUpdate();
 				}
@@ -936,7 +992,7 @@
 					bullet.update();
 
 					for(let mine of mines) {
-						if(distance(bullet, mine) < mine.size) {
+						if((bullet.x - mine.x)*(bullet.x - mine.x) + (bullet.y - mine.y)*(bullet.y-mine.y) < mine.size*mine.size) {
 							bullet.die();
 							mine.explode();
 						}
@@ -998,13 +1054,6 @@
 							let radius = TANKSCALE*27;
 							let sqrDistance = (tank.x - bullet.x)*(tank.x - bullet.x) + (tank.y - bullet.y)*(tank.y-bullet.y);
 
-							if(DEBUG) {
-								if(sqrDistance < radius*radius*30) {
-									circle(bullet.x, bullet.y, radius, "rgba(100, 200, 100, 0.01)");
-									circle(tank.x, tank.y, radius, "rgba(150, 220, 150, 0.01)");
-								}
-							}
-
 							if(sqrDistance < radius*radius) {
 								bullet.explode();
 								tank.explode();
@@ -1042,7 +1091,7 @@
 			var HASSTARTEDONCE = false;
 
 			const LEVELS = [
-				createLevel(DEBUGMAP),
+				//createLevel(DEBUGMAP),
 				createLevel(MAP1),
 				createLevel(MAP2),
 			];
@@ -1057,6 +1106,8 @@
 			let bullets = [];
 			let mines = [];
 			let explosions = [];
+
+			let trails = [];
 
 			function restart() {
 
@@ -1084,6 +1135,7 @@
 				bullets = [];
 				mines = [];
 				deadTanks = [];
+				trails = [];
 
 				currentLevel = LEVELS[currentLevelId];
 				startTimer = STARTDELAY;
