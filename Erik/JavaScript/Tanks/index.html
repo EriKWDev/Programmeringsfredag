@@ -318,6 +318,7 @@
 
 					if(DEBUG && nextTile) {
 						circle(nextTile.x, nextTile.y, 10, this.colors.gun);
+						console.log(this.pointInSight(nextTile));
 					}
 
 					if(nextTile != null) {
@@ -382,18 +383,19 @@
 							circle(currentCoords.x*currentLevel.tileWidth + currentLevel.tileWidth/2, currentCoords.y*currentLevel.tileHeight + currentLevel.tileHeight/2, 6, "yellow");
 						}
 
-						currentCoords.x += dx;
-						currentCoords.y += dy;
 						let rx = Math.round(currentCoords.x);
 						let ry = Math.round(currentCoords.y);
+
 						if(rx == Math.round(playerCoords.x) && ry == Math.round(playerCoords.y)) {
 							return true;
 						}
 
-						console.log(dx,dy,rx,ry);
+						currentCoords.x += dx;
+						currentCoords.y += dy;
 
-						currentTile = currentLevel.tileMap[ry][rx].tileType;
-						if(!currentTile) {
+						if(currentLevel.tileMap[ry][rx].tileType != null) {
+							currentTile = currentLevel.tileMap[ry][rx].tileType;
+						} else {
 							return false;
 						}
 					}
