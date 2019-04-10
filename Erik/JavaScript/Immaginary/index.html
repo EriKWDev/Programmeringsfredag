@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Immaginary</title>
+	</head>
+	<body>
+		<script src="https://koda.nu/simple.js">
+
+			class Complex {
+				constructor(re, im, t=0, index=0) {
+					this.re = re;
+					this.im = im;
+					this.t = t;
+					this.x = 0;
+					this.y = 0;
+					this.c = "rgba(0,0,0,1)";
+					this.index = index;
+				}
+
+				draw() {
+					save();
+					translate(totalWidth/2, totalHeight/2);
+					this.x = (this.re+this.t*cos(angle))*xScl;
+					this.y = -(this.im-this.t*sin(angle))*yScl;
+					this.c = "rgba(170," + Math.abs(this.im*30) + "," + Math.abs(this.re*30) + ",0.7)";
+
+					if(this.index != 0) {
+						let lastPoint = points[this.index-1];
+						let thisPoint = points[this.index];
+						if(lastPoint != null && thisPoint != null) {
+							line(lastPoint.x, lastPoint.y, points[this.index].x, points[this.index].y, 3, this.c);
+						}
+					}
+
+					circle(this.x, this.y, 8, this.c);
+					restore();
+				}
+			}
+
+			updatesPerSecond = 2020;
+			//const angle = 3*pi/4;
+
+			let xScl = 20;
+			let yScl = 20;
+
+			let startT = 3000;
+			let t = startT;
+			let points = [];
+
+			function drawAxis() {
+				let c = "rgba(0,0,0,0.5)"
+				line(0, totalHeight/2, totalWidth, totalHeight/2, 1, c);
+				line(totalWidth/2, 0, totalWidth/2, totalHeight, 1, c);
+				save();
+				translate(totalWidth/2, totalHeight/2);
+				rotateRadians(angle);
+				line(0, 0, totalWidth, 0, 1, c);
+				line(-totalWidth, 0, 0, 0, 1, c);
+				line(0, 0, totalWidth, 0, 1, c);
+				restore();
+			}
+
+			var angle = pi/4;
+
+			let lastAngle = angle;
+			let index = 0;
+
+			function update() {
+				angle = -Math.atan2(((totalHeight/2)-mouse.y),(mouse.x-(totalWidth/2)));
+
+				if(angle != lastAngle) {
+					clearScreen();
+					drawAxis();
+					for(let point of points) {
+						point.draw();
+					}
+				}
+
+				lastAngle = angle;
+
+				if(t >= -startT) {
+					t-=2;
+					let dt = 0.07*t;
+
+					let im = new Complex(cos(dt)*10*sin(dt), sin(dt)*10*cos(dt/2), 0.008*t, index);
+					points.push(im);
+					index++;
+
+					im.draw();
+
+				}
+			}
+
+		</script>
+	</body>
+</html>
