@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=Alice');
+
+@page {
+  size: A4 portrait;
+  margin: 2cm 1.5cm;
+}
+
+html, body {
+	font-family: "Alice", sans-serif;
+}
+
+p {
+	font-size: 14px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.document {
+	max-width: 800px;
+	margin:auto;
+}
+
+.main-title {
+	font-size: 48px;
+	margin-bottom: 3px;
+}
+
+.main-subtitle {
+	font-size: 24px;
+	font-style: italic;
+	font-weight: normal;
+	margin: 0px;
+}
+
+.preparation-time {
+	font-style: italic;
+	margin: 0px;
+}
+
+.recipe {
+	column-count: 2;
+	column-fill: auto;
+	column-gap: 0px;
+	column-width: 250px;
+}
+
+.ingredients-title {
+	font-size: 20px;
+	margin: 0px;
+}
+
+.ingredients-subtitle {
+	padding-top: 25px;
+	margin: 0px;
+	font-style: italic;
+	font-size: 18px;
+}
+
+.ingredients-table, .ingredients-table-row {
+	width: 100%;
+}
+
+tr:nth-child(odd) {
+	background-color: rgba(230, 230, 230, 1);
+}
+
+tr:nth-child(even) {
+	background-color: rgba(224, 224, 224, 1);
+}
+
+.instructions {
+	margin-top: 25px;
+	height: 1000px;
+}
+
+.instructions-title {
+	font-size: 20px;
+	margin: 0px;
+}
+
+.instructions-list {
+	margin-top: 0px;
+}
+
+.instructions-list > li {
+	margin-bottom: 5px;
+	break-inside: avoid;
+	page-break-inside: avoid;
+}

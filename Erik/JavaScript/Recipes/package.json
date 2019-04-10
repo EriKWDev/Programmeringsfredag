@@ -1,0 +1,16 @@
+{
+  "name": "recipes",
+  "version": "1.0.0",
+  "description": "ErikWDev's Recipes Manager",
+  "main": "recipes.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ErikWDev",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^7.0.1",
+    "handlebars": "^4.1.1",
+    "puppeteer": "^1.14.0"
+  }
+}

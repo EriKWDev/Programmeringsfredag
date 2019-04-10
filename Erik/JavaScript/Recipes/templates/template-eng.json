@@ -1,0 +1,41 @@
+{
+	"main":{
+		"title":"Title",
+		"subtitle":"Subtitle",
+		"duration":"10 minutes"
+	},
+	"ingredients":{
+		"portions":"1 Portion",
+		"subIngredients":[
+			{
+				"title":"Main Ingredients",
+				"ingredients":[
+					{
+						"unit":"1 unit",
+						"ingredient":"Ingredient"
+					},
+					{
+						"unit":"2 units",
+						"ingredient":"Ingredients"
+					}
+				]
+			},
+			{
+				"title":"Extra Ingredients",
+				"ingredients":[
+					{
+						"unit":"1 part",
+						"ingredient":"Ingredient"
+					},
+					{
+						"unit":"1 part",
+						"ingredient":"Ingredient"
+					}
+				]
+			}
+		]
+	},
+	"instructions":[
+		"Instruction"
+	]
+}

@@ -1,0 +1,41 @@
+{
+	"main":{
+		"title":"Titel",
+		"subtitle":"Subtitel",
+		"duration":"10 minuter"
+	},
+	"ingredients":{
+		"portions":"1 Portion",
+		"subIngredients":[
+			{
+				"title":"Huvudingredienser",
+				"ingredients":[
+					{
+						"unit":"1 enhet",
+						"ingredient":"Ingredient"
+					},
+					{
+						"unit":"2 enheter",
+						"ingredient":"Ingredients"
+					}
+				]
+			},
+			{
+				"title":"Extraingredienser",
+				"ingredients":[
+					{
+						"unit":"1 del",
+						"ingredient":"Ingredient"
+					},
+					{
+						"unit":"1 del",
+						"ingredient":"Ingredient"
+					}
+				]
+			}
+		]
+	},
+	"instructions":[
+		"Instruktion"
+	]
+}
