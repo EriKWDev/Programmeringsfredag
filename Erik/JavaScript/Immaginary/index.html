@@ -26,6 +26,12 @@
 					this.y = -(this.im*yScl-this.t*tScl*sin(angle));
 					this.c = "rgba(170," + Math.abs(this.im*30) + "," + Math.abs(this.re*30) + ",0.45)";
 
+					if(keyboard.d) {
+						if(this.index % 100 == 0) {
+							text(this.x, this.y, 20, Math.round(this.re) + " + " + Math.round(this.im) + "i", c);
+						}
+					}
+
 					if(this.index != 0) {
 						let lastPoint = points[this.index-1];
 						let thisPoint = points[this.index];
@@ -39,25 +45,33 @@
 				}
 			}
 
-			updatesPerSecond = 2020;
-			//const angle = 3*pi/4;
-
-			let xScl = 10;
-			let yScl = 10;
-			let tScl = 10;
-
-			let startT = 1000;
-			let t = startT;
-			let points = [];
-
 			function drawAxis() {
-				let c = "rgba(0,0,0,0.5)"
-				text(50, 50, 15, "Re-Scale: " + xScl, c);
-				text(50, 65, 15, "Im-Scale: " + yScl, c);
-				text(50, 80, 15, "T-Scale: " + tScl, c);
+				let c = "rgba(220,220,220,0.8)"
+				text(50, 50, 15, "Re-Scale: " + xScl + " ( Increase-decrease: left/right )", c);
+				text(50, 65, 15, "Im-Scale: " + yScl + " ( Increase-decrease: up/down )", c);
+				text(50, 80, 15, "T-Scale: " + tScl + " ( Increase-decrease: w/s )", c);
+
+				text(50, 115, 15, "Overall-scale Increase-decrease: Shift + w/s", c);
+				text(50, 130, 15, "Extra Info: hold d", c);
+				text(50, 145, 15, "Reset: r", c);
 
 				line(0, totalHeight/2, totalWidth, totalHeight/2, 1, c);
 				line(totalWidth/2, 0, totalWidth/2, totalHeight, 1, c);
+
+				if(xScl >= 0.5 || xScl <= -0.5) {
+					for(let x = 0; x <= totalWidth; x += totalWidth/Math.abs(xScl)) {
+						text(x, totalHeight/2 - 10, 10, Math.round((x-totalWidth/2)/xScl * 10) / 10);
+						circle(x, totalHeight/2, 3, c);
+					}
+				}
+
+				if(yScl >= 0.5 || yScl <= -0.5) {
+					for(let y = 0; y <= totalHeight; y += totalHeight/Math.abs(yScl)) {
+						text(totalWidth/2 + 10, y, 10, -1*Math.round((y-totalHeight/2)/yScl * 10) / 10 + "i");
+						circle(totalWidth/2, y, 3, c);
+					}
+				}
+
 				save();
 				translate(totalWidth/2, totalHeight/2);
 				rotateRadians(angle);
@@ -69,9 +83,13 @@
 
 			function rescale() {
 				if(keyboard.r) {
-					xScl = 10;
-					yScl = 10;
-					tScl = 10;
+					xScl = 20;
+					yScl = 20;
+					tScl = 200;
+					redraw = true;
+				}
+
+				if(keyboard.d) {
 					redraw = true;
 				}
 
@@ -122,6 +140,16 @@
 
 			var angle = pi/4;
 
+			updatesPerSecond = 120;
+
+			let xScl = 20;
+			let yScl = 20;
+			let tScl = 200;
+
+			let startT = 2000;
+			let t = startT;
+			let points = [];
+
 			let lastAngle = angle;
 			let index = 0;
 			let redraw = false;
@@ -135,7 +163,7 @@
 				angle = -Math.atan2(((totalHeight/2)-mouse.y),(mouse.x-(totalWidth/2)));
 
 				if(angle != lastAngle || redraw) {
-					clearScreen();
+					fill("rgba(30, 30, 40, 1)");
 					drawAxis();
 					for(let point of points) {
 						point.draw();
@@ -145,13 +173,23 @@
 				lastAngle = angle;
 
 				if(t >= -startT) {
-					t-=1.3;
+					// #1 Spiral with infinity-8
+					t-=1.8;
 					let dt = 0.07*t;
+					let im = new Complex(10*cos(dt), 10*sin(dt)*cos(dt/3), 0.001*t, index);
 
-					let im = new Complex(sin(sin(dt))*10, 10*sin(10*cos(dt/4)), 0.002*t, index);
+					// // #2 Cool Thingy
+					// t-=0.7;
+					// let dt = 0.07*t;
+					// let im = new Complex(10*cos(dt)*sin(dt/3), 10*tan(dt/5), 0.001*t, index);
+
+					// // #3 Simple Spiral
+					// t-=1;
+					// let dt = 0.07*t;
+					// let im = new Complex(10*cos(dt), 10*sin(dt), 0.001*t, index);
+
 					points.push(im);
 					index++;
-
 					im.draw();
 
 				}

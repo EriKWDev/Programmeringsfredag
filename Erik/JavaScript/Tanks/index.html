@@ -144,15 +144,6 @@
 				}
 
 				update() {
-
-					let newTile = getTileAtPosition({x:this.x, y:this.y});
-					if(this.lastTile != newTile && newTile.tileType == "_") {
-						if(this.lastTile != null)
-							this.lastTile.tileType = "_";
-						newTile.tileType = "O";
-						this.lastTile = newTile;
-					}
-
 					this.collisionTimer--;
 					if(this.x > totalWidth + this.tolerance  || this.x < -this.tolerance  || this.y > totalHeight + this.tolerance  || this.y < -this.tolerance) {
 						this.die();
@@ -293,32 +284,36 @@
 					let newPath = AStar(getTileAtPosition({x:this.x, y:this.y}), PLAYERTANK.lastTile);
 					this.path =  newPath || this.path;
 					if(newPath) {
-						this.pathIndex = newPath.length-1;
+						this.pathIndex = this.path.length-1;
 						let nextTile = this.path[this.pathIndex];
 						if(nextTile)
 							this.pathAngle = -Math.atan2((this.y-nextTile.y),(nextTile.x-this.x));
+
 					}
 					this.recalculatePathTimer = this.recalculatePathDelay;
 				}
 
 				ai() {
+					let thisTile = getTileAtPosition({x:this.x, y:this.y});
+					let nextTile = this.path[this.pathIndex];
+
 					this.recalculatePathTimer--;
 					if(this.recalculatePathTimer <= 0) {
 						this.recalculatePath();
 					}
 
+					console.log("SHOOTTIMER: " + this.shootTimer);
+
 					if(this.shootTimer <= 0) {
+						console.log("BOOM????");
 						if(this.pointInSight({x:PLAYERTANK.x,y:PLAYERTANK.y})) {
+							console.log("BOOM!!");
 							this.shoot();
 						}
 					}
 
-					let thisTile = getTileAtPosition({x:this.x, y:this.y});
-					let nextTile = this.path[this.pathIndex];
-
 					if(DEBUG && nextTile) {
 						circle(nextTile.x, nextTile.y, 10, this.colors.gun);
-						console.log(this.pointInSight(nextTile));
 					}
 
 					if(nextTile != null) {
@@ -374,14 +369,22 @@
 					let playerCoords = getTileMapCoordsAtPosition({x:position.x, y:position.y});
 
 					let dist = distance(currentCoords, playerCoords);
+
 					let dx = -(currentCoords.x - playerCoords.x) / dist;
 					let dy = -(currentCoords.y - playerCoords.y) / dist;
 					let currentTile = "_";
 
-					while(currentTile == "_" || currentTile == "O" || currentTile == "H") {
+					if(dist <= 1) {
+						return true
+					}
+
+					while(currentTile == "_" || currentTile == "H") {
 						if(DEBUG) {
 							circle(currentCoords.x*currentLevel.tileWidth + currentLevel.tileWidth/2, currentCoords.y*currentLevel.tileHeight + currentLevel.tileHeight/2, 6, "yellow");
 						}
+
+						currentCoords.x += dx;
+						currentCoords.y += dy;
 
 						let rx = Math.round(currentCoords.x);
 						let ry = Math.round(currentCoords.y);
@@ -390,14 +393,7 @@
 							return true;
 						}
 
-						currentCoords.x += dx;
-						currentCoords.y += dy;
-
-						if(currentLevel.tileMap[ry][rx].tileType != null) {
-							currentTile = currentLevel.tileMap[ry][rx].tileType;
-						} else {
-							return false;
-						}
+						currentTile = currentLevel.tileMap[ry][rx].tileType;
 					}
 
 					return false;
@@ -838,7 +834,7 @@
 
 					for(let key in current.neighbouringTiles) {
 						let neighbouringTile = current.neighbouringTiles[key];
-						if (neighbouringTile != null && neighbouringTile.tileType != "O" && (neighbouringTile.tileType == "_" || neighbouringTile.tileType == "P")) {
+						if (neighbouringTile != null && neighbouringTile.tileType != "E" && (neighbouringTile.tileType == "_" || neighbouringTile.tileType == "P")) {
 
 							if(closedSet.includes(neighbouringTile)) {
 								continue;
@@ -987,6 +983,9 @@
 
 				for(let deadTank of deadTanks) {
 					deadTank.deadUpdate();
+					if(deadTank.isPlayer && !hasWon) {
+						died = true;
+					}
 				}
 
 				for(let bullet of bullets) {
@@ -1092,11 +1091,23 @@
 			var HASINITIATEDLEVEL = false;
 			var HASSTARTEDONCE = false;
 
-			const LEVELS = [
-				//createLevel(DEBUGMAP),
-				createLevel(MAP1),
-				createLevel(MAP2),
+			var MAPS = [
+				MAP1,
+				MAP2,
 			];
+
+			var LEVELS = [];
+			setLevels();
+
+			function setLevels() {
+				for(let MAP of MAPS) {
+					LEVELS.push(createLevel(MAP));
+				}
+			}
+
+			function resetLevel(id) {
+				LEVELS[id] = createLevel(MAPS[id]);
+			}
 
 			let currentLevelId = 0;
 			var currentLevel = LEVELS[currentLevelId];
@@ -1110,9 +1121,16 @@
 			let explosions = [];
 
 			let trails = [];
+			let died = false;
+
+			function win() {
+				stopUpdate();
+			}
 
 			function restart() {
-
+				resetLevel(currentLevelId);
+				currentLevelId--;
+				nextLevel();
 			}
 
 			function nextLevel() {
@@ -1127,7 +1145,7 @@
 				if(currentLevelId != LEVELS.length - 1) {
 					currentLevelId++;
 				} else {
-					stopUpdate();
+					win();
 				}
 
 				PLAYERTANK.angle = 0;
@@ -1143,6 +1161,7 @@
 				startTimer = STARTDELAY;
 				winTimer = WINDELAY;
 				hasWon = false;
+				died = false;
 			}
 
 			function update() {
@@ -1181,16 +1200,22 @@
 							}
 						}
 
-						if(hasWon) {
+						if(hasWon || died) {
 							winTimer -= 0.8;
 							backgroundMusic.pause();
 							winMusic.loop = false;
-							if(!winMusic.ended)
+							if(!winMusic.ended) {
 								winMusic.play();
+							}
+
 							let t = WINDELAY*WINDELAY*0.2-(winTimer*winTimer)*0.2;
 							circle(totalWidth/2, totalHeight/2, t, COLORS.startcolor);
 							if(winTimer <= 0) {
-								nextLevel();
+								if(hasWon) {
+									nextLevel();
+								} else {
+									restart();
+								}
 							}
 						}
 					}
