@@ -1,0 +1,45 @@
+{
+	"main":{
+		"title":"Gin & Tonic",
+		"subtitle":"Den perfekta GT:n",
+		"duration":"2 minutes"
+	},
+	"ingredients":{
+		"portions":"1 Glass",
+		"subIngredients":[
+			{
+				"title":"Huvudingredienser",
+				"ingredients":[
+					{
+						"unit":"30 ml",
+						"ingredient":"Gin"
+					},
+					{
+						"unit":"1 Burk",
+						"ingredient":"Tonic"
+					},
+					{
+						"unit":"1 klyfta",
+						"ingredient":"Citron"
+					}
+				]
+			},
+			{
+				"title":"Garnering",
+				"ingredients":[
+					{
+						"unit":"1 skiva",
+						"ingredient":"Citron"
+					}
+				]
+			}
+		],
+		"instructions":{
+
+		}
+	},
+	"instructions":[
+		"Häll Gin i ett glas. Tryck i citronjuicen från citronklyftan i glaset. Häll i is och fyll med tonic",
+		"Garnera med en citronskiva på sidan av glaset"
+	]
+}
