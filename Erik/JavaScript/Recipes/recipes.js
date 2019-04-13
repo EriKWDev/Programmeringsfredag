@@ -4,6 +4,10 @@ const hbs = require("handlebars");
 const path = require("path");
 const merge = require('easy-pdf-merge');
 
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 const compile = async function(templateName, data) {
 	const templatePath = path.join(process.cwd(), "templates", `${templateName}.hbs`);
 	const html = await fs.readFile(templatePath, "utf-8");
@@ -22,7 +26,7 @@ const createRecipePDF = async function (name) {
 			printBackground: true
 		};
 
-		const templateName = "template-1";
+		const templateName = "template-2";
 		const data = require(`./recipes-data/${name}.json`);
 		const recipeHTML = await compile(templateName, data);
 		await fs.writeFile(`templates/${templateName}.html`, recipeHTML, (e) => {
@@ -31,12 +35,15 @@ const createRecipePDF = async function (name) {
 			}
 		});
 
-		await page.goto(path.join(process.cwd(), "templates", `${templateName}.html`), {waitUntil: "networkidle2"});
+		const htmlPath = "file:" + path.join(process.cwd(), "templates", `${templateName}.html`);
+		console.log("Path: " + htmlPath);
 		await page.emulateMedia("print");
+		await page.goto(htmlPath, {waitUntil: "networkidle2"});
 		await page.pdf(options);
 
 		await browser.close();
 		console.log(`"${name}.pdf" created succesfully from "${name}.json"`);
+		await sleep(1000);
 		return;
 
 	} catch (e) {
@@ -69,18 +76,17 @@ const createAllRecipes = async function () {
 		console.log("");
 		console.log("__________ Finnished Recipe Creation __________");
 
-		for(let i = 0; i < 5; i++) {
+		for(let i = 0; i < 3; i++) {
 			console.log("");
 		}
 		console.log("_________________ Quick Facts _________________");
 		console.log("");
 		console.log("Total number of Recipes: " + filePaths.length);
 		console.log("_______________________________________________");
-		for(let i = 0; i < 30; i++) {
+		for(let i = 0; i < 3; i++) {
 			console.log("");
 		}
 	});
-
 }
 
 createAllRecipes();

@@ -2,11 +2,58 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
-		<title>Template</title>
+		<title>Recipe: {{main.title}}</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="template-2.css">
 	</head>
 	<body>
-		<div>
-			<h1>{{ name }}</h1>
+		<div class="document">
+			<div class="title-box">
+				<h1 class="main-title">{{main.title}}</h1>
+				<h2 class="main-subtitle">– {{main.subtitle}}</h2>
+				<p class="preparation-time">Tillagningstid: {{main.duration}}</p>
+				<br />
+				{{#each main.rating}}
+					{{#if this}}
+						<span class="fa fa-star checked"></span>
+					{{else}}
+						<span class="fa fa-star"></span>
+					{{/if}}
+				{{/each}}
+				​<hr />​​​​​​​​​​​​​​​​​​​
+			</div>
+
+			<div class="recipe">
+				<div class="ingredients">
+					<h2 class="ingredients-title">Ingredienser [ {{ingredients.portions}} ]</h2>
+
+					{{#each ingredients.subIngredients}}
+						<h3 class="ingredients-subtitle">{{this.title}}</h3>
+						<table class="ingredients-table">
+							<tbody>
+								{{#each this.ingredients as |ingredient|}}
+									<tr class="ingredients-table-row">
+										<td><p>{{ingredient.unit}}</p></td>
+										<td><p>{{ingredient.ingredient}}</p></td>
+									</tr>
+								{{/each}}
+							</tbody>
+						</table>
+					{{/each}}
+				</div>
+
+				<div class="instructions">
+					<h2 class="instructions-title">Instruktioner</h2>
+					{{#each subInstructions as |subInstruction|}}
+					<h3 class="instructions-subtitle">{{subInstruction.title}}</h3>
+					<ol class="instructions-list">
+						{{#each subInstruction.instructions as |instruction|}}
+							<li><p>{{instruction}}</p></li>
+						{{/each}}
+					</ol>
+					{{/each}}
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

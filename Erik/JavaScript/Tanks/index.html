@@ -138,7 +138,7 @@
 					this.isColliding = false;
 					this.vx = cos(this.angle) * this.speed;
 					this.vy = sin(this.angle) * this.speed;
-					this.collisionDelay = 2;
+					this.collisionDelay = 3/this.speed;
 					this.collisionTimer = 0;
 					this.lastTile = null;
 				}
@@ -199,7 +199,7 @@
 			}
 
 			class Tank {
-				constructor(x, y, colors, isPlayer=false, maxBullets=5, maxMines=3, shootDelay=30, scale=TANKSCALE) {
+				constructor(x, y, colors, isPlayer=false, maxBullets=5, maxMines=3, shootDelay=30, bulletSpeedBoost=1, scale=TANKSCALE) {
 					this.x = x;
 				  	this.y = y;
 					this.isPlayer = isPlayer;
@@ -239,6 +239,7 @@
 					this.backing = false;
 					this.backingDelay = 16;
 					this.backingTimer = 0;
+					this.bulletSpeedBoost = bulletSpeedBoost;
 
 					if(!this.isPlayer) {
 						this.aimAngle = -Math.atan2((this.y-PLAYERTANK.y),(PLAYERTANK.x-this.x));;
@@ -302,12 +303,9 @@
 						this.recalculatePath();
 					}
 
-					console.log("SHOOTTIMER: " + this.shootTimer);
-
 					if(this.shootTimer <= 0) {
-						console.log("BOOM????");
-						if(this.pointInSight({x:PLAYERTANK.x,y:PLAYERTANK.y})) {
-							console.log("BOOM!!");
+						let boom = this.pointInSight({x:PLAYERTANK.x,y:PLAYERTANK.y});
+						if(boom) {
 							this.shoot();
 						}
 					}
@@ -328,7 +326,6 @@
 								this.backing = true;
 								this.backingTimer = this.backingDelay;
 							} else if (!this.backing) {
-								//if(sin(this.angle) <= sin(this.pathAngle) + 0.03 && sin(this.angle) >= sin(this.pathAngle) - 0.03) {
 								this.x += cos(this.angle) * this.speed;
 								this.y += sin(this.angle) * this.speed;
 								this.trail();
@@ -416,6 +413,9 @@
 						mines.push(new Mine(this, this.x, this.y, 400));
 						this.mines++;
 						this.hasLaidMine = true;
+						if(this.isPlayer) {
+							STATISTICS.totalMinesLaid++;
+						}
 				    } else if(!keyboard.space) {
 					    this.hasLaidMine = false;
 				    }
@@ -444,6 +444,9 @@
 					if(this.trailTimer <= 0) {
 						trails.push(new Trail(this.x, this.y, this.angle, this.width*0.8));
 						this.trailTimer = this.trailDelay;
+						if(this.isPlayer) {
+							STATISTICS.distanceTravelled++;
+						}
 					}
 				}
 
@@ -473,10 +476,13 @@
 
 				shoot() {
 					if(this.bullets < this.maxBullets) {
-						bullets.push(new Bullet(this, this.x+cos(this.aimAngle)*this.length/1.3, this.y+sin(this.aimAngle)*this.length/1.3, this.aimAngle, PLAYERTANK.speed*1.2, 1));
+						bullets.push(new Bullet(this, this.x+cos(this.aimAngle)*this.length/1.3, this.y+sin(this.aimAngle)*this.length/1.3, this.aimAngle, PLAYERTANK.speed*1.2*this.bulletSpeedBoost, 1));
 						this.bullets++;
 						this.shootTimer = this.shootDelay;
 						this.hasShot = true;
+						if(this.isPlayer) {
+							STATISTICS.totalBulletsFired++;
+						}
 					}
 				}
 
@@ -693,6 +699,8 @@
 
 			const COLORS = {
 				red1:"rgba(200, 10, 50, 1)",
+				red2:"rgba(130, 2, 20, 1)",
+				red3:"rgba(190, 8, 40, 1)",
 				brown1:"rgba(137, 95, 67, 1)",
 				brown2:"rgba(171, 119, 84, 1)",
 				brown3:"rgba(179, 132, 101, 1)",
@@ -712,7 +720,8 @@
 				gray2:"rgba(85, 85, 85, 1)",
 				gray3:"rgba(200, 200, 200, 1)",
 				white:"rgba(230, 230, 230, 1)",
-				startcolor:"rgba(40, 40, 40, 0.4)"
+				startcolor:"rgba(40, 40, 40, 0.4)",
+				endColor:"rgba(120, 100, 120, 0.01)"
 			};
 
 			const DEBUGMAP = {
@@ -725,7 +734,7 @@
 					"B_____b__P_____B____B",
 					"B__0__b________B____B",
 					"B_____B________BBB__B",
-				/*M*/"B________B__________B",
+			   /*M*/"B________B__________B",
 					"B____BBBBB__________B",
 					"B____B______________B",
 					"B____B_________0____B",
@@ -745,7 +754,7 @@
 					"B_____B___B___B_____B",
 					"B_____B___B___H_____B",
 					"B_________b___B_____B",
-				/*M*/"B___P_____b___b__0__B",
+			   /*M*/"B___P_____b___b__0__B",
 					"B_________b___B_____B",
 					"B_____B___B___H_____B",
 					"B_____B___B___B_____B",
@@ -761,16 +770,36 @@
 				    /*__________M_________*/
 					"BBBBBBBBBBBBBBBBBBBBB",
 					"B___________________B",
-					"B_________________0_B",
+					"B_________________1_B",
 					"B______________B____B",
 					"B______________B____B",
 					"B______________BBB__B",
-				/*M*/"B___________________B",
+			   /*M*/"B___________________B",
 					"B__BBB______________B",
 					"B____B______________B",
 					"B____B______________B",
 					"B_P_________________B",
 					"B___________________B",
+					"BBBBBBBBBBBBBBBBBBBBB",
+				]
+			};
+
+			const MAP3 = {
+				name:"Walls",
+				map:[
+				    /*__________M_________*/
+					"BBBBBBBBBBBBBBBBBBBBB",
+					"B_________________2_B",
+					"B___________________B",
+					"B_________________2_B",
+					"B___BbBbBHBHBBBBBBBBB",
+					"B___________________B",
+			   /*M*/"B___________________B",
+					"B___________________B",
+					"BBBBBBBBBHBHBbBbB___B",
+					"B_______b___________B",
+					"B_P__b____________0_B",
+					"B_______b___________B",
 					"BBBBBBBBBBBBBBBBBBBBB",
 				]
 			};
@@ -922,9 +951,13 @@
 						    } else if(tileType.toUpperCase() == "H") {
 							    level.holes.push(newTile);
 							    level.tiles.push(newTile);
-						    } else if (tileType == "0" || tileType == "1") {
+						    } else if (tileType == "0") {
 							    // constructor(x, y, colors, isPlayer=false, maxBullets=5, maxMines=3, shootDelay=30, scale=TANKSCALE)
-								level.tanks.push(new Tank(newTile.x, newTile.y, enemyTankColors[tileType], false, 1, 0, 50));
+								level.tanks.push(new Tank(newTile.x, newTile.y, enemyTankColors[tileType], false, 1, 0, 10));
+							} else if (tileType == "1") {
+								level.tanks.push(new Tank(newTile.x, newTile.y, enemyTankColors[tileType], false, 3, 0, 60));
+							} else if (tileType == "2") {
+								level.tanks.push(new Tank(newTile.x, newTile.y, enemyTankColors[tileType], false, 1, 0, 30, 2));
 							} else {
 								if(newTile.destroyable) {
 									level.destroyableTiles.push(newTile);
@@ -1064,13 +1097,14 @@
 				}
 			}
 
-			var DEBUG = true;
+			var DEBUG = false;
 
 			canvas.getContext("2d").textAlign = "center";;
 
 			const TANKCOLORS1 = tankColors(COLORS.orange1, COLORS.orange2, COLORS.orange3);
 			const TANKCOLORS2 = tankColors(COLORS.brown1, COLORS.brown2, COLORS.brown3);
 			const TANKCOLORS3 = tankColors(COLORS.green1, COLORS.green2, COLORS.green3);
+			const TANKCOLORS4 = tankColors(COLORS.red2, COLORS.red1, COLORS.red3);
 			const TANKSCALE = totalHeight/700;
 			const STARTDELAY = 180;
 			const WINDELAY = 150;
@@ -1078,22 +1112,36 @@
 			let winTimer = WINDELAY;
 			var backgroundMusic = new Audio("http://66.90.93.122/ost/wii-play/qqvrntybtr/053%20-%20Tanks%20-%20Variation%201.mp3");
 			var winMusic = new Audio("http://66.90.93.122/ost/wii-play/howmzfluwp/055%20-%20Tanks%20-%20Round%20End.mp3");
+			var deathMusic = new Audio("http://66.90.93.122/ost/wii-play/xigbgdonrb/054%20-%20Tanks%20-%20Round%20Failure.mp3");
+			var statsMusic = new Audio ("http://66.90.93.122/ost/wii-play/saxordnvfk/068%20-%20Tanks%20-%20Results.mp3");
 
 			var PLAYERTANK = new Tank(0, 0, TANKCOLORS3, true);
+			var PLAYERLIVES = 1;
+
+			var STATISTICS = {
+				totalBulletsFired:0,
+				totalMinesLaid:0,
+				totalEnemiesKilled:0,
+				distanceTravelled:0
+			};
 
 			var enemyTankColors = [
 				TANKCOLORS2,
 				TANKCOLORS1,
+				TANKCOLORS4
 			];
 
 			var GAMEISPLAYING = false;
 			var START = false;
 			var HASINITIATEDLEVEL = false;
 			var HASSTARTEDONCE = false;
+			var GAMEOVER = false;
+			var GAMEOVERTIME = 0;
 
 			var MAPS = [
 				MAP1,
 				MAP2,
+				MAP3
 			];
 
 			var LEVELS = [];
@@ -1106,6 +1154,8 @@
 			}
 
 			function resetLevel(id) {
+				tanks = [];
+				currentLevel.tanks = [];
 				LEVELS[id] = createLevel(MAPS[id]);
 			}
 
@@ -1124,13 +1174,24 @@
 			let died = false;
 
 			function win() {
-				stopUpdate();
+				statsMusic.play();
+				GAMEOVER = true;
+			}
+
+			function gameOver() {
+				statsMusic.play();
+				GAMEOVER = true;
 			}
 
 			function restart() {
 				resetLevel(currentLevelId);
 				currentLevelId--;
-				nextLevel();
+				PLAYERLIVES--;
+				if(PLAYERLIVES <= 0) {
+					gameOver();
+				} else {
+					nextLevel();
+				}
 			}
 
 			function nextLevel() {
@@ -1141,20 +1202,24 @@
 				backgroundMusic.currentTime = 0;
 				winMusic.pause();
 				winMusic.currentTime = 0;
+				deathMusic.pause();
+				deathMusic.currentTime = 0;
 
 				if(currentLevelId != LEVELS.length - 1) {
 					currentLevelId++;
 				} else {
-					win();
+					return win ();
 				}
 
 				PLAYERTANK.angle = 0;
 				PLAYERTANK.trails = [];
 				PLAYERTANK.bullets = 0;
 				PLAYERTANK.mines = 0;
+				PLAYERTANK.dead = false;
 				bullets = [];
 				mines = [];
 				deadTanks = [];
+				tanks = [];
 				trails = [];
 
 				currentLevel = LEVELS[currentLevelId];
@@ -1165,67 +1230,98 @@
 			}
 
 			function update() {
-				if(!HASINITIATEDLEVEL) {
-					START = (DEBUG || HASSTARTEDONCE);
-					PLAYERTANK.x = currentLevel.playerSpawnpoint.x;
-					PLAYERTANK.y = currentLevel.playerSpawnpoint.y;
-					currentLevel.tanks.push(PLAYERTANK);
-					tanks = currentLevel.tanks;
-					HASINITIATEDLEVEL = true;
-				}
+				if(GAMEOVER) {
+					let y = totalHeight*1.3 - GAMEOVERTIME;
+					let texty = (y <= totalHeight/4 ? totalHeight/4 : y);
+					let x = totalWidth/2;
 
-				if(START) {
-					GAMEISPLAYING = (startTimer <= 0);
+					rectangle(totalWidth/4, y-150, totalWidth-totalWidth/2, totalHeight*2, COLORS.gray1);
 
-					graphicsAndCollisions();
+					circle(x, totalHeight/2, totalWidth, COLORS.endColor);
+					text(x, texty, 80, "GAME OVER", COLORS.white);
+					texty += 100;
+					text(x, texty, 60, "Statistics", COLORS.white);
+					text(x, texty+60, 30, "Bullets Fired : " + STATISTICS.totalBulletsFired, COLORS.white);
+					text(x, texty+90, 30, "Mines Laid : " + STATISTICS.totalMinesLaid, COLORS.white);
+					text(x, texty+120, 30, "Distance Travelled : " + STATISTICS.distanceTravelled, COLORS.white);
+					text(x, texty+200, 30, "Missions Cleared : " + (currentLevelId + 1) + " / " + LEVELS.length, COLORS.white);
 
-					if(!hasPlayedMusic) {
-						backgroundMusic.pause();
-						backgroundMusic.play();
-						hasPlayedMusic = true;
+					texty += 160;
+					text(x, texty+100, 20, "A Game Clone by: ErikWDev");
+					text(x, texty+180, 20, "All music is owned by Nintendo (tm).");
+					text(x, texty+210, 20, "All rights reserved.");
+					GAMEOVERTIME++;
+				} else {
+					if(!HASINITIATEDLEVEL) {
+						START = (DEBUG || HASSTARTEDONCE);
+						PLAYERTANK.x = currentLevel.playerSpawnpoint.x;
+						PLAYERTANK.y = currentLevel.playerSpawnpoint.y;
+						currentLevel.tanks.push(PLAYERTANK);
+						tanks = currentLevel.tanks;
+						HASINITIATEDLEVEL = true;
 					}
 
-					if(!GAMEISPLAYING) {
-						startTimer -= 0.8;
-						circle(totalWidth/2, totalHeight/2, (startTimer*startTimer)*10, COLORS.startcolor);
-						text(totalWidth/2, totalHeight/2, 120 - currentLevel.name.length*3, currentLevel.name, COLORS.white);
-						text(totalWidth/2, totalHeight/2 + 80, 50, "Mission: " + (currentLevelId + 1), COLORS.white);
-						text(totalWidth/2, totalHeight/2 + 160, 50, "Tanks: " + (tanks.length - 1), COLORS.white);
-					} else {
-						let info =  "Mission: " + (currentLevelId + 1) + " – " + currentLevel.name;
-						text(totalWidth/2, totalHeight-currentLevel.tileHeight/4, currentLevel.tileHeight/2, info, COLORS.white);
-						if(tanks.length <= 1) {
-							if(tanks[0] == PLAYERTANK) {
-								hasWon = true;
-							}
+					if(START) {
+						GAMEISPLAYING = (startTimer <= 0);
+
+						graphicsAndCollisions();
+
+						if(!hasPlayedMusic) {
+							backgroundMusic.pause();
+							backgroundMusic.play();
+							hasPlayedMusic = true;
 						}
 
-						if(hasWon || died) {
-							winTimer -= 0.8;
-							backgroundMusic.pause();
-							winMusic.loop = false;
-							if(!winMusic.ended) {
-								winMusic.play();
+						if(!GAMEISPLAYING) {
+							startTimer -= 0.8;
+							circle(totalWidth/2, totalHeight/2, (startTimer*startTimer)*10, COLORS.startcolor);
+							text(totalWidth/2, totalHeight/2, 120 - currentLevel.name.length*3, currentLevel.name, COLORS.white);
+							text(totalWidth/2, totalHeight/2 + 80, 50, "Mission: " + (currentLevelId + 1) + " / " + LEVELS.length, COLORS.white);
+							text(totalWidth/2, totalHeight/2 + 160, 50, "Tanks: " + (tanks.length - 1), COLORS.white);
+							text(totalWidth/2, totalHeight/2 - 120, 50, "Lives: " + PLAYERLIVES, COLORS.white);
+						} else {
+							let info =  "Lives: " + PLAYERLIVES + " Mission: " + (currentLevelId + 1) + " – " + currentLevel.name;
+							text(totalWidth/2, totalHeight-currentLevel.tileHeight/4, currentLevel.tileHeight/2, info, COLORS.white);
+							if(tanks.length <= 1) {
+								if(tanks[0] == PLAYERTANK) {
+									hasWon = true;
+								}
 							}
 
-							let t = WINDELAY*WINDELAY*0.2-(winTimer*winTimer)*0.2;
-							circle(totalWidth/2, totalHeight/2, t, COLORS.startcolor);
-							if(winTimer <= 0) {
-								if(hasWon) {
-									nextLevel();
-								} else {
-									restart();
+							if(hasWon || died) {
+								winTimer -= 0.8;
+								backgroundMusic.pause();
+								if(!winMusic.ended && !deathMusic.ended) {
+									if(hasWon) {
+										winMusic.loop = false;
+										winMusic.play();
+									} else {
+										if(died) {
+											deathMusic.loop = false;
+											deathMusic.play();
+										}
+									}
+								}
+
+								let t = WINDELAY*WINDELAY*0.2-(winTimer*winTimer)*0.2;
+								circle(totalWidth/2, totalHeight/2, t, COLORS.startcolor);
+								if(winTimer <= 0) {
+									if(hasWon) {
+										nextLevel();
+									} else {
+										restart();
+									}
 								}
 							}
 						}
-					}
-				} else {
-					clearScreen();
-					circle(totalWidth/2, totalHeight/2, 130, COLORS.red1);
-					text(totalWidth/2, totalHeight/2, 15, "Click here to start!", COLORS.white);
-					if(distance(totalWidth/2, totalHeight/2, mouse.x, mouse.y) < 130 && mouse.left) {
-						START = true;
-						HASSTARTEDONCE = true;
+					} else {
+						clearScreen();
+						circle(totalWidth/2, totalHeight/2, 130, COLORS.red1);
+						text(totalWidth/2, totalHeight/2, 15, "Click here to start!", COLORS.white);
+						if(distance(totalWidth/2, totalHeight/2, mouse.x, mouse.y) < 130 && mouse.left) {
+							START = true;
+							HASSTARTEDONCE = true;
+						}
 					}
 				}
 			}
