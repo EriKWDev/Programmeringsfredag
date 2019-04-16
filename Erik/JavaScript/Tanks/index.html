@@ -6,8 +6,6 @@
 	</head>
 	<body>
 		<script src="https://koda.nu/simple.js">
-			updatesPerSecond = 60;
-
 			class Trail {
 				constructor(x, y, angle, size) {
 					this.x = x;
@@ -42,6 +40,9 @@
 					this.hasDestroyedTiles = false;
 					this.kills = kills;
 					this.hasKilled = false;
+					smallExplosion.pause();
+					smallExplosion.currentTime = 0.8;
+					smallExplosion.play();
 				}
 
 				update() {
@@ -95,6 +96,10 @@
 					this.time = time;
 					this.size = size;
 					this.owner = owner;
+
+					mineSound.pause();
+					mineSound.currentTime = 0;
+					mineSound.play();
 				}
 
 				update() {
@@ -187,6 +192,8 @@
 						this.collisionTimer = this.collisionDelay;
 						this.bounces++;
 						this.angle = pi-this.angle;
+						click.currentTime = 0;
+						click.play();
 					}
 
 					if(side.left || side.right) {
@@ -194,12 +201,15 @@
 						this.collisionTimer = this.collisionDelay;
 						this.bounces++;
 						this.angle = pi-this.angle;
+						click.currentTime = 0;
+						click.play();
 					}
 				}
 			}
 
+
 			class Tank {
-				constructor(x, y, colors, isPlayer=false, maxBullets=5, maxMines=3, shootDelay=30, bulletSpeedBoost=1, scale=TANKSCALE) {
+				constructor(x, y, colors, isPlayer=false, maxBullets=5, maxMines=3, shootDelay=30, bulletSpeedBoost=1, speedBoost=1, maxBulletBounces=1, scale=TANKSCALE) {
 					this.x = x;
 				  	this.y = y;
 					this.isPlayer = isPlayer;
@@ -218,7 +228,7 @@
 					this.bullets = 0;
 					this.maxBullets = maxBullets;
 					this.maxMines = maxMines;
-					this.speed = 2;
+					this.speed = 2 * speedBoost;
 					this.mines = 0;
 					this.canShoot = true;
 					this.corner1 = {x:0, y:0, hasCollided:false, isColliding:false};
@@ -227,7 +237,7 @@
 					this.corner4 = {x:0, y:0, hasCollided:false, isColliding:false};
 					this.corners = [];
 					this.updateCorners();
-					this.trailDelay = 10 * this.scale;
+					this.trailDelay = 15 * this.scale / this.speed;
 					this.trailTimer = 0;
 					this.dead = false;
 					this.lastTile = null;
@@ -237,9 +247,11 @@
 					this.pathIndex = 0;
 					this.pathAngle = 0;
 					this.backing = false;
-					this.backingDelay = 16;
+					this.backingDelay = 18;
 					this.backingTimer = 0;
 					this.bulletSpeedBoost = bulletSpeedBoost;
+					this.maxBulletBounces = maxBulletBounces;
+					this.speedBoost = speedBoost;
 
 					if(!this.isPlayer) {
 						this.aimAngle = -Math.atan2((this.y-PLAYERTANK.y),(PLAYERTANK.x-this.x));;
@@ -281,16 +293,28 @@
 					}
 				}
 
-				recalculatePath() {
+				recalculatePath(efficient=true) {
 					let newPath = AStar(getTileAtPosition({x:this.x, y:this.y}), PLAYERTANK.lastTile);
 					this.path =  newPath || this.path;
+
 					if(newPath) {
 						this.pathIndex = this.path.length-1;
-						let nextTile = this.path[this.pathIndex];
-						if(nextTile)
-							this.pathAngle = -Math.atan2((this.y-nextTile.y),(nextTile.x-this.x));
 
+						let nextTile = this.path[this.pathIndex];
+						if(efficient) {
+							while(this.pathIndex > 0 && this.pointInSight(nextTile)) {
+								this.pathIndex--;
+								nextTile = this.path[this.pathIndex];
+							}
+
+							nextTile = this.path[++this.pathIndex];
+						}
+
+						if(nextTile) {
+							this.pathAngle = -Math.atan2((this.y-nextTile.y),(nextTile.x-this.x));
+						}
 					}
+
 					this.recalculatePathTimer = this.recalculatePathDelay;
 				}
 
@@ -299,22 +323,23 @@
 					let nextTile = this.path[this.pathIndex];
 
 					this.recalculatePathTimer--;
-					if(this.recalculatePathTimer <= 0) {
+					if(this.recalculatePathTimer <= 0 && this.speed > 0) {
 						this.recalculatePath();
 					}
 
 					if(this.shootTimer <= 0) {
-						let boom = this.pointInSight({x:PLAYERTANK.x,y:PLAYERTANK.y});
+						let boom = this.pointInSight({x:PLAYERTANK.x,y:PLAYERTANK.y}, true);
 						if(boom) {
 							this.shoot();
 						}
 					}
 
-					if(DEBUG && nextTile) {
-						circle(nextTile.x, nextTile.y, 10, this.colors.gun);
-					}
+					if(nextTile != null && this.speed > 0) {
 
-					if(nextTile != null) {
+						if(DEBUG) {
+							circle(nextTile.x, nextTile.y, 10, this.colors.gun);
+						}
+
 						if((thisTile.gridX == nextTile.gridX && thisTile.gridY == nextTile.gridY)) {
 							if(this.pathIndex >= 1) {
 								this.pathIndex--;
@@ -325,22 +350,29 @@
 							if(this.corner1.isColliding || this.corner2.isColliding) {
 								this.backing = true;
 								this.backingTimer = this.backingDelay;
+								this.recalculatePath(false);
 							} else if (!this.backing) {
 								this.x += cos(this.angle) * this.speed;
 								this.y += sin(this.angle) * this.speed;
 								this.trail();
 							}
 
-							this.angle = moveTowards(this.angle, this.pathAngle, 0.03);
+							this.angle = moveTowards(this.angle, this.pathAngle, 0.03 * this.speedBoost);
 						}
 
 						if(this.backing) {
-							this.pathAngle = -Math.atan2((this.y-nextTile.y),(nextTile.x-this.x));
 							this.backingTimer--;
 							this.angle = moveTowards(this.angle, this.pathAngle, 0.06);
 							if(this.backingTimer <= 0) {
 								this.backing = false;
 								this.backingTimer = this.backingDelay;
+								if(this.pathIndex < this.path.length - 1) {
+									this.pathIndex++;
+									nextTile = this.path[this.pathIndex];
+								}
+								if(nextTile) {
+									this.pathAngle = -Math.atan2((this.y-nextTile.y),(nextTile.x-this.x));
+								}
 							}
 
 							this.x -= cos(this.angle) * this.speed/2;
@@ -357,40 +389,46 @@
 
 				}
 
-				pointInSight(position) {
+				pointInSight(position, checkHoles=false) {
 					if(PLAYERTANK.dead) {
 						return false;
 					}
 
-					let currentCoords = getTileMapCoordsAtPosition({x:this.x, y:this.y});
+					if(position.x == null || position.y == null) {
+						return false
+					}
+
+					let currentCoords = {x:this.x, y:this.y};
 					let playerCoords = getTileMapCoordsAtPosition({x:position.x, y:position.y});
 
-					let dist = distance(currentCoords, playerCoords);
+					let dist = distance(this, position) / 10;
 
-					let dx = -(currentCoords.x - playerCoords.x) / dist;
-					let dy = -(currentCoords.y - playerCoords.y) / dist;
+					let dx = -(this.x - position.x) / dist;
+					let dy = -(this.y - position.y) / dist;
 					let currentTile = "_";
 
 					if(dist <= 1) {
 						return true
 					}
 
-					while(currentTile == "_" || currentTile == "H") {
+					let currentTileCoords = getTileMapCoordsAtPosition({x:currentCoords.x, y:currentCoords.y});
+					let startTileCoords = currentTileCoords;
+
+					while((currentTile == "E" && (currentTileCoords.x == startTileCoords.x && currentTileCoords.y == startTileCoords.y)) || (currentTile == "_" || (currentTile == "H" && checkHoles))) {
 						if(DEBUG) {
-							circle(currentCoords.x*currentLevel.tileWidth + currentLevel.tileWidth/2, currentCoords.y*currentLevel.tileHeight + currentLevel.tileHeight/2, 6, "yellow");
+							circle(currentCoords.x, currentCoords.y, 6, "yellow");
 						}
 
 						currentCoords.x += dx;
 						currentCoords.y += dy;
 
-						let rx = Math.round(currentCoords.x);
-						let ry = Math.round(currentCoords.y);
+						currentTileCoords = getTileMapCoordsAtPosition({x:currentCoords.x, y:currentCoords.y});
 
-						if(rx == Math.round(playerCoords.x) && ry == Math.round(playerCoords.y)) {
+						if(currentTileCoords.x == playerCoords.x && currentTileCoords.y == playerCoords.y) {
 							return true;
 						}
 
-						currentTile = currentLevel.tileMap[ry][rx].tileType;
+						currentTile = getTileAtPosition({x:currentCoords.x, y:currentCoords.y}).tileType;
 					}
 
 					return false;
@@ -476,7 +514,10 @@
 
 				shoot() {
 					if(this.bullets < this.maxBullets) {
-						bullets.push(new Bullet(this, this.x+cos(this.aimAngle)*this.length/1.3, this.y+sin(this.aimAngle)*this.length/1.3, this.aimAngle, PLAYERTANK.speed*1.2*this.bulletSpeedBoost, 1));
+						bullets.push(new Bullet(this, this.x+cos(this.aimAngle)*this.length/1.3, this.y+sin(this.aimAngle)*this.length/1.3, this.aimAngle, PLAYERTANK.speed*1.2*this.bulletSpeedBoost, this.maxBulletBounces));
+						shootSound.pause();
+						shootSound.currentTime = 0;
+						shootSound.play();
 						this.bullets++;
 						this.shootTimer = this.shootDelay;
 						this.hasShot = true;
@@ -656,6 +697,106 @@
 				}
 			}
 
+			// #region Variables
+			updatesPerSecond = 60;
+			var DEBUG = false;
+			canvas.getContext("2d").textAlign = "center";;
+
+			const COLORS = {
+				red1:"rgba(200, 10, 50, 1)",
+				red2:"rgba(130, 2, 20, 1)",
+				red3:"rgba(190, 8, 40, 1)",
+				blue1:"rgba(110, 110, 180, 1)",
+				blue2:"rgba(80, 80, 190, 1)",
+				blue3:"rgba(60, 60, 195, 1)",
+				brown1:"rgba(137, 95, 67, 1)",
+				brown2:"rgba(171, 119, 84, 1)",
+				brown3:"rgba(179, 132, 101, 1)",
+				green1:"rgba(70, 156, 48, 1)",
+				green2:"rgba(78, 176, 54, 1)",
+				green3:"rgba(104, 201, 79, 1)",
+				orange1:"rgba(211, 84, 0, 1)",
+				orange2:"rgba(230, 126, 34, 1)",
+				orange3:"rgba(243, 156, 18, 1)",
+				yellow1:"rgba(255, 212, 28, 1)",
+				sand1:"rgba(227, 185, 130, 1)",
+				sand2:"rgba(236, 204, 162, 1)",
+				sand3:"rgba(231, 196, 150, 1)",
+				sand4:"rgba(225, 191, 146, 1)",
+				gray0:"rgba(85, 85, 85, 0.4)",
+				gray1:"rgba(55, 55, 55, 1)",
+				gray2:"rgba(85, 85, 85, 1)",
+				gray3:"rgba(200, 200, 200, 1)",
+				white1:"rgba(250, 250, 250, 1)",
+				white2:"rgba(210, 210, 210, 1)",
+				white3:"rgba(230, 230, 230, 1)",
+				white:"rgba(230, 230, 230, 1)",
+				startcolor:"rgba(40, 40, 40, 0.4)",
+				endColor:"rgba(120, 100, 120, 0.01)"
+			};
+
+			const TANKCOLORS1 = tankColors(COLORS.orange1, COLORS.orange2, COLORS.orange3);
+			const TANKCOLORS2 = tankColors(COLORS.brown1, COLORS.brown2, COLORS.brown3);
+			const TANKCOLORS3 = tankColors(COLORS.green1, COLORS.green2, COLORS.green3);
+			const TANKCOLORS4 = tankColors(COLORS.red2, COLORS.red1, COLORS.red3);
+			const TANKCOLORS5 = tankColors(COLORS.blue3, COLORS.blue2, COLORS.blue1);
+			const TANKCOLORS6 = tankColors(COLORS.white3, COLORS.white2, COLORS.white1);
+
+			var enemyTankColors = [
+				TANKCOLORS2,
+				TANKCOLORS1,
+				TANKCOLORS4,
+				TANKCOLORS5,
+				TANKCOLORS6,
+			];
+
+			const TANKSCALE = totalHeight/700;
+			const STARTDELAY = 180;
+			const WINDELAY = 150;
+			let startTimer = STARTDELAY;
+			let winTimer = WINDELAY;
+			var backgroundMusic = new Audio("http://66.90.93.122/ost/wii-play/qqvrntybtr/053%20-%20Tanks%20-%20Variation%201.mp3");
+			var winMusic = new Audio("http://66.90.93.122/ost/wii-play/howmzfluwp/055%20-%20Tanks%20-%20Round%20End.mp3");
+			var deathMusic = new Audio("http://66.90.93.122/ost/wii-play/xigbgdonrb/054%20-%20Tanks%20-%20Round%20Failure.mp3");
+			var statsMusic = new Audio("http://66.90.93.122/ost/wii-play/saxordnvfk/068%20-%20Tanks%20-%20Results.mp3");
+			var smallExplosion = new Audio("https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-audio-hero/audio_hero_ExplosionSmall_DIGIJ02_24_351.mp3?_=9");
+			var shootSound = new Audio("https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-27787/zapsplat_leisure_inflatable_toy_puncture_002_28944.mp3");
+			var click = new Audio("https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-one/multimedia_button_click_007.mp3");
+			var mineSound = new Audio("https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-skyclad-sound/skyclad_sound_pop_then_squeak_squawk_descend_281.mp3");
+
+			var PLAYERTANK = new Tank(0, 0, TANKCOLORS3, true);
+			var PLAYERLIVES = 3;
+
+			var STATISTICS = {
+				totalBulletsFired:0,
+				totalMinesLaid:0,
+				totalEnemiesKilled:0,
+				distanceTravelled:0
+			};
+
+			var GAMEISPLAYING = false;
+			var START = false;
+			var HASINITIATEDLEVEL = false;
+			var HASSTARTEDONCE = false;
+			var GAMEOVER = false;
+			var GAMEOVERTIME = 0;
+
+			var hasWon = false;
+
+			let hasPlayedMusic = false;
+			let tanks = [];
+			let deadTanks = [];
+			let bullets = [];
+			let mines = [];
+			let explosions = [];
+
+			let trails = [];
+			let died = false;
+
+			// #endregion
+
+			// #region Helper functions
+
 			function drawTank(x, y, angle, aimAngle, width, length, colors, enemy=false) {
 				save();
 				translate(x, y);
@@ -697,213 +838,9 @@
 				};
 			}
 
-			const COLORS = {
-				red1:"rgba(200, 10, 50, 1)",
-				red2:"rgba(130, 2, 20, 1)",
-				red3:"rgba(190, 8, 40, 1)",
-				brown1:"rgba(137, 95, 67, 1)",
-				brown2:"rgba(171, 119, 84, 1)",
-				brown3:"rgba(179, 132, 101, 1)",
-				green1:"rgba(70, 156, 48, 1)",
-				green2:"rgba(78, 176, 54, 1)",
-				green3:"rgba(104, 201, 79, 1)",
-				orange1:"rgba(211, 84, 0, 1)",
-				orange2:"rgba(230, 126, 34, 1)",
-				orange3:"rgba(243, 156, 18, 1)",
-				yellow1:"rgba(255, 212, 28, 1)",
-				sand1:"rgba(227, 185, 130, 1)",
-				sand2:"rgba(236, 204, 162, 1)",
-				sand3:"rgba(231, 196, 150, 1)",
-				sand4:"rgba(225, 191, 146, 1)",
-				gray0:"rgba(85, 85, 85, 0.4)",
-				gray1:"rgba(55, 55, 55, 1)",
-				gray2:"rgba(85, 85, 85, 1)",
-				gray3:"rgba(200, 200, 200, 1)",
-				white:"rgba(230, 230, 230, 1)",
-				startcolor:"rgba(40, 40, 40, 0.4)",
-				endColor:"rgba(120, 100, 120, 0.01)"
-			};
+			// #endregion
 
-			const DEBUGMAP = {
-				name:"Debugging",
-				map:[
-				    /*__________M_________*/
-					"BBBBBBBBBBBBBBBBBBBBB",
-					"B___________________B",
-					"B_____BBbbBB______0_B",
-					"B_____b__P_____B____B",
-					"B__0__b________B____B",
-					"B_____B________BBB__B",
-			   /*M*/"B________B__________B",
-					"B____BBBBB__________B",
-					"B____B______________B",
-					"B____B_________0____B",
-					"B_________0_________B",
-					"B___________________B",
-					"BBBBBBBBBBBBBBBBBBBBB",
-				]
-			};
-
-			const MAP1 = {
-				name:"It Begins",
-				map:[
-				    /*__________M_________*/
-					"BBBBBBBBBBBBBBBBBBBBB",
-					"B___________________B",
-					"B___________________B",
-					"B_____B___B___B_____B",
-					"B_____B___B___H_____B",
-					"B_________b___B_____B",
-			   /*M*/"B___P_____b___b__0__B",
-					"B_________b___B_____B",
-					"B_____B___B___H_____B",
-					"B_____B___B___B_____B",
-					"B___________________B",
-					"B___________________B",
-					"BBBBBBBBBBBBBBBBBBBBB",
-				]
-			};
-
-			const MAP2 = {
-				name:"Walls",
-				map:[
-				    /*__________M_________*/
-					"BBBBBBBBBBBBBBBBBBBBB",
-					"B___________________B",
-					"B_________________1_B",
-					"B______________B____B",
-					"B______________B____B",
-					"B______________BBB__B",
-			   /*M*/"B___________________B",
-					"B__BBB______________B",
-					"B____B______________B",
-					"B____B______________B",
-					"B_P_________________B",
-					"B___________________B",
-					"BBBBBBBBBBBBBBBBBBBBB",
-				]
-			};
-
-			const MAP3 = {
-				name:"Walls",
-				map:[
-				    /*__________M_________*/
-					"BBBBBBBBBBBBBBBBBBBBB",
-					"B_________________2_B",
-					"B___________________B",
-					"B_________________2_B",
-					"B___BbBbBHBHBBBBBBBBB",
-					"B___________________B",
-			   /*M*/"B___________________B",
-					"B___________________B",
-					"BBBBBBBBBHBHBbBbB___B",
-					"B_______b___________B",
-					"B_P__b____________0_B",
-					"B_______b___________B",
-					"BBBBBBBBBBBBBBBBBBBBB",
-				]
-			};
-
-			function heuristic(tile, goal) {
-				//return Math.abs(tile.x-goal.x) + Math.abs(tile.y-goal.y);
-				//return(tile.x-goal.x)*(tile.y-goal.y);
-				return distance(tile, goal);
-			}
-
-			function AStarPath(current, start, l=30) {
-				let path = [];
-				let temp = current;
-				for(let i = 0; i < l; i++) {
-
-					if(temp.previous == null) {
-						break;
-					}
-
-					if(temp != start)
-						path.push({x:temp.previous.x, y:temp.previous.y, gridX:temp.previous.gridX, gridY:temp.previous.gridY});
-
-					temp = temp.previous;
-				}
-				return path;
-			}
-
-			function AStar(start=currentLevel.tileMap[1][1], goal=currentLevel.tileMap[currentLevel.height-1][currentLevel.width-1]) {
-				let closedSet = [];
-				let openSet = [start];
-
-				for(let tile of currentLevel.tileMap) {
-					tile.f = 0;
-					tile.g = 0;
-					tile.h = 0;
-					tile.previous = null;
-				}
-
-				start.f = heuristic(start, goal);
-
-				let i = 0;
-				while(openSet.length > 0 && i < currentLevel.height*currentLevel.width*2) {
-					i++;
-
-					let nodeWithLowest = start;
-
-					for(let open of openSet) {
-						if(open.f < nodeWithLowest.f) {
-							nodeWithLowest = open;
-						}
-					}
-
-					let current = nodeWithLowest;
-
-					if(current.gridX == goal.gridX && current.gridY == goal.gridY) {
-						return AStarPath(current, start, i);
-					}
-
-					openSet.splice(openSet.indexOf(current), 1);
-					closedSet.push(current);
-
-					for(let key in current.neighbouringTiles) {
-						let neighbouringTile = current.neighbouringTiles[key];
-						if (neighbouringTile != null && neighbouringTile.tileType != "E" && (neighbouringTile.tileType == "_" || neighbouringTile.tileType == "P")) {
-
-							if(closedSet.includes(neighbouringTile)) {
-								continue;
-							}
-
-							let tentativeGScore = current.g + 1;
-
-							if(!openSet.includes(neighbouringTile)) {
-								openSet.push(neighbouringTile);
-							} else if(tentativeGScore > neighbouringTile.g) {
-								continue;
-							}
-
-							neighbouringTile.previous = current;
-							neighbouringTile.g = tentativeGScore;
-							neighbouringTile.h = heuristic(neighbouringTile, goal);
-							neighbouringTile.f = neighbouringTile.g + neighbouringTile.h;
-						}
-					}
-				}
-
-				// no solution
-				// console.log("It is impossible to complete the path. : " + i);
-				return;
-			}
-
-			function printCurrentLevel() {
-				let text = "\n";
-
-				for(let y = 0; y < currentLevel.height; y++) {
-					for(let x = 0; x < currentLevel.width; x++) {
-						text += currentLevel.tileMap[y][x].tileType;
-					}
-					text += "\n";
-				}
-				text += "\n";
-
-				console.log(text);
-			}
-
+			// #region Level
 			function createLevel(MAP) {
 				let level = {
 					name:MAP.name,
@@ -952,18 +889,22 @@
 							    level.holes.push(newTile);
 							    level.tiles.push(newTile);
 						    } else if (tileType == "0") {
-							    // constructor(x, y, colors, isPlayer=false, maxBullets=5, maxMines=3, shootDelay=30, scale=TANKSCALE)
+							    // constructor(x, y, colors, isPlayer=false, maxBullets=5, maxMines=3, shootDelay=30, bulletSpeedBoost=1, speedBoost=1, maxBulletBounces=1, scale=TANKSCALE) {
 								level.tanks.push(new Tank(newTile.x, newTile.y, enemyTankColors[tileType], false, 1, 0, 10));
 							} else if (tileType == "1") {
 								level.tanks.push(new Tank(newTile.x, newTile.y, enemyTankColors[tileType], false, 3, 0, 60));
 							} else if (tileType == "2") {
 								level.tanks.push(new Tank(newTile.x, newTile.y, enemyTankColors[tileType], false, 1, 0, 30, 2));
+							} else if (tileType == "3") {
+								level.tanks.push(new Tank(newTile.x, newTile.y, enemyTankColors[tileType], false, 3, 0, 30, 2.1, 1.8));
+							} else if (tileType == "4") {
+								level.tanks.push(new Tank(newTile.x, newTile.y, enemyTankColors[tileType], false, 8, 0, 130, 3.5, 0, 5));
 							} else {
 								if(newTile.destroyable) {
 									level.destroyableTiles.push(newTile);
 								}
 								level.tiles.push(newTile);
-						     }
+							}
 						}
 					}
 				}
@@ -984,6 +925,64 @@
 				return level;
 			}
 
+			function setLevels() {
+				for(let MAP of MAPS) {
+					LEVELS.push(createLevel(MAP));
+				}
+			}
+
+			function resetLevel(id) {
+				tanks = [];
+				currentLevel.tanks = [];
+				LEVELS[id] = createLevel(MAPS[id]);
+			}
+
+			function restart() {
+				resetLevel(currentLevelId);
+				currentLevelId--;
+				PLAYERLIVES--;
+				if(PLAYERLIVES <= 0) {
+					gameOver();
+				} else {
+					nextLevel();
+				}
+			}
+
+			function nextLevel() {
+				GAMEISPLAYING = false;
+				HASINITIATEDLEVEL = false;
+				hasPlayedMusic = false;
+				backgroundMusic.pause();
+				backgroundMusic.currentTime = 0;
+				winMusic.pause();
+				winMusic.currentTime = 0;
+				deathMusic.pause();
+				deathMusic.currentTime = 0;
+
+				if(currentLevelId != LEVELS.length - 1) {
+					currentLevelId++;
+				} else {
+					return win ();
+				}
+
+				PLAYERTANK.angle = 0;
+				PLAYERTANK.trails = [];
+				PLAYERTANK.bullets = 0;
+				PLAYERTANK.mines = 0;
+				PLAYERTANK.dead = false;
+				bullets = [];
+				mines = [];
+				deadTanks = [];
+				tanks = [];
+				trails = [];
+
+				currentLevel = LEVELS[currentLevelId];
+				startTimer = STARTDELAY;
+				winTimer = WINDELAY;
+				hasWon = false;
+				died = false;
+			}
+
 			function getTileMapCoordsAtPosition(position) {
 				let x = Math.round(0.5 + position.x/currentLevel.tileWidth)-1;
 				let y = Math.round(0.5 + position.y/currentLevel.tileHeight)-1;
@@ -991,17 +990,346 @@
 				return {x:x, y:y};
 			}
 
-			function getTileAtPosition(position) {
+			function getTileAtPosition(position, debug=false) {
 				let coords = getTileMapCoordsAtPosition(position);
 
 				let tile = currentLevel.tileMap[coords.y][coords.x];
 
-				if(DEBUG) {
+				if(DEBUG && debug) {
 					cRectangle(currentLevel.tileWidth/2 + coords.x*currentLevel.tileWidth, currentLevel.tileHeight/2 + coords.y*currentLevel.tileHeight, currentLevel.tileWidth, currentLevel.tileHeight, COLORS.gray0);
 				}
 
 				return tile;
 			}
+			// #endregion
+
+			// #region A*
+			function heuristic(tile, goal) {
+				//return Math.abs(tile.x-goal.x) + Math.abs(tile.y-goal.y);
+				//return(tile.x-goal.x)*(tile.y-goal.y);
+				return distance(tile, goal);
+			}
+
+			function AStarPath(current, start, l=30) {
+				let path = [];
+				let temp = current;
+				for(let i = 0; i < l; i++) {
+
+					if(temp.previous == null) {
+						break;
+					}
+
+					if(temp != start)
+						path.push({x:temp.previous.x, y:temp.previous.y, gridX:temp.previous.gridX, gridY:temp.previous.gridY});
+
+					temp = temp.previous;
+				}
+				return path;
+			}
+
+			function AStar(start=currentLevel.tileMap[1][1], goal=currentLevel.tileMap[currentLevel.height-1][currentLevel.width-1]) {
+				let closedSet = [];
+				let openSet = [start];
+
+				for(let tile of currentLevel.tileMap) {
+					tile.f = 0;
+					tile.g = 0;
+					tile.h = 0;
+					tile.previous = null;
+				}
+
+				start.f = heuristic(start, goal);
+
+				let i = 0;
+				while(openSet.length > 0 && i < currentLevel.height*currentLevel.width*5) {
+					i++;
+
+					let nodeWithLowest = start;
+
+					for(let open of openSet) {
+						if(open.f < nodeWithLowest.f) {
+							nodeWithLowest = open;
+						}
+					}
+
+					let current = nodeWithLowest;
+
+					if(current.gridX == goal.gridX && current.gridY == goal.gridY) {
+						return AStarPath(current, start, i);
+					}
+
+					openSet.splice(openSet.indexOf(current), 1);
+					closedSet.push(current);
+
+					for(let key in current.neighbouringTiles) {
+						let neighbouringTile = current.neighbouringTiles[key];
+						if (neighbouringTile != null && neighbouringTile.tileType != "E" && (neighbouringTile.tileType == "_" || neighbouringTile.tileType == "P")) {
+
+							if(closedSet.includes(neighbouringTile)) {
+								continue;
+							}
+
+							let tentativeGScore = current.g + 1;
+
+							if(!openSet.includes(neighbouringTile)) {
+								openSet.push(neighbouringTile);
+							} else if(tentativeGScore > neighbouringTile.g) {
+								continue;
+							}
+
+							neighbouringTile.previous = current;
+							neighbouringTile.g = tentativeGScore;
+							neighbouringTile.h = heuristic(neighbouringTile, goal);
+							neighbouringTile.f = neighbouringTile.g + neighbouringTile.h;
+						}
+					}
+				}
+
+				// no solution
+				// console.log("It is impossible to complete the path. : " + i);
+				return;
+			}
+
+			// #endregion
+
+			// #region Maps
+
+			const EMPTYMAP = {
+				name:"EMPTY",
+				map:[
+				    /*__________M_________*/
+					"BBBBBBBBBBBBBBBBBBBBB",
+					"B___________________B",
+					"B___________________B",
+					"B___________________B",
+					"B___________________B",
+					"B___________________B",
+				/*M*/"B___________________B",
+					"B___________________B",
+					"B___________________B",
+					"B___________________B",
+					"B_P_________________B",
+					"B___________________B",
+					"BBBBBBBBBBBBBBBBBBBBB",
+				]
+			};
+
+			const MAP1 = {
+				name:"It Begins",
+				map:[
+				    /*__________M_________*/
+					"BBBBBBBBBBBBBBBBBBBBB",
+					"B___________________B",
+					"B___________________B",
+					"B_____B___B___B_____B",
+					"B_____B___B___H_____B",
+					"B_________b___B_____B",
+				/*M*/"B___P_____b___b__0__B",
+					"B_________b___B_____B",
+					"B_____B___B___H_____B",
+					"B_____B___B___B_____B",
+					"B___________________B",
+					"B___________________B",
+					"BBBBBBBBBBBBBBBBBBBBB",
+				]
+			};
+
+			const MAP2 = {
+				name:"Walls",
+				map:[
+				    /*__________M_________*/
+					"BBBBBBBBBBBBBBBBBBBBB",
+					"B___________________B",
+					"B_________________1_B",
+					"B______________B____B",
+					"B______________B____B",
+					"B______________BBB__B",
+				/*M*/"B___________________B",
+					"B__BBB______________B",
+					"B____B______________B",
+					"B____B______________B",
+					"B_P_________________B",
+					"B___________________B",
+					"BBBBBBBBBBBBBBBBBBBBB",
+				]
+			};
+
+			const MAP3 = {
+				name:"Red",
+				map:[
+				    /*__________M_________*/
+					"BBBBBBBBBBBBBBBBBBBBB",
+					"B___________________B",
+					"B________________2__B",
+					"B___________________B",
+					"B___BBHBHBBBBBBBB___B",
+					"B___________________B",
+				/*M*/"B________________1__B",
+					"B___________________B",
+					"B___BBBBBBBBHBHBB___B",
+					"B___________________B",
+					"B_P______________0__B",
+					"B___________________B",
+					"BBBBBBBBBBBBBBBBBBBBB",
+				]
+			};
+
+			const MAP4 = {
+				name:"Hole in One",
+				map:[
+				    /*__________M_________*/
+					"BBBBBBBBBBBBBBBBBBBBB",
+					"B___H___H___________B",
+					"B___H_0_H________1__B",
+					"B___H___H___________B",
+					"BH_HHHHHH___________B",
+					"B___________________B",
+				/*M*/"B___H_______________B",
+					"B___H_______________B",
+					"B_bbB___________HHHHB",
+					"B___b_______________B",
+					"B_P_b_____________0_B",
+					"B_______________H___B",
+					"BBBBBBBBBBBBBBBBBBBBB",
+				]
+			};
+
+			const MAP5 = {
+				name:"Can you do it?",
+				map:[
+				    /*__________M_________*/
+					"BBBBBBBBBBBBBBBBBBBBB",
+					"B_________2____B____B",
+					"B__BHBB________B____B",
+					"B_____B_BbbbB__B__0_B",
+					"B_____BBB___B_BB____B",
+				/*M*/"B_________P_________B",
+					"B_____BBB___B_BB____B",
+					"B_____B_BbbbB__B__0_B",
+					"B__BHBB________B____B",
+					"B_________2____B____B",
+					"BBBBBBBBBBBBBBBBBBBBB",
+				]
+			};
+
+			const MAP6 = {
+				name:"2 Red 1 Brown",
+				map:[
+				    /*__________M_________*/
+					"BBBBBBBBBBBBBBBBBBBBB",
+					"B________________2__B",
+					"B___________________B",
+					"B________________2__B",
+					"B___BbBbBHBHBBBBBBBBB",
+					"B___________________B",
+				/*M*/"B___________________B",
+					"B___________________B",
+					"BBBBBBBBBHBHBbBbB___B",
+					"B___________________B",
+					"B_P__b____________0_B",
+					"B___________________B",
+					"BBBBBBBBBBBBBBBBBBBBB",
+				]
+			};
+
+			const MAP7 = {
+				name:"Now We're Talking",
+				map:[
+				    /*__________M_________*/
+					"BBBBBBBBBBBBBBBBBBBBB",
+					"B___________________B",
+					"B_0_H____________2__B",
+					"B___H_______________B",
+				/*M*/"B___H____________1__B",
+					"B___H_______________B",
+					"B_P_H____________2__B",
+					"B___H_______________B",
+					"BBBBBBBBBBBBBBBBBBBBB",
+				]
+			};
+
+			const MAP8 = {
+				name:"Blue",
+				map:[
+				    /*_______M______*/
+					"BBBBBBBBBBBBBBB",
+					"B_____________B",
+					"B______3______B",
+					"B_____________B",
+					"B___B_____B___B",
+					"B___B_____B___B",
+				/*M*/"B___BBBBBBB___B",
+					"B___B_____B___B",
+					"B___B_____B___B",
+					"B_____________B",
+					"B______P______B",
+					"B_____________B",
+					"BBBBBBBBBBBBBBB",
+				]
+			};
+
+			const MAP9 = {
+				name:"White",
+				map:[
+				    /*__________M_________*/
+					"BBBBBBBBBBBBBBBBBBBBB",
+					"B___________________B",
+					"B________________4__B",
+					"B___________________B",
+					"B___________________B",
+					"B___________________B",
+				/*M*/"B___________________B",
+					"B___________________B",
+					"B___________________B",
+					"B___________________B",
+					"B_P_________________B",
+					"B___________________B",
+					"BBBBBBBBBBBBBBBBBBBBB",
+				]
+			};
+
+			const MAP10 = {
+				name:"Whiter",
+				map:[
+				    /*__________M_________*/
+					"BBBBBBBBBBBBBBBBBBBBB",
+					"B_________B_4_______B",
+					"B_________b_________B",
+					"B_________B_________B",
+					"B_BbbBB____________4B",
+					"B_____B_____________B",
+				/*M*/"B_P___b_________3___B",
+					"B_____B_____________B",
+					"B_BbbBB____________4B",
+					"B_________B_________B",
+					"B_________b_________B",
+					"B_________B_4_______B",
+					"BBBBBBBBBBBBBBBBBBBBB",
+				]
+			};
+
+			var MAPS = [
+				// DEBUGMAP,
+				// EMPTYMAP,
+				MAP1,
+				MAP2,
+				MAP3,
+				MAP4,
+				MAP5,
+				MAP6,
+				MAP7,
+				MAP8,
+				MAP9,
+				MAP10,
+			];
+
+			var LEVELS = [];
+			setLevels();
+
+			let currentLevelId = 0;
+			var currentLevel = LEVELS[currentLevelId];
+
+			// #endregion
 
 			function graphicsAndCollisions() {
 				fill(COLORS.sand2);
@@ -1097,82 +1425,6 @@
 				}
 			}
 
-			var DEBUG = false;
-
-			canvas.getContext("2d").textAlign = "center";;
-
-			const TANKCOLORS1 = tankColors(COLORS.orange1, COLORS.orange2, COLORS.orange3);
-			const TANKCOLORS2 = tankColors(COLORS.brown1, COLORS.brown2, COLORS.brown3);
-			const TANKCOLORS3 = tankColors(COLORS.green1, COLORS.green2, COLORS.green3);
-			const TANKCOLORS4 = tankColors(COLORS.red2, COLORS.red1, COLORS.red3);
-			const TANKSCALE = totalHeight/700;
-			const STARTDELAY = 180;
-			const WINDELAY = 150;
-			let startTimer = STARTDELAY;
-			let winTimer = WINDELAY;
-			var backgroundMusic = new Audio("http://66.90.93.122/ost/wii-play/qqvrntybtr/053%20-%20Tanks%20-%20Variation%201.mp3");
-			var winMusic = new Audio("http://66.90.93.122/ost/wii-play/howmzfluwp/055%20-%20Tanks%20-%20Round%20End.mp3");
-			var deathMusic = new Audio("http://66.90.93.122/ost/wii-play/xigbgdonrb/054%20-%20Tanks%20-%20Round%20Failure.mp3");
-			var statsMusic = new Audio ("http://66.90.93.122/ost/wii-play/saxordnvfk/068%20-%20Tanks%20-%20Results.mp3");
-
-			var PLAYERTANK = new Tank(0, 0, TANKCOLORS3, true);
-			var PLAYERLIVES = 1;
-
-			var STATISTICS = {
-				totalBulletsFired:0,
-				totalMinesLaid:0,
-				totalEnemiesKilled:0,
-				distanceTravelled:0
-			};
-
-			var enemyTankColors = [
-				TANKCOLORS2,
-				TANKCOLORS1,
-				TANKCOLORS4
-			];
-
-			var GAMEISPLAYING = false;
-			var START = false;
-			var HASINITIATEDLEVEL = false;
-			var HASSTARTEDONCE = false;
-			var GAMEOVER = false;
-			var GAMEOVERTIME = 0;
-
-			var MAPS = [
-				MAP1,
-				MAP2,
-				MAP3
-			];
-
-			var LEVELS = [];
-			setLevels();
-
-			function setLevels() {
-				for(let MAP of MAPS) {
-					LEVELS.push(createLevel(MAP));
-				}
-			}
-
-			function resetLevel(id) {
-				tanks = [];
-				currentLevel.tanks = [];
-				LEVELS[id] = createLevel(MAPS[id]);
-			}
-
-			let currentLevelId = 0;
-			var currentLevel = LEVELS[currentLevelId];
-			var hasWon = false;
-
-			let hasPlayedMusic = false;
-			let tanks = [];
-			let deadTanks = [];
-			let bullets = [];
-			let mines = [];
-			let explosions = [];
-
-			let trails = [];
-			let died = false;
-
 			function win() {
 				statsMusic.play();
 				GAMEOVER = true;
@@ -1181,52 +1433,6 @@
 			function gameOver() {
 				statsMusic.play();
 				GAMEOVER = true;
-			}
-
-			function restart() {
-				resetLevel(currentLevelId);
-				currentLevelId--;
-				PLAYERLIVES--;
-				if(PLAYERLIVES <= 0) {
-					gameOver();
-				} else {
-					nextLevel();
-				}
-			}
-
-			function nextLevel() {
-				GAMEISPLAYING = false;
-				HASINITIATEDLEVEL = false;
-				hasPlayedMusic = false;
-				backgroundMusic.pause();
-				backgroundMusic.currentTime = 0;
-				winMusic.pause();
-				winMusic.currentTime = 0;
-				deathMusic.pause();
-				deathMusic.currentTime = 0;
-
-				if(currentLevelId != LEVELS.length - 1) {
-					currentLevelId++;
-				} else {
-					return win ();
-				}
-
-				PLAYERTANK.angle = 0;
-				PLAYERTANK.trails = [];
-				PLAYERTANK.bullets = 0;
-				PLAYERTANK.mines = 0;
-				PLAYERTANK.dead = false;
-				bullets = [];
-				mines = [];
-				deadTanks = [];
-				tanks = [];
-				trails = [];
-
-				currentLevel = LEVELS[currentLevelId];
-				startTimer = STARTDELAY;
-				winTimer = WINDELAY;
-				hasWon = false;
-				died = false;
 			}
 
 			function update() {
