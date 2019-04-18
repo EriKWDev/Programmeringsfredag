@@ -2,7 +2,7 @@
 	"main":{
 		"title":"Bolognese",
 		"subtitle":"Spaghetti med Köttfärsås",
-		"duration":"1h 45 minuter",
+		"duration":"1h 30 minuter",
 		"rating":[1,1,1,1,1,1,1,1,0,0]
 	},
 	"ingredients":{
@@ -12,8 +12,8 @@
 				"title":"Huvudingredienser",
 				"ingredients":[
 					{
-						"unit":"500 gram",
-						"ingredient":"Köttfärsås"
+						"unit":"800 gram",
+						"ingredient":"Köttfärs"
 					},
 					{
 						"unit":"320 gram",
