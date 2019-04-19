@@ -6,6 +6,8 @@
 	</head>
 	<body>
 		<script src="https://koda.nu/simple.js">
+			// Spåren som pansarvagnarna lämnar efter sig. Pansarvagnarna skapar hela tiden nya instances av denna class
+			// och lägger in dem i trails variablen. I update kallas update för varje trail-objekt.
 			class Trail {
 				constructor(x, y, angle, size) {
 					this.x = x;
@@ -29,7 +31,8 @@
 				}
 			}
 
-
+			// Varje gång en pansarvagn, en mina eller ett skott exploderar skapas ett explosion-objekt som snabbt
+			// tar bort sig själv efter att effekten är färdig.
 			class Explosion {
 				constructor(x, y, radius, destroyTiles=true, kills=true, time=20) {
 					this.x = x;
@@ -87,7 +90,8 @@
 				}
 			}
 
-
+			// Minornas färg animeras med sinuskurvor vars frekvens ökar exponensielt. När de exploderar sprängs alla
+			// pansarvagnar i närheten. Om ett skott träffar en mina så sprängs den direkt.
 			class Mine {
 				constructor(owner, x, y, time, size=15*TANKSCALE) {
 					this.x = x;
@@ -126,7 +130,8 @@
 				}
 			}
 
-
+			// Skott som pansarvagnarna kan skjuta. De kollar när de är i närheten av en vägg huruvida de har studsat
+			// mot denna vägg och kollar i så fall även vilken sida av väggen den studsade på.
 			class Bullet {
 				constructor(owner, x, y, angle, speed, maxBounces, color=COLORS.gray1, scale=TANKSCALE) {
 					this.x = x;
@@ -207,7 +212,8 @@
 				}
 			}
 
-
+			// Den största classen i programmet. Här definieras all logik för hur spelaren kontrollerar sin pansarvagn
+			// samt all logik för hur AI:n skall bete sig i olika situationer.
 			class Tank {
 				constructor(x, y, colors, isPlayer=false, maxBullets=5, maxMines=3, shootDelay=30, bulletSpeedBoost=1, speedBoost=1, maxBulletBounces=1, scale=TANKSCALE) {
 					this.x = x;
@@ -570,7 +576,9 @@
 				}
 			}
 
-
+			// Varje vägg i spelet är en s.k. "Tile". De har en typ som kan vara "_":tom, "B":Block, "b":Block som kan sprängas,
+			// "H"Hål, "0"-"9":Fiende (AI), "P":Player Spawnpoint m.m.
+			// Varje Tile har definierade ramar som skott skall studsa emot samt pansarvagnar inte skall kunna gå över / genom.
 			class Tile {
 				constructor(gridX, gridY, x, y, w, h, tileType, neighbours=null) {
 					this.x = x;
@@ -697,6 +705,8 @@
 				}
 			}
 
+			// Definiering av lla globala variabler som skall vara tillgängliga för alla fuktioner under hela processen. Bl.a. inställningar,
+			// statistik, färger, musik, spelarens liv och mycket mer.
 			// #region Variables
 			updatesPerSecond = 60;
 			var DEBUG = false;
@@ -795,6 +805,7 @@
 
 			// #endregion
 
+			// Diverse funktioner som underlättar beräkningar eller ritande av exempelvis pansarvagnar.
 			// #region Helper functions
 
 			function drawTank(x, y, angle, aimAngle, width, length, colors, enemy=false) {
@@ -807,7 +818,7 @@
 				cRectangle(0, width/3, length, width/8, colors.head);
 				cRectangle(0, -width/3, length, width/8, colors.head);
 
-				circle(40, 0, 5, colors.gun);
+				circle(length/3, 0, 5, colors.gun);
 
 				rotateRadians(aimAngle-angle);
 				cRectangle(0, 0, width/2, width/2, colors.head);
@@ -842,6 +853,8 @@
 
 			// #endregion
 
+			// Funktioner som skapar och definierar alla nivåer utifrån MAP-arrayerna av strings nedan. (Skapar objekt som har mer information)
+			// och som är lättare att använda
 			// #region Level
 			function createLevel(MAP) {
 				let level = {
@@ -1005,6 +1018,9 @@
 			}
 			// #endregion
 
+			// A* är en sökalgoritm som letar efter den kortaste / mest effektiva vägen att ta sig från punk A till punkt B i ett system
+			// av noder. Denna funktion har jag implementerat själv ifrån pseudo-kod som finns på https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode
+			// Jag har tidigare erfarenhet av denna algoritm och ansåg den lämplig för AI:ns ändamål.
 			// #region A*
 			function heuristic(tile, goal) {
 				//return Math.abs(tile.x-goal.x) + Math.abs(tile.y-goal.y);
@@ -1094,6 +1110,7 @@
 
 			// #endregion
 
+			// Här definieras alla banor i string-arayer. Varje bokstav / karaktär representerar en typ av Tile (vägg-typ)
 			// #region Maps
 
 			const EMPTYMAP = {
@@ -1333,6 +1350,105 @@
 
 			// #endregion
 
+			// Update-funktionen ser till att alla objekt som finns instantierade blir kallade för att kunna genomföra sina uppgifter
+			// kontinuerligt. Här sker även all logik för musik, tsatistik, animationer och texter som spelaren tar del av.
+			function update() {
+				if(GAMEOVER) {
+					let y = totalHeight*1.3 - GAMEOVERTIME;
+					let texty = (y <= totalHeight/4 ? totalHeight/4 : y);
+					let x = totalWidth/2;
+
+					rectangle(totalWidth/4, y-150, totalWidth-totalWidth/2, totalHeight*2, COLORS.gray1);
+
+					circle(x, totalHeight/2, totalWidth, COLORS.endColor);
+					text(x, texty, 80, "GAME OVER", COLORS.white);
+					texty += 100;
+					text(x, texty, 60, "Statistics", COLORS.white);
+					text(x, texty+60, 30, "Bullets Fired : " + STATISTICS.totalBulletsFired, COLORS.white);
+					text(x, texty+90, 30, "Mines Laid : " + STATISTICS.totalMinesLaid, COLORS.white);
+					text(x, texty+120, 30, "Distance Travelled : " + STATISTICS.distanceTravelled, COLORS.white);
+					text(x, texty+200, 30, "Missions Cleared : " + (currentLevelId + 1) + " / " + LEVELS.length, COLORS.white);
+
+					texty += 160;
+					text(x, texty+100, 20, "A Game Clone by: ErikWDev");
+					text(x, texty+180, 20, "All music is owned by Nintendo (tm).");
+					text(x, texty+210, 20, "All rights reserved.");
+					GAMEOVERTIME++;
+				} else {
+					if(!HASINITIATEDLEVEL) {
+						START = (DEBUG || HASSTARTEDONCE);
+						PLAYERTANK.x = currentLevel.playerSpawnpoint.x;
+						PLAYERTANK.y = currentLevel.playerSpawnpoint.y;
+						currentLevel.tanks.push(PLAYERTANK);
+						tanks = currentLevel.tanks;
+						HASINITIATEDLEVEL = true;
+					}
+
+					if(START) {
+						GAMEISPLAYING = (startTimer <= 0);
+
+						graphicsAndCollisions();
+
+						if(!hasPlayedMusic) {
+							backgroundMusic.pause();
+							backgroundMusic.play();
+							hasPlayedMusic = true;
+						}
+
+						if(!GAMEISPLAYING) {
+							startTimer -= 0.8;
+							circle(totalWidth/2, totalHeight/2, (startTimer*startTimer)*10, COLORS.startcolor);
+							text(totalWidth/2, totalHeight/2, 120 - currentLevel.name.length*3, currentLevel.name, COLORS.white);
+							text(totalWidth/2, totalHeight/2 + 80, 50, "Mission: " + (currentLevelId + 1) + " / " + LEVELS.length, COLORS.white);
+							text(totalWidth/2, totalHeight/2 + 160, 50, "Tanks: " + (tanks.length - 1), COLORS.white);
+							text(totalWidth/2, totalHeight/2 - 120, 50, "Lives: " + PLAYERLIVES, COLORS.white);
+						} else {
+							let info =  "Lives: " + PLAYERLIVES + " Mission: " + (currentLevelId + 1) + " – " + currentLevel.name;
+							text(totalWidth/2, totalHeight-currentLevel.tileHeight/4, currentLevel.tileHeight/2, info, COLORS.white);
+							if(tanks.length <= 1) {
+								if(tanks[0] == PLAYERTANK) {
+									hasWon = true;
+								}
+							}
+
+							if(hasWon || died) {
+								winTimer -= 0.8;
+								backgroundMusic.pause();
+								if(!winMusic.ended && !deathMusic.ended) {
+									if(hasWon) {
+										winMusic.loop = false;
+										winMusic.play();
+									} else {
+										if(died) {
+											deathMusic.loop = false;
+											deathMusic.play();
+										}
+									}
+								}
+
+								let t = WINDELAY*WINDELAY*0.2-(winTimer*winTimer)*0.2;
+								circle(totalWidth/2, totalHeight/2, t, COLORS.startcolor);
+								if(winTimer <= 0) {
+									if(hasWon) {
+										nextLevel();
+									} else {
+										restart();
+									}
+								}
+							}
+						}
+					} else {
+						clearScreen();
+						circle(totalWidth/2, totalHeight/2, 130, COLORS.red1);
+						text(totalWidth/2, totalHeight/2, 15, "Click here to start!", COLORS.white);
+						if(distance(totalWidth/2, totalHeight/2, mouse.x, mouse.y) < 130 && mouse.left) {
+							START = true;
+							HASSTARTEDONCE = true;
+						}
+					}
+				}
+			}
+
 			function graphicsAndCollisions() {
 				fill(COLORS.sand2);
 
@@ -1435,103 +1551,6 @@
 			function gameOver() {
 				statsMusic.play();
 				GAMEOVER = true;
-			}
-
-			function update() {
-				if(GAMEOVER) {
-					let y = totalHeight*1.3 - GAMEOVERTIME;
-					let texty = (y <= totalHeight/4 ? totalHeight/4 : y);
-					let x = totalWidth/2;
-
-					rectangle(totalWidth/4, y-150, totalWidth-totalWidth/2, totalHeight*2, COLORS.gray1);
-
-					circle(x, totalHeight/2, totalWidth, COLORS.endColor);
-					text(x, texty, 80, "GAME OVER", COLORS.white);
-					texty += 100;
-					text(x, texty, 60, "Statistics", COLORS.white);
-					text(x, texty+60, 30, "Bullets Fired : " + STATISTICS.totalBulletsFired, COLORS.white);
-					text(x, texty+90, 30, "Mines Laid : " + STATISTICS.totalMinesLaid, COLORS.white);
-					text(x, texty+120, 30, "Distance Travelled : " + STATISTICS.distanceTravelled, COLORS.white);
-					text(x, texty+200, 30, "Missions Cleared : " + (currentLevelId + 1) + " / " + LEVELS.length, COLORS.white);
-
-					texty += 160;
-					text(x, texty+100, 20, "A Game Clone by: ErikWDev");
-					text(x, texty+180, 20, "All music is owned by Nintendo (tm).");
-					text(x, texty+210, 20, "All rights reserved.");
-					GAMEOVERTIME++;
-				} else {
-					if(!HASINITIATEDLEVEL) {
-						START = (DEBUG || HASSTARTEDONCE);
-						PLAYERTANK.x = currentLevel.playerSpawnpoint.x;
-						PLAYERTANK.y = currentLevel.playerSpawnpoint.y;
-						currentLevel.tanks.push(PLAYERTANK);
-						tanks = currentLevel.tanks;
-						HASINITIATEDLEVEL = true;
-					}
-
-					if(START) {
-						GAMEISPLAYING = (startTimer <= 0);
-
-						graphicsAndCollisions();
-
-						if(!hasPlayedMusic) {
-							backgroundMusic.pause();
-							backgroundMusic.play();
-							hasPlayedMusic = true;
-						}
-
-						if(!GAMEISPLAYING) {
-							startTimer -= 0.8;
-							circle(totalWidth/2, totalHeight/2, (startTimer*startTimer)*10, COLORS.startcolor);
-							text(totalWidth/2, totalHeight/2, 120 - currentLevel.name.length*3, currentLevel.name, COLORS.white);
-							text(totalWidth/2, totalHeight/2 + 80, 50, "Mission: " + (currentLevelId + 1) + " / " + LEVELS.length, COLORS.white);
-							text(totalWidth/2, totalHeight/2 + 160, 50, "Tanks: " + (tanks.length - 1), COLORS.white);
-							text(totalWidth/2, totalHeight/2 - 120, 50, "Lives: " + PLAYERLIVES, COLORS.white);
-						} else {
-							let info =  "Lives: " + PLAYERLIVES + " Mission: " + (currentLevelId + 1) + " – " + currentLevel.name;
-							text(totalWidth/2, totalHeight-currentLevel.tileHeight/4, currentLevel.tileHeight/2, info, COLORS.white);
-							if(tanks.length <= 1) {
-								if(tanks[0] == PLAYERTANK) {
-									hasWon = true;
-								}
-							}
-
-							if(hasWon || died) {
-								winTimer -= 0.8;
-								backgroundMusic.pause();
-								if(!winMusic.ended && !deathMusic.ended) {
-									if(hasWon) {
-										winMusic.loop = false;
-										winMusic.play();
-									} else {
-										if(died) {
-											deathMusic.loop = false;
-											deathMusic.play();
-										}
-									}
-								}
-
-								let t = WINDELAY*WINDELAY*0.2-(winTimer*winTimer)*0.2;
-								circle(totalWidth/2, totalHeight/2, t, COLORS.startcolor);
-								if(winTimer <= 0) {
-									if(hasWon) {
-										nextLevel();
-									} else {
-										restart();
-									}
-								}
-							}
-						}
-					} else {
-						clearScreen();
-						circle(totalWidth/2, totalHeight/2, 130, COLORS.red1);
-						text(totalWidth/2, totalHeight/2, 15, "Click here to start!", COLORS.white);
-						if(distance(totalWidth/2, totalHeight/2, mouse.x, mouse.y) < 130 && mouse.left) {
-							START = true;
-							HASSTARTEDONCE = true;
-						}
-					}
-				}
 			}
 
 		</script>
