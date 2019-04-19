@@ -368,7 +368,7 @@
 
 						if(this.backing) {
 							this.backingTimer--;
-							this.angle = moveTowards(this.angle, this.pathAngle, 0.06);
+							this.angle = moveTowards(this.angle, this.pathAngle, 0.03 * this.speedBoost);
 							if(this.backingTimer <= 0) {
 								this.backing = false;
 								this.backingTimer = this.backingDelay;
@@ -495,8 +495,8 @@
 				}
 
 				updateCorners() {
-					let c = cos(this.angle)*0.9;
-					let s = sin(this.angle)*0.9;
+					let c = cos(this.angle)*(this.isPlayer ? 0.85 : 0.7);
+					let s = sin(this.angle)*(this.isPlayer ? 0.75 : 0.65);
 
 					let lc = this.l2*c;
 					let ls = this.l2*s;
@@ -1194,7 +1194,7 @@
 			};
 
 			const MAP4 = {
-				name:"Hole in One",
+				name:"Hole-y...",
 				map:[
 				    /*__________M_________*/
 					"BBBBBBBBBBBBBBBBBBBBB",
@@ -1214,7 +1214,27 @@
 			};
 
 			const MAP5 = {
-				name:"Can you do it?",
+				name:"2 Red 1 Brown",
+				map:[
+					/*__________M_________*/
+					"BBBBBBBBBBBBBBBBBBBBB",
+					"B___________________B",
+					"B________________2__B",
+					"B___________________B",
+					"B___BbBbBHBHBBBBBBBBB",
+					"B___________________B",
+				/*M*/"B_2_________________B",
+					"B___________________B",
+					"BBBBBBBBBHBHBbBbB___B",
+					"B___________________B",
+					"B_P__b____________0_B",
+					"B___________________B",
+					"BBBBBBBBBBBBBBBBBBBBB",
+				]
+			};
+
+			const MAP6 = {
+				name:"Symmetry",
 				map:[
 				    /*__________M_________*/
 					"BBBBBBBBBBBBBBBBBBBBB",
@@ -1227,26 +1247,6 @@
 					"B_____B_BbbbB__B__0_B",
 					"B__BHBB________B____B",
 					"B_________2____B____B",
-					"BBBBBBBBBBBBBBBBBBBBB",
-				]
-			};
-
-			const MAP6 = {
-				name:"2 Red 1 Brown",
-				map:[
-				    /*__________M_________*/
-					"BBBBBBBBBBBBBBBBBBBBB",
-					"B________________2__B",
-					"B___________________B",
-					"B________________2__B",
-					"B___BbBbBHBHBBBBBBBBB",
-					"B___________________B",
-				/*M*/"B___________________B",
-					"B___________________B",
-					"BBBBBBBBBHBHBbBbB___B",
-					"B___________________B",
-					"B_P__b____________0_B",
-					"B___________________B",
 					"BBBBBBBBBBBBBBBBBBBBB",
 				]
 			};
@@ -1272,22 +1272,42 @@
 				map:[
 				    /*_______M______*/
 					"BBBBBBBBBBBBBBB",
-					"B_____________B",
+					"B______0______B",
+					"B___H_____H___B",
 					"B______3______B",
 					"B_____________B",
-					"B___B_____B___B",
-					"B___B_____B___B",
-				/*M*/"B___BBBBBBB___B",
-					"B___B_____B___B",
-					"B___B_____B___B",
+					"B___H_____H___B",
+			   /*M*/"BBB___bbb___BBB",
+					"B___H_____H___B",
 					"B_____________B",
-					"B______P______B",
+					"B_____________B",
+					"B___H__P__H___B",
 					"B_____________B",
 					"BBBBBBBBBBBBBBB",
 				]
 			};
 
 			const MAP9 = {
+				name:"Battlefield",
+				map:[
+				    /*________M________*/
+					"BBBBBBBBBBBBBBBBBB",
+					"B____B___1_______B",
+					"B____B_b_____B_3_B",
+					"B____B_H___H_B___B",
+					"B____________B___B",
+					"B______H___H_____B",
+			   /*M*/"B_P_b____b_____2_B",
+					"B______H___H_____B",
+					"B____________B___B",
+					"B____B_H___H_B___B",
+					"B____B_b_____B_3_B",
+					"B____B___1_______B",
+					"BBBBBBBBBBBBBBBBBB",
+				]
+			};
+
+			const MAP13 = {
 				name:"White",
 				map:[
 				    /*__________M_________*/
@@ -1307,7 +1327,7 @@
 				]
 			};
 
-			const MAP10 = {
+			const MAP15 = {
 				name:"Whiter",
 				map:[
 				    /*__________M_________*/
@@ -1328,7 +1348,6 @@
 			};
 
 			var MAPS = [
-				// DEBUGMAP,
 				// EMPTYMAP,
 				MAP1,
 				MAP2,
@@ -1339,7 +1358,12 @@
 				MAP7,
 				MAP8,
 				MAP9,
-				MAP10,
+				// MAP10,
+				// MAP11,
+				// MAP12,
+				MAP13,
+				// MAP14,
+				MAP15
 			];
 
 			var LEVELS = [];
