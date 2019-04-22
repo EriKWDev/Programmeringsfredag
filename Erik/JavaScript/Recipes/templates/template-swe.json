@@ -36,7 +36,20 @@
 			}
 		]
 	},
-	"instructions":[
-		"Instruktion"
+	"subInstructions":[
+		{
+			"title":"Sub-Instruktion 1",
+			"instructions":[
+				"Instruktion 1",
+				"Instruktion 2"
+			]
+		},
+		{
+			"title":"Sub-Instruktion 2",
+			"instructions":[
+				"Instruktion 1",
+				"Instruktion 2"
+			]
+		}
 	]
 }

@@ -27,15 +27,16 @@ const createRecipePDF = async function (name) {
 		};
 
 		const templateName = "template-2";
-		const data = require(`./recipes-data/${name}.json`);
+		const data = require(path.join(process.cwd(), "recipes-data", `${name}.json`));
 		const recipeHTML = await compile(templateName, data);
-		await fs.writeFile(`templates/${templateName}.html`, recipeHTML, (e) => {
+
+		await fs.writeFile(path.join(process.cwd(), "html", `${name}.html`), recipeHTML, (e) => {
 			if(e) {
 				return console.log(e);
 			}
 		});
 
-		const htmlPath = "file:" + path.join(process.cwd(), "templates", `${templateName}.html`);
+		const htmlPath = "file:" + path.join(process.cwd(), "html", `${name}.html`);
 		console.log("Path: " + htmlPath);
 		await page.emulateMedia("print");
 		await page.goto(htmlPath, {waitUntil: "networkidle2"});

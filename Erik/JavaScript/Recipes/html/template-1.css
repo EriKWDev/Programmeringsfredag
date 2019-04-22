@@ -6,38 +6,13 @@
 }
 
 html, body {
-	font-family: "Alice";
-	color: #333;
+	font-family: "Alice", sans-serif;
 }
 
 p {
 	font-size: 14px;
 	padding: 0px;
 	margin: 0px;
-}
-
-.titles {
-	width: 50%;
-	float: left;
-}
-
-.alphabet {
-	width: 50%;
-	float: left;
-}
-
-.title-box:after {
-	content: "";
-	display: table;
-	clear: both;
-}
-
-.fa-star {
-	color: #ABABAB;
-}
-
-.checked {
-  color: #333333BB;
 }
 
 .document {
@@ -93,13 +68,6 @@ p {
 .instructions-title {
 	font-size: 20px;
 	margin: 0px;
-}
-
-.instructions-subtitle {
-	padding-top: 10px;
-	margin: 0px;
-	font-style: italic;
-	font-size: 18px;
 }
 
 .instructions-list {

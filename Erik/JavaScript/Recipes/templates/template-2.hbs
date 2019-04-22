@@ -2,26 +2,31 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
-		<title>Recipe: {{main.title}}</title>
+		<title>Recipe: {{main.title}} – {{main.subtitle}}</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="template-2.css">
 	</head>
 	<body>
 		<div class="document">
 			<div class="title-box">
-				<h1 class="main-title">{{main.title}}</h1>
-				<h2 class="main-subtitle">– {{main.subtitle}}</h2>
-				<p class="preparation-time">Tillagningstid: {{main.duration}}</p>
-				<br />
-				{{#each main.rating}}
-					{{#if this}}
-						<span class="fa fa-star checked"></span>
-					{{else}}
-						<span class="fa fa-star"></span>
-					{{/if}}
-				{{/each}}
-				​<hr />​​​​​​​​​​​​​​​​​​​
+				<div class="titles">
+					<h1 class="main-title">{{main.title}}</h1>
+					<h2 class="main-subtitle">– {{main.subtitle}}</h2>
+					<p class="preparation-time">Tillagningstid: {{main.duration}}</p>
+					<br />
+					{{#each main.rating}}
+						{{#if this}}
+							<span class="fa fa-star checked"></span>
+						{{else}}
+							<span class="fa fa-star"></span>
+						{{/if}}
+					{{/each}}
+				</div>
+				<div class="alphabet">
+					<p>ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ</p>
+				</div>
 			</div>
+			​<hr />​​​​​​​​​​​​​​​​​​​
 
 			<div class="recipe">
 				<div class="ingredients">
