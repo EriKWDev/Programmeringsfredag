@@ -1,0 +1,105 @@
+{
+	"main":{
+		"title":"Tomatpasta",
+		"subtitle":"Kycklingpasta med Champinjon- och Soltorkad Tomatröra",
+		"duration":"55 minuter",
+		"rating":[1,1,1,1,1,1,1,1,1,0]
+	},
+	"ingredients":{
+		"portions":"5 Portioner",
+		"subIngredients":[
+			{
+				"title":"Huvudingredienser",
+				"ingredients":[
+					{
+						"unit":"660 gram",
+						"ingredient":"Kycklingfilé"
+					},
+					{
+						"unit":"500 gram",
+						"ingredient":"Färskpasta"
+					},
+					{
+						"unit":"1 burk",
+						"ingredient":"Soltorkad Tomatpurré"
+					},
+					{
+						"unit":"1 klyfta",
+						"ingredient":"Vitlök"
+					},
+					{
+						"unit":"1 st",
+						"ingredient":"Charlottenlök"
+					},
+					{
+						"unit":"½ st",
+						"ingredient":"Gullök"
+					}
+				]
+			},
+			{
+				"title":"Champinjon- och Tomatröra",
+				"ingredients":[
+					{
+						"unit":"3 dl",
+						"ingredient":"Grädde"
+					},
+					{
+						"unit":"1 st",
+						"ingredient":"Hönsbuljong"
+					},
+					{
+						"unit":"1 msk",
+						"ingredient":"Japansk Soya"
+					},
+					{
+						"unit":"10 st",
+						"ingredient":"Champinjoner"
+					},
+					{
+						"unit":"10 st",
+						"ingredient":"Soltorkade Tomater"
+					},
+					{
+						"unit":"",
+						"ingredient":"Oregano"
+					},
+					{
+						"unit":"",
+						"ingredient":"Timjan / Franska Örter"
+					}
+				]
+			}
+		]
+	},
+	"subInstructions":[
+		{
+			"title":"Kyckling",
+			"instructions":[
+				"Skär kycklingfiléerna i små bitar.",
+				"Finhacka vitlök, charlottenlök och gullök i små jämna bitar.",
+				"Värm en stekpanna med olivolja och bryna vitlöken, lägg sedan i kycklingen och sist resterande lök.",
+				"Låt steka tills kycklingen nästan är klar och häll då i den soltorkade tomatpurrén.",
+				"Krydda med oregano, timjan / franska örter, salt och peppar."
+			]
+		},
+		{
+			"title":"Champinjoner",
+			"instructions":[
+				"Skiva alla champinjoner och lägg i en varm kastrull med rikligt med olivolja eller smör.",
+				"Stek champinjonerna under lock tills de mjuknat.",
+				"Smaka av med peppar och salt och låt stå på låg värme under lock tills vidare."
+			]
+		},
+		{
+			"title":"Tomatröra och Pasta",
+			"instructions":[
+				"Häll i grädden i en kastrull och låt skjuda.",
+				"Finfördela hönsbuljongen i såsen och sänk värmen. Rör runt.",
+				"Häll i de soltorkade tomaterna, alla färdigstekta champinjoner och till sist kycklingröran.",
+				"Koka färskpastan i en stor kastrull i c.a. 4 minuter. Häll i salt.",
+				"Sila pastan och blanda antingen ned röran i pastan eller servera separat."
+			]
+		}
+	]
+}

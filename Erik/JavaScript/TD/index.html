@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>td</title>
+	</head>
+	<body>
+		<script src="https://koda.nu/simple.js">
+
+			updatesPerSecond = 100;
+
+			class Tower {
+				constructor(x, y, range=100, shootDelay=30, damage=4, price=100) {
+					this.x = x;
+					this.y = y;
+					this.shootDelay = shootDelay;
+					this.shootTimer = 0;
+					this.damage = damage;
+					this.level = 0;
+					this.price = price;
+					this.angle = 0;
+					this.range = range;
+					this.checkedTrail = [];
+					this.checkTrail();
+				}
+
+				checkTrail() {
+					this.checkedTrail = [];
+					for(let trail of currentLevel.trail) {
+						if(sqrdistance(trail, this) < this.range*this.range) {
+							this.checkedTrail.push(trail);
+						}
+					}
+				}
+
+				update() {
+					this.draw();
+
+					for(let trail of this.checkedTrail) {
+						line(this.x, this.y, trail.x, trail.y, 2, COLORS.mouseNo);
+						circle(trail.x, trail.y, 5, COLORS.mouseNo);
+					}
+
+					if(this.shootTimer <= 0) {
+						for(let trail of this.checkedTrail) {
+							if(trail.enemies.length > 0) {
+								for(let enemy of trail.enemies) {
+									if(sqrdistance(enemy, this) < this.range*this.range) {
+										this.shoot(enemy);
+									}
+								}
+							}
+						}
+					} else {
+						this.shootTimer--;
+					}
+				}
+
+				shoot(enemy) {
+					if(this.shootTimer <= 0) {
+						enemy.damage(this.damage);
+						this.shootTimer = this.shootDelay;
+					}
+				}
+
+				draw() {
+					circle(this.x, this.y, this.range, COLORS.mouseYes);
+					circle(this.x, this.y, currentLevel.size/6, COLORS.end);
+					arc(this.x, this.y, currentLevel.size/4, 360 - 360/this.shootDelay * this.shootTimer, 6, COLORS.end);
+				}
+			}
+
+			class Enemy {
+				constructor(speed=1, life=4) {
+					this.x = currentLevel.trail[0].x;
+					this.y = currentLevel.trail[0].y;
+					this.currentTile = getTileAtPosition(this.x, this.y);
+					this.i = 0;
+					this.speed = speed;
+					this.lastDirX;
+					this.lastDirY;
+					this.md = currentLevel.size/4;
+					this.md *= this.md;
+					this.life = life;
+					this.startLife = this.life;
+				}
+
+				update() {
+					this.draw();
+					this.move();
+				}
+
+				damage(amount) {
+					this.life -= amount;
+					if(this.life <= 0) {
+						this.die();
+					}
+				}
+
+				draw() {
+					//circle(this.x, this.y, currentLevel.size/10, COLORS.start);
+					let color = "rgba(40,40," +  (20/this.life) * 255 + ",0.8)";
+					let size = currentLevel.size/10 + sin(time/3);
+					circle(this.x, this.y, size, color);
+					arc(this.x, this.y, size*2, 360/this.startLife * this.life, 5, color);
+				}
+
+				move() {
+					let nextTile = currentLevel.trail[this.i+1];
+					if(nextTile != null) {
+						let dirX = Math.round(clamp(nextTile.x - this.x, -1, 1));
+						let dirY = Math.round(clamp(nextTile.y - this.y, -1, 1));
+
+						let s = this.speed * 1/this.startLife * this.life
+
+						this.x += dirX * s;
+						this.y += dirY * s;
+
+						if(sqrdistance(this, nextTile) < this.md) {
+							currentLevel.trail[this.i].enemies.splice(currentLevel.trail[this.i].enemies.indexOf(this), 1);
+							this.i++;
+							currentLevel.trail[this.i].enemies.push(this);
+
+							if(this.i >= currentLevel.trail.length-1) {
+								lives--;
+								this.die();
+							}
+						}
+
+						this.lastDirX = dirX;
+						this.lastDirY = dirY;
+					}
+				}
+
+				die() {
+					currentLevel.trail[this.i].enemies.splice(currentLevel.trail[this.i].enemies.indexOf(this), 1);
+					enemies.splice(enemies.indexOf(this), 1);
+				}
+			}
+
+			class Tile {
+				constructor(x, y, type) {
+					this.x = x;
+					this.y = y;
+					this.type = type;
+				}
+			}
+
+			class Level {
+				constructor(id, map, name) {
+					this.id = id;
+					this.map = map;
+
+					for(let y = 0; y < this.map.length; y++) {
+						this.map[y] = this.map[y].replace(/\s/g,"");
+					}
+
+					this.name = name;
+					this.size = totalHeight/(this.map.length + 4);
+
+					this.width = this.map[0].length*this.size - this.map[0].length;
+					this.height = this.map.length*this.size - this.map.length;
+					this.xCorrection = (totalWidth-this.width)/2;
+					this.yCorrection = this.size;
+					this.outLine = 10;
+					this.trail = [];
+					this.createTrail();
+					this.endTile = this.trail[this.trail.length-1];
+					this.tiles = [];
+					this.createTiles();
+				}
+
+				createTrail() {
+					let startY = 0;
+					let startX = 0;
+					for(let y = 0; y < this.map.length; y++) {
+						for(let x = 0; x < this.map[y].length; x++) {
+							if(this.map[y][x] == "S") {
+								startY = y;
+								startX = x;
+								break;
+							}
+						}
+					}
+
+					this.trail.push({x:startX, y:startY, enemies:[]});
+
+					let done = false;
+					let currentX = startX;
+					let currentY = startY;
+					let positions = [];
+
+					while(!done) {
+						for(let i = -1; i <= 1; i++) {
+							for(let j = -1; j <= 1; j++) {
+								if(Math.abs(i) != Math.abs(j)) {
+									let currentCheck = this.map[currentY+i][currentX+j];
+									if(currentCheck != null && (currentCheck == "R" || currentCheck == "E")) {
+										let alreadyChecked = false;
+										for(let p of positions) {
+											if(p.x == currentX+j && p.y == currentY+i) {
+												alreadyChecked = true;
+											}
+										}
+
+										if(!alreadyChecked) {
+											positions.push({x:currentX+j, y:currentY+i, enemies:[]});
+											console.log(currentCheck, currentX+j, currentY+i);
+											this.trail.push(positions[positions.length-1]);
+											currentX += j;
+											currentY += i;
+											if(currentCheck == "E") {
+												done = true;
+												console.log("Done!");
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					for(let p of this.trail) {
+						p.x = this.xCorrection + p.x*this.size + this.size/2 - p.x;
+						p.y = this.yCorrection + p.y*this.size + this.size/2 - p.y;
+					}
+				}
+
+				createTiles() {
+					let size = this.size;
+
+					for(let y = 0; y < this.map.length; y++) {
+						for(let x = 0; x < this.map[y].length; x++) {
+							let X = x*this.size + this.xCorrection - x;
+							let Y = y*this.size + this.yCorrection - y;
+							this.tiles.push(new Tile(X, Y, this.map[y][x]));
+						}
+					}
+				}
+
+				draw() {
+					let size = this.size;
+
+					rectangle(this.xCorrection-this.outLine, this.yCorrection-this.outLine, this.width+this.outLine*2, this.height+this.outLine*2, COLORS.mouseNo);
+
+					for(let tile of this.tiles) {
+						let color = "";
+
+						switch(tile.type) {
+							case "_":
+							default:
+								color = COLORS.background;
+								break;
+							case "E":
+								color = COLORS.end;
+								break;
+							case "S":
+								color = COLORS.start;
+								break;
+							case "R":
+								color = COLORS.road;
+								break;
+						}
+
+						rectangle(tile.x, tile.y, this.size, this.size, color);
+					}
+				}
+			}
+
+			const COLORS = {
+				background:"rgba(20,20,20,1.0)",
+				background2:"rgba(15,15,15,1.0)",
+				road:"rgba(69,69,69,1.0)",
+				mouseNo:"rgba(229, 68, 68, 0.4)",
+				mouseYes:"rgba(200,200,200,0.2)",
+				start:"rgba(20, 200, 200, 1.0)",
+				end:"rgba(250, 20, 80, 1.0)",
+				enemy1:"rgba(30, 130, 149, 0.8)"
+			};
+
+			const DEBUGMAP = [
+				"_ _ _ _ _ _ _ _ _",
+				"_ _ _ R R R R S _",
+				"_ R R R _ _ _ _ _",
+				"_ R _ _ _ _ R E _",
+				"_ R R R _ _ R _ _",
+				"_ _ _ R R _ R _ _",
+				"_ _ _ _ R _ R _ _",
+				"_ R R R R _ R R _",
+				"_ R _ _ _ _ _ R _",
+				"_ R R R R R R R _",
+				"_ _ _ _ _ _ _ _ _",
+			];
+
+			var LEVEL1 = new Level("1:1:1", DEBUGMAP, "Debugging");
+			var currentLevel = LEVEL1;
+			var lives = 100;
+			var time = 0;
+			const DT = 0.1;
+			var hasPlaced = false;
+
+			var enemies = [];
+			var towers = [];
+
+			function update() {
+				fill(COLORS.background);
+				drawLevel(currentLevel);
+				mouseFunction();
+				updateEnemies();
+				updateTowers();
+				arc(currentLevel.endTile.x, currentLevel.endTile.y, currentLevel.size/1.3, 360/100 * lives, 10, COLORS.end);
+				if(random(0, 100) > 90) {
+					enemies.push(new Enemy(random(0.8, 1.6), random(1,10)));
+				}
+				time += DT;
+			}
+
+			function sqrdistance(a, b) {
+				line(a.x, a.y, b.x, b.y, 2, COLORS.mouseNo);
+				return (a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y);
+			}
+
+			function drawLevel(level) {
+				level.draw();
+			}
+
+			function getTileAtPosition(x, y) {
+				if(!mouseInBounds()) {
+					return " ";
+				}
+
+				let x1 = Math.floor((x-currentLevel.xCorrection)/currentLevel.size);
+				let y1 = Math.floor((y-currentLevel.yCorrection)/currentLevel.size);
+
+				let X = Math.floor((x-currentLevel.xCorrection+x1)/currentLevel.size);
+				let Y = Math.floor((y-currentLevel.yCorrection+y1)/currentLevel.size);
+
+				if(!currentLevel.map[Y] || !currentLevel.map[Y][X]) {
+					return " ";
+				}
+
+				return currentLevel.map[Y][X];
+			}
+
+			function mouseInBounds() {
+				return (mouse.x > currentLevel.xCorrection && mouse.x < currentLevel.xCorrection + currentLevel.width && mouse.y > currentLevel.yCorrection && mouse.y < currentLevel.yCorrection + currentLevel.height)
+			}
+
+			function mouseFunction() {
+				let canPlace = getTileAtPosition(mouse.x, mouse.y) == "_";
+
+				if(canPlace && mouse.left && !hasPlaced) {
+					towers.push(new Tower(mouse.x, mouse.y));
+					hasPlaced = true;
+				} else if(!mouse.left) {
+					hasPlaced = false;
+				}
+
+				circle(mouse.x, mouse.y, currentLevel.size, canPlace ? COLORS.mouseYes : COLORS.mouseNo);
+			}
+
+			function clamp(num, min=0, max=1) {
+				return num <= min ? min : num >= max ? max : num;
+			}
+
+			function updateEnemies() {
+				for(let enemy of enemies) {
+					enemy.update();
+				}
+			}
+
+			function updateTowers() {
+				for(let tower of towers) {
+					tower.update();
+				}
+			}
+
+		</script>
+	</body>
+</html>
