@@ -2,7 +2,7 @@
 
 @page {
   size: A4 portrait;
-  margin: 2cm 1.5cm;
+  margin: 1.0cm 1.0cm;
 }
 
 html, body {
@@ -103,7 +103,7 @@ p {
 }
 
 .instructions-list {
-	margin-top: 0px;
+	margin-top: 5px;
 }
 
 .instructions-list > li {

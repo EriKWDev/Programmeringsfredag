@@ -148,6 +148,8 @@
 
 			let startT = 1000;
 			let t = startT;
+
+			let progress = 0;
 			let points = [];
 
 			let lastAngle = angle;
@@ -183,10 +185,10 @@
 					// let dt = 0.07*t;
 					// let im = new Complex(3, 5*sin(dt*0.2), 0.001*t, index);
 
-					// // #1 Spiral with infinity-8
-					// t-=1.8;
-					// let dt = 0.07*t;
-					// let im = new Complex(10*cos(dt), 10*sin(dt)*cos(dt/3), 0.001*t, index);
+					// #1 Spiral with infinity-8
+					t-=1.8;
+					let dt = 0.07*t;
+					let im = new Complex(10*cos(dt), 10*sin(dt)*cos(dt/3), 0.001*t, index);
 
 					// // #2 Cool Thingy
 					// t-=0.7;
@@ -203,14 +205,16 @@
 					// let dt = 0.07*t;
 					// let im = new Complex(sin(dt*0.1)*3, ((2*5)/pi)*asin(sin(((2*pi)*dt)/2)), 0.001*t, index);
 
-					t-=0.8;
-					let dt = 0.07*t;
-					let im = new Complex(0, 8*Math.max(sin(0.5*dt), sin(dt), sin(2*dt)), 0.1*dt, index);
+					// t-=0.8;
+					// let dt = 0.07*t;
+					// let im = new Complex(0, 8*Math.max(sin(0.5*dt), sin(dt), sin(2*dt)), 0.1*dt, index);
+
+					progress = Math.round((100-((100/(startT))*(t)))/2);
+					line(0, 5, totalWidth/100 * progress, 5, 10, "rgba(20, 180, 10, 1)");
 
 					points.push(im);
 					index++;
 					im.draw();
-
 				}
 			}
 

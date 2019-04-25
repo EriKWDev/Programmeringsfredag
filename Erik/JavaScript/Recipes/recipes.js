@@ -28,6 +28,21 @@ const createRecipePDF = async function (name) {
 
 		const templateName = "template-2";
 		const data = require(path.join(process.cwd(), "recipes-data", `${name}.json`));
+		const prev_data = require(path.join(process.cwd(), "tmp", `${name}.json`));
+
+		if(JSON.stringify(data) == JSON.stringify(prev_data)) {
+			console.log("Recipe not changed. Aborting creation.");
+			return;
+		}
+
+		console.log();
+
+		await fs.writeFile(path.join(process.cwd(), "tmp", `${name}.json`), JSON.stringify(data), (e) => {
+			if(e) {
+				return console.log(e);
+			}
+		});
+
 		const recipeHTML = await compile(templateName, data);
 
 		await fs.writeFile(path.join(process.cwd(), "html", `${name}.html`), recipeHTML, (e) => {
@@ -44,7 +59,8 @@ const createRecipePDF = async function (name) {
 
 		await browser.close();
 		console.log(`"${name}.pdf" created succesfully from "${name}.json"`);
-		await sleep(1000);
+		console.log("");
+		await sleep(800);
 		return;
 
 	} catch (e) {
@@ -73,11 +89,10 @@ const createAllRecipes = async function () {
 			return console.log("Error: ", error);
 		}
 
-		console.log("All PDFs have been succesfully combined.");
 		console.log("");
 		console.log("__________ Finnished Recipe Creation __________");
 
-		for(let i = 0; i < 3; i++) {
+		for(let i = 0; i < 2; i++) {
 			console.log("");
 		}
 		console.log("_________________ Quick Facts _________________");
