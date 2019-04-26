@@ -1,0 +1,14 @@
+{
+  "name": "electronapp1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "ErikWDev",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^5.0.0"
+  }
+}

@@ -22,8 +22,19 @@ p {
 }
 
 .alphabet {
-	width: 50%;
-	float: left;
+	position:absolute;
+	right: 6px;
+	top: 6px;
+	border-top-right-radius: 25px;
+	box-shadow: 0 0 0 2px #333;
+	width: 4cm;
+	text-align: center;
+}
+
+.alphabet-title {
+	margin: 0px;
+	padding: 0px;
+	font-size: 3em;
 }
 
 .title-box:after {
