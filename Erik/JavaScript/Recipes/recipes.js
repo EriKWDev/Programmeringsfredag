@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer");
 const fs = require("fs-extra");
 const hbs = require("handlebars");
 const path = require("path");
-const merge = require('easy-pdf-merge');
+const merge = require("easy-pdf-merge");
 const FORCECREATE = true;
 
 function sleep(ms) {
