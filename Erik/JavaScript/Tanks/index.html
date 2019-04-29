@@ -1385,7 +1385,7 @@
 					rectangle(totalWidth/4, y-150, totalWidth-totalWidth/2, totalHeight*2, COLORS.gray1);
 
 					circle(x, totalHeight/2, totalWidth, COLORS.endColor);
-					text(x, texty, 80, "GAME OVER", COLORS.white);
+					text(x, texty, 80, (currentLevelId + 1 == LEVELS.length ? "YOU WIN" : "GAME OVER"), COLORS.white);
 					texty += 100;
 					text(x, texty, 60, "Statistics", COLORS.white);
 					text(x, texty+60, 30, "Bullets Fired : " + STATISTICS.totalBulletsFired, COLORS.white);

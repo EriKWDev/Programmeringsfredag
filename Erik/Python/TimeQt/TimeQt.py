@@ -5,7 +5,6 @@ from PyQt5.QtGui import *
 import time
 
 class Window(QMainWindow):
-
 	def __init__(self):
 		super().__init__()
 
