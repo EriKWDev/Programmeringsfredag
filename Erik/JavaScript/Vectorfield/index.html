@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Vectorfield</title>
+		<script src="https://koda.nu/simple.js">
+
+			class Vector {
+				constructor(x, y, angle, magnitude=1) {
+					this.x = x;
+					this.y = y;
+					this.angle = angle;
+					this.magnitude = magnitude;
+
+					this.dx = cos(angle) * magnitude;
+					this.dy = sin(angle) * magnitude;
+				}
+
+				update() {
+					this.angle = -Math.atan2((this.y-CENTER.y),(CENTER.x-this.x));
+					let avg = this.angle;
+					for(let vector of vectors) {
+						avg += vector.angle / vectors.length;
+					}
+					this.angle = avg;
+					this.draw();
+				}
+
+				draw() {
+					save();
+					translate(this.x, this.y);
+					rotateRadians(this.angle);
+					line(0, 0, this.magnitude/2, 0, 3, COLORS.red);
+					line(0, 0, -this.magnitude/2, 0, 3, COLORS.white);
+
+					// translate(this.magnitude, 0);
+					// triangle(0, 3, 0, -3, 6, 0, COLORS.white);
+					restore();
+				}
+			}
+
+			const COLORS = {
+				background:"rgba(60, 60, 60, 1.0)",
+				white:"rgba(200, 200, 200, 1.0)",
+				red:"rgba(200, 100, 100, 1.0)"
+			};
+
+			const SCALE = 100;
+			const CENTER = {
+					x:totalWidth/2,
+					y:totalHeight/2
+			};
+			let redraw = true;
+			let vectors = [];
+			vectors.push(new Vector(totalWidth/2, totalHeight/2, pi));
+
+			for(let x = 0; x <= totalWidth; x+=totalWidth/20) {
+				for(let y = 0; y < totalHeight; y+=totalHeight/14) {
+					vectors.push(new Vector(x, y, random(0, 2*pi), SCALE * 0.3));
+				}
+			}
+
+			const drawVectorField = () => {
+				for(let vector of vectors) {
+					vector.update();
+				}
+			}
+
+			update = () => {
+				if(redraw) {
+					fill(COLORS.background);
+					circle(CENTER.x, CENTER.y, 10, COLORS.white);
+					CENTER.x = mouse.x;
+					CENTER.y = mouse.y;
+					drawVectorField();
+				}
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
