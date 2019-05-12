@@ -3,9 +3,103 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Project 1</title>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
-	     <script src="sketch.js"></script>
 	</head>
 	<body>
+		<script type="text/javascript" src="https://koda.nu/simple.js">
+
+			updatesPerSecond = 100;
+
+			const COLORS = {
+				black:"rgba(30, 30, 30, 0.9)",
+				white:"rgba(230, 230, 230, 1.0)",
+			}
+
+			const center = {
+				x:totalWidth/2,
+				y:totalHeight/2
+			};
+
+			const Ingredients = {
+				Gin:{
+					name:"Gin",
+					percentage:40
+				},
+				Tonic:{
+					name:"Tonic",
+					percentage:0
+				}
+			}
+
+			const GlassType = {
+				Long:"Long",
+				Whiskey:"Rocks / Whiskey",
+				Cognac:"Cognac / Burbon",
+				Champagne:"Champagne Flute",
+				Martini:"Martini",
+				Cocktail:"Cocktail",
+				Shot:"Shot",
+				Wine:"Wine"
+			};
+
+			class Drink {
+				constructor(name="New Drink", ingredients, glassType=GlassType.Long) {
+					this.name = name;
+					this.ingredients = ingredients;
+					this.glassType = glassType;
+
+					this.totalParts = 0;
+
+					for(let ingredient of ingredients) {
+						this.totalParts += ingredient.parts;
+					}
+				}
+
+				draw(x, y, size=1, lineWidth=1.5, color=COLORS.black) {
+					let width, height;
+
+					switch (this.glassType) {
+						default:
+						case GlassType.Long:
+
+							width = 100*size;
+							height = 400*size;
+							let partHeight = height/(this.totalParts + 1);
+
+							save();
+							translate(x - width/2, y - height/2);
+
+							// Draw ingredients
+							for(let ingredient of ingredients) {
+								rectangle(0, 0, width, partHeight*ingredient.parts, "green");
+							}
+
+							// Draw Long Glass
+							line(0, 0, width, 0, lineWidth, color);
+							line(width, 0, width, height, lineWidth, color);
+							line(0, 0, 0, height, lineWidth, color);
+							line(0, height, width, height, lineWidth, color);
+
+							// Draw Name
+							text(width + size*12, size*12, size*12, this.name, COLORS.black);
+
+							restore();
+							break;
+					}
+				}
+			}
+
+			let GT = new Drink(
+				"Gin & Tonic", [
+					{Ingredients.Gin, parts:1},
+					{Ingredients.Tonic, parts:2}
+				]
+			);
+
+			update = () => {
+				fill(COLORS.white);
+				GT.draw(mouse.x, mouse.y);
+			}
+
+		</script>
 	</body>
 </html>
