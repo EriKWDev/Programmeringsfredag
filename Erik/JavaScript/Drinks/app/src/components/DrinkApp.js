@@ -1,31 +1,40 @@
+// Drink Sheet:
+// https://docs.google.com/spreadsheets/d/1OhMYSx78R9zzwPTbqouh54vmJyIBmpX5qHGTL43zbCE/edit#gid=0
+
 import React from "react";
 import Drink from "./Drink"
+import Config from "./Config"
 
-const GoogleSpreadsheet = require("google-spreadsheet");
-const { promisify } = require("util");
-const credentials = require("./auth.json");
+function fetchDrinks(callback) {
+	window.gapi.client.load("sheets", "v4", () => {
+		window.gapi.client.sheets.spreadsheets.values.get({
+			spreadsheetId: Config.spreadsheetId,
+			range: "Drinks!A1:H"
+		}).then(response => {
+			const data = response.result.values;
+			console.log(data);
+			const rows = data.map(row => ({
+				name: row[0],
+				glass: row[1],
+				garnishes: row[2],
+				cost: row[3],
+				alc: row[4],
+				ingredients: row[5],
+				amounts: row[6],
+				id: row[7]
+			})) || [];
 
-const printDrink = (drink) => {
-	console.log(`${drink.name}`);
-	console.log(`Served in a ${drink.glass}-glass with ${drink.garnishes}`);
-	console.log(`Ingredients: ${drink.ingredients}`);
-	console.log(`Amounts:     ${drink.amounts}`);
-	console.log(`--------------------`);
-}
+			rows.splice(0, 1);
 
-const accessSpreadsheet = async () => {
-	const doc = new GoogleSpreadsheet("1OhMYSx78R9zzwPTbqouh54vmJyIBmpX5qHGTL43zbCE");
-	await promisify(doc.useServiceAccountAuth)(credentials);
-	const info = await promisify(doc.getInfo)();
-	const sheet = info.worksheets[0];
-
-	console.log(`Title: ${sheet.title}, Rows: ${sheet.rowCount}`);
-
-	const rows = await promisify(sheet.getRows)({
-		offset:3
+			callback({
+				rows
+			});
+		},
+		response => {
+			callback(false, response.result.error);
+		}
+		);
 	});
-
-	return rows;
 }
 
 class DrinkApp extends React.Component {
@@ -33,32 +42,92 @@ class DrinkApp extends React.Component {
 		super();
 
 		this.state = {
-			rows:[
-				{
-					id:1,
-					name:"Margarita",
-					ingredients:"Tequila, Cointreau, Lemon Juice"
-				},
-				{
-					id:2,
-					name:"Gin & Tonic",
-					ingredients:"Gin, Tonic"
-				}
-			],
+			rows:[],
+			error: null,
+			loading: true
 		};
+
+		this.showDrink = this.showDrink.bind(this);
+		this.onLoad = this.onLoad.bind(this);
+		this.initClient = this.initClient.bind(this);
+	}
+
+	showDrink(id) {
+		this.setState(previousState => {
+			const newRows = previousState.rows.map (row => {
+				if(row.id === id) {
+					row.show = !row.show;
+				}
+
+				return row;
+			});
+
+			return ({
+				rows: newRows,
+				error: previousState.error,
+				loading: previousState.loading
+			});
+		});
+	}
+
+	async componentDidMount() {
+		await window.gapi.load("client", this.initClient);
+	}
+
+	initClient() {
+		this.setState(previousState => {
+			return ({
+				rows: previousState.rows,
+				error:  previousState.error,
+				loading: true
+			});
+		});
+
+		window.gapi.client.init({
+			apiKey: Config.apiKey,
+			discoveryDocs: Config.discoveryDocs,
+		}).then(() => {
+			fetchDrinks(this.onLoad);
+		});
+	}
+
+	onLoad(data, error) {
+		this.setState(previousState => {
+			for(let newRow of data.rows) {
+				for(let oldRow of previousState.rows) {
+					if(newRow.id === oldRow.id) {
+						newRow.show = oldRow.show;
+					}
+				}
+			}
+
+			return ({
+				rows: data.rows,
+				error: error,
+				loading: false
+			});
+		});
 	}
 
 	render() {
+		if(this.state.error) {
+			return (
+				<div>{this.state.error}</div>
+			);
+		}
+
 		let drinks = this.state.rows.map(row => {
 			return (
-				<Drink key={row.id} drink={row} />
+				<Drink key={row.id} drink={row} show={(id) => { this.showDrink(id) }}/>
 			);
 		});
 
 		return (
-			<div>
-				<h1>Drink App</h1>
+			<div className="appCointainer">
+				<h1>Menu</h1>
+				<a onClick={this.initClient} className="myButton">Refresh</a>
 				<div className="drink-container">
+				<div className="loading" style={{opacity:this.state.loading ? 1 : 0}}></div>
 				{drinks}
 				</div>
 			</div>
