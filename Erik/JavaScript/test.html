@@ -1,0 +1,46 @@
+<script src="https://koda.nu/simple.js">
+
+	let input = document.createElement("input");
+	input.type = "text";
+	input.autofocus = true;
+	input.style.width = totalWidth/2;
+	input.style.fontSize = 20;
+	input.style.position = "absolute";
+	document.getElementsByTagName("body")[0].appendChild(input);
+
+	var myFunctions = {
+		f:(x, y) => {
+			return x + y;
+		},
+		prevF:(x,y) => {  }
+	};
+
+	let x = 0;
+	let y = 0;
+
+	update = () => {
+		clearScreen();
+
+		myFunctions.f = (x, y) => {
+			try {
+				return eval(input.value);
+			} catch (e) {
+				return null;
+			}
+		};
+
+		if(myFunctions.prevF != myFunctions.f) {
+			for(x = 0; x <= totalWidth; x+= totalWidth/70) {
+				for(y = 0; y <= totalWidth; y+= totalWidth/70) {
+					let v = myFunctions.f(x, y);
+					circle(x, y, 5 + abs(v)/50, `rgba(${y*(255/totalHeight)}, ${x*(255/totalWidth)}, ${v}, 0.8)`);
+				}
+			}
+		}
+
+		myFunctions.prevF = myFunctions.f;
+		console.log(input.value);
+	}
+
+
+</script>

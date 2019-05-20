@@ -597,9 +597,9 @@
 					this.destroyable = (tileType == tileType.toLowerCase());
 					this.destroyed = false;
 					this.timer = 30;
-					this.neighbouringTiles = {up: null, down:null, left:null, right:null};
+					this.neighbouringTiles = { up:null, down:null, left:null, right:null };
 
-					//A*
+					// A* (AI variables)
 					this.previous = null;
 					this.f = 0;
 					this.g = 0;
@@ -710,7 +710,7 @@
 			// #region Variables
 			updatesPerSecond = 60;
 			var DEBUG = false;
-			canvas.getContext("2d").textAlign = "center";;
+			canvas.getContext("2d").textAlign = "center";
 
 			const COLORS = {
 				red1:"rgba(200, 10, 50, 1)",
@@ -765,10 +765,10 @@
 			const WINDELAY = 150;
 			let startTimer = STARTDELAY;
 			let winTimer = WINDELAY;
-			var backgroundMusic = new Audio("http://66.90.93.122/ost/wii-play/qqvrntybtr/053%20-%20Tanks%20-%20Variation%201.mp3");
-			var winMusic = new Audio("http://66.90.93.122/ost/wii-play/howmzfluwp/055%20-%20Tanks%20-%20Round%20End.mp3");
-			var deathMusic = new Audio("http://66.90.93.122/ost/wii-play/xigbgdonrb/054%20-%20Tanks%20-%20Round%20Failure.mp3");
-			var statsMusic = new Audio("http://66.90.93.122/ost/wii-play/saxordnvfk/068%20-%20Tanks%20-%20Results.mp3");
+			var backgroundMusic = new Audio("http://23.237.126.42/ost/wii-play/qqvrntybtr/053%20-%20Tanks%20-%20Variation%201.mp3");
+			var winMusic = new Audio("http://23.237.126.42/ost/wii-play/howmzfluwp/055%20-%20Tanks%20-%20Round%20End.mp3");
+			var deathMusic = new Audio("http://23.237.126.42/ost/wii-play/xigbgdonrb/054%20-%20Tanks%20-%20Round%20Failure.mp3");
+			var statsMusic = new Audio("http://23.237.126.42/ost/wii-play/saxordnvfk/068%20-%20Tanks%20-%20Results.mp3");
 			var smallExplosion = new Audio("https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-audio-hero/audio_hero_ExplosionSmall_DIGIJ02_24_351.mp3?_=9");
 			var shootSound = new Audio("https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-27787/zapsplat_leisure_inflatable_toy_puncture_002_28944.mp3");
 			var click = new Audio("https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-one/multimedia_button_click_007.mp3");
@@ -1330,7 +1330,7 @@
 			};
 
 			const MAP11 = {
-				name:"Not Africa",
+				name:"Wall 2.0",
 				map:[
 				    /*__________M_________*/
 					"BBBBBBBBBBBBBBBBBBBBB",
