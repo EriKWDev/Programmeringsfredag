@@ -1,0 +1,105 @@
+
+body {
+	text-align: center;
+	font-size: 1.2rem;
+	color: #FBFBFB;
+	margin: 0;
+	font-family: "Alice", sans-serif;
+}
+
+@keyframes open {
+	0%, 30% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+section {
+	animation: open 1.6s ease;
+}
+
+.image {
+	transition: 0.8s filter ease;
+	height: 120vh;
+	width: 100%;
+}
+
+section>div>.container:hover ~ .image {
+	filter: blur(10px);
+}
+
+section>div>.container {
+	padding: 1vh;
+	z-index: 2;
+	transition: all 0.8s ease;
+	border-radius: 50%;
+	height: 50vh;
+	width: 50vh;
+	position: absolute;
+	left: calc(50% - (50vh/2));
+}
+
+.container>p {
+	font-size: 1.2rem;
+	width: 30vh;
+	margin: auto;
+	padding: 2px;
+	padding: 1vh;
+	line-height: 1.5rem;
+}
+
+span {
+	transition: background 0.5s ease;
+}
+
+span:hover {
+	background: rgb(46, 46, 46);
+}
+
+section>div>.container:hover {
+	box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+	filter: contrast(1.2);
+}
+
+.box {
+	clip-path: circle(45vh);
+}
+
+.one>div>.image {
+	background: url("img/JosefinSkidor1.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center;
+}
+
+.one>div>.container {
+	background: url("img/JosefinSkidor1.jpg");
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center;
+	top:calc(((120vh * (2*(1 - 1) + 1)) / 2) - 50vh/2);
+}
+
+.two>div>.image {
+	background: url("img/JosefinPyssel1.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center;
+}
+
+.two>div>.container {
+	background: url("img/JosefinPyssel1.jpg");
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center;
+	top:calc(((120vh * (2*(2 - 1) + 1)) / 2) - 50vh/2);
+}
+
+.three {
+	background: rgba(198, 27, 88, 1);
+}

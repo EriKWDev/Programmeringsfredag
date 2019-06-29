@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Sudoku</title>
+	</head>
+	<body>
+		<script src="https://koda.nu/simple.js">
+
+			class Box {
+				constructor(i, j, values=[1, 2, 3, 4, 5, 6, 7, 8, 9]) {
+					this.values = values;
+
+					this.i = i;
+					this.j = j;
+				}
+
+				draw(x, y, size=50) {
+					save();
+					translate(x, y);
+					let s = size/2;
+
+					rectangle(-s, -s, size, size, COLORS.black);
+					rectangle(-s*0.9, -s*0.9, size*0.9, size*0.9, COLORS.white);
+
+					console.log(this.values);
+
+					if(this.values.length <= 1) {
+						text(0, s/2, s, this.values[0], COLORS.black);
+					} else {
+						let j = 0;
+						for(let i = 0; i < this.values.length; i++) {
+							let value = this.values[i];
+							text((-s/2) + i%3 * s/2, j * s/2 - s/4, s/2, value, COLORS.black);
+							if(i%3 == 0 && i > 0) {
+								j++;
+							}
+						}
+					}
+
+					restore();
+				}
+			}
+
+			class Board {
+				constructor() {
+					this.boxes = new Array(9);
+					for(let i = 0; i < 9; i++) {
+						this.boxes[i] = new Array(9);
+						for(let j = 0; j < 9; j++) {
+							this.boxes[i][j] = new Box(i, j);
+						}
+					}
+				}
+
+				drawBoard(x, y, boxSize=50) {
+					for(let i = 0; i < 9; i++) {
+						for(let j = 0; j < 9; j++) {
+							this.boxes[i][j].draw((x - 4.5*boxSize) + i*boxSize, (y-4.5*boxSize) + j*boxSize);
+						}
+					}
+				}
+			}
+
+			updatesPerSecond = 60;
+			var DEBUG = false;
+			canvas.getContext("2d").textAlign = "center";
+
+			const COLORS = {
+				black:"rgba(30, 30, 30, 1.0)",
+				white:"rgba(230, 230, 230, 1.0)",
+			};
+
+			const CENTER = {x:totalWidth/2, y:totalHeight/2};
+
+			let board = new Board();
+			console.table(board.boxes);
+
+			update = () => {
+				clearScreen();
+				board.drawBoard(CENTER.x, CENTER.y);
+			}
+
+		</script>
+	</body>
+</html>
