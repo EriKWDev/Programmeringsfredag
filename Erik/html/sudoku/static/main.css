@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Raleway');
+
+h1, h2, h3 {
+	font-family: 'Abril Fatface', cursive;
+}
+
+body, html {
+	font-family: 'Raleway', sans-serif;
+	margin: 5px;
+	height: 100%;
+}
+
+.grid {
+	height: 100%;
+	display: grid;
+	grid-template-columns: 3fr 1fr 10fr 3fr 1fr;
+	grid-template-rows: 1fr 2fr 8fr 2fr 1fr;
+	grid-template-areas: "logo . . . ."
+						 ". . . . ."
+						 ". . login . ."
+						 ". . . . ."
+						 "footer footer footer footer footer";
+}
+
+.login {
+	text-align: center;
+	grid-area: login;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	border-radius: 15px;
+}
+
+
+.login > h1 {
+	margin-bottom: 0;
+}
+
+.login > p {
+	margin: 0;
+}
+
+footer {
+	grid-area: footer;
+}
+
+.logo {
+	text-align: center;
+	grid-area: logo;
+	margin-top: auto;
+	margin-bottom: auto;
+}

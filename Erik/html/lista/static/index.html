@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="'en'" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+		<link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto" rel="stylesheet">
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+		<title>FLIST</title>
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="logo">
+				<a href=""><img class="logoImg" src="/static/img/logo.svg" alt="FLIST - SMARTER STORAGE"></a>
+			</div>
+
+			<div class="input">
+				<input id="input" type="text" name="searchText" value="" placeholder="Search..." onkeyup="search ()">
+				<input id="checkBox1" type="checkbox" name="slut" onclick="search ()"><label for="slut">Slut</label>
+			</div>
+
+			<div class="output">
+				<table>
+					<thead>
+						<tr>
+							<th>Type</th>
+							<th>Sub-Type</th>
+							<th>Name</th>
+							<th>Location</th>
+							<th>Qt.</th>
+							<th>Package</th>
+							<th>Expiry Date</th>
+							<th>Date Added</th>
+							<th>Extra</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody id="output">
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		let socket = io.connect ();
+	 	let output = document.getElementById ("output");
+		let input = document.getElementById ("input").value;
+		let checkBox1 = document.getElementById ("checkBox1").checked;
+		let statuses = ["Kvar", "<b>Slut</b>"];
+		let previous;
+
+		function search () {
+			input = document.getElementById ("input").value;
+			checkBox1 = document.getElementById ("checkBox1").checked;
+
+			let search = {};
+			search.query = input;
+			search.slut = checkBox1;
+
+			socket.emit ("search", search);
+		}
+
+		function notNull (str) {
+			return (str == null || str == "" || str == "0000-00-00" ? "-" : str);
+		}
+
+		function createElement (data) {
+			let str = "<tr onclick='console.log(\"clicked " + data.name + "\")' class='element " + (data.status == 1 ? "slut" : "") + "'>";
+
+			str += "<td>" + notNull (data.type) + "</td>";
+			str += "<td>" + notNull (data.subtype) + "</td>";
+			str += "<td><b>" + notNull (data.name) + "</b></td>";
+			str += "<td>" + notNull (data.location) + "</td>";
+			str += "<td>" + notNull (data.quantity) + "</td>";
+			str += "<td>" + notNull (data.package) + "</td>";
+			str += "<td>" + notNull (data.expiryDate) + "</td>";
+			str += "<td>" + notNull (data.dateAdded) + "</td>";
+			str += "<td>" + notNull (data.extra) + "</td>";
+			str += "<td>" + statuses[data.status] + "</td>";
+
+			str += "</tr>"
+			return str;
+		}
+
+		socket.on ("update", function (elements) {
+
+			elements = elements.sort((a,b) => (a.type > b.type) ? 1 : ((b.type > a.type) ? -1 : 0));
+			elements = elements.sort((a,b) => (a.status > b.status) ? 1 : ((b.status > a.status) ? -1 : 0));
+
+			let old = false;
+			if (previous != null && elements.length > 0) {
+				old = true;
+				if (previous.length == elements.length) {
+					for (let i = 0; i < previous.length; i++) {
+						if (elements[i] == null || previous[i] == null || elements[i].id != previous[i].id) {
+							old = false;
+						}
+					}
+				} else {
+					old = false;
+				}
+				if (old) {
+					output.style.opacity = 1;
+				}
+			}
+
+			if (!old) {
+				output.style.opacity = 0;
+				setTimeout (() => {
+					output.innerHTML = "";
+
+					previous = elements;
+					for (let element of elements) {
+						output.innerHTML += createElement (element);
+					}
+				}, 100);
+
+				setTimeout (() => {
+					output.style.opacity = 1;
+				}, 200);
+			}
+		});
+
+		socket.emit ("update");
+	</script>
+</html>
