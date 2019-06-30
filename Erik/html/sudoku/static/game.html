@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Sudoku</title>
+		<link rel="stylesheet" href="/game.css">
+	</head>
+	<body>
+		<div class="grid">
+			<div class="logo">
+				<h1>Sudoku</h1>
+			</div>
+
+			<div class="game">
+				<div id="sudoku">
+
+				</div>
+			</div>
+
+			<footer>
+				<p>Made by ErikWDev</p>
+			</footer>
+		</div>
+	</body>
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		let socket = io ();
+		let COLORS = {green:"rgb(200, 230, 201)", green2:"#81c784", red:"#ff3677", white:"#FFF"};
+
+		let BOARD = [
+					["5","3"," "," ","7"," "," "," "," "],
+					["6"," "," ","1","9","5"," "," "," "],
+					[" ","9","8"," "," "," "," ","6"," "],
+					["8"," "," "," ","6"," "," "," ","3"],
+					["4"," "," ","8"," ","3"," "," ","1"],
+					["7"," "," "," ","2"," "," "," ","6"],
+					[" ","6"," "," "," "," ","2","8"," "],
+					[" "," "," ","4","1","9"," "," ","5"],
+					[" "," "," "," ","8"," "," ","7","9"]
+				];
+
+		let board = [
+					["5","3"," "," ","7"," "," "," "," "],
+					["6"," "," ","1","9","5"," "," "," "],
+					[" ","9","8"," "," "," "," ","6"," "],
+					["8"," "," "," ","6"," "," "," ","3"],
+					["4"," "," ","8"," ","3"," "," ","1"],
+					["7"," "," "," ","2"," "," "," ","6"],
+					[" ","6"," "," "," "," ","2","8"," "],
+					[" "," "," ","4","1","9"," "," ","5"],
+					[" "," "," "," ","8"," "," ","7","9"]
+				];
+
+		let sudoku = document.getElementById ("sudoku");
+
+		function select (i, j) {
+			let n = (parseInt (board[i][j]) + 1)%10;
+			board[i][j] = n || "1";
+			board[i][j] += "";
+			updateBoard ();
+		}
+
+		function updateBoard () {
+			let html = "";
+			for (let i = 0; i < board.length; i++) {
+				for (let j = 0; j < board[i].length; j++) {
+					html += "<div " + (BOARD[i][j] == " " ? "onClick=\"select("+i+","+j+");\"" : "class='locked'") + " id='box-" + i + "-" + j + "'><p>" + board[i][j] + "</p></div>";
+				}
+			}
+			sudoku.innerHTML = html;
+			fillBoard ();
+		}
+
+		function checkNumbers (a) {
+			for (let n = 1; n <= 9; n++) {
+				if (a.find ((o) => {return o == n + ""}) == null) {
+					return false
+				}
+			}
+
+			return true;
+		}
+
+		function getColumn (n) {
+			return board [n];
+		}
+
+		function fillBoard () {
+			for (let n = 0; n < 9; n++) {
+				fillRow    (n, (checkNumbers (getRow    (n)) ? COLORS.green : COLORS.white));
+
+				fillColumn (n, (checkNumbers (getColumn (n)) ? COLORS.green : COLORS.white));
+			}
+		}
+
+		function fillColumn (n, color) {
+			if (color != COLORS.white) {
+				for (let j = 0; j < 9; j++) {
+					let o = document.getElementById (coordsToId (n, j));
+					o.style.backgroundColor = (o.style.backgroundColor == COLORS.green ? COLORS.green2 : color);
+				}
+			}
+		}
+
+		function fillRow (n, color) {
+			for (let i = 0; i < 9; i++) {
+				let o = document.getElementById (coordsToId (i, n));
+				o.style.backgroundColor = color
+			}
+		}
+
+		function coordsToId (i, j) {
+			return "box-" + i + "-" + j;
+		}
+
+		function getRow (n) {
+			let tmp = [];
+			for (let o of board) {
+				tmp.push (o[n]);
+			}
+			return tmp;
+		}
+
+		function getBox (n) {
+			let tmp = [];
+
+			return tmp;
+		}
+
+		updateBoard ();
+	</script>
+</html>

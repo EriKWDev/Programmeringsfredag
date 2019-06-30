@@ -1,0 +1,19 @@
+{
+  "name": "flista",
+  "version": "1.0.1a",
+  "description": "Kyl- och fryslista",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "ErikWDev",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.3.2",
+    "express.js": "^1.0.0",
+    "mysql": "^2.16.0",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {}
+}

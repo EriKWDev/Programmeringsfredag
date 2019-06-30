@@ -7,12 +7,98 @@ footer {
 	text-align: center;
 }
 
-.drink {
-	margin: 10px;
-	border: 2px solid rgba(40, 40, 40, 0.6);
-	padding: 10px;
+.appCointainer {
+	text-align: center;
+	margin:auto;
 }
 
-.drink-container {
-	
+@keyframes drink {
+	0% {
+		transform: scale(1.2);
+		opacity: 0;
+		transform: rotate(45deg);
+	}
+
+	50% {
+		transform: scale(1.3);
+	}
+
+	100% {
+		transform: scale(1);
+		transform: rotate(0deg);
+		opacity: 1;
+	}
+}
+
+.drink {
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	margin: 10px auto 10px auto;
+	border: 0px solid rgba(40, 40, 180, 0.1);
+	padding: 10px;
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	width: 400px;
+	animation: drink 0.4s ease-in-out;
+}
+
+.loading {
+	opacitry: 1;
+	width: 64px;
+	height: 64px;
+	text-align: center;
+	margin: auto;
+	transition: all 0.4s ease-in-out;
+}
+
+.loading:after {
+	text-align: center;
+	margin: 10px auto 10px auto;
+	content: " ";
+	display: block;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	border: 5px solid #e21055;
+	border-color: #e21055 transparent #e21055 transparent;
+	animation: lds-dual-ring 1.2s ease-in-out infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+	  transform: rotate(90deg);
+  }
+
+  55% {
+	  transform: rotate(70deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.show {
+	border: 2px solid #e21055;
+}
+
+.myButton {
+	background-color:#e21055;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:5px;
+	text-decoration:none;
+}
+.myButton:hover {
+	background-color:#c3144e;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
 }
