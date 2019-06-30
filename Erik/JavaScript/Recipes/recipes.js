@@ -3,7 +3,7 @@ const fs = require("fs-extra");
 const hbs = require("handlebars");
 const path = require("path");
 const merge = require("easy-pdf-merge");
-const FORCECREATE = true;
+const FORCECREATE = false;
 
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
@@ -93,7 +93,7 @@ const createAllRecipes = async function () {
 	for(let i = 0; i < 100; i++) {
 		console.log("");
 	}
-	console.log("__________ Starting Recipe Creation ___________");
+	console.log("╭━━━━━ Starting Recipe Creation ━━━━━╮");
 	console.log("");
 
 	for(const file of files) {
@@ -110,16 +110,17 @@ const createAllRecipes = async function () {
 
 		console.log("All Recipe-PDFs have been merged to _Recipes.pdf");
 		console.log("");
-		console.log("__________ Finnished Recipe Creation __________");
+		console.log("╰━━━━━ Finnished Recipe Creation ━━━━━╯");
 
 		for(let i = 0; i < 2; i++) {
 			console.log("");
 		}
-		console.log("_________________ Quick Facts _________________");
+		console.log("╭━━━━━━━━━━━━━ Quick Stats ━━━━━━━━━━━━━╮");
 		console.log("");
 		console.log("Total number of Recipes: " + filePaths.length);
 		console.log("Forced? " + FORCECREATE);
-		console.log("_______________________________________________");
+		console.log("");
+		console.log("╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯");
 		for(let i = 0; i < 3; i++) {
 			console.log("");
 		}

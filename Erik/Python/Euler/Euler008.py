@@ -12,7 +12,7 @@ for i in range (0, 1000 - n):
     for j in range (0, n):
         product *= int(nstr[i + j])
         tmp += nstr[i + j] + " "
-    
+
     print (i, ":", tmp, "->", product)
 
     if (product > currentMaxProduct):

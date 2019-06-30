@@ -1,0 +1,16 @@
+{
+  "name": "screendump",
+  "version": "1.0.0",
+  "description": "",
+  "main": "screendump.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ErikWDev",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^8.0.1",
+    "path": "^0.12.7",
+    "puppeteer": "^1.17.0"
+  }
+}

@@ -3,6 +3,9 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Tanks Game</title>
+		<style media="screen">
+
+		</style>
 	</head>
 	<body>
 		<script src="https://koda.nu/simple.js">
@@ -157,7 +160,7 @@
 					this.collisionTimer--;
 					if(this.x > totalWidth + this.tolerance  || this.x < -this.tolerance  || this.y > totalHeight + this.tolerance  || this.y < -this.tolerance) {
 						this.die();
-					}  else {
+					} else {
 						this.draw();
 						this.x += this.vx;
 						this.y += this.vy;
@@ -260,7 +263,7 @@
 					this.speedBoost = speedBoost;
 
 					if(!this.isPlayer) {
-						this.aimAngle = -Math.atan2((this.y-PLAYERTANK.y),(PLAYERTANK.x-this.x));;
+						this.aimAngle = -Math.atan2((this.y-PLAYERTANK.y),(PLAYERTANK.x-this.x));
 					}
 				}
 
@@ -1124,7 +1127,7 @@
 					"B___________________B",
 					"B___________________B",
 					"B___________________B",
-				/*M*/"B___________________B",
+			   /*M*/"B___________________B",
 					"B___________________B",
 					"B___________________B",
 					"B___________________B",
