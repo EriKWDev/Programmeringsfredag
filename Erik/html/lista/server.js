@@ -25,7 +25,7 @@ function log (message, name="Server") {
 database.connect((error) => {
 	if (error) {
 		log ("MySql not connected", "MySql");
-		throw error;
+		// throw error;
 	} else {
 		log ("MySql connected", "MySql");
 	}
@@ -81,7 +81,7 @@ function Update (socket) {
 	database.query (sql, (error, result) => {
 		if (error) {
 			log ("MySql Error", "MySql");
-			throw error;
+			//throw error;
 		} else {
 			socket.emit ("update", result);
 		}

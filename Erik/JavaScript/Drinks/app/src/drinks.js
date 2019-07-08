@@ -2,7 +2,6 @@
 // https://docs.google.com/spreadsheets/d/1OhMYSx78R9zzwPTbqouh54vmJyIBmpX5qHGTL43zbCE/edit#gid=0
 //
 
-
 const GoogleSpreadsheet = require("google-spreadsheet");
 const { promisify } = require("util");
 const credentials = require("./auth.json");
