@@ -1,18 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
 import {
-  StyleSheet,
-  ScrollView,
   View,
-  Text,
-  SectionList,
+  Text
 } from "react-native";
 
-const App = () => {
-  return (
-	<View>
-		<Text>Hello, World</Text>
-	</View>
-  );
-};
-
-export default App;
+export default class App extends Component {
+  render() {
+    return (
+        <View>
+            <Text>Hello!</Text>
+        </View>
+    )
+  }
+}
