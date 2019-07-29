@@ -1,0 +1,50 @@
+:root {
+    --login-button: #f1f1f1;
+    --white: #ffffff;
+    --black: #272727;
+}
+
+html, body {
+    font-family: Roboto, sans-serif;
+    color: var(--black);
+}
+
+h1 {
+    font-weight: normal;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 50px;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    padding: 50px;
+}
+
+.g-image {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+}
+
+.login-button {
+    background-color: var(--login-button);
+	cursor: pointer;
+	font-size: 0.9em;
+	padding: 6px 15px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.login-button:active {
+	position: relative;
+	top: 1px;
+}  

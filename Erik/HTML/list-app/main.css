@@ -1,0 +1,135 @@
+:root {
+    --black: #272727;
+    --grey: #747474;
+    --light-grey: #fbfbfb;
+    --white: #ffffff;
+    --logout-button: #48bbac;
+    --color-0: #f0226d;
+    --color-1: #726DFF;
+    --color-2: #30aa2d;
+    --color-3: #c449c9;
+    --color-4: #e7bc44;
+    --color-5: #f1ff34;
+    --color-6: #69e5e9;
+    --color-7: #a8246d;
+    --color-8: #7e7e7e;
+    --color-9: #383838;
+}
+
+body, html {
+    margin: 0px;
+    font-family: Roboto, sans-serif;
+    color: var(--black);
+    font-size: 1.2em;
+    background-color: var(--white);
+}
+
+header {
+    width: 100%;
+    background-color: var(--white);
+}
+
+.logout-button {
+	background-color: var(--logout-button);
+	display: inline-block;
+	cursor: pointer;
+	color: var(--white);
+	font-size: 0.9em;
+	padding: 6px 15px;
+    text-decoration: none;
+    float: right;
+}
+
+.logout-button:active {
+	position: relative;
+	top: 1px;
+}   
+
+.user-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 10px;
+    float: right;
+}
+
+#user {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#list-container {
+    padding: 15px;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-bottom: 40%;
+}
+
+td {
+    font-size: 1.3em;
+    padding: 0.25em;
+}
+
+td:last-child {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+td > input {
+    opacity: 1;
+}
+
+th:last-child {
+    text-align: center;
+}
+
+i {
+    cursor: pointer;
+}
+
+.add-button {
+    position: fixed;
+    bottom: 20px;
+    right: 50px;
+    font-size: 2em;
+    background-color: var(--light-grey);
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+th {
+    text-align: left;
+    font-size: 1.3em;
+    font-weight: 200;
+}
+
+.category-column {
+    width: 100px;
+}
+
+.title-column {
+    text-align: left;
+}
+
+.list-item:nth-child(even) {
+    background-color: var(--light-grey);
+}
+
+.list-header {
+    color: var(--black);
+    font-size: 1.1em;
+    font-weight: bold;
+    padding-top: 30px;
+}
+
+.list-item {
+    color: var(--black);
+    overflow: auto;
+}

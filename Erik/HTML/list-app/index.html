@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>FList</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <header>
+            <div id="user"></div>
+        </header>
+        <div id="main-container">
+            <div id="list-container"></div>
+            <div class="add-button">
+                <i class="fa fa-plus"></i>
+            </div>
+        </div>
+        
+        <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+        <script>
+            const firebaseConfig = {
+                apiKey: "AIzaSyCPSpJoHJaq1QtZzb63L1Ub73kpU0Cde90",
+                authDomain: "erikwdev-flist.firebaseapp.com",
+                databaseURL: "https://erikwdev-flist.firebaseio.com",
+                projectId: "erikwdev-flist",
+                storageBucket: "erikwdev-flist.appspot.com",
+                messagingSenderId: "1007957993674",
+                appId: "1:1007957993674:web:4430ac52038c2083"
+            };
+
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+        </script>
+        <script src="main.js"></script>
+    </body>
+</html>
