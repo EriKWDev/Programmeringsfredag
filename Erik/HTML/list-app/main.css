@@ -2,18 +2,27 @@
     --black: #272727;
     --grey: #747474;
     --light-grey: #fbfbfb;
+    --less-light-grey: #f1f0f0;
     --white: #ffffff;
     --logout-button: #48bbac;
     --color-0: #f0226d;
     --color-1: #726DFF;
     --color-2: #30aa2d;
     --color-3: #c449c9;
-    --color-4: #e7bc44;
-    --color-5: #f1ff34;
-    --color-6: #69e5e9;
+    --color-4: #fc9038;
+    --color-5: #e7bc44;
+    --color-6: #48bbac;
     --color-7: #a8246d;
     --color-8: #7e7e7e;
     --color-9: #383838;
+}
+
+.loading {
+    font-size: 5em;
+    display: block;
+    margin: auto;
+    text-align: center;
+    margin-top: 10%;
 }
 
 body, html {
@@ -71,17 +80,43 @@ table {
 }
 
 td {
-    font-size: 1.3em;
+    font-size: 0.8em;
     padding: 0.25em;
 }
 
 td:last-child {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
+}
+
+select {
+    width: auto;
+    height: 28px;
+    font-size: 0.7em;
+    padding: 5px;
+    color: var(--white);
+    border-radius: 0px;
 }
 
 td > input {
-    opacity: 1;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    background-color: inherit;
+    border-bottom: 2px solid var(--grey);
+    color: var(--black);
+    font-size: inherit;
+    width: 100%;
+    display: none;
+}
+
+input::placeholder {
+    color: var(--grey);
+}
+
+td > span {
+    display: block;
 }
 
 th:last-child {
@@ -106,25 +141,29 @@ i {
 
 th {
     text-align: left;
-    font-size: 1.3em;
+    font-size: 0.9em;
     font-weight: 200;
 }
 
 .category-column {
-    width: 100px;
+    width: 12%;
 }
 
 .title-column {
     text-align: left;
 }
 
-.list-item:nth-child(even) {
+.location-column {
+    font-weight: bold;
+}
+
+.list-item:nth-child(even):not(.list-header) {
     background-color: var(--light-grey);
 }
 
 .list-header {
     color: var(--black);
-    font-size: 1.1em;
+    font-size: 0.9em;
     font-weight: bold;
     padding-top: 30px;
 }
@@ -132,4 +171,9 @@ th {
 .list-item {
     color: var(--black);
     overflow: auto;
+    transition: all 0.2s ease-in-out;
+}
+
+.list-item:hover {
+    
 }

@@ -10,7 +10,7 @@ firebase.auth().onAuthStateChanged((user) => {
             picture: user.photoURL,
             email: user.email,
             displayName: user.providerData[0].displayName
-        }).then((result) => {
+        }, {merge: true}).then((result) => {
             window.location.replace("/")
         })
     } else {
