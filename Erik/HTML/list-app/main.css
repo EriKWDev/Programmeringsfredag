@@ -25,17 +25,24 @@
     margin-top: 10%;
 }
 
-body, html {
+html, body {
     margin: 0px;
     font-family: Roboto, sans-serif;
     color: var(--black);
     font-size: 1.2em;
     background-color: var(--white);
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 header {
     width: 100%;
     background-color: var(--white);
+}
+
+#search-bar {
+    height: 100%;
+    font-size: 1em;
 }
 
 .logout-button {
@@ -68,8 +75,13 @@ header {
     justify-content: flex-end;
 }
 
+#user > * {
+    margin-right: 10px;
+}
+
 #list-container {
     padding: 15px;
+    transition: all 0.8s ease-in-out;
 }
 
 table {
@@ -170,10 +182,8 @@ th {
 
 .list-item {
     color: var(--black);
-    overflow: auto;
-    transition: all 0.2s ease-in-out;
 }
 
 .list-item:hover {
-    
+
 }

@@ -4,6 +4,9 @@
         <title>FList</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="Description" content="FList is a simple tool to keep track of what you currently have stowed in your freezer or fridge.">
+        <meta name="theme-color" content="#48bbac"/>
+        <link rel="manifest" href="/manifest.json">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="main.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -17,13 +20,32 @@
             <div id="list-container">
                 <div class="loading">
                     <i class="fa fa-gear faa-wrench animated"></i>
+                    <noscript>
+                        <h1>FList requires JavaScript in order to function</h1>
+                    </noscript>
                 </div>
             </div>
             <div class="add-button" onClick="addItem()">
                 <i class="fa fa-plus faa-wrench animated-hover"></i>
             </div>
         </div>
-        
+        <script>
+            if ("serviceWorker" in navigator) {
+                window.addEventListener("load", () => {
+                    navigator.serviceWorker.register("/sw.js").then((registration) => {
+                        // Registration was successful
+                        console.log("Registered!");
+                    }, (err) => {
+                        // registration failed :(
+                        console.log("Service Worker registration failed: ", err);
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+                });
+            } else {
+                console.log("Service worker is not supported");
+            }
+        </script>
         <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>

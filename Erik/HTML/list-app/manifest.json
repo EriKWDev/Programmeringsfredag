@@ -1,0 +1,20 @@
+{
+    "short_name": "FList",
+    "name": "Fryslista",
+    "icons": [
+    {
+        "src":"/assets/icon.png",
+        "sizes": "192x192",
+        "type": "image/png"
+    },
+    {
+        "src":"/assets/icon2.png",
+        "sizes": "512x512",
+        "type": "image/png"
+    }
+    ],
+    "start_url": "/",
+    "background_color": "#48bbac",
+    "theme_color": "#48bbac",
+    "display": "standalone"
+  }

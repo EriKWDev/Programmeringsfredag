@@ -30,16 +30,22 @@ firebase.auth().onAuthStateChanged((user) => {
 
 const createUI = () => {
     let userElement = document.getElementById("user")
-    let HTML = ``
+    let HTML = 
+    `
+    <input results="8" autosave="flist-search" class="search-bar" type="search" placeHolder="Search"></input>
+    <i class="fa fa-search"></i>
+    `
 
     if(currentUserFriends.length > 0) {
-        HTML += `<i class="fa fa-users"></i>`
+        HTML += 
+        `
+        <i class="fa fa-users"></i>
+        `
 
         for(let friend of currentUserFriends) {
-            console.log(friend)
             HTML += 
             `
-                <img title="${friend.displayName}: ${friend.email}" class="user-img" src="${friend.picture}" alt="${friend.displayName}">
+            <img title="${friend.displayName}: ${friend.email}" class="user-img" src="${friend.picture}" alt="${friend.displayName}">
             `
         }
     }
@@ -49,6 +55,7 @@ const createUI = () => {
     <i class="fa fa-user"></i>
     <img title="${currentUser.displayName}: ${currentUser.email}" class="user-img" src="${currentUser.picture}" alt="${user.displayName}">
     <a class="logout-button" onClick="logout()">Logout</a>
+    <i onClick="document.documentElement.webkitRequestFullScreen()" class="fa fa-expand"></i>
     `
     userElement.innerHTML = HTML
 }
@@ -75,7 +82,6 @@ const getData = async () => {
                 let thisFriendDict = {}
                 friendData.forEach((doc) => {
                     let item = doc.data()
-                    console.log("FRIENDS", item)
                     item.id = doc.id
                     thisFriendDict[item.id] = item
                 })
