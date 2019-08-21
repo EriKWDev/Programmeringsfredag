@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/main.css" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/9.1.0/markdown-it.min.js"></script>
+        <script src="bower_components/markdown-it/dist/markdown-it.min.js"></script>
     </head>
     <body>
         <div id="content">
@@ -13,13 +13,21 @@
         </div>
         
     <script>
-        const md = window.markdownit()
-        fetch("file.md").then(response => {
-            let text = response.text()
-            console.log(text)
-            let result = md.render(text)
-            document.getElementById("content").innerHTML = result
+        const md = window.markdownit({
+            html: true,
+            linkify: true,
+            typographer: true
         })
+        md.use(window.markdownitAbbr())
+        const getFile = async (fileName) => {
+            let response = await fetch(fileName)
+            let text = await response.text()
+            console.log(text)
+            let result = await md.render(text)
+            console.log(result)
+            document.getElementById("content").innerHTML = result
+        }
+        getFile("article.md")
     </script>
     </body>
 </html>
