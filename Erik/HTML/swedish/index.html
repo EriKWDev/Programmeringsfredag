@@ -8,6 +8,7 @@
         <script src="node_modules/markdown-it/dist/markdown-it.min.js"></script>
         <script src="node_modules/markdown-it-container/dist/markdown-it-container.min.js"></script>
         <script src="node_modules/markdown-it-footnote/dist/markdown-it-footnote.min.js"></script>
+        <script src="node_modules/markdown-it-abbr/dist/markdown-it-abbr.js"></script>
     </head>
     <body>
         <div class="flex-container">
@@ -35,9 +36,10 @@
                     validate: (params) => { 
                         return params.match("bad")
                     }
-                }).use(window.markdownitFootnote)
-
-                document.getElementById("content").innerHTML = await md.render(text)
+                }).use(window.markdownitFootnote).use(window.markdownitAbbr)
+                
+                let abbreviations = await getFile("abbreviations.md")
+                document.getElementById("content").innerHTML = await md.render(`${abbreviations} \n\n ${text}`)
             })
         </script>
     </body>

@@ -4,9 +4,9 @@
     --black: #3a3a3a;
     --grey: #bfbfbf;
     --good-example-1: #ffc356;
-    --good-example-2: #ffe58747;
+    --good-example-2: #ffe58723;
     --bad-example-1: #ff4f80;
-    --bad-example-2: #ff4f8047;
+    --bad-example-2: #ff4f800f;
 }
 
 html, body {
@@ -38,13 +38,14 @@ hr {
 }
 
 li {
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 13px;
+    margin-top: 13px;
 }
 
 .example {
-    padding: 5px 0px 5px 20px;
+    padding: 8px 0px 8px 20px;
     margin-left: 10px;
+    font-family: "Lora", sans-serif;
 }
 
 .good {
@@ -67,6 +68,12 @@ li {
 
 .example p:nth-child(even)::before {
     content: "Eng | ";
+}
+
+.footnotes::before {
+    content: "Footnotes";
+    font-size: 1.5em;
+    font-weight: 400;
 }
 
 p {
