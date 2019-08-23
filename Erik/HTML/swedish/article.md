@@ -1,17 +1,17 @@
 # Swedish Nouns Can Be Very Long
-_Author: Erik W. Gren_
+*Author: Erik W. Gren*
 
 ---
 
 ## Combined Nouns
 
-In English, we can find some _combined nouns_ such as "firefighter" (i.e. "fire" + "fighter").
+In English, we can find some *combined nouns* such as "firefighter" (i.e. "fire" + "fighter").
 However, the most common way of combining nouns in English is by using a space or a hyphens.
 
-For example: _strategy game_, _forest fire_, _coffee mug_, _dog-friendly_, etc.
+For example: *strategy game*, *forest fire*, *coffee mug*, *dog-friendly*, etc.
 
 The Swedish approach to nouns is, however, a bit different. Swedish grammar thinks more along
-the lines that a noun should be just that, _A_ noun. Hence, in Swedish, all combined nouns are
+the lines that a noun should be just that, *A* noun. Hence, in Swedish, all combined nouns are
 converted into one single, long noun.
 
 ## Examples
