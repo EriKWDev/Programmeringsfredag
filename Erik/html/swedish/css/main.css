@@ -72,6 +72,19 @@ li {
     background-color: var(--bad-example-2);
 }
 
+.bad::before {
+    content: "!";
+    position: absolute;
+    transform: translateX(-2em) translateY(1em);
+    font-weight: 500;
+    color: white;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    background-color: var(--bad-example-1);
+}
+
 .bad p mark {
     border-bottom: 2px dashed var(--bad-example-1);
 }
