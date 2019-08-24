@@ -61,9 +61,9 @@ Theoretically, a Swedish word could be infinitely long. Swedes usually gag about
 
 However, it would be ridiculous to have an infinitely long dictionary, so the SA has decided that the longest word in the official dictionary of the Swedish language (the SAOL/SAOB) is the following noun:
 ::: good example
-Realisationskapitalvinstbeskattning ^[The crime of knowingly paying too little tax]
+Realisationskapitalvinstbeskattning
 
-Realization-capital-gains-taxing (No English alternative)
+Realization-capital-gains-taxing (A kind of tax evasion/fraud)
 :::
 
 This word is not particularly useful nor common, but it is what it is.
@@ -78,7 +78,7 @@ I promised you infinitely long words, and if that's what you want then that's wh
    Flag-pole-top-cleaning-substance
    :::
 2. ::: good example
-   hyperneuroakustiska diafragmakontravibrationer ^[This is a scientific/joke word for "drunk hiccups". The more common term is "fyllehicka".]
+   hyperneuroakustiska diafragmakontravibrationer ^[This is a scientific/joke word for "drunk hiccups". The term used in real life is "fyllehicka".]
 
    hyper-neuro-acoustic diaphragm-contra-vibrations
    :::

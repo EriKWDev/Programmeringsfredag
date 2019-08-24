@@ -73,16 +73,16 @@ li {
 }
 
 .bad::before {
-    content: "!";
+    font-family: "Font Awesome 5 Free";
+    content: "\f06a";
+    font-weight: 900;
     position: absolute;
-    transform: translateX(-2em) translateY(1em);
-    font-weight: 500;
-    color: white;
+    transform: translateX(-1.85em) translateY(1em);
+    color: var(--bad-example-1);
+    background-color: white;
+    height: 0.95em;
+    width: 0.95em;
     border-radius: 50%;
-    height: 20px;
-    width: 20px;
-    text-align: center;
-    background-color: var(--bad-example-1);
 }
 
 .bad p mark {
@@ -93,6 +93,19 @@ mark {
     border-bottom: 2px dashed var(--black);
     background-color: inherit;
     font-style: italic;
+    color: var(--black);
+    font-weight: 500;
+    cursor: inherit !important;
+    text-decoration: none !important;
+}
+
+abbr {
+    border-bottom: 2px dotted var(--black);
+    background-color: inherit;
+    color: var(--black);
+    font-weight: 500;
+    cursor: inherit !important;
+    text-decoration: none !important;
 }
 
 .example p {
