@@ -1,5 +1,7 @@
 # Swedish Nouns Can Be Very Long
-*Author: Erik W. Gren*
+*2019-08-22 by Erik W. Gren*
+
+
 
 ## Combined Nouns
 In English, we can find some *combined nouns* such as "firefighter" (i.e. "fire" + "fighter"). However, the most common way of combining nouns in English is by using a space or a hyphens.
@@ -16,13 +18,13 @@ The Swedish approach to nouns is, however, a bit different. Swedish grammar thin
    :::
 2. ::: good example
    En skogsbrand
-   
+
    A forest fire
    :::
 3. ::: bad example
-   En skogs brand ^[The act of writing combined nouns incorrectly in Swedish is called **"särskrivning"** (lit. separate writing). This is a common error for all Swedish beginners, native or not (Younger self included, of course).]
-   
-   A forestfire
+   En skog==s b==rand ^[The act of writing combined nouns incorrectly in Swedish is called **"särskrivning"** (lit. separate writing). This is a common error for all Swedish beginners, native or not (Younger self included, of course).]
+
+   A fores==tf==ire
    :::
 4. ::: good example
    Ett parkeringshus
@@ -37,7 +39,7 @@ n-ord/t-ord-property.
 Let's look at the above example again:
 
 ::: good example
-Ett strategispel
+==Ett== strategi==spel==
 
 A strategy game
 :::
@@ -47,7 +49,7 @@ A strategy game
 If we were to change the order of the words...
 
 ::: good example
-En spelstrategi
+==En== spel==strategi==
 
 A game strategy
 :::
@@ -93,8 +95,8 @@ I promised you infinitely long words, and if that's what you want then that's wh
 
 
 ## Extra
-A challenge would be to try to decode all these words. I've tried my best to translate them word by word into English, though they might not be perfect.
+A challenge would be to try and decode all these words. I've tried my best to translate them word-by-word into English. Though, they might not be perfect.
 
-If you feel like it, you can analyze these words thoroughly. (Though, if learning Swedish is your goal, it might be more effective to just move on to another article... )
+If you feel like it, you can analyze these words thoroughly. (However, if learning Swedish is your goal, it might be more effective to just move on to another article... )
 
 But hey! Why would you learn Swedish if you can't have a bit of fun with it?

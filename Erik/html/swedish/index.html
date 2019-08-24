@@ -8,7 +8,8 @@
         <script src="node_modules/markdown-it/dist/markdown-it.min.js"></script>
         <script src="node_modules/markdown-it-container/dist/markdown-it-container.min.js"></script>
         <script src="node_modules/markdown-it-footnote/dist/markdown-it-footnote.min.js"></script>
-        <script src="node_modules/markdown-it-abbr/dist/markdown-it-abbr.js"></script>
+        <script src="node_modules/markdown-it-abbr/dist/markdown-it-abbr.min.js"></script>
+        <script src="node_modules/markdown-it-mark/dist/markdown-it-mark.min.js"></script>
     </head>
     <body>
         <div class="flex-container">
@@ -16,31 +17,6 @@
 
             </div>
         </div>
-        <script>
-            const getFile = async (fileName) => {
-                let response = await fetch(fileName)
-                let text = await response.text()
-                return text
-            }
-
-            getFile("article.md").then(async (text) => {
-                let md = window.markdownit({
-                    html: true,
-                    linkify: true,
-                    typographer: true
-                }).use(window.markdownitContainer, "good example", {
-                    validate: (params) => { 
-                        return params.match("good")
-                    }
-                }).use(window.markdownitContainer, "bad example", {
-                    validate: (params) => { 
-                        return params.match("bad")
-                    }
-                }).use(window.markdownitFootnote).use(window.markdownitAbbr)
-                
-                let abbreviations = await getFile("abbreviations.md")
-                document.getElementById("content").innerHTML = await md.render(`${abbreviations} \n\n ${text}`)
-            })
-        </script>
+        <script src="article.js"></script>
     </body>
 </html>
