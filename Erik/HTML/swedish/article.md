@@ -1,8 +1,6 @@
 # Swedish Nouns Can Be Very Long
 *Author: Erik W. Gren*
 
----
-
 ## Combined Nouns
 In English, we can find some *combined nouns* such as "firefighter" (i.e. "fire" + "fighter"). However, the most common way of combining nouns in English is by using a space or a hyphens.
 
