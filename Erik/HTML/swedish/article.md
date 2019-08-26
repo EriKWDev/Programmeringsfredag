@@ -22,7 +22,7 @@ The Swedish approach to nouns is, however, a bit different. Swedish grammar thin
    A forest fire
    :::
 3. ::: bad example
-   En skog==s b==rand ^[The act of writing combined nouns incorrectly in Swedish is called **"särskrivning"** (lit. separate writing). This is a common error for all Swedish beginners, native or not (Younger self included, of course).]
+   En skog==s b==rand ^[The act of writing combined nouns incorrectly in Swedish is called "särskrivning" (lit. separate writing). This is a common error for all Swedish beginners, native or not (Younger self included, of course).]
 
    A fores==tf==ire
    :::
@@ -88,7 +88,7 @@ I promised you infinitely long words, and if that's what you want then that's wh
    Nail-polish-remover-radio-advertisement
    :::
 4. ::: good example
-   Undervattensbåtseldsläckningspphängningskroksfäste
+   Undervattensbåtseldsläckningsupphängningskroksfäste
 
    Underwater-boat-fire-extinguish-hanger
    :::
