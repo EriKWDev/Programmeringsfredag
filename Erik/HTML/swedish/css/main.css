@@ -70,6 +70,12 @@ abbr {
     text-decoration: none !important;
 }
 
+header h1 {
+    font-size: 3em;
+    border: none;
+    margin-bottom: 0;
+}
+
 .flex-container {
     display: flex;
     justify-content: center;
@@ -177,8 +183,12 @@ abbr {
         font-style: italic;
     }
 
-    abbr ~ .footnotes {
+    abbr ~ .footnotes::before {
         content: " (" attr(title) ") ";
+    }
+
+    header {
+        display: none;
     }
 
     .good {

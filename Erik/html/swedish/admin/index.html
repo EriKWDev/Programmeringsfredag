@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin</title>
+</head>
+<body>
+    <div id="login">
+        <form onsubmit="event.preventDefault(); loginAdmin();">
+            <label for="email">Email: <input type="text" id="email" placeholder="email@example.com"></label>
+            <label for="pass">Password: <input type="password" id="pass" placeholder="****"></label>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <div id="content" style="display: none;">
+        Hello, World!
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/6.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.1/firebase-firestore.js"></script>
+    <script src="../firebase/firebase.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
