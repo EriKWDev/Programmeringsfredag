@@ -17,6 +17,12 @@
 
     <div id="content" style="display: none;">
         Hello, World!
+        <form onsubmit="event.preventDefault();">
+            <label for="title">Title: <input type="text" id="title" placeholder="Amazing Title"></label><br>
+            <label for="author">Author: <input type="text" id="author" placeholder="Author"></label><br>
+            <label for="article">Article: <input type="textarea" id="article" placeholder="# Hello, World!"></label><br>
+            <button type="submit">Publish</button>
+        </form>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/6.4.1/firebase-app.js"></script>
