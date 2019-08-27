@@ -10,7 +10,11 @@ firebase.auth().onAuthStateChanged((user) => {
         document.getElementById("content").style.display = "none"
         console.log("Not signed in.")
     }
-  })
+})
+
+const publishArticle = () => {
+    
+}
 
 const loginAdmin = () => {
     let email = document.getElementById("email").value

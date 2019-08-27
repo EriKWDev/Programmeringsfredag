@@ -17,10 +17,11 @@
 
     <div id="content" style="display: none;">
         Hello, World!
-        <form onsubmit="event.preventDefault();">
+        <form onsubmit="event.preventDefault(); publishArticle();">
             <label for="title">Title: <input type="text" id="title" placeholder="Amazing Title"></label><br>
             <label for="author">Author: <input type="text" id="author" placeholder="Author"></label><br>
-            <label for="article">Article: <input type="textarea" id="article" placeholder="# Hello, World!"></label><br>
+            <label for="date">Date: <input type="date" id="date"></label><br>
+            <textarea rows="30" cols="80" type="textarea" id="article" placeholder="# Hello, World! This is an article about Sweden or Swedish"></textarea><br>
             <button type="submit">Publish</button>
         </form>
     </div>
