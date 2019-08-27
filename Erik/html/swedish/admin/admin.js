@@ -13,7 +13,26 @@ firebase.auth().onAuthStateChanged((user) => {
 })
 
 const publishArticle = () => {
+    let article = getArticle()
     
+    if(article.title != "" && article.author != "" && article.date != "" && article.text != "") {
+        database.collection("Articles").add(article)
+    }
+}
+
+const getArticle = () => {
+    let title = document.getElementById("title").value
+    let author = document.getElementById("author").value
+    let date = document.getElementById("date").value
+    let text = document.getElementById("article").value
+
+    return {
+        title: title,
+        author: author,
+        date: date,
+        text: text,
+        status: "done"
+    }
 }
 
 const loginAdmin = () => {
@@ -31,3 +50,23 @@ const loginAdmin = () => {
 const logOut = () => {
     firebase.auth().signOut()
 }
+
+const preview = async () => {
+    document.getElementById("preview").innerHTML = await renderArticle(getArticle()).catch(error => {console.log(error)})
+}
+
+document.getElementById("article").addEventListener("keyup", () => {
+    preview()
+})
+
+document.getElementById("title").addEventListener("keyup", () => {
+    preview()
+})
+
+document.getElementById("date").addEventListener("change", () => {
+    preview()
+})
+
+document.getElementById("author").addEventListener("keyup", () => {
+    preview()
+})
