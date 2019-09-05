@@ -1,0 +1,66 @@
+{
+    "projects": [{
+        "title": "Swedish Blog",
+        "description": "A blog where everyone can learn about Sweden, Swedish and Swedes. Sweet!",
+        "subProjects": [
+            {
+                "title": "Website Functionality",
+                "todos": [
+                    {
+                        "title": "Implement Firestore",
+                        "description": "Implement a database so that all data can be stored online.",
+                        "status": "progress",
+                        "subtodos": [
+                            {
+                                "title": "Setup security rules",
+                                "status": "done"
+                            },
+                            {
+                                "title": "Test security rules",
+                                "status": "progress"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Make the initial index.html",
+                        "status": "done"
+                    },
+                    {
+                        "title": "Fix Style of Post-Page",
+                        "description": "The current post-page is not very good-looking. Style it up!",
+                        "status": "progress"
+                    }
+                ]
+            },
+            {
+                "title": "Hosting",
+                "todos": [
+                    {
+                        "title": "Publish Webpage",
+                        "description": "Make the blog come to life!",
+                        "status": "progress"
+                    },
+                    {
+                        "title": "Compare Hosting Plans",
+                        "description": "We want the cheapest possible.",
+                        "status": "progress"
+                    }
+                ]
+            },
+            {
+                "title": "Articles",
+                "todos": [
+                    {
+                        "title": "Swedish Nouns can be Very Long",
+                        "description": "Write about combined nouns in swedish and their grammatical properties (light-hearted)",
+                        "status": "done"
+                    },
+                    {
+                        "title": "Bestämd Form",
+                        "status": "progress"
+                    }
+                ]
+            }
+        ]
+    }]
+}

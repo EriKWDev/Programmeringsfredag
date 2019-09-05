@@ -1,5 +1,3 @@
-let articleName = "article.md"
-
 const getArticlesFromFirebase = async () => {
     let articlesSnapshot = await database.collection("Articles").where("status", "==", "done").get()
     return articlesSnapshot
