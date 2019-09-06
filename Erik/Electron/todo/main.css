@@ -45,6 +45,7 @@ html, body {
     width: 100%;
     border-bottom: 0px solid var(--light-gray);
     transition: border-bottom 0.2s ease-in-out;
+    background: linear-gradient(white, var(--transparent));
 }
 
 .title-wrapper:hover {
@@ -57,6 +58,7 @@ html, body {
     color: var(--text-light);
     padding: 10px;
     padding-top: 30px;
+    overflow: scroll;
 }
 
 #main-grid {
@@ -76,6 +78,7 @@ html, body {
     background-color:var(--main);
     color: var(--text-white);
     padding-top: 15px;
+    overflow: scroll;
 }
 
 .sub-project:first-of-type {
@@ -83,10 +86,11 @@ html, body {
 }
 
 .sub-project {
-    margin: 0px;
+    margin-bottom: 4px;
     width: 100%;
     cursor: pointer;
     animation: left-in 0.3s ease-in-out;
+    box-shadow: inset 0 0 2px var(--text-light);
 }
 
 .sub-project:not(:last-of-type) {
@@ -94,6 +98,7 @@ html, body {
 }
 
 .sub-project p {
+    margin: 0px;
     padding-left: 8px;
     margin-left: 10px;
     border-left: 2px solid var(--todo-done);

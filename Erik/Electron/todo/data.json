@@ -1,5 +1,5 @@
-{
-    "projects": [{
+[
+    {
         "title": "Swedish Blog",
         "description": "A blog where everyone can learn about Sweden, Swedish and Swedes. Sweet!",
         "subProjects": [
@@ -9,7 +9,7 @@
                     {
                         "title": "Implement Firestore",
                         "description": "Implement a database so that all data can be stored online.",
-                        "status": "progress",
+                        "status": "done",
                         "subtodos": [
                             {
                                 "title": "Setup security rules",
@@ -38,7 +38,7 @@
                     {
                         "title": "Publish Webpage",
                         "description": "Make the blog come to life!",
-                        "status": "progress"
+                        "status": "done"
                     },
                     {
                         "title": "Compare Hosting Plans",
@@ -62,5 +62,5 @@
                 ]
             }
         ]
-    }]
-}
+    }
+]

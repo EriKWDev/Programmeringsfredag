@@ -1,7 +1,3 @@
-const fs = require("fs")
-
-fs.writeFile("test.json")
-
 let projects = []
 
 let currentProjectId = 0
@@ -66,7 +62,7 @@ const toggleStatus = (todoId) => {
 const initiate = async () => {
     let data = await fetch("data.json")
     let json = await data.json()
-    projects = json.projects
+    projects = json
 
     populateProject()
     populateContent(0)
