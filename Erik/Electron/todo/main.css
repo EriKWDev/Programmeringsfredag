@@ -2,6 +2,7 @@ html, body {
     font-family: sans-serif;
     color: white;
     margin: 0px;
+    user-select: none;
 }
 
 :root {
@@ -45,7 +46,7 @@ html, body {
     width: 100%;
     border-bottom: 0px solid var(--light-gray);
     transition: border-bottom 0.2s ease-in-out;
-    background: linear-gradient(white, var(--transparent));
+    z-index: 100;
 }
 
 .title-wrapper:hover {
@@ -86,11 +87,11 @@ html, body {
 }
 
 .sub-project {
-    margin-bottom: 4px;
+    margin-bottom: 8px;
+    padding: 10px;
     width: 100%;
     cursor: pointer;
     animation: left-in 0.3s ease-in-out;
-    box-shadow: inset 0 0 2px var(--text-light);
 }
 
 .sub-project:not(:last-of-type) {
@@ -113,7 +114,37 @@ html, body {
     justify-content: left;
     align-self: center;
     transition: all 0.3s ease-in-out;
-    animation: left-in 0.3s ease-in-out;
+    animation: left-in 0.3s ease-in-out forwards;
+    transition: height 1.4s ease;
+    max-height: 4em;
+}
+
+.fly-away {
+    animation: fly-away 0.6s ease-in forwards;
+    max-height: 0px;
+    transition: max-height 0.4s ease-in-out;
+}
+
+@keyframes fly-away {
+    0% {
+        transform: translateX(0px);
+        opacity: 1;
+        display: inline-block;
+    }
+    20% {
+        transform: translateX(30px);
+        opacity: 1;
+    }
+    25% {
+        transform: translateX(33px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-300vw);
+        opacity: 0;
+        padding: 0px;
+        margin: 0px;
+    }
 }
 
 @keyframes left-in {

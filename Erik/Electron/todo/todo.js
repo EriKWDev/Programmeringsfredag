@@ -18,6 +18,10 @@ const populateProject = () => {
     }
 }
 
+const generateSubTodo = () => {
+
+}
+
 const populateContent = (subProjectId) => {
     if(subProjectId == currentSubProjectId) {
         return
@@ -31,7 +35,7 @@ const populateContent = (subProjectId) => {
     for(let todo of subProject.todos) {
         content.innerHTML +=
         `
-        <div status="${todo.status.toLowerCase()}" class="todo">
+        <div status="${todo.status.toLowerCase()}" class="todo" onclick="flyAway(this)">
             <div class="todo-check-wrapper">
                 <div onClick="toggleStatus(${i})" id="todo-check-${i}" status="${todo.status.toLowerCase()}" class="todo-check"></div>
                 <div>
@@ -48,6 +52,16 @@ const populateContent = (subProjectId) => {
     }
 
     currentSubProjectId = subProjectId
+}
+
+const flyAway = (element) => {
+    element.classList.add("fly-away")
+
+    element.addEventListener("animationend", () => {
+        element.removeEventListener("animationend", () => {})
+
+        //element.remove()
+    })
 }
 
 const toggleStatus = (todoId) => {
