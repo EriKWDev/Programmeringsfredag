@@ -1,7 +1,8 @@
 from threading import Thread
 from math import log, log2
 import time
-from PIL import Image, ImageDraw
+from tkinter import *
+from PIL import Image, ImageDraw, ImageTk
 try:
    import queue
 except ImportError:
@@ -53,17 +54,17 @@ def work(index):
         except ValueError:
             continue
 
-HEIGHT = 2140
+HEIGHT = 6000
 WIDTH = int(HEIGHT*1.618)
-MAX_THREADS = 40
+MAX_THREADS = 10
 POINT = points(WIDTH, HEIGHT)
 
-MAX_ITER = 300
+MAX_ITER = 100
 
-RE_ZOOM = 0.003
-IM_ZOOM = 0.003
-RE_OFFSET = 0.35
-IM_OFFSET = 0.38
+RE_ZOOM = 1
+IM_ZOOM = 1
+RE_OFFSET = 0
+IM_OFFSET = 0
 
 RE_START = -2 * RE_ZOOM + RE_OFFSET
 RE_END = 1 * RE_ZOOM + RE_OFFSET
@@ -73,7 +74,7 @@ IM_END = 1 * IM_ZOOM + IM_OFFSET
 im = Image.new("HSV", (WIDTH, HEIGHT), (0, 0, 0))
 draw = ImageDraw.Draw(im)
 
-def main():
+def regenerate_mandelbrot():
     print()
     print("Starting...")
     print("Max Threads: {}, Dimensions: {}x{}, Depth: {}".format(MAX_THREADS, HEIGHT, WIDTH, MAX_ITER))
@@ -94,6 +95,42 @@ def main():
     print()
     #im.save("003-{}x{}-{}-{}-{}.png".format(HEIGHT, WIDTH, MAX_THREADS, MAX_ITER), "PNG")
     im.convert("RGB").save("test.png", "PNG")
+    return True
+
+class Window(Frame):
+    def __init__(self, master=None):
+        Frame.__init__(self, master)
+        self.pack(fill=BOTH, expand=YES)
+        self.image = Image.open("test.png")
+        self.img_copy = self.image.copy()
+        self._load_image()
+
+        self.background_image = ImageTk.PhotoImage(self.image)
+
+        self.background = Label(self, image=self.background_image)
+        self.background.pack(fill=BOTH, expand=YES)
+        self.background.bind("<Configure>", self._resize_image)
+    
+    def _load_image(self):
+        self.image = Image.open("test.png")
+        self.img_copy= self.image.copy()
+
+    def _resize_image(self, event):
+        new_width = event.width
+        new_height = event.height
+
+        self.image = self.img_copy.resize((new_width, new_height))
+
+        self.background_image = ImageTk.PhotoImage(self.image)
+        self.background.configure(image =  self.background_image)
+
+def main():
+    regenerate_mandelbrot()
+    root = Tk()
+    app = Window(root)
+    root.wm_title("Mandelbrot Window")
+    root.geometry("{}x{}".format(int(WIDTH), int(HEIGHT)))
+    root.mainloop()
 
 if __name__ == "__main__":
     main()
