@@ -54,9 +54,9 @@ def work(index):
         except ValueError:
             continue
 
-HEIGHT = 6000
+HEIGHT = 600
 WIDTH = int(HEIGHT*1.618)
-MAX_THREADS = 10
+MAX_THREADS = 1
 POINT = points(WIDTH, HEIGHT)
 
 MAX_ITER = 100
