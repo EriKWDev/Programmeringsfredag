@@ -8,7 +8,7 @@
 </head>
 <body>
     <script src="https://koda.nu/simple.js">
-        let ARRAY = new Array(330)
+        let ARRAY = new Array(2330)
         for(let i = 0; i < ARRAY.length; i++) {
             ARRAY[i] = i
         }
@@ -57,14 +57,14 @@
         }
 
         function visualizeArray(array) {
-            let w = totalWidth - 100
-            let h = totalHeight - 200
+            let w = totalWidth/9 * 8
+            let h = totalHeight/2
             let l = array.length;
-            line(totalWidth/2 - w/2, h + 88, totalWidth/2 + w/2, 88, 1, "white")
+            //line(totalWidth/2 - w/2, (totalHeight/3)*2.4, totalWidth/2 + w/2, -h/l, 1, "white")
 
             for(let i in array) {
                 save()
-                translate(totalWidth/2 - w/2 + (i/l)*w, totalHeight/2 + 300)
+                translate(totalWidth/2 - w/2 + (i/l)*w, (totalHeight/3)*2.4)
                 let color = HSVtoRGB(array[i]/l, 0.8, 0.9)
                 let c = `rgba(${color.r}, ${color.g}, ${color.b}, 0.9)`
                 // console.log(color);
