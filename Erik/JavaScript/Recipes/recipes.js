@@ -3,7 +3,7 @@ const fs = require("fs-extra");
 const hbs = require("handlebars");
 const path = require("path");
 const merge = require("easy-pdf-merge");
-const FORCECREATE = false;
+const FORCECREATE = true;
 
 const log = (message="", type="info") => {
 
@@ -141,8 +141,6 @@ const createAllRecipes = async () => {
 	for(let i = 0; i < 100; i++) {
 		log("", "space");
 	}
-	console.log("╭━━━━━ Starting Recipe Creation ━━━━━╮");
-	console.log("");
 
 	log("Starting Recipe Creation", "title");
 	console.time("Total time");
@@ -159,7 +157,7 @@ const createAllRecipes = async () => {
 
 		console.log("All Recipe-PDFs have been merged to _Recipes.pdf");
 		console.log("");
-		console.log("╰━━━━━ Finnished Recipe Creation ━━━━━╯");
+		log("Finnished Recipe Creation", "title");
 
 		for(let i = 0; i < 2; i++) {
 			console.log("");
