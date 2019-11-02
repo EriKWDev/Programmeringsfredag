@@ -6,7 +6,7 @@ html, body {
 
 #main-container {
     display: grid;
-    grid-column: 1fr 10r 1fr;
+    grid-template-columns: 400px 4fr 400px;
     grid-template-areas: ". . tweetContainer";
 }
 
@@ -31,9 +31,9 @@ html, body {
 
 #tweet-container:after {
     position: absolute;
-    bottom: 0;  
-    height: 100%;
-    width: 100%;
+    top: 0;  
+    height: 70vh;
+    width: 390px;
     content: "";
     background: linear-gradient(to top,
        rgba(255,255,255, 1) 20%, 
