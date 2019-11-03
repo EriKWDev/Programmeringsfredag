@@ -39,14 +39,14 @@ const generateRecipes = async () => {
 
 const getHTMLFromFile = async (filePath) => {
     let file = await fse.readFile(filePath, "utf-8")
-    let lines = file.split(`\n`)
+    let lines = file.split(/\n/)
 
     let isReadingFrontMatter = false
     let yamlFrontMatter = ""
     let mdRecipe = ""
 
     for(let line of lines) {
-        if(line == "---") {
+        if(line.includes("---")) {
             isReadingFrontMatter = !isReadingFrontMatter;
         } else if(isReadingFrontMatter) {
             yamlFrontMatter += line + "\n"
@@ -54,10 +54,9 @@ const getHTMLFromFile = async (filePath) => {
             mdRecipe += line + "\n"
         }
     }
-    
+
     let frontMatter = await yaml.parse(yamlFrontMatter)
     let renderedHTML = await md.render(mdRecipe)
-    console.log(frontMatter)
 
     let html =
     `
