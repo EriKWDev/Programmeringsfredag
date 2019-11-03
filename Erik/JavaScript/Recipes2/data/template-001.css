@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css?family=Alice");
+
+html, body, p, h1, h2 {
+    color: #1b1b1b;
+    font-family: "Alice";
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    height: 100vh;
+}
+
+.recipe-container {
+	column-count: 2;
+	column-fill: auto;
+	column-gap: 0px;
+    column-width: 250px;
+}
+
+.stars {
+    display: inline-flex;
+}
+
+.star {
+    height: 10px;
+    width: 10px;
+    margin: 5px;
+    background-color: #1b1b1b;
+    border: #1b1b1b 1px solid;
+}
+
+.no-star {
+    height: 10px;
+    width: 10px;
+    margin: 5px;
+    background-color: #ffffff;
+    border: #1b1b1b 1px solid;
+}
+
+ol, ul {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin: 0px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    break-after: avoid;
+    margin-bottom: 0px;
+    margin-top: 20px;
+}
