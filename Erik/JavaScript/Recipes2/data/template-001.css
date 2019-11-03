@@ -1,8 +1,13 @@
-@import url("https://fonts.googleapis.com/css?family=Alice");
+body {
+    margin: 10px;
+}
 
 html, body, p, h1, h2 {
     color: #1b1b1b;
-    font-family: "Alice";
+}
+
+.recipe-container > *:nth-child(1) {
+    column-span: all;
 }
 
 .container {
@@ -14,8 +19,15 @@ html, body, p, h1, h2 {
 .recipe-container {
 	column-count: 2;
 	column-fill: auto;
-	column-gap: 0px;
-    column-width: 250px;
+    column-gap: 0px;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: #1b1b1b 1px solid;
+    max-width: 80%;
 }
 
 .stars {
@@ -35,21 +47,35 @@ html, body, p, h1, h2 {
     width: 10px;
     margin: 5px;
     background-color: #ffffff;
+    border: #1b1b1b 2px solid;
+}
+
+.letter {
+    font-size: 50px;
+    font-weight: bold;
+    padding: 20px;
     border: #1b1b1b 1px solid;
+    width: 100px;
+    border-radius: 0px 50px 0px 0px;
+    text-align: center;
+    position: absolute;
+    right: 20px;
 }
 
 ol, ul {
-    break-inside: avoid;
-    page-break-inside: avoid;
     margin: 0px;
 }
 
-li {
+li, p {
     margin-bottom: 10px;
+    break-inside: avoid;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    break-after: avoid;
     margin-bottom: 0px;
     margin-top: 20px;
 }

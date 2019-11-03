@@ -1,28 +1,32 @@
 const fse = require("fs-extra")
 const md = require("markdown-it")()
 const path = require("path")
-const pdf = require("html-pdf")
+const pdf = require("html5-to-pdf")
 const yaml = require("yaml")
 
 const options = {
     "templateName":"template-001",
     "pdfOptions":{
-        "format":"A3",
-        "orientation":"portrait",
-        "border":{
+        "printBackground":true,
+        "format":"A4",
+        "scale":1.0,
+        "landscape":false,
+        "margin":{
             "top":"1cm",
             "right":"1cm",
             "bottom":"2cm",
             "left":"1cm"
-        },
-        "base":`file://${path.join(__dirname, "data", "template-001.css")}`
+        }
     }
 }
 
 console.log(path.join(__dirname, "data", "template-001.css"))
+console.log(__dirname)
 
 const generateRecipes = async () => {
     let directory = await fse.readdir(path.join(__dirname, "data"))
+    await fse.emptyDir(path.join(__dirname, "recipes"))
+    await fse.emptyDir(path.join(__dirname, "html"))
 
     for(let fileName of directory) {
 
@@ -63,7 +67,17 @@ const getHTMLFromFile = async (filePath) => {
     <!DOCTYPE html>
     <html lang="en">
         <head>
-            <link rel="stylesheet" type="text/css" href="${options.templateName + ".css"}"
+            <style type="text/css">
+                @font-face {
+                    font-family: Alice;
+                    src: url(Alice.ttf);
+                }
+
+                body, html, p, h1, h2, h3, h4, h5, h6 {
+                    font-family: Alice !important;
+                }
+            </style>
+            <link rel="stylesheet" type="text/css" href="${options.templateName + ".css"}">
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=0.2">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -72,12 +86,16 @@ const getHTMLFromFile = async (filePath) => {
         <body>
             <div class="container">
 
+                <div class="letter">${frontMatter.title.substr(0, 1).toUpperCase()}</div>
+
                 <div class="recipe-top">
                     <h1>${frontMatter.title}</h1>
                     <p>${frontMatter.subtitle}</p>
                     <p>${frontMatter.time}</p>
                     <div class="stars-container">${generateStarsHTML(frontMatter.stars)}</div>
                 </div>
+
+                <hr />
 
                 <div class="recipe-container">
                     ${renderedHTML}
@@ -87,18 +105,32 @@ const getHTMLFromFile = async (filePath) => {
         </body>
     </html>
     `
-
-    await fse.writeFile(filePath.split(".")[0] + ".html", html, "utf-8")
     return html
 }
 
 const generatePdfFromHTML = async (html, fileName) => {
+
+    await fse.writeFile(path.join(__dirname, "html", `${fileName.split(".")[0]}.html`), html, "utf-8")
+
     console.log(`Generating pdf for ${fileName}...`)
-    pdf.create(html, options.pdfOptions).toFile(path.join(__dirname, "recipes", `${fileName.split(".")[0]}.pdf`), (err, res) => {
-        if (err) {
-            console.log(err)
-        }
+
+    const html5ToPDF = new pdf({
+        inputPath: path.join(__dirname, "html", `${fileName.split(".")[0]}.html`),
+        outputPath: path.join(__dirname, "recipes", `${fileName.split(".")[0]}.pdf`),
+        include: [
+            path.join(__dirname, "data", `Alice.ttf`),
+            path.join(__dirname, "data", `${options.templateName}.css`)
+        ],
+        pdf: options.pdfOptions,
+        launchOptions: {
+            headless: true
+        },
+        template: ""
     })
+
+    await html5ToPDF.start()
+    await html5ToPDF.build()
+    await html5ToPDF.close()
 }
 
 const generateStarsHTML = (stars) => {

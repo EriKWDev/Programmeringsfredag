@@ -36,6 +36,24 @@ time: 1h
 4. Knåda som bara den asså jävlar vad du kommer att behöva knåda.
 5. Platta ut degen och skär till pasta.
 6. Koka
+1. Skrik på italienska.
+2. Fyll ett bord med mjöl.
+3. Gör äggvulkan.
+4. Knåda som bara den asså jävlar vad du kommer att behöva knåda.
+5. Platta ut degen och skär till pasta.
+6. Koka
+1. Skrik på italienska.
+2. Fyll ett bord med mjöl.
+3. Gör äggvulkan.
+4. Knåda som bara den asså jävlar vad du kommer att behöva knåda.
+5. Platta ut degen och skär till pasta.
+6. Koka
+1. Skrik på italienska.
+2. Fyll ett bord med mjöl.
+3. Gör äggvulkan.
+4. Knåda som bara den asså jävlar vad du kommer att behöva knåda.
+5. Platta ut degen och skär till pasta.
+6. Koka
 
 
 
