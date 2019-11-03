@@ -1,4 +1,4 @@
-let socket = io("http://localhost")
+let socket = io(window.location.origin)
 let uttt = document.getElementById("uttt")
 let board = undefined
 const colors = {
@@ -54,3 +54,13 @@ const clickBox = (i, j) => {
 }
 
 generateGame()
+
+let ping = 0
+
+window.setInterval(() => {
+    socket.emit("pingy", {date: new Date()})
+}, 8000)
+
+socket.on("pong", (data) => {
+    ping = new Date().getTime() - new Date(data.date).getTime()
+})

@@ -123,11 +123,16 @@ io.on("connection", (socket) => {
     }
 
     rooms[roomName].users[socket.id] = users[socket.id]
+    socket.emit("updateBoard", rooms[roomName].board)
+  })
+
+  socket.on("pingy", (data) => {
+    socket.emit("pong", data)
   })
 
   socket.on("clickBox", (data) => {
     log(`${users[socket.id].name} wants to click ${data.i}, ${data.j}`, users[socket.id].roomName)
-    rooms[users[socket.id].roomName].board[data.i][data.j].status = 1
+    rooms[users[socket.id].roomName].board[data.i][data.j].status = rooms[users[socket.id].roomName].board[data.i][data.j].status == 1 ? 0 : 1
     io.to(users[socket.id].roomName).emit("updateBoard", rooms[users[socket.id].roomName].board)
   })
 
