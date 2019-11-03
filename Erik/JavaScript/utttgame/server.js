@@ -1,40 +1,123 @@
-var app = require("http").createServer(handler)
-var io = require("socket.io")(app)
-var fs = require("fs")
-var config = require("./config.json")
-var twitter = require("node-tweet-stream")(config)
 
-twitter.track("tic tac toe");
-twitter.track("ultimate tic tac toe");
-twitter.track("javascript");
-twitter.track("socket.io");
-twitter.track("nodejs");
-twitter.track("python");
+const express = require("express")
+const app = express()
+const server = require('http').Server(app)
+const io = require("socket.io")(server)
+const path = require("path")
+const fs = require("fs")
 
-twitter.on("tweet", (tweet) => {
-  io.emit("tweet", tweet);
-});
-
-app.listen(80)
-
-console.log("Starting uttt server...")
-
-function handler (req, res) {
-  fs.readFile(`${__dirname}/${req.url}`,
-  function (err, data) {
-    if (err) {
-      res.writeHead(500)
-      return res.end("Error loading index.html")
-    }
-
-    res.writeHead(200)
-    res.end(data)
-  })
+const options = {
+  name:"UTTT",
+  port:80,
 }
 
-io.on("connection", function (socket) {
+// Helper function
 
-  socket.on("test", function (data) {
-    console.log(data)
+const log = (msg, title=`Server`) => {
+  let date = new Date()
+  console.log(`[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}] ${title}: ${msg}`)
+}
+
+const generateBoard = () => {
+  let board = {}
+  for(let i = 0; i < 9; i++) {
+    board[i] = {
+      "clicks":0
+    }
+    for(let j = 0; j < 9; j++) {
+      board[i][j] = {
+        "status":-1
+      }
+    }
+  }
+  return board
+}
+
+
+// Express server
+
+log(`Starting...`)
+server.listen(options.port, () => {
+  log(`Running at port ${options.port}`)
+})
+
+app.use("/static", express.static(path.join(__dirname, "static")))
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "login.html"))
+})
+
+app.get("/:username", (req, res) => {
+  res.sendFile(path.join(__dirname, "overview.html"))
+})
+
+app.get("/:username/:roomid", (req, res) => {
+  res.sendFile(path.join(__dirname, "game.html"))
+})
+
+
+// Socket io
+
+let users = {}
+let rooms = {}
+
+const addUser = (socket) => {
+  users[socket.id] = {
+    "socket":socket,
+    "id":socket.id,
+    "name":undefined,
+    "roomName":undefined,
+    "color":undefined,
+  }
+
+  log(`User ${socket.id} connected`)
+}
+
+const removeUser = (socket) => {
+  log(`User ${users[socket.id].name} disconnected`, users[socket.id].roomName)
+
+  rooms[users[socket.id].roomName].users[socket.id] = undefined
+  console.log(rooms[users[socket.id].roomName].users)
+  users[socket.id] = undefined
+}
+
+const setName = (socket, name) => {
+  users[socket.id].name = name
+}
+
+io.on("connection", (socket) => {
+  addUser(socket)
+
+  socket.emit("getName")
+  socket.emit("getRoom")
+
+  socket.on("setName", (name) => {
+    setName(socket, name)
+    log(`${socket.id} set name to "${users[socket.id].name}"`, users[socket.id].roomName)
+  })
+
+  socket.on("setRoom", (roomName) => {
+    log(`User ${users[socket.id].name} joined room "${roomName}"`, users[socket.id].roomName)
+    socket.join(roomName)
+    users[socket.id].roomName = roomName
+    if(rooms[roomName] == undefined || rooms[roomName] == null) {
+      rooms[roomName] = {
+        "users":{},
+        "name":roomName,
+        "board":generateBoard()
+      }
+    }
+
+    rooms[roomName].users[socket.id] = users[socket.id]
+  })
+
+  socket.on("clickBox", (data) => {
+    log(`${users[socket.id].name} wants to click ${data.i}, ${data.j}`, users[socket.id].roomName)
+    rooms[users[socket.id].roomName].board[data.i][data.j].status = 1
+    io.to(users[socket.id].roomName).emit("updateBoard", rooms[users[socket.id].roomName].board)
+  })
+
+  socket.on("disconnect", () => {
+    removeUser(socket)
   })
 })

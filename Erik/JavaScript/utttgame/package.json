@@ -9,7 +9,7 @@
   "author": "ErikWDev",
   "license": "ISC",
   "dependencies": {
-    "node-tweet-stream": "^2.0.3",
+    "express": "^4.17.1",
     "nodemon": "^1.19.4",
     "socket.io": "^2.3.0"
   }
