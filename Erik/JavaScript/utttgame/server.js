@@ -72,13 +72,27 @@ const addUser = (socket) => {
 
   log(`User ${socket.id} connected`)
 }
+const removeRoom = (roomName) => {
+  log(`Removing room ${roomName}...`, roomName)
+  delete rooms[roomName]
+}
 
 const removeUser = (socket) => {
   log(`User ${users[socket.id].name} disconnected`, users[socket.id].roomName)
 
-  rooms[users[socket.id].roomName].users[socket.id] = undefined
-  console.log(rooms[users[socket.id].roomName].users)
-  users[socket.id] = undefined
+  delete rooms[users[socket.id].roomName].users[socket.id]
+
+  let i = 0
+  for(let key in rooms[users[socket.id].roomName].users) {
+    i++
+  }
+
+  if(i == 0) {
+    log(`Room has no users`, users[socket.id].roomName)
+    removeRoom(users[socket.id].roomName)
+  }
+
+  delete users[socket.id]
 }
 
 const setName = (socket, name) => {
