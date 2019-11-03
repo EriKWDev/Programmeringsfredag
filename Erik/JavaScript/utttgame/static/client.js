@@ -3,8 +3,8 @@ let uttt = document.getElementById("uttt")
 let board = undefined
 const colors = {
     "-1":"var(--light-grey)",
-    "0":"var(--black)",
-    "1":"var(--red)",
+    "0":"var(--teal)",
+    "1":"var(--purple)",
 }
 
 socket.on("getName", () => {
