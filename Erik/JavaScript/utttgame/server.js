@@ -18,6 +18,10 @@ const playerTypes = [
 
 // Helper function
 
+const serverMessageToRoom = (socket, msg) => {
+  io.to(users[socket.id].roomName).emit("chatMessage", {from: {type:-2, id:"SERVER", name:"Server"}, message:msg})
+}
+
 const log = (msg, title=`Server`) => {
   let date = new Date()
   console.log(`[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}] ${title}: ${msg}`)
@@ -92,6 +96,7 @@ const removeUser = (socket) => {
   delete rooms[users[socket.id].roomName].users[socket.id]
 
   io.to(users[socket.id].roomName).emit("updateRoom", rooms[users[socket.id].roomName])
+  serverMessageToRoom(socket, `${users[socket.id].name} has left the room`)
 
   if(Object.keys(rooms[users[socket.id].roomName].users).length <= 0) {
     log(`Room has no users`, users[socket.id].roomName)
@@ -131,21 +136,21 @@ io.on("connection", (socket) => {
     }
 
     let usersInRoom = Object.keys(rooms[roomName].users).length
-
-    log(`Current room count: ${Object.keys(rooms[roomName].users).length}`, users[socket.id].roomName)
     if(usersInRoom <= 0) {
       users[socket.id].type = 0
       rooms[users[socket.id].roomName].currentPlayer = 0
+      serverMessageToRoom(socket, `${users[socket.id].name}(Player 1) has joined the room`)
     } else if(usersInRoom == 1) {
       users[socket.id].type = 1
+      serverMessageToRoom(socket, `${users[socket.id].name}(Player 2) has joined the room`)
     } else {
       users[socket.id].type = 2
+      serverMessageToRoom(socket, `${users[socket.id].name}(Spectator) has joined the room`)
     }
 
     log(`Player ${users[socket.id].name} joined group ${users[socket.id].type}`, users[socket.id].roomName)
 
     rooms[roomName].users[socket.id] = users[socket.id]
-
     io.to(roomName).emit("updateRoom", rooms[roomName])
   })
 

@@ -8,6 +8,7 @@ let ROOM = undefined
 let ME = undefined
 
 const colors = {
+    "-2":"var(--black)",
     "-1":"var(--light-grey)",
     "0":"var(--teal)",
     "1":"var(--purple)",
@@ -142,11 +143,11 @@ const sendChatMessage = () => {
 }
 
 socket.on("chatMessage", (data) => {
+    console.log(data)
     let chat = document.getElementById("chat")
     let HTML =
     `
-    <div class="chat-message">
-        <span>${data.from.name}: ${data.message}</span>
+    <div class="chat-message" style="${socket.id == data.from.id ? 'color:'+colors[ME.type == 2 ? -2 : ME.type]+'; font-weight: bold; border: 2px solid;' : 'color:' + (data.from.type >= 0 && data.from.type < 2 ? colors[data.from.type] : colors[-2])};">${data.from.name}: ${data.message}</span>
     </div>
     `
     chat.innerHTML += HTML;
