@@ -166,19 +166,28 @@ io.on("connection", (socket) => {
       return socket.emit("errorMessage", {message: "Waiting for player 2 to join..."})
     }
 
-    if(rooms[users[socket.id].roomName].currentPlayer == users[socket.id].type) {
-      log(`${users[socket.id].name} wants to click ${data.i}, ${data.j}`, users[socket.id].roomName)
-
-      let isValidMove = checkMove(data.i, data.j, rooms[users[socket.id].roomName].currentPlayer, users[socket.id].type, rooms[users[socket.id].roomName].board)
-
-      if(isValidMove == false) {
-        return socket.emit("errorMessage", {message: "That is an invalid move"})
-      }
-
-      rooms[users[socket.id].roomName].board[data.i][data.j].status = users[socket.id].type
-      rooms[users[socket.id].roomName].currentPlayer = !rooms[users[socket.id].roomName].currentPlayer
-      io.to(users[socket.id].roomName).emit("updateRoom", rooms[users[socket.id].roomName])
+    if(rooms[users[socket.id].roomName].currentPlayer != users[socket.id].type) {
+      return socket.emit("errorMessage", {message: "It is not your turn yet"})
     }
+
+    log(`${users[socket.id].name} wants to click ${data.i}, ${data.j}`, users[socket.id].roomName)
+
+    let isValidMove = checkMove(data.i, data.j, rooms[users[socket.id].roomName].currentPlayer, users[socket.id].type, rooms[users[socket.id].roomName].board)
+
+    if(isValidMove == false) {
+      return socket.emit("errorMessage", {message: "That is an invalid move"})
+    }
+
+    rooms[users[socket.id].roomName].board[data.i][data.j].status = users[socket.id].type
+    rooms[users[socket.id].roomName].currentPlayer = !rooms[users[socket.id].roomName].currentPlayer
+    io.to(users[socket.id].roomName).emit("updateRoom", rooms[users[socket.id].roomName])
+  })
+
+  socket.on("chatMessage", (data) => {
+    if(data.message == "") {
+      return
+    }
+    io.to(users[socket.id].roomName).emit("chatMessage", data)
   })
 
   socket.on("disconnect", () => {

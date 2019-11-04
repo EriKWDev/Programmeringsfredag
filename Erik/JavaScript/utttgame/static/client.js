@@ -4,6 +4,8 @@ let errorBox = document.getElementById("error-box")
 let infoBox = document.getElementById("info-box")
 let board = undefined
 let errorId = 0
+let ROOM = undefined
+let ME = undefined
 
 const colors = {
     "-1":"var(--light-grey)",
@@ -40,6 +42,10 @@ socket.on("updateBoard", (data) => {
 })
 
 socket.on("errorMessage", (data) => {
+    sendErrorMessage(data)
+})
+
+const sendErrorMessage = (data) => {
     let errorHTML= `<p id="error-${errorId}">${data.message}</p>`
     errorBox.innerHTML += errorHTML
     let id = `error-${errorId}`
@@ -52,7 +58,7 @@ socket.on("errorMessage", (data) => {
         }, 500, id)
     }, 5000, id)
     errorId++
-})
+}
 
 const updateBoard = (newBoard) => {
     board = newBoard
@@ -64,6 +70,7 @@ const updateBoard = (newBoard) => {
 }
 
 const updateRoom = (room) => {
+    ROOM = room
     console.log(room)
     updateBoard(room.board)
     let HTML =
@@ -89,6 +96,10 @@ const updateRoom = (room) => {
             `
             <span style="${user.id == socket.id ? "font-weight: bold; border: 2px solid;" : ""} color:${user.type < 2 ? colors[user.type] : colors[-1]}">${user.name}</span>
             `
+        }
+
+        if(user.id == socket.id) {
+            ME = user
         }
     }
 
@@ -116,6 +127,30 @@ const getBoxId = (i, j) => {
 const clickBox = (i, j) => {
     socket.emit("clickBox", {i: i, j:j})
 }
+
+const sendChatMessage = () => {
+    if(ROOM == undefined || ME == undefined) {
+        return sendErrorMessage({message: "You have not joined a room yet"})
+    }
+
+    if(document.getElementById("chat-input").value.trim() == "") {
+        return sendErrorMessage({message: "You can't send an empty message"})
+    }
+
+    socket.emit("chatMessage", {from:ME, message:document.getElementById("chat-input").value.trim()})
+    document.getElementById("chat-input").value = ""
+}
+
+socket.on("chatMessage", (data) => {
+    let chat = document.getElementById("chat")
+    let HTML =
+    `
+    <div class="chat-message">
+        <span>${data.from.name}: ${data.message}</span>
+    </div>
+    `
+    chat.innerHTML += HTML;
+})
 
 generateGame()
 
