@@ -1,4 +1,3 @@
-
 const express = require("express")
 const app = express()
 const server = require('http').Server(app)
@@ -10,6 +9,12 @@ const options = {
   name:"UTTT",
   port:80,
 }
+
+const playerTypes = [
+  "player1",
+  "player2",
+  "spectator"
+]
 
 // Helper function
 
@@ -31,6 +36,10 @@ const generateBoard = () => {
     }
   }
   return board
+}
+
+const checkMove = (i, j, currentPlayer, player, board) => {
+  return currentPlayer == player && board[i][j].status == -1
 }
 
 
@@ -63,11 +72,11 @@ let rooms = {}
 
 const addUser = (socket) => {
   users[socket.id] = {
-    "socket":socket,
     "id":socket.id,
     "name":undefined,
     "roomName":undefined,
     "color":undefined,
+    "type":undefined
   }
 
   log(`User ${socket.id} connected`)
@@ -82,12 +91,9 @@ const removeUser = (socket) => {
 
   delete rooms[users[socket.id].roomName].users[socket.id]
 
-  let i = 0
-  for(let key in rooms[users[socket.id].roomName].users) {
-    i++
-  }
+  io.to(users[socket.id].roomName).emit("updateRoom", rooms[users[socket.id].roomName])
 
-  if(i == 0) {
+  if(Object.keys(rooms[users[socket.id].roomName].users).length <= 0) {
     log(`Room has no users`, users[socket.id].roomName)
     removeRoom(users[socket.id].roomName)
   }
@@ -114,16 +120,33 @@ io.on("connection", (socket) => {
     log(`User ${users[socket.id].name} joined room "${roomName}"`, users[socket.id].roomName)
     socket.join(roomName)
     users[socket.id].roomName = roomName
+
     if(rooms[roomName] == undefined || rooms[roomName] == null) {
       rooms[roomName] = {
         "users":{},
         "name":roomName,
-        "board":generateBoard()
+        "board":generateBoard(),
+        "currentPlayer":undefined
       }
     }
 
+    let usersInRoom = Object.keys(rooms[roomName].users).length
+
+    log(`Current room count: ${Object.keys(rooms[roomName].users).length}`, users[socket.id].roomName)
+    if(usersInRoom <= 0) {
+      users[socket.id].type = 0
+      rooms[users[socket.id].roomName].currentPlayer = 0
+    } else if(usersInRoom == 1) {
+      users[socket.id].type = 1
+    } else {
+      users[socket.id].type = 2
+    }
+
+    log(`Player ${users[socket.id].name} joined group ${users[socket.id].type}`, users[socket.id].roomName)
+
     rooms[roomName].users[socket.id] = users[socket.id]
-    socket.emit("updateBoard", rooms[roomName].board)
+
+    io.to(roomName).emit("updateRoom", rooms[roomName])
   })
 
   socket.on("pingy", (data) => {
@@ -131,9 +154,31 @@ io.on("connection", (socket) => {
   })
 
   socket.on("clickBox", (data) => {
-    log(`${users[socket.id].name} wants to click ${data.i}, ${data.j}`, users[socket.id].roomName)
-    rooms[users[socket.id].roomName].board[data.i][data.j].status = rooms[users[socket.id].roomName].board[data.i][data.j].status == 1 ? 0 : 1
-    io.to(users[socket.id].roomName).emit("updateBoard", rooms[users[socket.id].roomName].board)
+    if(users[socket.id].type == 2) {
+      return socket.emit("errorMessage", {message: "You are only a spectator of this game and cannot interact with it."})
+    }
+
+    if(rooms[users[socket.id].roomName].currentPlayer == undefined) {
+      rooms[users[socket.id].roomName].currentPlayer = 0
+    }
+
+    if(Object.keys(rooms[users[socket.id].roomName].users).length < 2) {
+      return socket.emit("errorMessage", {message: "Waiting for player 2 to join..."})
+    }
+
+    if(rooms[users[socket.id].roomName].currentPlayer == users[socket.id].type) {
+      log(`${users[socket.id].name} wants to click ${data.i}, ${data.j}`, users[socket.id].roomName)
+
+      let isValidMove = checkMove(data.i, data.j, rooms[users[socket.id].roomName].currentPlayer, users[socket.id].type, rooms[users[socket.id].roomName].board)
+
+      if(isValidMove == false) {
+        return socket.emit("errorMessage", {message: "That is an invalid move"})
+      }
+
+      rooms[users[socket.id].roomName].board[data.i][data.j].status = users[socket.id].type
+      rooms[users[socket.id].roomName].currentPlayer = !rooms[users[socket.id].roomName].currentPlayer
+      io.to(users[socket.id].roomName).emit("updateRoom", rooms[users[socket.id].roomName])
+    }
   })
 
   socket.on("disconnect", () => {
