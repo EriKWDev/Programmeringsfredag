@@ -8,7 +8,8 @@
     --teal: #3ac3c2;
     --purple: #8e5fd0;
     --green: #6ac515;
-    --orange: #ec5f0e;
+    --orange: #ff9800;
+    --blue: #3f51b5;
 }
 
 html, body {
@@ -17,6 +18,10 @@ html, body {
     font-size: 1rem;
     color: var(--black);
     font-family: "Quicksand", sans-serif;
+}
+
+.title {
+    text-align: center;
 }
 
 .login-container {
@@ -76,6 +81,10 @@ button {
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+
+    #chat-container {
+        display: none;
     }
 }
 

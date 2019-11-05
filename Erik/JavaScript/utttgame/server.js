@@ -5,6 +5,17 @@ const io = require("socket.io")(server)
 const path = require("path")
 const fs = require("fs")
 
+/* Dangerous Chat Message:
+
+<span onclick='setInterval(() => { 
+changeColor();
+document.getElementsByTagName("body")[0].style.backgroundColor = colors[ROOM.colors[ME.type]];
+}, 500)'>
+Click <i>this</i>!
+</span>
+
+*/
+
 const options = {
   name:"UTTT",
   port:80,
@@ -196,8 +207,47 @@ io.on("connection", (socket) => {
 
     rooms[users[socket.id].roomName].board[data.i][data.j].status = users[socket.id].type
     rooms[users[socket.id].roomName].board[data.i].clicks++
+
+    // Check for wins
+    let board = rooms[users[socket.id].roomName].board
+    let game = board[data.i]
+    let gameWin = false
+    let winner = users[socket.id].type
+
+    for(let n = 0; n < 9; n+=3) {
+      if(game[n+0].status == winner && game[n+1].status == winner && game[n+2].status == winner) {
+        gameWin = true
+      }
+
+      if(gameWin) {
+        break
+      }
+    }
+
+    for(let n = 0; n < 3; n+=1) {
+      if(game[n+0].status == winner && game[n+3].status == winner && game[n+6].status == winner) {
+        gameWin = true
+      }
+
+      if(gameWin) {
+        break
+      }
+    }
+
+    if(game[0].status == winner && game[4].status == winner && game[8].status == winner) {
+      gameWin = true
+    }
+
+    if(game[2].status == winner && game[4].status == winner && game[6].status == winner) {
+      gameWin = true
+    }
+
+    rooms[users[socket.id].roomName].board[data.i].winner = gameWin ? winner : undefined
+
     rooms[users[socket.id].roomName].board[data.i].closed = rooms[users[socket.id].roomName].board[data.i].clicks >= 9 || (rooms[users[socket.id].roomName].board[data.i].winner != undefined)
 
+
+    // Open correct games based on if they're closed or not
     if(rooms[users[socket.id].roomName].board[data.j].closed) {
       let n = 0
       for(let i = 0; i < 9; i++) {
@@ -235,9 +285,12 @@ io.on("connection", (socket) => {
   })
 
   socket.on("chatMessage", (data) => {
+    data.message.trim()
+
     if(data.message == "") {
       return
     }
+
     io.to(users[socket.id].roomName).emit("chatMessage", data)
   })
 

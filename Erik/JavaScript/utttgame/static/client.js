@@ -16,7 +16,8 @@ const colors = {
     "3":"var(--yellow)",
     "4":"var(--green)",
     "5":"var(--orange)",
-    "6":"var(--black)"
+    "6":"var(--black)",
+    "7":"var(--blue)",
 }
 
 const playerTypes = [
@@ -70,10 +71,12 @@ const changeColor = () => {
 const updateBoard = (newBoard) => {
     board = newBoard
     for(let i = 0; i < 9; i++) {
-        document.getElementById(`small-${i}`).style.border = board[i].open ? "2px solid " + colors[ROOM.colors[ROOM.currentPlayer]] : "var(--black)"
-
+        let small = document.getElementById(`small-${i}`)
+        small.style.backgroundColor = board[i].winner != undefined ? colors[ROOM.colors[board[i].winner]] : ""
+        small.style.border = board[i].open ? "2px solid " + colors[ROOM.colors[ROOM.currentPlayer]] : ""
+        
         for(let j = 0; j < 9; j++) {
-            document.getElementById(getBoxId(i, j)).style.backgroundColor = colors[ROOM.colors[board[i][j].status]]
+            document.getElementById(getBoxId(i, j)).style.backgroundColor = board[i].winner != undefined ? colors[ROOM.colors[board[i].winner]] : colors[ROOM.colors[board[i][j].status]]
         }
     }
 }
