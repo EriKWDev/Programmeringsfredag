@@ -7,6 +7,9 @@
     --yellow: #ffe159;
     --teal: #3ac3c2;
     --purple: #8e5fd0;
+    --green: #6ac515;
+    --orange: #ff9800;
+    --blue: #3f51b5;
 }
 
 html, body {
@@ -15,6 +18,10 @@ html, body {
     font-size: 1rem;
     color: var(--black);
     font-family: "Quicksand", sans-serif;
+}
+
+.title {
+    text-align: center;
 }
 
 .login-container {
@@ -75,6 +82,10 @@ button {
         flex-direction: column;
         justify-content: center;
     }
+
+    #chat-container {
+        display: none;
+    }
 }
 
 #info-box > * {
@@ -87,6 +98,10 @@ button {
     text-align: center;
     max-width: 300px;
     margin-bottom: 10px;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 #chat-container {
@@ -139,6 +154,8 @@ button {
     max-width: 500px;
     max-height: 500px;
     margin: auto;
+    border-radius: 20px;
+    border: 2px solid var(--light-grey);
     transition: 0.2s all ease-in-out;
 }
 

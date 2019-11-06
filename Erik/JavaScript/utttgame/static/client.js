@@ -14,6 +14,10 @@ const colors = {
     "1":"var(--purple)",
     "2":"var(--red)",
     "3":"var(--yellow)",
+    "4":"var(--green)",
+    "5":"var(--orange)",
+    "6":"var(--black)",
+    "7":"var(--blue)",
 }
 
 const playerTypes = [
@@ -51,21 +55,28 @@ const sendErrorMessage = (data) => {
     errorBox.innerHTML += errorHTML
     let id = `error-${errorId}`
     setTimeout(() => {
-        console.log(id)
         document.getElementById(id).style.opacity = 0;
         document.getElementById(id).style.maxHeight = "0";
         setTimeout(() => {
             document.getElementById(id).style.display = "none";
         }, 500, id)
-    }, 5000, id)
+    }, 3000, id)
     errorId++
+}
+
+const changeColor = () => {
+    socket.emit("changeColor", {"colors": colors})
 }
 
 const updateBoard = (newBoard) => {
     board = newBoard
     for(let i = 0; i < 9; i++) {
+        let small = document.getElementById(`small-${i}`)
+        small.style.backgroundColor = board[i].winner != undefined ? colors[ROOM.colors[board[i].winner]] : ""
+        small.style.border = board[i].open ? "2px solid " + colors[ROOM.colors[ROOM.currentPlayer]] : ""
+        
         for(let j = 0; j < 9; j++) {
-            document.getElementById(getBoxId(i, j)).style.backgroundColor = colors[board[i][j].status]
+            document.getElementById(getBoxId(i, j)).style.backgroundColor = board[i].winner != undefined ? colors[ROOM.colors[board[i].winner]] : colors[ROOM.colors[board[i][j].status]]
         }
     }
 }
@@ -74,6 +85,11 @@ const updateRoom = (room) => {
     ROOM = room
     console.log(room)
     updateBoard(room.board)
+
+    if(room.winner != undefined) {
+        document.getElementById("uttt").style.border = `3px solid ${colors[ROOM.colors[room.winner]]}`
+    }
+
     let HTML =
     `
     <span>${room.name}</span>
@@ -90,12 +106,12 @@ const updateRoom = (room) => {
         if(user.type == room.currentPlayer) {
             HTML +=
             `
-            <span style="${user.id == socket.id ? "font-weight: bold; border: 2px solid;" : ""} background-color:${user.type < 2 ? colors[user.type] : colors[-1]}; color:white;">${user.name}</span>
+            <span style="${user.id == socket.id ? "font-weight: bold; border: 2px solid;" : ""} background-color:${user.type < 2 ? colors[ROOM.colors[user.type]] : colors[-1]}; color:white;" ${user.id == socket.id && (user.type == 0 || user.type == 1) ? 'onClick="changeColor()"' : 'onClick="sendErrorMessage({message:`You cannot change color of that person`})"' }>${user.name}</span>
             `
         } else {
             HTML +=
             `
-            <span style="${user.id == socket.id ? "font-weight: bold; border: 2px solid;" : ""} color:${user.type < 2 ? colors[user.type] : colors[-1]}">${user.name}</span>
+            <span style="${user.id == socket.id ? "font-weight: bold; border: 2px solid;" : ""} color:${user.type < 2 ? colors[ROOM.colors[user.type]] : colors[-1]}" ${user.id == socket.id && (user.type == 0 || user.type == 1) ? 'onClick="changeColor()"' : 'onclick="sendErrorMessage({message:`You cannot change color of that person`})"' }>${user.name}</span>
             `
         }
 
@@ -147,7 +163,7 @@ socket.on("chatMessage", (data) => {
     let chat = document.getElementById("chat")
     let HTML =
     `
-    <div class="chat-message" style="${socket.id == data.from.id ? 'color:'+colors[ME.type == 2 ? -2 : ME.type]+'; font-weight: bold; border: 2px solid;' : 'color:' + (data.from.type >= 0 && data.from.type < 2 ? colors[data.from.type] : colors[-2])};">${data.from.name}: ${data.message}</span>
+    <div class="chat-message" style="${socket.id == data.from.id ? 'color:'+colors[ROOM.colors[ME.type == 2 ? -2 : ME.type]]+'; font-weight: bold; border: 2px solid;' : 'color:' + (data.from.type >= 0 && data.from.type < 2 ? colors[ROOM.colors[data.from.type]] : colors[-2])};">${data.from.name}: ${data.message}</span>
     </div>
     `
     chat.innerHTML += HTML;
