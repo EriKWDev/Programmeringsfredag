@@ -29,6 +29,30 @@ const playerTypes = [
 
 // Helper function
 
+const checkWin = (game, winner) => {
+  for(let n = 0; n < 9; n+=3) {
+    if(game[n+0].status == winner && game[n+1].status == winner && game[n+2].status == winner) {
+      return true
+    }
+  }
+
+  for(let n = 0; n < 3; n+=1) {
+    if(game[n+0].status == winner && game[n+3].status == winner && game[n+6].status == winner) {
+      return true
+    }
+  }
+
+  if(game[0].status == winner && game[4].status == winner && game[8].status == winner) {
+    return true
+  }
+
+  if(game[2].status == winner && game[4].status == winner && game[6].status == winner) {
+    return true
+  }
+
+  return false
+}
+
 const serverMessageToRoom = (socket, msg) => {
   io.to(users[socket.id].roomName).emit("chatMessage", {from: {type:-2, id:"SERVER", name:"Server"}, message:msg})
 }
@@ -45,6 +69,7 @@ const generateBoard = () => {
       "clicks":0,
       "open":true,
       "closed":false,
+      "status":-1,
       "winner":undefined
     }
     for(let j = 0; j < 9; j++) {
@@ -210,42 +235,20 @@ io.on("connection", (socket) => {
 
     // Check for wins
     let board = rooms[users[socket.id].roomName].board
-    let game = board[data.i]
-    let gameWin = false
     let winner = users[socket.id].type
 
-    for(let n = 0; n < 9; n+=3) {
-      if(game[n+0].status == winner && game[n+1].status == winner && game[n+2].status == winner) {
-        gameWin = true
-      }
-
-      if(gameWin) {
-        break
-      }
-    }
-
-    for(let n = 0; n < 3; n+=1) {
-      if(game[n+0].status == winner && game[n+3].status == winner && game[n+6].status == winner) {
-        gameWin = true
-      }
-
-      if(gameWin) {
-        break
-      }
-    }
-
-    if(game[0].status == winner && game[4].status == winner && game[8].status == winner) {
-      gameWin = true
-    }
-
-    if(game[2].status == winner && game[4].status == winner && game[6].status == winner) {
-      gameWin = true
-    }
+    let gameWin = checkWin(board[data.i], winner)
 
     rooms[users[socket.id].roomName].board[data.i].winner = gameWin ? winner : undefined
+    rooms[users[socket.id].roomName].board[data.i].status = gameWin ? winner : -1
 
     rooms[users[socket.id].roomName].board[data.i].closed = rooms[users[socket.id].roomName].board[data.i].clicks >= 9 || (rooms[users[socket.id].roomName].board[data.i].winner != undefined)
 
+    let bigWin = false
+    if(gameWin) {
+      bigWin = checkWin(board, winner)
+      rooms[users[socket.id].roomName].winner = bigWin ? winner : undefined
+    }
 
     // Open correct games based on if they're closed or not
     if(rooms[users[socket.id].roomName].board[data.j].closed) {
@@ -263,6 +266,13 @@ io.on("connection", (socket) => {
         rooms[users[socket.id].roomName].board[i].open = false
       }
       rooms[users[socket.id].roomName].board[data.j].open = true
+    }
+
+    if(bigWin) {
+      for(let i = 0; i < 9; i++) {
+        rooms[users[socket.id].roomName].board[i].open = false
+      }
+      serverMessageToRoom(socket, `${users[socket.id].name} has won the game!`)
     }
 
     rooms[users[socket.id].roomName].currentPlayer = rooms[users[socket.id].roomName].currentPlayer ? 0 : 1

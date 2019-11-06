@@ -85,6 +85,11 @@ const updateRoom = (room) => {
     ROOM = room
     console.log(room)
     updateBoard(room.board)
+
+    if(room.winner != undefined) {
+        document.getElementById("uttt").style.border = `3px solid ${colors[ROOM.colors[room.winner]]}`
+    }
+
     let HTML =
     `
     <span>${room.name}</span>

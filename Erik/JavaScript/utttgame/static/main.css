@@ -152,6 +152,8 @@ button {
     max-width: 500px;
     max-height: 500px;
     margin: auto;
+    border-radius: 20px;
+    border: 2px solid var(--light-grey);
     transition: 0.2s all ease-in-out;
 }
 
