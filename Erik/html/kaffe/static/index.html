@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/static/main.css">
+    <title>Kaffe</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script defer src="https://koda.nu/simple.js">
+        let socket = io(window.location.origin);
+
+        updatesPerSecond = 60;
+
+        const clamp = (number, min, max) => {
+            return Math.max(min, Math.min(number, max));
+        }
+
+        class Slider {
+            constructor(x, y, title, height, color, minText="", maxText="") {
+                this.x = x;
+                this.y = y;
+                this.height = height;
+                this.value = 50;
+                this.color = color;
+                this.title = title;
+                this.width = 3;
+
+                this.handleY = -this.height/2;
+                this.dragging = false;
+                this.minText = minText;
+                this.maxText = maxText;
+            }
+
+            update() {
+                if(mouse.left && distance(mouse.x, mouse.y, this.x, this.handleY + this.y) < 10) {
+                    this.dragging = true;
+                }
+
+                if(this.dragging) {
+                    this.handleY = clamp(mouse.y, this.y - this.height, this.y) - this.y;
+                }
+
+                if(!mouse.left) {
+                    this.dragging = false;
+                }
+
+                this.value = -Math.ceil(this.handleY/this.height * 100);
+                this.draw();
+            }
+
+            draw() {
+                save();
+                translate(this.x, this.y);
+                rectangle(-this.width/2, -this.height, this.width, this.height, transparize(this.color, 0.3));
+                let n = 20;
+                for(let i = 0; i <= n; i++) {
+                    let y = this.height/n * i;
+                    line(0, -y, i % 5 == 0 ? 20 : 10, -y, 1, this.color);
+                }
+                line(0, 0, 0, this.handleY, 4, transparize(this.color, 0.8));
+                text(0, 40, 11, this.title, this.color);
+                text(0, 15, 8, this.minText);
+                text(0, -108, 8, this.maxText);
+                circle(0, this.handleY, 10, this.color);
+                if(this.dragging) {
+                    text(-25, this.handleY + 5, 10, this.value, this.color);
+                }
+                restore();
+            }
+        }
+
+        class SliderGroup {
+            constructor(name="", x, y, color = "rgb(99, 74, 44)") {
+                this.x = -400;
+                this.y = y;
+                this.startX = x;
+                this.startY = y;
+                this.color = color;
+                this.sliders = [];
+                this.spacing = 100;
+                this.active = false;
+                this.code = {};
+                this.words = [
+                    "Smak",
+                    "Bitterhet",
+                    "Syrlighet",
+                    "Fyllighet",
+                    "Styrka"
+                ];
+                this.sliderTexts = [
+                    {title: "Smak", min: "Äckligt", max: "Gott"},
+                    {title: "Bitterhet", min: "Tamt", max: "Bittert"},
+                    {title: "Syrlighet", min: "Neutralt", max: "Surt"},
+                    {title: "Fyllighet", min: "Tunnt", max: "Fylligt"},
+                    {title: "Styrka", min: "Svagt", max: "Starkt"},
+                ];
+                this.n = this.words.length;
+                for(let i = 1; i <= this.n; i++) {
+                    let currentText = this.sliderTexts[i-1];
+                    this.sliders.push(new Slider(this.x + i*this.spacing - this.spacing*(this.n+1)/2, this.y + 50, currentText.title, 100, this.color, currentText.min, currentText.max));
+                }
+                this.values = [];
+                this.t = 0;
+                this.resetT = false;
+                this.name = name;
+            }
+
+            update() {
+                if(this.resetT == true) {
+                    this.t = 0;
+                    this.resetT = false;
+                }
+
+                if(this.active == false) {
+                    this.x = lerp(this.x, -300, this.t);
+                    this.t += 0.01;
+                } else {
+                    this.x = lerp(this.x, this.startX, this.t);
+                    this.t += 0.01;
+                }
+
+                this.code = {
+                    values:[]
+                };
+                let i = 0;
+                for(let slider of this.sliders) {
+                    slider.update();
+                    this.code.values.push(slider.value);
+                    i++;
+
+                    slider.x = this.x + i*this.spacing - this.spacing*(this.n+1)/2;
+                    slider.y = this.y + 50;
+                }
+
+                save();
+                translate(this.x, this.y - 250);
+                // text(0, -180, 20, "Kaffe #1 – Dropp, 60°C, Medium", this.color);
+                // text(0, 400, 30, this.code, this.color);
+                text(0, 400, 30, this.name, this.color);
+                rotate(360/this.n * 1.5);
+                for(let slider of this.sliders) {
+                    rotate(360/this.n);
+                    // line(0, 0, 0, 10 + slider.value, 3, "rgba(99, 74, 44, 0.9)");
+                    circle(0, 10 + slider.value, 10, this.color);
+                    text(0, 150, 10, slider.title, this.color);
+                }
+                
+                let c = 5;
+                for(let i = 1; i <= c + 1; i++) {
+                    circle(0, 0, (110/c) * i, transparize(this.color, 0.08))
+                }
+                restore();
+            }
+        }
+
+        function lerp(a, b, t) {
+            return a + t * (b - a);
+        }
+
+        function transparize(color, a = 0.5) {
+            let d = color.split("rgb");
+            let c = d[1].split(")");
+            return `rgba${c} ${a})`;
+        }
+
+        let canvas = document.getElementById("canvas");
+        let context = canvas.getContext("2d");
+        context.textAlign = "center";
+        context.font = "Arial";
+
+        let sliderGroups = [
+            new SliderGroup(
+                "Ditt perfekta kaffe",
+                totalWidth/2,
+                totalHeight/2 + 100,
+                "rgb(62, 176, 81)"
+            ),
+            new SliderGroup(
+                "Kaffet du dricker just nu",
+                totalWidth/2,
+                totalHeight/2 + 100,
+                "rgb(138, 103, 61)"
+            )
+        ];
+
+        let index = 0;
+        let once = false;
+        let n = 0;
+        let saved = false
+
+        function update() {
+            clearScreen();
+            
+            sliderGroups[index].active = true;
+
+            let code = {
+                metod:1,
+                typ:1,
+                kaffen:[],
+            }
+
+            for(let i in sliderGroups) {
+                sliderGroups[i].update();
+                sliderGroups[i].active = false;
+                code.kaffen.push(sliderGroups[i].code);
+            }
+
+            //console.log(code);
+            let w = 100;
+            if(n > 0) {
+                circle(totalWidth/2, totalHeight-200, w, saved ? "rgba(60, 140, 60, 1)" : "rgba(60, 60, 140, 1)");
+                text(totalWidth/2, totalHeight-180, 40, saved ? "Klar" : "Skicka", "white");
+                console.log(distance(mouse, {x: totalWidth/2, y: totalHeight-200}))
+                if(distance(mouse, {x: totalWidth/2, y: totalHeight-200}) < w) {
+                    if(mouse.left && !saved) {
+                        console.log("SAVE!!!!")
+                        socket.emit("save", code)
+                        saved = true;
+                    }
+                }
+
+            }
+
+            let key = keyboard.space || keyboard.left || keyboard.right || keyboard.up || keyboard.down;
+
+            if(key && once == false) {
+                index++;
+                n++;
+                index %= sliderGroups.length;
+                once = true;
+
+                for(let i in sliderGroups) {
+                    sliderGroups[i].resetT = true;
+                }
+            } else if(!key) {
+                once = false;
+            }
+        }
+    </script>
+</body>
+</html>
