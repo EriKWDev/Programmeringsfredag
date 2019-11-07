@@ -46,7 +46,8 @@
             if(roomId.length == 0) {
                 window.location.replace(`/${username}/`)
             } else {
-                window.location.replace(`/${username}/${roomId}/`)
+                window.location.href = `${window.location.origin}/${username}/${roomId}/`
+                // window.location.replace(`/${username}/${roomId}/`)
                 //window.open(`/${username}/${roomId}/`, "", "height=700,width=450")
             }
         }
