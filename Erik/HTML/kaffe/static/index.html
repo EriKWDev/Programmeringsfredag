@@ -19,16 +19,16 @@
         }
 
         class Slider {
-            constructor(x, y, title, height, color, minText="", maxText="") {
+            constructor(x, y, title, height, color, minText="", maxText="", value) {
                 this.x = x;
                 this.y = y;
                 this.height = height;
-                this.value = 50;
+                this.value = value;
                 this.color = color;
                 this.title = title;
                 this.width = 3;
 
-                this.handleY = -this.height/2;
+                this.handleY = -this.height/2 - value/2;
                 this.dragging = false;
                 this.minText = minText;
                 this.maxText = maxText;
@@ -73,7 +73,7 @@
         }
 
         class SliderGroup {
-            constructor(name="", x, y, color = "rgb(99, 74, 44)") {
+            constructor(name="", x, y, color = "rgba(99, 74, 44, 1)", values=[]) {
                 this.x = -400;
                 this.y = y;
                 this.startX = x;
@@ -100,9 +100,10 @@
                 this.n = this.words.length;
                 for(let i = 1; i <= this.n; i++) {
                     let currentText = this.sliderTexts[i-1];
-                    this.sliders.push(new Slider(this.x + i*this.spacing - this.spacing*(this.n+1)/2, this.y + 50, currentText.title, 100, this.color, currentText.min, currentText.max));
+                    this.sliders.push(new Slider(this.x + i*this.spacing - this.spacing*(this.n+1)/2, this.y + 50, currentText.title, 100, this.color, currentText.min, currentText.max, values[i-1] == undefined ? 5 : values[i-1]));
+                    console.log(values[i-1]);
                 }
-                this.values = [];
+                this.values = values;
                 this.t = 0;
                 this.resetT = false;
                 this.name = name;
@@ -173,17 +174,20 @@
 
         let sliderGroups = [
             new SliderGroup(
-                "Ditt perfekta kaffe",
-                totalWidth/2,
-                totalHeight/2 + 100,
-                "rgb(62, 176, 81)"
-            ),
-            new SliderGroup(
                 "Kaffet du dricker just nu",
                 totalWidth/2,
                 totalHeight/2 + 100,
                 "rgb(138, 103, 61)"
-            )
+            ),
+            new SliderGroup(
+                "Ditt perfekta kaffe",
+                totalWidth/2,
+                totalHeight/2 + 100,
+                "rgb(62, 176, 81)",
+                [
+                    100,
+                ]
+            ),
         ];
 
         let index = 0;
@@ -193,6 +197,8 @@
 
         function update() {
             clearScreen();
+            fill("rgba(0, 0, 0, 0.9)")
+            text(totalWidth/2, 40, 10, n <= 0 ? "Tryck på mellanslag/pilarna för nästa fråga" : "Tryck på mellanslag/pilarna för att ändra ditt svar", "white");
             
             sliderGroups[index].active = true;
 
@@ -211,13 +217,13 @@
             //console.log(code);
             let w = 100;
             if(n > 0) {
-                circle(totalWidth/2, totalHeight-200, w, saved ? "rgba(60, 140, 60, 1)" : "rgba(60, 60, 140, 1)");
-                text(totalWidth/2, totalHeight-180, 40, saved ? "Klar" : "Skicka", "white");
-                console.log(distance(mouse, {x: totalWidth/2, y: totalHeight-200}))
-                if(distance(mouse, {x: totalWidth/2, y: totalHeight-200}) < w) {
+                let x = totalWidth-200;
+                let y = totalHeight/2;
+                circle(x, y, w, saved ? "rgba(60, 140, 60, 1)" : "rgba(60, 60, 140, 1)");
+                text(x, y*1.04, 35, saved ? "Klar" : "Skicka", "white");
+                if(distance(mouse, {x: x, y: y}) < w) {
                     if(mouse.left && !saved) {
-                        console.log("SAVE!!!!")
-                        socket.emit("save", code)
+                        socket.emit("save", code);
                         saved = true;
                     }
                 }
