@@ -18,7 +18,7 @@ Click <i>this</i>!
 
 const options = {
   name:"UTTT",
-  port:80,
+  port:process.env.PORT || 80,
 }
 
 const playerTypes = [
@@ -89,7 +89,7 @@ const checkMove = (i, j, currentPlayer, player, board) => {
 // Express server
 
 log(`Starting...`)
-server.listen(process.env.PORT || options.port, () => {
+server.listen(options.port, () => {
   log(`Running at port ${options.port}`)
 })
 
