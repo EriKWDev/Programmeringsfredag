@@ -89,7 +89,7 @@ const checkMove = (i, j, currentPlayer, player, board) => {
 // Express server
 
 log(`Starting...`)
-server.listen(options.port, () => {
+server.listen(process.env.PORT || options.port, () => {
   log(`Running at port ${options.port}`)
 })
 
