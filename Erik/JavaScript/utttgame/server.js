@@ -99,7 +99,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "login.html"))
 })
 
-app.get("/:username", (req, res) => {
+app.get("/:username/", (req, res) => {
   res.sendFile(path.join(__dirname, "overview.html"))
 })
 
@@ -124,22 +124,25 @@ const addUser = (socket) => {
 
   log(`User ${socket.id} connected`)
 }
+
 const removeRoom = (roomName) => {
   log(`Removing room ${roomName}...`, roomName)
   delete rooms[roomName]
 }
 
 const removeUser = (socket) => {
-  log(`User ${users[socket.id].name} disconnected`, users[socket.id].roomName)
+  if(users[socket.id].roomName != undefined) {
+    log(`User ${users[socket.id].name} disconnected`, users[socket.id].roomName)
+    delete rooms[users[socket.id].roomName].users[socket.id]
 
-  delete rooms[users[socket.id].roomName].users[socket.id]
+    io.to(users[socket.id].roomName).emit("updateRoom", rooms[users[socket.id].roomName])
+    overviewIo.emit("updateRooms", rooms)
+    serverMessageToRoom(socket, `${users[socket.id].name} has left the room`)
 
-  io.to(users[socket.id].roomName).emit("updateRoom", rooms[users[socket.id].roomName])
-  serverMessageToRoom(socket, `${users[socket.id].name} has left the room`)
-
-  if(rooms[users[socket.id].roomName] == undefined || Object.keys(rooms[users[socket.id].roomName].users).length <= 0) {
-    log(`Room has no users`, users[socket.id].roomName)
-    removeRoom(users[socket.id].roomName)
+    if(rooms[users[socket.id].roomName] == undefined || Object.keys(rooms[users[socket.id].roomName].users).length <= 0) {
+      log(`Room has no users`, users[socket.id].roomName)
+      removeRoom(users[socket.id].roomName)
+    }
   }
 
   delete users[socket.id]
@@ -149,8 +152,20 @@ const setName = (socket, name) => {
   users[socket.id].name = name
 }
 
+let overviewIo = io.of("/overview")
+overviewIo.on("connection", (socket) => {
+  log("Socket has joined the Overview.", "Overview")
+
+  socket.emit("updateRooms", rooms)
+
+  socket.on("disconnect", () => {
+
+  })
+})
+
 io.on("connection", (socket) => {
   addUser(socket)
+  log(`Currently connected sockets: ${Object.keys(users).length}`)
 
   socket.emit("getName")
   socket.emit("getRoom")
@@ -199,6 +214,7 @@ io.on("connection", (socket) => {
 
     rooms[roomName].users[socket.id] = users[socket.id]
     io.to(roomName).emit("updateRoom", rooms[roomName])
+    overviewIo.emit("updateRooms", rooms)
   })
 
   socket.on("pingy", (data) => {
@@ -277,6 +293,7 @@ io.on("connection", (socket) => {
 
     rooms[users[socket.id].roomName].currentPlayer = rooms[users[socket.id].roomName].currentPlayer ? 0 : 1
     io.to(users[socket.id].roomName).emit("updateRoom", rooms[users[socket.id].roomName])
+    overviewIo.emit("updateRooms", rooms)
   })
 
   socket.on("changeColor", (data) => {
@@ -292,6 +309,7 @@ io.on("connection", (socket) => {
     }
 
     io.to(users[socket.id].roomName).emit("updateRoom", rooms[users[socket.id].roomName])
+    overviewIo.emit("updateRooms", rooms)
   })
 
   socket.on("chatMessage", (data) => {
@@ -306,5 +324,6 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     removeUser(socket)
+    log(`Currently connected sockets: ${Object.keys(users).length}`)
   })
 })

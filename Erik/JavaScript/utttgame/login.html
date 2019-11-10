@@ -9,13 +9,13 @@
 </head>
 <body>
     <div class="login-container">
-        <h1>Choose a Name!</h1>
+        <h1>Pick a Name!</h1>
         <div id="error-box"></div>
         <input id="username-input" type="text" placeholder="Username"><br>
         <input id="room-input" type="text" placeholder="Room ID"><br>
         <button id="login-button" onclick="checkForm()">Go!</button>
-        <p><i>*Not yet implemented*</i> Leave Room ID empty for overview of available games</p>
-        <h3>UTTT Beta 4.2.0 by Erik W. Gren</h3>
+        <p>Leave Room ID empty for overview of available games</p>
+        <h3>UTTT Beta 4.3.1 by Erik Gren</h3>
     </div>
 
     <script>
@@ -45,7 +45,7 @@
 
         const login = (username, roomId) => {
             if(roomId.length == 0) {
-                window.location.replace(`/${username}/`)
+                window.location.href = `${window.location.origin}/${username}/`
             } else {
                 window.location.href = `${window.location.origin}/${username}/${roomId}/`
                 // window.location.replace(`/${username}/${roomId}/`)

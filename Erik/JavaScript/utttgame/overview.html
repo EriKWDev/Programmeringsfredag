@@ -10,8 +10,85 @@
 <body>
     <div id="overview-container">
         <h1>Playable Games</h1>
+        <div class="game-list" id="playable-games">
 
+        </div>
         <h1>Games to Spectate</h1>
+        <div class="game-list" id="joinable-games">
+            
+        </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script>
+        let socket = io("/overview")
+        const NAME = location.pathname.split("/")[1]
+
+        const colors = {
+            "-2":"var(--black)",
+            "-1":"var(--light-grey)",
+            "0":"var(--teal)",
+            "1":"var(--purple)",
+            "2":"var(--red)",
+            "3":"var(--yellow)",
+            "4":"var(--green)",
+            "5":"var(--orange)",
+            "6":"var(--black)",
+            "7":"var(--blue)",
+        }
+
+        const clearRooms = () => {
+            document.getElementById("joinable-games").innerHTML = ``
+            document.getElementById("playable-games").innerHTML = ``
+        }
+
+        const generateMiniBoard = (room) => {
+            let board = room.board
+            let HTML = ``
+
+            for(let i = 0; i < 9; i++) {
+                HTML += `<span class="small-game" id="small-${i}" style="background-color: ${colors[room.colors[board[i].winner]]}; border: 2px solid ${board[i].open ? colors[room.colors[room.currentPlayer]] : "0px solid"};">`
+                for(let j = 0; j < 9; j++) {
+                    if(board[i].winner != undefined) {
+                        break
+                    }
+
+                    let status = board[i][j].status
+                    HTML += `<span class="game-box" id="box-${i}-${j}"  style="background-color: ${colors[room.colors[status]]};"></span>`
+                }
+                HTML += `</span>`
+            }
+
+           return HTML
+        }
+
+        const drawRoom = (room) => {
+            let container = document.getElementById(Object.keys(room.users).length == 1 ? "playable-games" : "joinable-games")
+            let HTML =
+            `
+            <div class="mini-room" onClick="location.href = '${location.origin}/${NAME}/${room.name}'">
+                <span class="mini-room-name">${room.name}</span>
+                <div class="mini-board" style="border: 2px solid ${room.winner != undefined ? colors[room.colors[room.winner]] : colors[-1]};">
+                    ${generateMiniBoard(room)}    
+                </div>
+                <span class="mini-room-info">
+                    <span class="mini-room-player" style="color: white; background-color: ${colors[room.colors[room.users[Object.keys(room.users)[0]].type]]};">${room.users[Object.keys(room.users)[0]].name}</span>
+                    vs
+                    <span class="mini-room-player" style="color: white; background-color: ${room.users[Object.keys(room.users)[1]] == undefined ? "grey" : colors[room.colors[room.users[Object.keys(room.users)[1]].type]]};">${room.users[Object.keys(room.users)[1]] == undefined ? "<i>You?</i>" : room.users[Object.keys(room.users)[1]].name}</span>
+                </span>    
+            </div>
+            `
+
+            container.innerHTML += HTML
+        }
+
+        socket.on("updateRooms", (rooms) => {
+            console.log(rooms)
+            clearRooms()
+            Object.keys(rooms).sort((a, b) => { return a.name > b.name }).forEach((key) => {
+                let room = rooms[key]
+                drawRoom(room)
+            })
+        })
+    </script>
 </body>
 </html>
