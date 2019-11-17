@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Radar Charts</title>
+</head>
+<body>
+    <script src="https://koda.nu/simple.js">
+        const CENTER = {x: totalWidth/2, y:totalHeight/2}
+        
+        let data = [
+            [50, 100, 50, 90, 40]
+        ]
+        
+        const dataPoint = (...args) => {
+            console.log(args)
+        }
+        
+        const drawGraph = () => {
+            save()
+            translate(CENTER.x, CENTER.y)
+            let r = 200
+            let n = 5
+            let step = r/n
+            for(let i = 0; i < n; i++) {
+                arc(0, 0, i*step, 360, 2, "grey")
+            }
+            restore()
+
+            save()
+            translate(CENTER.x, CENTER.y)
+            for(let values of data) {
+                for(let value of values) {
+                    rotate(360/values.length)
+                    circle(0, value, 5, "rgba(40, 10, 200, 0.7)")
+                    line(0, 0, 0, value, 2, "red")
+                }
+            }
+            restore()
+        }
+
+        update = () => {
+            clearScreen()
+            drawGraph()
+        }
+      </script>
+</body>
+</html>

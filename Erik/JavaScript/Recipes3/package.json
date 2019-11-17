@@ -1,16 +1,16 @@
 {
-  "name": "kaffe",
+  "name": "recipes3",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon ."
+    "test": "nodemon ."
   },
   "author": "ErikWDev",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
     "fs-extra": "^8.1.0",
-    "socket.io": "^2.3.0"
+    "js-yaml": "^3.13.1",
+    "puppeteer": "^2.0.0"
   }
 }

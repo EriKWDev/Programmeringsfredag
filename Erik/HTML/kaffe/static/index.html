@@ -62,11 +62,11 @@
                 }
                 line(0, 0, 0, this.handleY, 4, transparize(this.color, 0.8));
                 text(0, 40, 11, this.title, this.color);
-                text(0, 15, 8, this.minText);
-                text(0, -108, 8, this.maxText);
+                text(0, 15, 10, this.minText);
+                text(0, -108, 10, this.maxText);
                 circle(0, this.handleY, 10, this.color);
                 if(this.dragging) {
-                    text(-25, this.handleY + 5, 10, this.value, this.color);
+                    text(-25, this.handleY + 5, 15, this.value, this.color);
                 }
                 restore();
             }
@@ -100,7 +100,7 @@
                 this.n = this.words.length;
                 for(let i = 1; i <= this.n; i++) {
                     let currentText = this.sliderTexts[i-1];
-                    this.sliders.push(new Slider(this.x + i*this.spacing - this.spacing*(this.n+1)/2, this.y + 50, currentText.title, 100, this.color, currentText.min, currentText.max, values[i-1] == undefined ? 5 : values[i-1]));
+                    this.sliders.push(new Slider(this.x + i*this.spacing - this.spacing*(this.n+1)/2, this.y + 50, currentText.title, 100, this.color, currentText.min, currentText.max, values[i-1] == undefined ? 0 : values[i-1]));
                     console.log(values[i-1]);
                 }
                 this.values = values;
@@ -174,36 +174,42 @@
 
         let sliderGroups = [
             new SliderGroup(
-                "Kaffet du dricker just nu",
+                "Hur Smakar Kaffet?",
                 totalWidth/2,
                 totalHeight/2 + 100,
                 "rgb(138, 103, 61)"
             ),
             new SliderGroup(
-                "Ditt perfekta kaffe",
+                "Ditt 'Perfekta Kaffe'?",
                 totalWidth/2,
                 totalHeight/2 + 100,
                 "rgb(62, 176, 81)",
                 [
                     100,
                 ]
-            ),
+            )
         ];
 
         let index = 0;
         let once = false;
         let n = 0;
-        let saved = false
+        let saved = false;
+
+
+        const reset = () => {
+            location.reload()
+        }
 
         function update() {
             clearScreen();
             fill("rgba(0, 0, 0, 0.9)")
-            text(totalWidth/2, 40, 10, n <= 0 ? "Tryck på mellanslag/pilarna för nästa fråga" : "Tryck på mellanslag/pilarna för att ändra ditt svar", "white");
+            text(totalWidth/2, 40, 20, n <= sliderGroups.length - 2 ? "Tryck på enter/mellanslag/pilarna för nästa fråga" : "Tryck på enter/mellanslag/pilarna för att ändra ditt svar", "white");
+            text(totalWidth/2, totalHeight-30, 20, `Fråga ${index+1}/${sliderGroups.length}`)
             
             sliderGroups[index].active = true;
 
             let code = {
-                metod:1,
+                metod:3,
                 typ:1,
                 kaffen:[],
             }
@@ -216,21 +222,35 @@
 
             //console.log(code);
             let w = 100;
-            if(n > 0) {
-                let x = totalWidth-200;
-                let y = totalHeight/2;
-                circle(x, y, w, saved ? "rgba(60, 140, 60, 1)" : "rgba(60, 60, 140, 1)");
-                text(x, y*1.04, 35, saved ? "Klar" : "Skicka", "white");
-                if(distance(mouse, {x: x, y: y}) < w) {
-                    if(mouse.left && !saved) {
-                        socket.emit("save", code);
-                        saved = true;
+            if(n >= sliderGroups.length - 1) {
+
+                if(saved) {
+                    circle(totalWidth/2, totalHeight/2, w*30, "rgba(60, 140, 60, 1)");
+                    text(totalWidth/2, totalHeight/2, 55, "Tack!", "white");
+                    let x = totalWidth/2;
+                    let y = totalHeight/2 + w*2;
+                    circle(x, y, w, "rgba(60, 60, 140, 1)");
+                    text(x, y*1.04, 35, "Nästa", "white");
+                    if(distance(mouse, {x: x, y: y}) < w) {
+                        if(mouse.left) {
+                            reset();
+                        }
+                    }
+                } else {
+                    let x = totalWidth-200;
+                    let y = totalHeight/2;
+                    circle(x, y, w, "rgba(60, 60, 140, 1)");
+                    text(x, y*1.04, 35, "Skicka", "white");
+                    if(distance(mouse, {x: x, y: y}) < w) {
+                        if(mouse.left && !saved) {
+                            socket.emit("save", code);
+                            saved = true;
+                        }
                     }
                 }
-
             }
 
-            let key = keyboard.space || keyboard.left || keyboard.right || keyboard.up || keyboard.down;
+            let key = keyboard.enter || keyboard.space || keyboard.left || keyboard.right || keyboard.up || keyboard.down;
 
             if(key && once == false) {
                 index++;

@@ -21,7 +21,7 @@ const log = (msg, title=`Server`) => {
 
 log(`Starting...`)
 server.listen(options.port, () => {
-  log(`Running at port ${options.port}`)
+  log(`Running on port ${options.port}`)
 })
 
 app.use("/static", express.static(path.join(__dirname, "static")))
