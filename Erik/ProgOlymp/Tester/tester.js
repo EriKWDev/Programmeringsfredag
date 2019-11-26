@@ -2,7 +2,11 @@
 
 test = async (f, input, output) => {
     var start = new Date()
-    let answer = await f(input)
+    try {
+        let answer = await f(input)
+    } catch (error) {
+        
+    }
     var end = new Date() - start
 
     let result = answer == output

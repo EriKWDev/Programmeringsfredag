@@ -12,19 +12,19 @@ interface.on("line", (line) => {
 
 const compute = (input) => {
     let candy = input.toUpperCase()
-    let secondHalft = candy.substring(Math.round(candy.length/2), candy.length)
+    let secondHalf = candy.substring(Math.round(candy.length/2), candy.length)
     let firstHalf = candy.substring(0, Math.round(candy.length/2))
     let bCount = firstHalf.split(`B`).length-1
     let maxBCount = bCount
 
     firstHalf = firstHalf.split(``)
-    secondHalft = secondHalft.split(``)
+    secondHalf = secondHalf.split(``)
 
     for(let i = 0; i <= candy.length; i++) {
-        let newLetter = secondHalft.pop()
-        let oldLetter = firstHalf.pop()
-        secondHalft.unshift(oldLetter)
-        firstHalf.unshift(newLetter)
+        let newLetter = secondHalf.shift()
+        let oldLetter = firstHalf.shift()
+        //secondHalf.unshift(oldLetter)
+        //firstHalf.unshift(newLetter) 
 
         if(newLetter == `B` && oldLetter == `V`) {
             bCount += 1
@@ -39,6 +39,12 @@ const compute = (input) => {
 }
 
 const tester = require("../../Tester/tester")
+let tmp = ""
+let N = 500
+for(let i = 0; i < N; i++) {
+    tmp += i < N/2 ? `B` : `V`
+}
+
 tester.runTests([
     [compute, "BBVVBVVVBB", 4],
     [compute, "BVBVBVBV", 2],
