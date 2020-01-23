@@ -76,7 +76,6 @@ html, body {
 
 #side-bar {
     grid-area: side-bar;
-    background-color:var(--main);
     color: var(--text-white);
     padding-top: 15px;
     overflow: scroll;

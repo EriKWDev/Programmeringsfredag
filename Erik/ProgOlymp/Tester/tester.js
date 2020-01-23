@@ -2,11 +2,7 @@
 
 test = async (f, input, output) => {
     var start = new Date()
-    try {
-        let answer = await f(input)
-    } catch (error) {
-        
-    }
+    let answer = await f(input)
     var end = new Date() - start
 
     let result = answer == output
@@ -35,7 +31,7 @@ exports.runTests = async (testCases=[]) => {
     console.log()
     console.log("___ Running Tests: _____________________________________________")
     console.log()
-    for(let testCase of testCases) {
+    for(let testCase of Cases) {
         let result = await test(testCase[0], testCase[1], testCase[2])
 
         results.push({successfull: result, input: testCase[0]})

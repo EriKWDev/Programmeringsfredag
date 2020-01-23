@@ -11,4 +11,4 @@ def Factorial (n):
 def NumberOfRoutes(n1, n2):
     return int(Factorial (n1 + n2) / (Factorial (n1) * Factorial (n2)))
 
-print (NumberOfRoutes (20, 20))
+print (NumberOfRoutes (3, 7))

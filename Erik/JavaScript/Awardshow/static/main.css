@@ -1,0 +1,74 @@
+
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,900|Roboto&display=swap');
+
+:root {
+    --p1-color: rgb(255, 44, 107);
+    --p2-color: rgb(77, 226, 218);
+    --black: rgb(34, 34, 34);
+}
+
+html, body {
+    margin: 0px;
+    padding: 0px;
+    color: var(--black);
+    font-size: 1.36rem;
+    font-family: "Roboto";
+}
+
+#main-container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+td {
+    padding: 2vh;
+}
+
+td:nth-child(1) {
+    text-align: right;
+    padding-right: 2vw;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+td:nth-child(2) {
+    max-width: 40vw;
+    font-size: 1.4rem;
+}
+
+mark {
+    color: var(--black);
+}
+
+mark:first-of-type::before {
+    content: "Vann senaste!";
+    display: inline;
+    position: absolute;
+    font-size: 0.8rem;
+    background-color: white;
+    transform: translateX(-7vw) translateY(-4.6vh) rotate(-15deg);
+    border-radius: 10px;
+    padding: 1vh;
+    border: 0.5vh dotted var(--black);
+}
+
+.p1 {
+    background-color: var(--p1-color);
+    padding: 1.2vh;
+    font-family: "Playfair Display";
+}
+
+.p2 {
+    background-color: var(--p2-color);
+    padding: 1.2vh;
+    font-family: "Playfair Display";
+}
