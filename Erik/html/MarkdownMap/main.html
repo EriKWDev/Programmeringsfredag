@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Markdown Map</title>
+</head>
+<body>
+    <script src="https://koda.nu/simple.js">
+        const COLORS = {
+            red:"rgba(240, 50, 60)",
+            blue:"rgba(60, 50, 240)",
+            white:"rgb(250, 250, 250)",
+        }
+
+        class Box {
+            constructor(x, y, w, h, color=COLORS.blue, title="Temp") {
+                this.x = x;
+                this.y = y;
+                this.w = w;
+                this.h = h;
+                this.color = color;
+                this.title = title;
+                this.fontSize = 20;
+            }
+
+            update() {
+                this.draw();
+            }
+
+            draw() {
+                rectangle(this.x - this.w/2, this.y - this.h/2, this.w, this.h, this.color);
+                text(this.x-this.w/2, this.y-this.h/2-this.fontSize, this.fontSize, this.title, "black");
+            }
+        }
+
+        let isCurrentlyDragging = false;
+
+        let boxes = [
+            new Box(totalWidth/2, totalHeight/2, totalWidth-20, totalHeight - 200),
+        ];
+
+        function update() {
+            fill(COLORS.white);
+
+            for(let box of boxes) {
+                box.update();
+            }
+        }
+
+    </script>
+</body>
+</html>
