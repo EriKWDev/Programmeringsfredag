@@ -1,0 +1,20 @@
+{
+    "messages":[
+        {
+            "user": "Jesus",
+            "message": "@Erik sade att han är en potatis"
+        },
+        {
+            "user": "Erik",
+            "message": "@Josefin sade att hon är Jesus"
+        },
+        {
+            "user": "Erik",
+            "message": "@Potatis lololololol olololol"
+        },
+        {
+            "user": "Jesus",
+            "message": "@Erik sade att han är en potatis"
+        }
+    ]
+}
