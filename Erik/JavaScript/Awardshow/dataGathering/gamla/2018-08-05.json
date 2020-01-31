@@ -1,0 +1,96 @@
+[
+    {
+        "type": "message",
+        "subtype": "channel_join",
+        "ts": "1533485266.000046",
+        "user": "UC2AMV7DW",
+        "text": "<@UC2AMV7DW> has joined the channel"
+    },
+    {
+        "client_msg_id": "0c53ddf8-3225-42d2-bd81-944c9a74455f",
+        "type": "message",
+        "text": "\"Är inte Bornholm skånskt\"\n\n- <@UC2AMV7DW> \n#Elinavillexpanderaskånskagränser\n#elinakangeografi\n#lingescykelsemester\n#2k18",
+        "user": "UBU7M4P4L",
+        "ts": "1533485337.000058",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "9e6107a69690",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/403948118455_9e6107a69690d0733369_72.png",
+            "first_name": "Albin",
+            "real_name": "Albin Linge",
+            "display_name": "Mobboffer",
+            "team": "TBTRZ9WDP",
+            "name": "gitarr.abbe",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1533485337.000058",
+        "reply_count": 2,
+        "reply_users_count": 2,
+        "latest_reply": "1533485492.000053",
+        "reply_users": [
+            "UBUJED9R8",
+            "UBU5S0SPN"
+        ],
+        "replies": [
+            {
+                "user": "UBUJED9R8",
+                "ts": "1533485404.000054"
+            },
+            {
+                "user": "UBU5S0SPN",
+                "ts": "1533485492.000053"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1533485492.000053"
+    },
+    {
+        "client_msg_id": "45ae9c61-f694-4b82-94b2-6711c7d98e10",
+        "type": "message",
+        "text": "#emiläravundsjukpåcykelsemester",
+        "user": "UBUJED9R8",
+        "ts": "1533485404.000054",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1533485337.000058",
+        "parent_user_id": "UBU7M4P4L"
+    },
+    {
+        "client_msg_id": "11938520-8834-47d1-881a-bf759b8b10ae",
+        "type": "message",
+        "text": "#bornholmtillhörskuggandon'tgothereelina",
+        "user": "UBU5S0SPN",
+        "ts": "1533485492.000053",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1533485337.000058",
+        "parent_user_id": "UBU7M4P4L"
+    }
+]

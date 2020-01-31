@@ -1,0 +1,190 @@
+[
+    {
+        "client_msg_id": "b97696e8-afcb-4d78-a048-b294e43cdc73",
+        "type": "message",
+        "text": "släkt kanske åsyftas? :stuck_out_tongue:",
+        "user": "UBU5S0SPN",
+        "ts": "1542534808.000300",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1542478156.003700",
+        "parent_user_id": "UC2AMV7DW"
+    },
+    {
+        "client_msg_id": "ad76bd9e-0cfa-4da1-bd85-a252549cf0cb",
+        "type": "message",
+        "text": "<@UBUJED9R8> saknas inte här några hashtaggar?",
+        "user": "UBU5S0SPN",
+        "ts": "1542534955.000600",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1532170460.000040",
+        "parent_user_id": "UBUJED9R8"
+    },
+    {
+        "client_msg_id": "edde649f-f790-40a9-a33e-f992e85b9697",
+        "type": "message",
+        "text": "<@UBUJED9R8> säker på att denna hashtaggen är rätt? #olofskablimattelärareintemattelärare",
+        "user": "UBU5S0SPN",
+        "ts": "1542535272.001000",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1532174438.000094",
+        "parent_user_id": "UBUJED9R8"
+    },
+    {
+        "client_msg_id": "7940bc35-ba5c-4389-b8d6-1b4461cb0590",
+        "type": "message",
+        "text": "Har också tänkt på det, men det står samma på facebook så nu är den så :wink:",
+        "user": "UBUJED9R8",
+        "ts": "1542535334.001200",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1532174438.000094",
+        "parent_user_id": "UBUJED9R8"
+    },
+    {
+        "client_msg_id": "f034b529-fc08-4ad7-90d9-bf7b018a6b7c",
+        "type": "message",
+        "text": "fair",
+        "user": "UBU5S0SPN",
+        "ts": "1542535351.001400",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1532174438.000094",
+        "parent_user_id": "UBUJED9R8"
+    },
+    {
+        "client_msg_id": "8fec4ec4-f38a-46ac-b15b-c6df8dd32bed",
+        "type": "message",
+        "text": "du bör också gå igenom meddelanden och tagga veronica (jag får itne redigera dina inlägg :P) (hittade även något med david som inte var taggat men vet inte om den är din eller nån annans)",
+        "user": "UBU5S0SPN",
+        "ts": "1542535394.001600",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1532174438.000094",
+        "parent_user_id": "UBUJED9R8"
+    },
+    {
+        "client_msg_id": "d4537866-b73d-4adc-ae63-a2ae0154e259",
+        "type": "message",
+        "text": "Kan fixa vid tillfälle :ok_hand:",
+        "user": "UBUJED9R8",
+        "ts": "1542535427.001800",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1532174438.000094",
+        "parent_user_id": "UBUJED9R8"
+    },
+    {
+        "client_msg_id": "092ec178-1cf4-455a-bcc8-cbb162d615e9",
+        "type": "message",
+        "text": "<@UC2AMV7DW> skulle du kunna gå igenom dina inlägg och uppdatera persontaggar? (vet iaf detta och en med veronica) (man kan inte redigera andras inlägg annars hade jag gjort det)",
+        "user": "UBU5S0SPN",
+        "ts": "1542535589.002000",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBU5S0SPN",
+            "ts": "1542535850.000000"
+        },
+        "thread_ts": "1534186279.000125",
+        "parent_user_id": "UC2AMV7DW"
+    }
+]

@@ -1,0 +1,110 @@
+[
+    {
+        "client_msg_id": "3f3309da-0c8c-4d6d-80f5-1eee5c3de308",
+        "type": "message",
+        "text": "<@UBU5S0SPN>: Hennes hår blir aldrig smutsigt trots att hon släpar det längs skogsgolvet\n\n<@UBUJUN49J>: Marken?\n\n#honsyftarpårapunselfråntrassel\n#theresekandetta,honärscout\n#Magnussonsmansion\n#13okt2k18",
+        "user": "UBUJUN49J",
+        "ts": "1539430105.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "e8930b4da23a",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-28\/408091166598_e8930b4da23ac0e8d731_72.jpg",
+            "first_name": "Josefin",
+            "real_name": "Josefin Magnusson",
+            "display_name": "Jesus; ägare av Han med rösträtt",
+            "team": "TBTRZ9WDP",
+            "name": "josefin.nifesoj",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1539430105.000100",
+        "reply_count": 2,
+        "reply_users_count": 2,
+        "latest_reply": "1539431180.000100",
+        "reply_users": [
+            "UBVFTJHPZ",
+            "UBU5S0SPN"
+        ],
+        "replies": [
+            {
+                "user": "UBVFTJHPZ",
+                "ts": "1539430184.000100"
+            },
+            {
+                "user": "UBU5S0SPN",
+                "ts": "1539431180.000100"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1539431180.000100"
+    },
+    {
+        "client_msg_id": "55400632-002a-4af3-bc63-10155c453797",
+        "type": "message",
+        "text": "Glöm inte #bästafilmennågonsin\n:P",
+        "user": "UBVFTJHPZ",
+        "ts": "1539430184.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "eec8c81111d3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-24\/404043855141_eec8c81111d338e01f57_72.jpg",
+            "first_name": "Olof",
+            "real_name": "Olof Linge",
+            "display_name": "Herr Ordförande",
+            "team": "TBTRZ9WDP",
+            "name": "olof.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1539430105.000100",
+        "parent_user_id": "UBUJUN49J"
+    },
+    {
+        "client_msg_id": "7f999f84-9eb3-400c-836b-b781abe5840b",
+        "type": "message",
+        "text": "<@UBUJUN49J>: Ingen har väl gråtit till lök?\n\n#ingenharväldöttavattgråtatilllök\n#tårarnarinner\n#förberedpappasfirande\n#magnussonsmansion\n#13okt2k18",
+        "user": "UBU5S0SPN",
+        "ts": "1539431128.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "fc16521d-8ddf-42e1-b422-ddc2e8d197b0",
+        "type": "message",
+        "text": "#varuteefterattpunkteraattdetvarmarkeniskogenochintebaravilkenmarksom",
+        "user": "UBU5S0SPN",
+        "ts": "1539431180.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1539430105.000100",
+        "parent_user_id": "UBUJUN49J"
+    }
+]

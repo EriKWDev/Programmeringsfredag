@@ -1,0 +1,64 @@
+[
+    {
+        "client_msg_id": "5141dcf2-5de6-449c-8c61-bc60c6719148",
+        "type": "message",
+        "text": "\"jag flossade I 24 timmar i rad så nu behöver jag inte flossa mer\"\n\n-<@UCKJ7VCP4>\n#davidisfreefromthecurse\n#såliiiiitenhanär\n#julisandby\n#2k18trenderviallavillsedö\n#ditrapsenlender",
+        "user": "UBU7M4P4L",
+        "ts": "1545762356.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "9e6107a69690",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/403948118455_9e6107a69690d0733369_72.png",
+            "first_name": "Albin",
+            "real_name": "Albin Linge",
+            "display_name": "Mobboffer",
+            "team": "TBTRZ9WDP",
+            "name": "gitarr.abbe",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBU7M4P4L",
+            "ts": "1545762433.000000"
+        },
+        "thread_ts": "1545762356.000100",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1545762447.000300",
+        "reply_users": [
+            "UBUJED9R8"
+        ],
+        "replies": [
+            {
+                "user": "UBUJED9R8",
+                "ts": "1545762447.000300"
+            }
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "972d9878-4773-4ceb-ac52-aa0ff67fc456",
+        "type": "message",
+        "text": "Typos i hashtags? #hurfulläralbin?",
+        "user": "UBUJED9R8",
+        "ts": "1545762447.000300",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1545762356.000100",
+        "parent_user_id": "UBU7M4P4L"
+    }
+]
