@@ -10,23 +10,12 @@
 <body>
     <div id="main-container">
         <div class="center">
-            <div class="card">
-                <h1><mark class="p1">Han med rösträtt</mark><i> vs. </i><mark class="p2">Jesus</mark></h1>
-                <table>
-                    <tr>
-                        <td><p class="p1">Han med rösträtt:</p></td>
-                        <td id="quote-1"></td>
-                    </tr>
-                    <tr>
-                        <td><p class="p2">Jesus:</p></td>
-                        <td id="quote-2"></td>
-                    </tr>
-                </table>
-            </div>
+            <button id="top-button" onclick="vote('top')">Röd</button>
+            <button id="bottom-button" onclick="vote('bottom')">Blå</button>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <script src="client.js"></script>
+    <script src="voter.js"></script>
 </body>
 </html>

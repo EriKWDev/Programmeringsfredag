@@ -1,0 +1,27 @@
+[
+    {
+        "client_msg_id": "6722d822-04da-4698-bcf2-c1052313b6b0",
+        "type": "message",
+        "text": "\"allting är skrevet\"\n\n- <@UEZC1KXL5>\n\n#erikkanbiologi\n#vadkallarnivenusbergpåkillar? \n#daviddenäldreblir20\n#14juli2k19\n#kölnansfritidsgårdutanförsallerupnärabara",
+        "user": "UBU7M4P4L",
+        "ts": "1563124950.004100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "9e6107a69690",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/403948118455_9e6107a69690d0733369_72.png",
+            "first_name": "Albin",
+            "real_name": "Albin Linge",
+            "display_name": "Mobboffer",
+            "team": "TBTRZ9WDP",
+            "name": "gitarr.abbe",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBU7M4P4L",
+            "ts": "1563125036.000000"
+        }
+    }
+]

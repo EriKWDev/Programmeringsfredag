@@ -1,0 +1,32 @@
+[
+    {
+        "client_msg_id": "3a99a1d1-6d65-4913-a984-17df378d0cb8",
+        "type": "message",
+        "text": "\"Det är en bebis den liknar mest en potatis.\" \n\n- <@UBVFTJHPZ> \n#mittpåenåker\n#Olofkännerpotatisenmest\n#2k18",
+        "user": "UBU7M4P4L",
+        "ts": "1532626808.000259",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "9e6107a69690",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/403948118455_9e6107a69690d0733369_72.png",
+            "first_name": "Albin",
+            "real_name": "Albin Linge",
+            "display_name": "Mobboffer",
+            "team": "TBTRZ9WDP",
+            "name": "gitarr.abbe",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "reactions": [
+            {
+                "name": "+1",
+                "users": [
+                    "UBUJUN49J"
+                ],
+                "count": 1
+            }
+        ]
+    }
+]

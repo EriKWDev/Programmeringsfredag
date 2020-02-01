@@ -1,0 +1,199 @@
+[
+    {
+        "client_msg_id": "38afae71-5a96-4a65-b938-bd3a792a1ecc",
+        "type": "message",
+        "text": "<@UE5JTPBEU>: Det är inte bra att vara släkt med de som gifter sig.\n\n#emilmissarallt\n#släcktbilden\n#fallwald18\n#bröllop\n#närarunstenen\n#17nov2k18",
+        "user": "UC2AMV7DW",
+        "ts": "1542478156.003700",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "54f8eba11f63",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-08-10\/414307813860_54f8eba11f63ac03ace2_72.jpg",
+            "first_name": "Elina",
+            "real_name": "Elina Linge",
+            "display_name": "Äldre än Albin",
+            "team": "TBTRZ9WDP",
+            "name": "elina.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2AMV7DW",
+            "ts": "1542542181.000000"
+        },
+        "thread_ts": "1542478156.003700",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1542534808.000300",
+        "reply_users": [
+            "UBU5S0SPN"
+        ],
+        "replies": [
+            {
+                "user": "UBU5S0SPN",
+                "ts": "1542534808.000300"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1542534808.000300"
+    },
+    {
+        "client_msg_id": "14e5814a-aa1f-482e-826b-eac5171f2b25",
+        "type": "message",
+        "text": "\"jag har aldrig mobbat Albin\"\n\n-<@UE5JTPBEU>\n\n#allamobbaralbin\n#dagensskämt\n#fallwald18\n#bröllop\n#närarunstenen\n#17nov2k18",
+        "user": "UBVFTJHPZ",
+        "ts": "1542480308.002500",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "eec8c81111d3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-24\/404043855141_eec8c81111d338e01f57_72.jpg",
+            "first_name": "Olof",
+            "real_name": "Olof Linge",
+            "display_name": "Herr Ordförande",
+            "team": "TBTRZ9WDP",
+            "name": "olof.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBVFTJHPZ",
+            "ts": "1548406650.000000"
+        }
+    },
+    {
+        "type": "message",
+        "subtype": "channel_join",
+        "ts": "1542480385.002800",
+        "user": "UE5JTPBEU",
+        "text": "<@UE5JTPBEU> has joined the channel"
+    },
+    {
+        "client_msg_id": "1c1da44a-f73a-4b05-8010-40e31c4ea878",
+        "type": "message",
+        "text": "\"Jag mobbar mig själv för att inte vara utanför\"\n\n-<@UBUJED9R8>\n\n#menallamobbarvälalbin\n#manharvälenanjurar\n#intesådumsomalbinserut\n#fallwald18\n#bröllop\n#närarunstenen\n#17nov2k18",
+        "user": "UBVFTJHPZ",
+        "ts": "1542485720.002500",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "eec8c81111d3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-24\/404043855141_eec8c81111d338e01f57_72.jpg",
+            "first_name": "Olof",
+            "real_name": "Olof Linge",
+            "display_name": "Herr Ordförande",
+            "team": "TBTRZ9WDP",
+            "name": "olof.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBVFTJHPZ",
+            "ts": "1548406839.000000"
+        }
+    },
+    {
+        "client_msg_id": "dcdc4160-3b3d-4740-9b15-0af2a483118d",
+        "type": "message",
+        "text": "<@UBUJUN49J> *till <@UBUJED9R8>* Du borde ändå känna igen Caspian, du är ju hans most... farb... morf... Morbror!\n\n#jesushargjortförmycketvattentillvin \n#ärintesådumsomalbinserut \n#fallwald18\n#bröllop\n#närarunstenen\n#17november2k18",
+        "user": "UBUJED9R8",
+        "ts": "1542486198.006800",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1545330952.000000"
+        }
+    },
+    {
+        "client_msg_id": "e303f49d-9bbd-4d98-9ad4-3b48e4d0efd8",
+        "type": "message",
+        "text": "<@UBUJED9R8> Skåne är knappt 30 mil\n\n#emilkangeografi\n#ärintesådumsomalbinserut\n#fallwald18\n#bröllop\n#närarunstenen\n#17nov2k18",
+        "user": "UC2AMV7DW",
+        "ts": "1542489367.008200",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "54f8eba11f63",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-08-10\/414307813860_54f8eba11f63ac03ace2_72.jpg",
+            "first_name": "Elina",
+            "real_name": "Elina Linge",
+            "display_name": "Äldre än Albin",
+            "team": "TBTRZ9WDP",
+            "name": "elina.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UC2AMV7DW",
+            "ts": "1545331193.000000"
+        }
+    },
+    {
+        "client_msg_id": "9570e3c6-0f09-4153-a7d9-a4c51f0fa0f6",
+        "type": "message",
+        "text": "\"Men nu är ju rosét här men inte min tallrik\"\n\n-<@UBUJUN49J>\n\n#jesushargjortförmycketvattentillvin\n#ärsådumsomalbinserut\n#fallwald18\n#bröllop\n#18nov2k18",
+        "user": "UBVFTJHPZ",
+        "ts": "1542497522.002600",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "eec8c81111d3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-24\/404043855141_eec8c81111d338e01f57_72.jpg",
+            "first_name": "Olof",
+            "real_name": "Olof Linge",
+            "display_name": "Herr Ordförande",
+            "team": "TBTRZ9WDP",
+            "name": "olof.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBVFTJHPZ",
+            "ts": "1548406869.000000"
+        }
+    },
+    {
+        "client_msg_id": "8e6aecb0-f7d6-4bad-9f63-4b5f1ef6fb3c",
+        "type": "message",
+        "text": "<@UBUJED9R8> till @alla: Ni är fina\n\n#tackdetsamma\n#fallwald18\n#bröllop\n#18nov2k18",
+        "user": "UBVFTJHPZ",
+        "ts": "1542497778.005300",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "eec8c81111d3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-24\/404043855141_eec8c81111d338e01f57_72.jpg",
+            "first_name": "Olof",
+            "real_name": "Olof Linge",
+            "display_name": "Herr Ordförande",
+            "team": "TBTRZ9WDP",
+            "name": "olof.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBVFTJHPZ",
+            "ts": "1548406884.000000"
+        }
+    }
+]

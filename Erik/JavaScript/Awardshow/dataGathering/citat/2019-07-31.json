@@ -1,0 +1,44 @@
+[
+    {
+        "client_msg_id": "979362d5-839f-4e1d-9b77-5d4eaa71b0fd",
+        "type": "message",
+        "text": "<@UBU7M4P4L> \"har Sverige tre av\"\n\n<@UBUJED9R8> \"rövhål\"\n\n#emilkanbiologi\n#aliasfail\n#bubbelmedbubbel\n#1augusti2k19\n#mittpåenåker",
+        "user": "UBU7M4P4L",
+        "ts": "1564613871.003200",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "9e6107a69690",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/403948118455_9e6107a69690d0733369_72.png",
+            "first_name": "Albin",
+            "real_name": "Albin Linge",
+            "display_name": "Mobboffer",
+            "team": "TBTRZ9WDP",
+            "name": "gitarr.abbe",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "13feaef7-9da5-4908-abd3-09f334254125",
+        "type": "message",
+        "text": "Man måste lägga lite tid på att skämta... speciellt om det handlar om att mobba <@UBU7M4P4L>\n\n- <@UBUJED9R8>\n\n#allamobbaralbin\n#aliasärseriöstmenskämtaskaman\n#bubbelmedbubbel\n#1aug2k19\n#mittpåenåker",
+        "user": "UBU5S0SPN",
+        "ts": "1564614197.006500",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    }
+]

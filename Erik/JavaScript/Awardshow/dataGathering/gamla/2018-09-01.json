@@ -1,0 +1,80 @@
+[
+    {
+        "client_msg_id": "8f27ee75-c5c6-47bc-94ea-9bb1381f5391",
+        "type": "message",
+        "text": "\"Kan man inte hitta en bra profilbild på sig själv så tar man en på någon annan som liknar en\"\n\n- <@UCKJ7VCP4>\n\n#albinärmodellpåscouttidningen\n#davidlärossomlivet\n#goingbacktohogwarts\n#incrediblemoments\n#14årsenare\n#4våningarupp\n#1sept2k18",
+        "user": "UBU5S0SPN",
+        "ts": "1535822575.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBU5S0SPN",
+            "ts": "1542535640.000000"
+        }
+    },
+    {
+        "client_msg_id": "4e091de9-5d90-4bbb-b78a-58b0504080ae",
+        "type": "message",
+        "text": "\"Om man inte hittar ett bra citat tar man nått som liknar det\"\n\n- <@UBVFTJHPZ>\n\n#fejkfacts?\n#truefacts\n#vikanfejkaallt\n#goingbacktohogwarts\n#incrediblemoments\n#14årsenare\n#4våningarupp\n#1sept2k18",
+        "user": "UBU5S0SPN",
+        "ts": "1535822833.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBU5S0SPN",
+            "ts": "1542535671.000000"
+        }
+    },
+    {
+        "type": "message",
+        "subtype": "channel_join",
+        "ts": "1535823002.000200",
+        "user": "UCKJ7VCP4",
+        "text": "<@UCKJ7VCP4> has joined the channel"
+    },
+    {
+        "client_msg_id": "bf5c8f6a-d72d-42c4-b4a7-ffa4ef94f3c7",
+        "type": "message",
+        "text": "\"Kolla vilket perfekt träd! Tror ni man får pröva det?\"\n\n- <@UCKJ7VCP4> \n\n#davidlärossomlivet \n#savetheforrest \n#incrediblemoments \n#14årsenare \n#davidtrorviäristorstan \n#1september2k18",
+        "user": "UBUJED9R8",
+        "ts": "1535827244.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    }
+]

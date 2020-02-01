@@ -1,0 +1,25 @@
+[
+    {
+        "client_msg_id": "7d54bb04-dd17-4436-9290-36449f8dfa2b",
+        "type": "message",
+        "text": "#däremilÄRviktig",
+        "user": "UBUJED9R8",
+        "ts": "1572554443.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1572477039.004000",
+        "parent_user_id": "UBU7M4P4L"
+    }
+]

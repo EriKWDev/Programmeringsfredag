@@ -1,0 +1,82 @@
+[
+    {
+        "client_msg_id": "56e2b113-e836-47ca-b917-7060409e9982",
+        "type": "message",
+        "text": "Där var apple så Andriod, och androidgubben ser ju lite ut som en kanin\n\n- <@UE5JTPBEU> \n\n#androidärlikamedplayboy\n#veronicakansinaloggor\n#hintärcharaderaliaspictionaryochnynnaiett\n#vuxnasteciterarfrånhåkanbråkansmobilochvillhadenkreedentillnästaawardshow\n#lingeshosmagnussons\n#17augusti2k19\n#magnussonmansion",
+        "user": "UCKJ7VCP4",
+        "ts": "1566069136.005600",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "g4b4badeb8ab",
+            "image_72": "https:\/\/secure.gravatar.com\/avatar\/14b4badeb8ab7a5902a7da78bff7fb87.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0002-72.png",
+            "first_name": "David",
+            "real_name": "David Sjöstrand",
+            "display_name": "Håkan Bråkan Sjöstrand",
+            "team": "TBTRZ9WDP",
+            "name": "david.sjostrand03",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "364cf4f2-a541-4643-8048-1474e6f63fd2",
+        "type": "message",
+        "text": "Jag är gud!\n\n- <@UCKJ7VCP4> \n\n#håkanbråkanärjesuspappa\n#treenighetensägeratthåkanbråkanärjesussåhanmedrösträttochäldreänalbindejtarsammaperson\n#lingeshosmagnussons\n#17augusti2k19\n#magnussonmansion",
+        "user": "UBU5S0SPN",
+        "ts": "1566070707.003300",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1566070707.003300",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1566070824.003400",
+        "reply_users": [
+            "UBUJED9R8"
+        ],
+        "replies": [
+            {
+                "user": "UBUJED9R8",
+                "ts": "1566070824.003400"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1566070824.003400"
+    },
+    {
+        "client_msg_id": "aa448e36-d78b-4c04-a654-b03b7840bcd8",
+        "type": "message",
+        "text": "#kännssomattjagmissarnågot \n#sadsmileyface",
+        "user": "UBUJED9R8",
+        "ts": "1566070824.003400",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1566070707.003300",
+        "parent_user_id": "UBU5S0SPN"
+    }
+]
