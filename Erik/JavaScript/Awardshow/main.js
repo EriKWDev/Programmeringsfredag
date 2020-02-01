@@ -2,7 +2,6 @@ let express = require("express")
 let app = express()
 let server = require("http").Server(app)
 let io = require("socket.io")(server)
-let fse = require("fs-extra")
 
 const port = 80
 
@@ -36,8 +35,7 @@ io.on("connection", (socket) => {
         delete game.users[socket.id]
         update()
     })
-
-    socket.on("pong", () => { console.log("received pong..."); })
 })
 
-setInterval(() => { io.emit("ping"); }, 5000)
+setInterval(() => { console.log("pinging..."); io.emit("ping"); }, 5000)
+io.on("pong", () => { console.log("received pong..."); })

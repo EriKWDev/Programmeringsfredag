@@ -1,27 +1,10 @@
 
-@import url("https://fonts.googleapis.com/css?family=Playfair+Display:400,900|Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,900|Roboto&display=swap');
 
 :root {
     --p1-color: rgb(255, 44, 107);
     --p2-color: rgb(77, 226, 218);
     --black: rgb(34, 34, 34);
-}
-
-button {
-    padding: 3%;
-    margin: 5%;
-    font-weight: bold;
-    width: 92%;
-}
-
-#button-top {
-    background-color: var(--p1-color);
-    font-size: 2rem;
-}
-
-#button-down {
-    background-color: var(--p2-color);
-    font-size: 2rem;
 }
 
 html, body {
