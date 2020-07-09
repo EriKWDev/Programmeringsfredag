@@ -39,7 +39,7 @@ const createUI = () => {
     if(currentUserFriends.length > 0) {
         HTML += 
         `
-        <i class="fa fa-users"></i>
+        <i class="fa fa-users" title="Friends"></i>
         `
 
         for(let friend of currentUserFriends) {
@@ -52,7 +52,7 @@ const createUI = () => {
 
     HTML +=
     `
-    <i class="fa fa-user"></i>
+    <i class="fa fa-user" title="You"></i>
     <img title="${currentUser.displayName}: ${currentUser.email}" class="user-img" src="${currentUser.picture}" alt="${user.displayName}">
     <a class="logout-button" onClick="logout()">Logout</a>
     <i onClick="document.documentElement.webkitRequestFullScreen()" class="fa fa-expand"></i>
