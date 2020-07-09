@@ -1,0 +1,1700 @@
+[
+    {
+        "type": "message",
+        "subtype": "channel_join",
+        "ts": "1532168212.000010",
+        "user": "UBUJED9R8",
+        "text": "<@UBUJED9R8> has joined the channel"
+    },
+    {
+        "client_msg_id": "6d8e82cc-9096-4963-b557-6a12d68b489b",
+        "type": "message",
+        "text": "\"Staffan, är du pappan eller är du en sjöjungfru?\"\n\n- <@UBU7M4P4L> \n#50årsfestistaffanstorpnäralundliteutanförmalmöbrevidköpenhamn\n#festistaffanstorpnäralundliteutanförmalmöbrevidköpenhamn\n#16oktober2k16",
+        "user": "UBUJED9R8",
+        "ts": "1532169749.000034",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253044.000000"
+        }
+    },
+    {
+        "client_msg_id": "0b52df5b-d6b7-4bfd-b1f4-2a20e616bccd",
+        "type": "message",
+        "text": "\"Köttbulle\"\n\n- <@UBUJED9R8> \n#50årsfestistaffanstorpnäralundliteutanförmalmöbrevidköpenhamn\n#festistaffanstorpnäralundliteutanförmalmöbrevidköpenhamn\n#2kförlängesen",
+        "user": "UBUJED9R8",
+        "ts": "1532169833.000021",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532175420.000000"
+        }
+    },
+    {
+        "client_msg_id": "c72bf59f-58ed-4f49-9496-6afee9b7a6f7",
+        "type": "message",
+        "text": "<@UBVFTJHPZ>: \"Go home Emil, you're drunk.\"\n<@UBUJED9R8>: \"Jag är inte full.\"\n\n#emilärhemma\n#festistaffanstorpnäralundliteutanförmalmöbrevidköpenhamn\n#2k13",
+        "user": "UBUJED9R8",
+        "ts": "1532169968.000053",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532175435.000000"
+        }
+    },
+    {
+        "client_msg_id": "c8f2cc56-5a65-431d-8f41-01bc6b05433b",
+        "type": "message",
+        "text": "<@UBUJED9R8>: \"Är du 1,22?\"\n<@UBUJUN49J>: \"Nä, jag är 122.\"\n\n#josefinvetinteomattdetärsammasak\n#2kförlängesen",
+        "user": "UBUJED9R8",
+        "ts": "1532170230.000026",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532702712.000000"
+        }
+    },
+    {
+        "type": "message",
+        "text": "#olofshuvudsvävar\n#harrypotterutställninginorrköping",
+        "files": [
+            {
+                "id": "FBUNL3TL5",
+                "created": 1532170457,
+                "timestamp": 1532170457,
+                "name": "Norrköping_Harry_Potter",
+                "title": "Norrköping_Harry_Potter",
+                "mimetype": "image\/jpeg",
+                "filetype": "jpg",
+                "pretty_type": "JPEG",
+                "user": "UBUJED9R8",
+                "editable": false,
+                "size": 117258,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/TBTRZ9WDP-FBUNL3TL5\/norrk__ping_harry_potter?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/TBTRZ9WDP-FBUNL3TL5\/download\/norrk__ping_harry_potter?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBUNL3TL5-875b478013\/norrk__ping_harry_potter_64.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBUNL3TL5-875b478013\/norrk__ping_harry_potter_80.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBUNL3TL5-875b478013\/norrk__ping_harry_potter_360.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_360_w": 360,
+                "thumb_360_h": 270,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBUNL3TL5-875b478013\/norrk__ping_harry_potter_480.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_480_w": 480,
+                "thumb_480_h": 360,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBUNL3TL5-875b478013\/norrk__ping_harry_potter_160.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBUNL3TL5-875b478013\/norrk__ping_harry_potter_720.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_720_w": 720,
+                "thumb_720_h": 540,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBUNL3TL5-875b478013\/norrk__ping_harry_potter_800.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_800_w": 800,
+                "thumb_800_h": 600,
+                "image_exif_rotation": 1,
+                "original_w": 960,
+                "original_h": 720,
+                "permalink": "https:\/\/klubbenfordrygajavlar.slack.com\/files\/UBUJED9R8\/FBUNL3TL5\/norrk__ping_harry_potter",
+                "permalink_public": "https:\/\/slack-files.com\/TBTRZ9WDP-FBUNL3TL5-0b413c915f",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": true,
+        "user": "UBUJED9R8",
+        "display_as_bot": false,
+        "ts": "1532170460.000040",
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1542535199.000000"
+        },
+        "thread_ts": "1532170460.000040",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1542534955.000600",
+        "reply_users": [
+            "UBU5S0SPN"
+        ],
+        "replies": [
+            {
+                "user": "UBU5S0SPN",
+                "ts": "1542534955.000600"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1542534955.000600"
+    },
+    {
+        "client_msg_id": "ffd07c6b-bbe9-46ce-8d1c-82853ceab76d",
+        "type": "message",
+        "text": "<@UBU5S0SPN>: \"Fram på en båt\"\n<@UBU7M4P4L>: \"Akter!\"\n\n#biljarkvällfiratherese\n#06maj2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532170678.000016",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253195.000000"
+        }
+    },
+    {
+        "client_msg_id": "b55e8153-e45d-49a5-9892-37efbe0eaf51",
+        "type": "message",
+        "text": "<@UBU7M4P4L> \"För att nämna några få exempel, så kan jag säga några stycken\"\n\n#midsommarhosanderssons\n#23juni2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532171334.000049",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253238.000000"
+        }
+    },
+    {
+        "client_msg_id": "940f5260-b7dd-4165-8231-9242c5976083",
+        "type": "message",
+        "text": "\"Jag skålade med en sill, det gick också bra\"\n\n-Veronica\n#midsommarhosanderssons\n#23juni2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532171380.000044",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253251.000000"
+        }
+    },
+    {
+        "type": "message",
+        "text": "#2k17\n#diké\n#midsommarhosanderssons",
+        "files": [
+            {
+                "id": "FBTT03C72",
+                "created": 1532171459,
+                "timestamp": 1532171459,
+                "name": "Diké",
+                "title": "Diké",
+                "mimetype": "image\/jpeg",
+                "filetype": "jpg",
+                "pretty_type": "JPEG",
+                "user": "UBUJED9R8",
+                "editable": false,
+                "size": 39928,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/TBTRZ9WDP-FBTT03C72\/dik__?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/TBTRZ9WDP-FBTT03C72\/download\/dik__?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBTT03C72-f218699545\/dik___64.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBTT03C72-f218699545\/dik___80.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBTT03C72-f218699545\/dik___360.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_360_w": 360,
+                "thumb_360_h": 202,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBTT03C72-f218699545\/dik___480.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_480_w": 480,
+                "thumb_480_h": 270,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBTT03C72-f218699545\/dik___160.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBTT03C72-f218699545\/dik___720.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_720_w": 720,
+                "thumb_720_h": 404,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBTT03C72-f218699545\/dik___800.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_800_w": 800,
+                "thumb_800_h": 449,
+                "image_exif_rotation": 1,
+                "original_w": 960,
+                "original_h": 539,
+                "permalink": "https:\/\/klubbenfordrygajavlar.slack.com\/files\/UBUJED9R8\/FBTT03C72\/dik__",
+                "permalink_public": "https:\/\/slack-files.com\/TBTRZ9WDP-FBTT03C72-82ace52eb6",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": true,
+        "user": "UBUJED9R8",
+        "display_as_bot": false,
+        "ts": "1532171461.000026"
+    },
+    {
+        "client_msg_id": "6945987d-33d3-4209-9f29-811626ac0c83",
+        "type": "message",
+        "text": "\"Jag kliade mig så jag knäppte upp min klännings\"\n\n-Veronica\n#midsommarhosanderssons\n#23juni2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532171519.000036",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253275.000000"
+        }
+    },
+    {
+        "client_msg_id": "65e8f79e-a0c6-4ce3-a971-7113acc6be3b",
+        "type": "message",
+        "text": "\"Ingen dör i Syrien\"\n\n-<@UBU7M4P4L> \n#vafanalbinintepkbror\n#brädspelshelg\n#påstaffanstorpsscoudgårdliteutanförstaffanstorpliteutanförlundliteutanförköpenhamn\n#8juli2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532171651.000013",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253301.000000"
+        }
+    },
+    {
+        "client_msg_id": "5f5bb1ab-4246-4ba4-bc5e-73b2fe2e9aff",
+        "type": "message",
+        "text": "\"Zombies är sköldpaddor\"\n\n-<@UBU7M4P4L> \n#albinlogik\n#brädspelshelg\n#påstaffanstorpsscoutgårdliteutanförstaffanstorpliteutanförlundliteutanförköpenhamn\n#8juli2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532171705.000041",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253314.000000"
+        }
+    },
+    {
+        "client_msg_id": "aeae1d1e-ba32-4e40-b6b7-290153c7cd53",
+        "type": "message",
+        "text": "\"Emil, du får hitta något annat om att Albin är dum\"\n\n-<@UBVFTJHPZ> \n#allamobbaralbin\n#brädspelshelg\n#påstaffanstorpsscoutgårdliteutanförstaffanstorpliteutanförlundliteutanförköpenhamn\n#8juli2017",
+        "user": "UBUJED9R8",
+        "ts": "1532171750.000001",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253333.000000"
+        }
+    },
+    {
+        "client_msg_id": "56438ec4-eba6-4c9c-b460-4408b3910f26",
+        "type": "message",
+        "text": "\"Bi som i liten humla\"\n\n- <@UBUJUN49J>\n#brädspelshelg\n#påstaffanstorpsscoutgårdliteutanförstaffanstorpliteutanförlundliteutanförköpenhamn\n#9juli2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532171842.000039",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532702758.000000"
+        }
+    },
+    {
+        "client_msg_id": "3f8127ae-ef2b-4a6e-85b7-9b05f476935f",
+        "type": "message",
+        "text": "\"Vad hände med att vi mobbar Albin?\"\n\n- <@UBUJED9R8> \n#allamobbaralbin\n#Emils20årsslashinflyttningsfest2årförsent\n#15meterovanförfäladenstraxutanförstångbystraxinnanförlundlitebrevidmalmö\n#15juli2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532172089.000037",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253362.000000"
+        }
+    },
+    {
+        "client_msg_id": "2c6683cb-af22-446f-b7e6-d09cd7985716",
+        "type": "message",
+        "text": "<@UBU5S0SPN>: \"Gör man på vatten\"\n<@UBUJUN49J>: \"Går!\"\n\n#josefintrorhonärjesus\n#Emils20årsslashinflyttningsfest2årförsent\n#15meterovanförfäladenstraxutanförstångbystraxinnanförlundlitebredvidmalmö\n#15juli2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532172178.000046",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532702791.000000"
+        }
+    },
+    {
+        "client_msg_id": "d5e20de4-cb38-457e-a82d-99e84c956774",
+        "type": "message",
+        "text": "\"Så din fot är som en förlängning av dig\"\n\n- <@UCKJ7VCP4> \n#storaslågarpmycketutanförtrelleborgsomliggermycketutanförmalmö\n#oehörtdummacitat\n#utansammanhang\n#19juli2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532172209.000004",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1535870655.000000"
+        }
+    },
+    {
+        "client_msg_id": "89aa4ab0-1c32-4612-8f5d-e2d5575a541d",
+        "type": "message",
+        "text": "\"Kungen har varit längre vikig än Trump\" \n\n- <@UBU7M4P4L> \n#allamobbaralbin \n#albinharkollpåstatsmän \n#albinsägeratthanärtrött \n#skegrielitebrevidsnarringeenbitsöderombodarpsomärbrevidhallongården\n#28juli2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532172577.000060",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253410.000000"
+        }
+    },
+    {
+        "client_msg_id": "1d7df37a-ae84-49c3-9e4d-2f29b5289a86",
+        "type": "message",
+        "text": "\"Jag vet hur man städar en toa snabbt: jag behöver en sprejflaska och en mikro\"\n\n-<@UBUJED9R8> \n#emiljobbarmedattstäda \n#andthatguysleg \n#emilärstädarehanvetvadhanpratarom \n#skegrielitebrevidsnarringeenbitsöderombodarpsomärbrevidhallongården\n#29juli2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532172650.000048",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253428.000000"
+        }
+    },
+    {
+        "client_msg_id": "63717198-69ad-44a1-9789-522899a07bfa",
+        "type": "message",
+        "text": "\"Jag har så jag kan köpa 2\" *håller upp 3 fingrar*\n\n- <@UBVFTJHPZ> \n#olofhardruckitförmycketcoca\n#olofskablimattelärare\n#skegrielitebredvidsnarringeenbitsöderombodarpsomärbredvidhallongården\n#29juli2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532172787.000006",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253438.000000"
+        }
+    },
+    {
+        "client_msg_id": "8f0542ca-666c-4b28-b08f-56d14235d399",
+        "type": "message",
+        "text": "<@UBUJED9R8>: \"Var har man vatten?\"\n<@UBU7M4P4L>: \"Kranen!\"\n\n#albinharkoll\n#skegrielitebrevidsnarringeenbitsöderombodarpsomärbrevidhallongården\n#29juli2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532172858.000011",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253456.000000"
+        }
+    },
+    {
+        "client_msg_id": "77d3c53a-e0c0-4b4c-9eb1-52a009855d6f",
+        "type": "message",
+        "text": "\"Du är helt onödig, Albin\"\n\n- <@UBUJUN49J> \n#allamobbaralbin\n#ettvarmtvardagsrumpånorrängeniutkantenavskegriealmostbythesea\n#18augusti2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532172890.000047",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532702819.000000"
+        }
+    },
+    {
+        "client_msg_id": "aa261981-e11f-4fcf-9249-7e623bc10571",
+        "type": "message",
+        "text": "Man måste se på te.......ve \n\n- <@UBUJED9R8> \n#ettvarmtvardagsrumpånorrängeniutkantenavskegriealmostbythesea\n#18augusti2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532172922.000003",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253492.000000"
+        }
+    },
+    {
+        "client_msg_id": "f45a8616-63cf-40c9-b241-fcfca51201f2",
+        "type": "message",
+        "text": "\"Här var det tomt som i tomrummet mellan väggarna i en termosflaska!\" \n\n- Mulle Meck\n#nostalgytripping\n#luftenletandesefteremmasomkanskeharenkamera\n#2kförlängesen",
+        "user": "UBUJED9R8",
+        "ts": "1532172976.000065",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532175792.000000"
+        }
+    },
+    {
+        "client_msg_id": "d847d1c2-fb47-42ab-a047-c1c822a35280",
+        "type": "message",
+        "text": "”En kaka kan säga mer än 1000 ord”\n\n- <@UBU7M4P4L> \n#farmorärundercovermaffia\n#7oktober2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532173009.000032",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253546.000000"
+        }
+    },
+    {
+        "client_msg_id": "9d89164a-9ed1-48b4-979a-ab4ba8e9dcad",
+        "type": "message",
+        "text": "”Det förra citatet måste väl vara något om att alla mobbar Albin?” \n\n-<@UBUJED9R8> \n#mobbarallaalbin? \n#jodetgördenog \n#magnussonsmansion \n#nästanvidnettonästanvidicanästanvidföredettacoopnästanvidcitygrossnästanvidlidlganskanärawillysistaffanstorputanförlund\n#31december2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532173050.000054",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253568.000000"
+        }
+    },
+    {
+        "client_msg_id": "d4848b94-000e-45fc-83e5-230f5e0738a7",
+        "type": "message",
+        "text": "”Nä men jag kan inte komma ihåg alla mina allergier” \n\n- <@UCKJ7VCP4> \n#detärnogingenfara \n#sättersigdirektpåhalsen \n#magnussonmansion\n#nästanvidnettonästanvidicanästanvidföredettacoopnästanvidcitygrossnästanvidlidlganskanärawillysistaffanstorputanförlund\n#31december2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532173235.000008",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1535870617.000000"
+        }
+    },
+    {
+        "client_msg_id": "6c4e5a14-5e4d-445f-a8ff-1582ca3fa381",
+        "type": "message",
+        "text": "\"Vi sjunger om traktorer” \n\n- Pia \n#justalnarpthings\n#magnussonsmansion #nästanvidnettonästanvidicanästanvidföredettacoopnästanvidcitygrossnästanvidlidlganskanärawillysistaffanstorputanförlund\n#31december2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532173298.000028",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253595.000000"
+        }
+    },
+    {
+        "client_msg_id": "38f8e175-6708-40fa-81f3-ccb70cd950f6",
+        "type": "message",
+        "text": "<@UBU7M4P4L>: ”Som ni vet...:\"\nAlla i kör:\" ALLA MOBBAR ALBIN!\"\n\n#mobbarallaAlbin? \n#jodetgördenog \n#definitivt\n#allamobbaralbin \n#magnussonsmansion \n#nästanvidnettonästanvidicanästanvidföredettacoopnästanvidcitygrossnästanvidlidlganskanärawillysistaffanstorputanförlund\n#31december2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532173406.000042",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253609.000000"
+        }
+    },
+    {
+        "client_msg_id": "b0e6702f-70ce-45a4-a2e9-2ec6f7d98475",
+        "type": "message",
+        "text": "\"Jaaa, där försvann Syrien!\"\n\n- <@UBU7M4P4L> \n#vafanalbinintepkbror\n#magnussonsmansion\n#nästanvidnettonästanvidicanästanvidföredettacoopnästanvidcitygrossnästanvidlidlganskanärawillysistaffanstorputanförlund\n#31december2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532173656.000008",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253617.000000"
+        }
+    },
+    {
+        "client_msg_id": "c854ffd0-4ee5-465b-b21e-519b51b699f2",
+        "type": "message",
+        "text": "\"Olof och Emil-trion\"\n\n- <@UBU7M4P4L> \n#albinlogik\n#magnussonsmansion\n#nästanvidnettonästanvidicanästanvidföredettacoopnästanvidcitygrossnästanvidlidlganskanärawillysistaffanstorputanförlund\n#31december2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532173715.000039",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253653.000000"
+        }
+    },
+    {
+        "client_msg_id": "8db71416-8da6-4054-8c57-2b17f64b7b42",
+        "type": "message",
+        "text": "”Trädet är ju större än granen” \n\n- David d.y \n#brajobbatdavid #magnussonmansion #nästanvidnettonästanvidicanästanvidföredettacoopnästanvidcitygrossnästanvidlidlganskanärawillysistaffanstorputanförlund\n#31december2k17",
+        "user": "UBUJED9R8",
+        "ts": "1532173741.000033",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253670.000000"
+        }
+    },
+    {
+        "type": "message",
+        "text": "<@UBUJUN49J> \n#10outof10dubbelhaka\n#vafanjosefinintepkbror\n#totallyincontext",
+        "files": [
+            {
+                "id": "FBU2F3M17",
+                "created": 1532173960,
+                "timestamp": 1532173960,
+                "name": "IntePKJosefin",
+                "title": "IntePKJosefin",
+                "mimetype": "image\/jpeg",
+                "filetype": "jpg",
+                "pretty_type": "JPEG",
+                "user": "UBUJED9R8",
+                "editable": false,
+                "size": 58556,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/TBTRZ9WDP-FBU2F3M17\/intepkjosefin?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/TBTRZ9WDP-FBU2F3M17\/download\/intepkjosefin?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBU2F3M17-863c270f0b\/intepkjosefin_64.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBU2F3M17-863c270f0b\/intepkjosefin_80.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBU2F3M17-863c270f0b\/intepkjosefin_360.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_360_w": 203,
+                "thumb_360_h": 360,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBU2F3M17-863c270f0b\/intepkjosefin_480.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_480_w": 270,
+                "thumb_480_h": 480,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBU2F3M17-863c270f0b\/intepkjosefin_160.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBU2F3M17-863c270f0b\/intepkjosefin_720.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_720_w": 405,
+                "thumb_720_h": 720,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBU2F3M17-863c270f0b\/intepkjosefin_800.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_800_w": 450,
+                "thumb_800_h": 800,
+                "image_exif_rotation": 1,
+                "original_w": 540,
+                "original_h": 960,
+                "permalink": "https:\/\/klubbenfordrygajavlar.slack.com\/files\/UBUJED9R8\/FBU2F3M17\/intepkjosefin",
+                "permalink_public": "https:\/\/slack-files.com\/TBTRZ9WDP-FBU2F3M17-2412a81932",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": true,
+        "user": "UBUJED9R8",
+        "display_as_bot": false,
+        "ts": "1532173962.000058",
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532702850.000000"
+        }
+    },
+    {
+        "type": "message",
+        "text": "Vill du ha en smäll på käften?\n#2k18\n#helgesnorvåraskämt",
+        "files": [
+            {
+                "id": "FBUNUPGUD",
+                "created": 1532174117,
+                "timestamp": 1532174117,
+                "name": "Helge",
+                "title": "Helge",
+                "mimetype": "image\/jpeg",
+                "filetype": "jpg",
+                "pretty_type": "JPEG",
+                "user": "UBUJED9R8",
+                "editable": false,
+                "size": 86359,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/TBTRZ9WDP-FBUNUPGUD\/helge?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/TBTRZ9WDP-FBUNUPGUD\/download\/helge?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBUNUPGUD-26c19f88a8\/helge_64.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBUNUPGUD-26c19f88a8\/helge_80.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBUNUPGUD-26c19f88a8\/helge_360.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_360_w": 360,
+                "thumb_360_h": 124,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBUNUPGUD-26c19f88a8\/helge_480.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_480_w": 480,
+                "thumb_480_h": 166,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBUNUPGUD-26c19f88a8\/helge_160.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBUNUPGUD-26c19f88a8\/helge_720.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_720_w": 720,
+                "thumb_720_h": 248,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBUNUPGUD-26c19f88a8\/helge_800.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_800_w": 800,
+                "thumb_800_h": 276,
+                "image_exif_rotation": 1,
+                "original_w": 960,
+                "original_h": 331,
+                "permalink": "https:\/\/klubbenfordrygajavlar.slack.com\/files\/UBUJED9R8\/FBUNUPGUD\/helge",
+                "permalink_public": "https:\/\/slack-files.com\/TBTRZ9WDP-FBUNUPGUD-ffb61500c3",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": true,
+        "user": "UBUJED9R8",
+        "display_as_bot": false,
+        "ts": "1532174119.000020"
+    },
+    {
+        "client_msg_id": "0de94fb6-f443-4d49-add2-6ace9e157682",
+        "type": "message",
+        "text": "\"Så Donald Trump har alltså sovit över hos Emil\" \n\n- Veronica\n#memoday\n#SCROTOST\n#underelledningen\n#3februari2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532174152.000058",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253718.000000"
+        }
+    },
+    {
+        "client_msg_id": "653678e9-1116-49ac-9565-7e4fd7800708",
+        "type": "message",
+        "text": "\"Jag kan bara ost i teorin, jag har inga praktiska tillämpningar!\" \n\n- <@UBVFTJHPZ> \n#jagbordeblivitsvetsare\n#cheesestringtheory\n#underelledningen\n#3februari2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532174182.000055",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253727.000000"
+        }
+    },
+    {
+        "client_msg_id": "d57c0d4e-d84f-40e7-adc5-72efd92bb6c1",
+        "type": "message",
+        "text": "<@UBU7M4P4L>: \"Svart och vit i vattnet\"\n<@UBUJED9R8>: \"Zebrafisk!\"\n\n#emillärossfiskar\n#vafanemiltroddeduvarvegitarian\n#sämrealias\n#underelledningen\n#3februari2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532174236.000014",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253741.000000"
+        }
+    },
+    {
+        "client_msg_id": "54e0e58f-9744-4b4e-b66b-5915f3df8a1c",
+        "type": "message",
+        "text": "<@UBUJED9R8>: \"Ka... Ka...\"\n<@UBU7M4P4L>: \"Puckel!\"\n<@UBUJED9R8>: \"Det är ju rätt!\"\n\n#kaka=bajs\n#sämrealias\n#whatallamobbarintealbin\n#underelledningen\n#3februari2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532174280.000032",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253750.000000"
+        }
+    },
+    {
+        "client_msg_id": "55f96a22-cbd5-4368-ad66-cc848289f945",
+        "type": "message",
+        "text": "<@UBU7M4P4L>: \"Albin mobbar Albin\"\n\n#allamobbaralbin\n#underelledningen\n#3februari2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532174319.000043",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253774.000000"
+        }
+    },
+    {
+        "client_msg_id": "63835ddc-bfae-4b91-b7b7-a53de1478d9f",
+        "type": "message",
+        "text": "\"Jag sitter alltså finns jag\"\n- <@UBU7M4P4L>  (<@UBVFTJHPZ>) \n\n#existensiellkris\n#cogitoergosum\n#påstaffanstorpsscoutgårdliteutanförstaffanstorpliteutanförlundliteutanförköpenhamn\n#10februari2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532174380.000015",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253797.000000"
+        }
+    },
+    {
+        "client_msg_id": "d704a761-0f3d-4336-bd5c-1f4ae67f7f63",
+        "type": "message",
+        "text": "Veronica: \"Annat ord för roligt\"\n<@UBVFTJHPZ>: \"Tråkigt!\"\n\n#olofärenpositivmänniska\n#olofskablimattelärareintemattelärare\n#hashtagspaus\n#15meterovanförfäladenstraxutanförstångbystraxinnanförlundlitebredvidmalmö\n#3mars2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532174438.000094",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253811.000000"
+        },
+        "thread_ts": "1532174438.000094",
+        "reply_count": 5,
+        "reply_users_count": 2,
+        "latest_reply": "1542535427.001800",
+        "reply_users": [
+            "UBU5S0SPN",
+            "UBUJED9R8"
+        ],
+        "replies": [
+            {
+                "user": "UBU5S0SPN",
+                "ts": "1542535272.001000"
+            },
+            {
+                "user": "UBUJED9R8",
+                "ts": "1542535334.001200"
+            },
+            {
+                "user": "UBU5S0SPN",
+                "ts": "1542535351.001400"
+            },
+            {
+                "user": "UBU5S0SPN",
+                "ts": "1542535394.001600"
+            },
+            {
+                "user": "UBUJED9R8",
+                "ts": "1542535427.001800"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1542535596.000000"
+    },
+    {
+        "client_msg_id": "55b5a3f3-01ed-413c-9494-310e4a446c16",
+        "type": "message",
+        "text": "\"Var fan bor jag? Hem bor jag!\"\n\n-<@UBUJED9R8>\n#magnussonmansion\n#emilärfull\n#emilhareget\n#harintedruckitsenitisdags\n#7april2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532174522.000008",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253836.000000"
+        }
+    },
+    {
+        "type": "message",
+        "text": "\"Allting är mycket roligare utan Emil.\" \n\n- <@UBVFTJHPZ> \n#2k18\n#emilmissarallt\n#emilhadeintefåttplatspåbilden\n#jessicaochpatriksbröllop\n#löberödutanförharlösanäraskånesvackrasteutaikt",
+        "files": [
+            {
+                "id": "FBVKWUYT1",
+                "created": 1532174711,
+                "timestamp": 1532174711,
+                "name": "EmilMissarAllt",
+                "title": "EmilMissarAllt",
+                "mimetype": "image\/jpeg",
+                "filetype": "jpg",
+                "pretty_type": "JPEG",
+                "user": "UBUJED9R8",
+                "editable": false,
+                "size": 90512,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/TBTRZ9WDP-FBVKWUYT1\/emilmissarallt?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/TBTRZ9WDP-FBVKWUYT1\/download\/emilmissarallt?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBVKWUYT1-591030fe2e\/emilmissarallt_64.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBVKWUYT1-591030fe2e\/emilmissarallt_80.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBVKWUYT1-591030fe2e\/emilmissarallt_360.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_360_w": 360,
+                "thumb_360_h": 270,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBVKWUYT1-591030fe2e\/emilmissarallt_480.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_480_w": 480,
+                "thumb_480_h": 360,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBVKWUYT1-591030fe2e\/emilmissarallt_160.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBVKWUYT1-591030fe2e\/emilmissarallt_720.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_720_w": 720,
+                "thumb_720_h": 540,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBVKWUYT1-591030fe2e\/emilmissarallt_800.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_800_w": 800,
+                "thumb_800_h": 600,
+                "image_exif_rotation": 1,
+                "original_w": 960,
+                "original_h": 720,
+                "permalink": "https:\/\/klubbenfordrygajavlar.slack.com\/files\/UBUJED9R8\/FBVKWUYT1\/emilmissarallt",
+                "permalink_public": "https:\/\/slack-files.com\/TBTRZ9WDP-FBVKWUYT1-3a1d59e7fc",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": true,
+        "user": "UBUJED9R8",
+        "display_as_bot": false,
+        "ts": "1532174714.000017"
+    },
+    {
+        "client_msg_id": "67918365-5918-476e-9ca1-ac2012771588",
+        "type": "message",
+        "text": "\"...för vi är dryga jävlar\" \n\n- Alla (utom Albin)\n#p12\n#allamobbaralbin\n#midsommarhoslenartspågitarrvägenistpliteutanförlundliteösteromdanmark\n#22juni2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532174780.000044",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253877.000000"
+        }
+    },
+    {
+        "client_msg_id": "69cbb36a-90d2-4660-b174-8613bebf6bce",
+        "type": "message",
+        "text": "Nerförsbackar är det värsta för då betyder det att man behöver gå upp igen! \n\n- <@UBU7M4P4L> \n#albinärpessimistisk\n#EBärjobbigt\n#ilandetsomhitlerficktaöverföromvärlden\n#ienstadjagejkanuttala",
+        "user": "UBUJED9R8",
+        "ts": "1532174820.000041",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "6ce53d95-a06b-44b7-922e-f6e3209358f6",
+        "type": "message",
+        "text": "Efter Albins senaste inlägg:\n\n\"#hashtaggame on point. Oj, vi mobbade ju inte Albin där!\" \n\n- <@UBVFTJHPZ> \n#allamobbarintealbin?\n#vadhändemedattallamobbaralbin?\n#midsommarhoslenartspågitarrvägenistpliteutanförlundliteösteromdanmark\n#22juni2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532174888.000029",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253908.000000"
+        }
+    },
+    {
+        "client_msg_id": "fd400ef7-70ad-48ed-bfc6-abfe6cbdec42",
+        "type": "message",
+        "text": "\"Det är okej att mobba mig också!\" \n\n- <@UBVFTJHPZ> \n#skaallamobbaolofnueller?\n#midsommarhoslenartspågitarrvägenistpliteutanförlundliteösteromdanmark\n#22juni2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532174934.000026",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253919.000000"
+        }
+    },
+    {
+        "client_msg_id": "a67ad774-b8b0-4902-987e-b49af95fd893",
+        "type": "message",
+        "text": "Helena: \"Hur långt har ni gått?\"\n<@UBU7M4P4L>: \"Hejdå.\"\n\n#albinklickar\n#albinmobbaralla\n#albinnobbaralla\n#midsommarhoslenartspågitarrvägenistpliteutanförlundliteösteromdanmark\n#22juni2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532174971.000057",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253928.000000"
+        }
+    },
+    {
+        "client_msg_id": "e1957279-c15c-497d-88cb-249a17512755",
+        "type": "message",
+        "text": "\"Vi är fan PK, bror!\" \n\n- <@UC2AMV7DW> \n#pkwtf\n#pk4life\n#rolighashtag\n#midsommarhoslenartspågitarrvägenistpliteutanförlundliteösteromdanmark\n#22juni2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532175036.000046",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1533549948.000000"
+        }
+    },
+    {
+        "client_msg_id": "70e26cfd-3c2a-438c-b8ab-15aec28eb874",
+        "type": "message",
+        "text": "\"Varför är alla mina ölburkar slut?\"\n\n- <@UBUJED9R8> \n#olofharaaaaldrigsettemilnykter\n#emiläralkolist\n#emilfickennyölburk\n#midsommarhoslenartspågitarrvägenistpliteutanförlundliteösteromdanmark\n#22juni2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532175096.000002",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253945.000000"
+        }
+    },
+    {
+        "client_msg_id": "e5deb695-da4e-4de8-8a6b-b1b4ebaed6fd",
+        "type": "message",
+        "text": "\"Akta dig, vi är PK-maffian\"\n\n- <@UBVFTJHPZ> \n#pkbror\n#midsommarhoslenartspågitarrvägenistpliteutanförlundliteösteromdanmark\n#22juni2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532175135.000032",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532253954.000000"
+        }
+    },
+    {
+        "client_msg_id": "9ab4d81d-7b69-41e4-ba04-546d167d56a7",
+        "type": "message",
+        "text": "\"När jag går in på ett litet barn\" \n\n- <@UBUJUN49J> \n#vafangördumedbarn\n#kankommapåhashtags\n#lagomdrygt\n#jacqauzzy\n#mittpåenåker\n#20juli2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532175178.000005",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532702883.000000"
+        }
+    },
+    {
+        "client_msg_id": "1d443648-93b3-452e-bc3e-6925dcf8ab47",
+        "type": "message",
+        "text": "\"j, a, c, q, a, u, zz, y. Jacuzzi\" \n\n- <@UBU7M4P4L> \n#jacqauzzy\n#albinkanstava\n#kollaråtminstondesindyslexisnart\n#mittpåenåker\n#20juli2k18",
+        "user": "UBUJED9R8",
+        "ts": "1532175220.000023",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532256903.000000"
+        }
+    },
+    {
+        "type": "message",
+        "text": "\"Är det så här en skalbagge känner sig när den landat på rygg?\n\n- <@UBUJED9R8> \n#mittpåenåker\n#2k18",
+        "files": [
+            {
+                "id": "FBTT9DXPS",
+                "created": 1532175305,
+                "timestamp": 1532175305,
+                "name": "SkalbaggePåRygg",
+                "title": "SkalbaggePåRygg",
+                "mimetype": "image\/jpeg",
+                "filetype": "jpg",
+                "pretty_type": "JPEG",
+                "user": "UBUJED9R8",
+                "editable": false,
+                "size": 68674,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/TBTRZ9WDP-FBTT9DXPS\/skalbaggep__rygg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/TBTRZ9WDP-FBTT9DXPS\/download\/skalbaggep__rygg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBTT9DXPS-e95a0b0ceb\/skalbaggep__rygg_64.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBTT9DXPS-e95a0b0ceb\/skalbaggep__rygg_80.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBTT9DXPS-e95a0b0ceb\/skalbaggep__rygg_360.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_360_w": 270,
+                "thumb_360_h": 360,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBTT9DXPS-e95a0b0ceb\/skalbaggep__rygg_480.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_480_w": 360,
+                "thumb_480_h": 480,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBTT9DXPS-e95a0b0ceb\/skalbaggep__rygg_160.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBTT9DXPS-e95a0b0ceb\/skalbaggep__rygg_720.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_720_w": 540,
+                "thumb_720_h": 720,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FBTT9DXPS-e95a0b0ceb\/skalbaggep__rygg_800.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_800_w": 600,
+                "thumb_800_h": 800,
+                "image_exif_rotation": 1,
+                "original_w": 720,
+                "original_h": 960,
+                "permalink": "https:\/\/klubbenfordrygajavlar.slack.com\/files\/UBUJED9R8\/FBTT9DXPS\/skalbaggep__rygg",
+                "permalink_public": "https:\/\/slack-files.com\/TBTRZ9WDP-FBTT9DXPS-fe8557fe33",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": true,
+        "user": "UBUJED9R8",
+        "display_as_bot": false,
+        "ts": "1532175307.000081"
+    },
+    {
+        "type": "message",
+        "subtype": "channel_topic",
+        "ts": "1532175375.000053",
+        "user": "UBUJED9R8",
+        "text": "<@UBUJED9R8> set the channel topic: Citat och dumma kommentarer från dryga jävlar med flera.",
+        "topic": "Citat och dumma kommentarer från dryga jävlar med flera."
+    },
+    {
+        "type": "message",
+        "subtype": "channel_topic",
+        "ts": "1532176421.000014",
+        "user": "UBUJED9R8",
+        "text": "<@UBUJED9R8> set the channel topic: Citat och dumma kommentarer från dryga jävlar med flera. Se pinnat inlägg för hur de bör se ut.",
+        "topic": "Citat och dumma kommentarer från dryga jävlar med flera. Se pinnat inlägg för hur de bör se ut."
+    },
+    {
+        "client_msg_id": "1e52c56a-4ae6-4fe0-9863-155657e61038",
+        "type": "message",
+        "text": "Eftersom vi är dryga jävlar så har vi riktlinjer för hur citaten ska se ut:\n\n1a) Om det bara är en person, skriv citatet inom \"citat\" och sedan blankrad innan ett talestreck och den personen som har sagt det. Ni taggar med @.\n1b) Om det är flera personer, skriv personens namn, sedan kolon och efter det citatet inom \"\". På nästa rad gör ni samma med personen som svarade och så vidare om det är ännu fler. Tagga personer som finns med @. (Tagga inte namn inne i citatet.)\n\n2) Dags för #hashtags! #hashtags skrivs enbart med små bokstäver.\n2a) Först kommer #hashtags om citatet så som exempelvis #allamobbaralbin.\n2b) Sen kommer vad det är för tillfälle, typ som #jessicaochpatriksbröllop.\n2c) Efter det kommer var det är.\n2d) Och sist när det var. Standard är #datummånad(i bokstäver)2kårtal (ex #20juli2k18), men vill man kan man skriva annat",
+        "user": "UBUJED9R8",
+        "ts": "1532176737.000041",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1532254090.000000"
+        }
+    },
+    {
+        "type": "message",
+        "subtype": "pinned_item",
+        "text": "<@UBUJED9R8> pinned a message to this channel.",
+        "user": "UBUJED9R8",
+        "item_type": "C",
+        "attachments": [
+            {
+                "fallback": "[July 21st, 2018 5:38 AM] emil.a.privat: Eftersom vi är dryga jävlar så har vi riktlinjer för hur citaten ska se ut:\n\n1a) Om det bara är en person, skriv citatet inom \"citat\" och sedan blankrad innan ett talestreck och den personen som har sagt det. Ni taggar med @.\n1b) Om det är flera personer, skriv personens namn, sedan kolon och efter det citatet inom \"\". På nästa rad gör ni samma med personen som svarade och så vidare om det är ännu fler. Tagga personer som finns med @. (Tagga inte namn inne i citatet.)\n\n2) Dags för #hashtags! #hashtags skrivs enbart med små bokstäver.\n2a) Först kommer #hashtags om citatet så som exempelvis #allamobbaralbin.\n2b) Sen kommer vad det är för tillfälle, typ som #jessicaochpatriksbröllop.\n2c) Efter det kommer var det är.\n2d) Och sist när det var. Standard är #datummånad(i bokstäver)2kårtal (ex #20juli2k18), men vill man kan man skriva annat",
+                "ts": "1532176737.000041",
+                "author_id": "UBUJED9R8",
+                "author_subname": "Emil Andersson",
+                "channel_id": "CBTRZA2BT",
+                "channel_name": "citat",
+                "is_msg_unfurl": true,
+                "text": "Eftersom vi är dryga jävlar så har vi riktlinjer för hur citaten ska se ut:\n\n1a) Om det bara är en person, skriv citatet inom \"citat\" och sedan blankrad innan ett talestreck och den personen som har sagt det. Ni taggar med @.\n1b) Om det är flera personer, skriv personens namn, sedan kolon och efter det citatet inom \"\". På nästa rad gör ni samma med personen som svarade och så vidare om det är ännu fler. Tagga personer som finns med @. (Tagga inte namn inne i citatet.)\n\n2) Dags för #hashtags! #hashtags skrivs enbart med små bokstäver.\n2a) Först kommer #hashtags om citatet så som exempelvis #allamobbaralbin.\n2b) Sen kommer vad det är för tillfälle, typ som #jessicaochpatriksbröllop.\n2c) Efter det kommer var det är.\n2d) Och sist när det var. Standard är #datummånad(i bokstäver)2kårtal (ex #20juli2k18), men vill man kan man skriva annat",
+                "author_name": "Emil Andersson",
+                "author_link": "https:\/\/klubbenfordrygajavlar.slack.com\/team\/UBUJED9R8",
+                "author_icon": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_48.jpg",
+                "mrkdwn_in": [
+                    "text"
+                ],
+                "from_hidden_wksp": false
+            }
+        ],
+        "ts": "1532176802.000082"
+    },
+    {
+        "client_msg_id": "7c106b47-f81a-4d68-b0b2-1aa933894802",
+        "type": "message",
+        "text": "Samling av vanliga #platsashtags som vi använder.\n\nKorta\n#magnussonsmansion\n#mittpåenåker\n#4våningarupp\n#underelledningen\n\nLånga:\n#skegrielitebrevidsnarringeenbitsöderombodarpsomärbrevidhallongården\n#nästanvidnettonästanvidicanästanvidföredettacoopnästanvidcitygrossnästanvidlidlganskanärawillysistaffanstorputanförlund\n#15meterovanförfäladenstraxutanförstångbystraxinnanförlundlitebrevidmalmö\n#påstaffanstorpsscoudgårdliteutanförstaffanstorpliteutanförlundliteutanförköpenhamn",
+        "user": "UBUJED9R8",
+        "ts": "1532177059.000033",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "type": "message",
+        "subtype": "pinned_item",
+        "text": "<@UBUJED9R8> pinned a message to this channel.",
+        "user": "UBUJED9R8",
+        "item_type": "C",
+        "attachments": [
+            {
+                "fallback": "[July 21st, 2018 5:44 AM] emil.a.privat: Samling av vanliga #platsashtags som vi använder.\n\nKorta\n#magnussonsmansion\n#mittpåenåker\n#4våningarupp\n#underelledningen\n\nLånga:\n#skegrielitebrevidsnarringeenbitsöderombodarpsomärbrevidhallongården\n#nästanvidnettonästanvidicanästanvidföredettacoopnästanvidcitygrossnästanvidlidlganskanärawillysistaffanstorputanförlund\n#15meterovanförfäladenstraxutanförstångbystraxinnanförlundlitebrevidmalmö\n#påstaffanstorpsscoudgårdliteutanförstaffanstorpliteutanförlundliteutanförköpenhamn",
+                "ts": "1532177059.000033",
+                "author_id": "UBUJED9R8",
+                "author_subname": "Emil Andersson",
+                "channel_id": "CBTRZA2BT",
+                "channel_name": "citat",
+                "is_msg_unfurl": true,
+                "text": "Samling av vanliga #platsashtags som vi använder.\n\nKorta\n#magnussonsmansion\n#mittpåenåker\n#4våningarupp\n#underelledningen\n\nLånga:\n#skegrielitebrevidsnarringeenbitsöderombodarpsomärbrevidhallongården\n#nästanvidnettonästanvidicanästanvidföredettacoopnästanvidcitygrossnästanvidlidlganskanärawillysistaffanstorputanförlund\n#15meterovanförfäladenstraxutanförstångbystraxinnanförlundlitebrevidmalmö\n#påstaffanstorpsscoudgårdliteutanförstaffanstorpliteutanförlundliteutanförköpenhamn",
+                "author_name": "Emil Andersson",
+                "author_link": "https:\/\/klubbenfordrygajavlar.slack.com\/team\/UBUJED9R8",
+                "author_icon": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_48.jpg",
+                "mrkdwn_in": [
+                    "text"
+                ],
+                "from_hidden_wksp": false
+            }
+        ],
+        "ts": "1532177066.000050"
+    }
+]

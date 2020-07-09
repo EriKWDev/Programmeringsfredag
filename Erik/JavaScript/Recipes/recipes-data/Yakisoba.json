@@ -12,8 +12,8 @@
 				"title":"Huvudingredienser",
 				"ingredients":[
 					{
-						"unit":"1 paket",
-						"ingredient":"Bacon"
+						"unit":"½ paket",
+						"ingredient":"Stekfläsk"
 					},
 					{
 						"unit":"½",
@@ -89,9 +89,9 @@
 			"instructions":[
 				"Koka Pastan tills den är helt genomkokt. Sila ur vattnet och låt stå.",
 				"Under tiden som pastan kokar, finhacka rödlök och hacka salladshuvudet i skivor. Stek upp de båda ingredienserna i sesamolja i en stekpanna. Häll i ½ glas vatten och sätt på ett lock. Stek tills vattnet har försvunnit och salladen brynts lite. Häll över i en bunke och ställ åt sidan.",
-				"Hacka bacon och låt det bada i en minut i soya. Lägg sedan ned baconet i pannan och häll i lite Japansk Soya samt ½ glas vatten. Finhacka vitlöken och häll i pannan med baconet. Lägg på lock.",
-				"Häll efterhand över skysåsen som baconet steker i i Yakisoba-såsen så att baconet kan steka vidare. Stek tills baconet blivit vitt eller brynts. Häll sedan över allt i bunken med sallad och rödlök.",
-				"Stek Pasta i sesamolja och häll i ½ glas vatten. Lägg på lock. Efter c.a 1 minut vänd all pasta i pannan. Häll i sallad, rödlök och baconet och låt fortsätta steka.",
+				"Hacka stekfläsket och låt det bada i en minut i soya. Lägg sedan ned fläsket i pannan och häll i lite Japansk Soya samt ½ glas vatten. Finhacka vitlöken och häll i pannan med fläsket. Lägg på lock.",
+				"Häll efterhand över skysåsen som fläsket steker i i Yakisoba-såsen så att fläsket kan steka vidare. Stek tills fläsket blivit vitt eller brynts. Häll sedan över allt i bunken med sallad och rödlök.",
+				"Stek Pasta i sesamolja och häll i ½ glas vatten. Lägg på lock. Efter c.a 1 minut vänd all pasta i pannan. Häll i sallad, rödlök och fläsket och låt fortsätta steka.",
 				"Precis innan servering, häll i all Yakisoba-sås i pannan, rör runt och sätt på lock.",
 				"Servera!"
 			]

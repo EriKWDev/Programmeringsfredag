@@ -1,0 +1,23 @@
+[
+    {
+        "client_msg_id": "5991b59c-efcd-4a4a-b72b-e8b49e948605",
+        "type": "message",
+        "text": "<@UBU7M4P4L>: Ska vi ta ett bord, slå oss ner och va dryga? \n\n#albinharkoll\n#sameprocedureaseveryyear\n#viärdrygavi\n#pontusfårnamn\n#näraskånesvackrasteutsikt",
+        "user": "UBUJED9R8",
+        "ts": "1541936168.003000",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    }
+]

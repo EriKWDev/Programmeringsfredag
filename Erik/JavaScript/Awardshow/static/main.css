@@ -1,0 +1,253 @@
+ @-webkit-keyframes roll-in-top {
+    0% {
+      -webkit-transform: translateY(-800px) rotate(-540deg);
+              transform: translateY(-800px) rotate(-540deg);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0) rotate(0deg);
+              transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+  }
+  @keyframes roll-in-top {
+    0% {
+      -webkit-transform: translateY(-800px) rotate(-540deg);
+              transform: translateY(-800px) rotate(-540deg);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0) rotate(0deg);
+              transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+  }
+.roll-in-top {
+	-webkit-animation: roll-in-top 0.6s ease-out both;
+	        animation: roll-in-top 0.6s ease-out both;
+}  
+
+ @-webkit-keyframes roll-in-bottom {
+    0% {
+      -webkit-transform: translateY(800px) rotate(540deg);
+              transform: translateY(800px) rotate(540deg);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0) rotate(0deg);
+              transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+  }
+  @keyframes roll-in-bottom {
+    0% {
+      -webkit-transform: translateY(800px) rotate(540deg);
+              transform: translateY(800px) rotate(540deg);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0) rotate(0deg);
+              transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+  }
+  .roll-in-bottom {
+	-webkit-animation: roll-in-bottom 0.6s ease-out both;
+	        animation: roll-in-bottom 0.6s ease-out both;
+}  
+
+ @-webkit-keyframes rotate-hor-center {
+    0% {
+      -webkit-transform: rotateX(0);
+              transform: rotateX(0);
+    }
+    100% {
+      -webkit-transform: rotateX(-360deg);
+              transform: rotateX(-360deg);
+    }
+  }
+  @keyframes rotate-hor-center {
+    0% {
+      -webkit-transform: rotateX(0);
+              transform: rotateX(0);
+    }
+    100% {
+      -webkit-transform: rotateX(-360deg);
+              transform: rotateX(-360deg);
+    }
+  }
+
+  .rotate-hor-center {
+	-webkit-animation: rotate-hor-center 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+	        animation: rotate-hor-center 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+}
+
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,900|Roboto&display=swap');
+
+:root {
+    --p1-color: rgb(255, 44, 107);
+    --p2-color: rgb(77, 226, 218);
+    --black: #262626;
+
+    --yellow: rgb(255, 198, 66);
+    --green: rgb(161, 255, 73);
+    --blue: rgb(0, 89, 255);
+    --red: rgb(255, 34, 71);
+}
+
+html, body {
+    margin: 0px;
+    padding: 0px;
+    color: var(--black);
+    font-size: 1.36rem;
+    font-family: "Roboto";
+    background-color: var(--black);
+}
+
+#round {
+  color: white;
+}
+
+#top-button {
+    background-color: var(--p1-color);
+    height: 50vh;
+    width: 100vw;
+    font-size: 4rem;
+    font-family: "Playfair Display";
+    border-radius: 0rem;
+}
+
+#bottom-button {
+    background-color: var(--p2-color);
+    height: 50vh;
+    width: 100vw;
+    font-size: 4rem;
+    font-family: "Playfair Display";
+    border-radius: 0rem;
+}
+
+button {
+    font-family: "Playfair Display";
+    font-weight: bold;
+    font-size: 2rem;
+    color: var(--black);
+    border-radius: 2rem;
+}
+
+.votes {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 4rem;
+    border-radius: 50%;
+}
+
+.votes-p2 {
+    background-color: var(--p2-color);
+}
+
+.votes-p1 {
+    background-color: var(--p1-color);
+}
+
+#main-container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+td {
+    padding: 2vh;
+}
+
+tr {
+    height: 30vh;
+}
+
+td:nth-child(1) {
+    text-align: right;
+    padding-right: 2vw;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+td:nth-child(2) {
+    max-width: 40vw;
+    font-size: 1.4rem;
+}
+
+mark {
+    color: var(--black);
+}
+
+.tag-cloud {
+    width: 30vw;
+    margin: auto;
+    padding: 1rem;
+}
+
+.citer {
+    color: white;
+    font-family: "Playfair Display";
+    font-size: 0.9rem;
+}
+
+.date {
+    display: inline-block;
+    border-bottom: 0.2rem dashed white;
+}
+
+.tag {
+    display: inline-block;
+    font-size: 0.9rem;
+    padding: 0.2rem;
+    margin: 0.2rem;
+    border-radius: 0.4rem;
+    color: var(--black);
+}
+
+.quote {
+    margin: auto;
+    color: white;
+    font-family: "Playfair Display";
+}
+
+#quote-p1-container {
+    border: 0.2rem solid var(--p1-color);
+    padding: 1.2rem;
+}
+
+#quote-p2-container {
+    border: 0.2rem solid var(--p2-color);
+    padding: 1.2rem;
+}
+
+.player-vs {
+    line-height: 7vh;
+    max-width: 70vw;
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+.p1 {
+    background-color: var(--p1-color);
+    padding: 1.2vh;
+    font-family: "Playfair Display";
+    max-width: 300px;
+}
+
+.p2 {
+    background-color: var(--p2-color);
+    padding: 1.2vh;
+    font-family: "Playfair Display";
+    max-width: 300px;
+}

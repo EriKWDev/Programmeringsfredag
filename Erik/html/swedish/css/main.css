@@ -1,0 +1,207 @@
+@import url("https://fonts.googleapis.com/css?family=Merriweather|Roboto&display=swap");
+
+:root {
+    --black: #3a3a3a;
+    --grey: #bfbfbf;
+    --good-example-1: #ffc356ff;
+    --good-example-2: #ffe58717;
+    --good-example-3: #ffe5874d;
+    --bad-example-1: #ff4f80ff;
+    --bad-example-2: #ff4f8115;
+    --bad-example-3: #ff4f813f;
+}
+
+html, body {
+    font-family: "Roboto", sans-serif;
+}
+
+p {
+    font-size: 1.1em;
+    color: var(--black);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    border-left: 2px dotted var(--grey);
+    padding-left: 10px;
+    font-weight: 400;
+}
+
+h2 {
+    margin-top: 3em;
+}
+
+hr {
+    height: 2px;
+    background: var(--grey);
+    border: 0;
+}
+
+ol, ul {
+    break-inside: avoid;
+}
+
+li {
+    margin-bottom: 13px;
+    margin-top: 13px;
+}
+
+mark {
+    border-bottom: 2px dashed var(--black);
+    background-color: inherit;
+    font-style: italic;
+    color: var(--black);
+    font-weight: 500;
+    cursor: inherit !important;
+    text-decoration: none !important;
+}
+
+abbr {
+    border-bottom: 2px dotted var(--black);
+    background-color: inherit;
+    color: var(--black);
+    font-weight: 500;
+    cursor: inherit !important;
+    text-decoration: none !important;
+}
+
+header h1 {
+    font-size: 3em;
+    border: none;
+    margin-bottom: 0;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+}
+
+.toc {
+    width: 100px;
+}
+
+#content {
+    padding: 1em;
+    max-width: 700px;
+    min-width: 100px;
+    border-radius: 10px;
+}
+
+.good {
+    border-left: 3.5px solid var(--good-example-1);
+    background-color: var(--good-example-2);
+}
+
+.good::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f058";
+    font-weight: 900;
+    position: absolute;
+    transform: translateX(-1.85em) translateY(0.9em);
+    color: var(--good-example-1);
+    background-color: white;
+    height: 0.95em;
+    width: 0.95em;
+    border-radius: 50%;
+}
+
+.good p mark {
+    border-bottom: 2px dashed var(--good-example-1);
+}
+
+.bad {
+    border-left: 3.5px solid var(--bad-example-1);
+    background-color: var(--bad-example-2);
+}
+
+.bad::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f06a";
+    font-weight: 900;
+    position: absolute;
+    transform: translateX(-1.85em) translateY(0.95em);
+    color: var(--bad-example-1);
+    background-color: white;
+    height: 0.95em;
+    width: 0.95em;
+    border-radius: 50%;
+}
+
+.bad p mark {
+    border-bottom: 2px dashed var(--bad-example-1);
+}
+
+.example {
+    padding: 8px 0px 8px 20px;
+    margin-left: 10px;
+    font-family: "Merriweather", monospace, sans-serif;
+    break-inside: avoid;
+}
+
+.example p {
+    margin: 0px;
+}
+
+.example p:nth-child(odd)::before {
+    content: "Swe | ";
+}
+
+.example p:nth-child(even)::before {
+    content: "Eng | ";
+}
+
+.footnotes {
+    margin-top: 4em;
+}
+
+.footnotes::before {
+    content: "Footnotes";
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+.footnote-item {
+    margin-left: 10px;
+    padding-left: 10px;
+    font-family: "Merriweather", monospace, sans-serif;
+    border-left: 3.5px solid var(--black);
+}
+
+@media print {
+    body {
+        margin: 0;
+        background-color: #fff;
+    }
+
+    h2 {
+        margin-top: 1.5em;
+    }
+
+    abbr {
+        border: none;
+        font-style: italic;
+    }
+
+    abbr ~ .footnotes::before {
+        content: " (" attr(title) ") ";
+    }
+
+    header {
+        display: none;
+    }
+
+    .good {
+        border: 3.5px solid var(--good-example-1);
+        background: none;
+    }
+
+    .bad {
+        border: 3.5px solid var(--bad-example-1);
+        background: none;
+    }
+  }

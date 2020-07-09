@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin</title>
+    <link href="../css/main.css" rel="stylesheet">
+    <script src="../node_modules/markdown-it/dist/markdown-it.min.js"></script>
+    <script src="../node_modules/markdown-it-container/dist/markdown-it-container.min.js"></script>
+    <script src="../node_modules/markdown-it-footnote/dist/markdown-it-footnote.min.js"></script>
+    <script src="../node_modules/markdown-it-abbr/dist/markdown-it-abbr.min.js"></script>
+    <script src="../node_modules/markdown-it-mark/dist/markdown-it-mark.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-12/css/all.min.css">
+</head>
+<body>
+    <div id="login">
+        <form onsubmit="event.preventDefault(); loginAdmin();">
+            <label for="email">Email: <input type="text" id="email" placeholder="email@example.com"></label>
+            <label for="pass">Password: <input type="password" id="pass" placeholder="****"></label>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <div id="content" style="display: none;">
+        <form onsubmit="event.preventDefault(); publishArticle();">
+            <label for="title">Title: <input type="text" id="title" placeholder="Amazing Title"></label><br>
+            <label for="author">Author: <input type="text" id="author" placeholder="Author"></label><br>
+            <label for="date">Date: <input type="date" id="date"></label><br>
+            <textarea rows="30" cols="80" type="textarea" id="article" placeholder="# Hello, World! This is an article about Sweden or Swedish"></textarea><br>
+            <button type="submit">Publish</button>
+        </form>
+
+        <div id="preview">
+
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/6.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.1/firebase-firestore.js"></script>
+    <script src="../firebase/firebase.js"></script>
+    <script src="../markdown/markdown.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+[
+    {
+        "client_msg_id": "a36c9a46-3acb-4f61-88ca-3b9870348d73",
+        "type": "message",
+        "text": "\"vi måste göra oss av med #albinmobbaralbin... Han ska inte få ta del av mobbandet.\"\n\n- Magnus Andersson\n\n#allamobbaralbinävenpåfysikum\n#ökadångestinförtenta\n#dageninnantentan\n#tentaplugg\n#29oktober2k19\n#Rydbergspubutanpub",
+        "user": "UBU7M4P4L",
+        "ts": "1572355458.005000",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "9e6107a69690",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/403948118455_9e6107a69690d0733369_72.png",
+            "first_name": "Albin",
+            "real_name": "Albin Linge",
+            "display_name": "Mobboffer",
+            "team": "TBTRZ9WDP",
+            "name": "gitarr.abbe",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBU7M4P4L",
+            "ts": "1572542751.000000"
+        },
+        "thread_ts": "1572355458.005000",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1572357449.000100",
+        "reply_users": [
+            "UBU5S0SPN"
+        ],
+        "replies": [
+            {
+                "user": "UBU5S0SPN",
+                "ts": "1572357449.000100"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1572357449.000100"
+    },
+    {
+        "client_msg_id": "1864623b-8da7-4cd1-b0dd-e3feaee3ea77",
+        "type": "message",
+        "text": "Lycka till på tentan :)\n\nHoppas att tentan inte är med på #allamobbaralbin",
+        "user": "UBU5S0SPN",
+        "ts": "1572357449.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBU5S0SPN",
+            "ts": "1572357476.000000"
+        },
+        "thread_ts": "1572355458.005000",
+        "parent_user_id": "UBU7M4P4L"
+    }
+]

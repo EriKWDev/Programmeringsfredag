@@ -1,0 +1,137 @@
+[
+    {
+        "client_msg_id": "e748b672-193c-4099-a11c-acb432339309",
+        "type": "message",
+        "text": "\"Den femte januari kommer den amrikanska drottning dö\"\n\n- <@UBVFTJHPZ> \n\n#blevbitenavenradioaktivspåkulanärjagvarliten\n#amerikaärenmonarki\n#mittpåenåker \n#3januari2k19\n",
+        "user": "UC2AMV7DW",
+        "ts": "1546523066.004000",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "54f8eba11f63",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-08-10\/414307813860_54f8eba11f63ac03ace2_72.jpg",
+            "first_name": "Elina",
+            "real_name": "Elina Linge",
+            "display_name": "Äldre än Albin",
+            "team": "TBTRZ9WDP",
+            "name": "elina.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "b3aad378-43c4-47bf-921a-682f5fa44b95",
+        "type": "message",
+        "text": "\"visste att jag vunnit faktiskt. Hade bara missat priset.\"\n\n- <@UBUJED9R8>\n\n#Emilmissarhälften\n#gohomeemilyouweredrunk\n#snopshot\n",
+        "user": "UBU7M4P4L",
+        "ts": "1546524216.002800",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "9e6107a69690",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/403948118455_9e6107a69690d0733369_72.png",
+            "first_name": "Albin",
+            "real_name": "Albin Linge",
+            "display_name": "Mobboffer",
+            "team": "TBTRZ9WDP",
+            "name": "gitarr.abbe",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1546524216.002800",
+        "reply_count": 3,
+        "reply_users_count": 2,
+        "latest_reply": "1546531200.000100",
+        "reply_users": [
+            "UBU5S0SPN",
+            "UBU7M4P4L"
+        ],
+        "replies": [
+            {
+                "user": "UBU5S0SPN",
+                "ts": "1546526417.000100"
+            },
+            {
+                "user": "UBU7M4P4L",
+                "ts": "1546530566.000100"
+            },
+            {
+                "user": "UBU5S0SPN",
+                "ts": "1546531200.000100"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1546531200.000100"
+    },
+    {
+        "client_msg_id": "ace0eb6d-0ce7-4a3b-be04-cc793445c415",
+        "type": "message",
+        "text": "#snapchat? Eller #snopshot?",
+        "user": "UBU5S0SPN",
+        "ts": "1546526417.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1546524216.002800",
+        "parent_user_id": "UBU7M4P4L"
+    },
+    {
+        "client_msg_id": "9a9d57bf-02dc-4297-9919-f01988fc23ab",
+        "type": "message",
+        "text": "Den är rätt",
+        "user": "UBU7M4P4L",
+        "ts": "1546530566.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "9e6107a69690",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/403948118455_9e6107a69690d0733369_72.png",
+            "first_name": "Albin",
+            "real_name": "Albin Linge",
+            "display_name": "Mobboffer",
+            "team": "TBTRZ9WDP",
+            "name": "gitarr.abbe",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1546524216.002800",
+        "parent_user_id": "UBU7M4P4L"
+    },
+    {
+        "client_msg_id": "57fd92d6-98bb-4b35-bbab-37e660832bab",
+        "type": "message",
+        "text": "Okej",
+        "user": "UBU5S0SPN",
+        "ts": "1546531200.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1546524216.002800",
+        "parent_user_id": "UBU7M4P4L"
+    }
+]

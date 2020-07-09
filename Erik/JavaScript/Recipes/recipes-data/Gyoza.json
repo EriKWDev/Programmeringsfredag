@@ -1,0 +1,132 @@
+{
+	"main":{
+		"title":"Gyoza",
+		"subtitle":"Japanska Stekta Dumplings",
+		"duration":"1h 30 minuter",
+		"rating":[1,1,1,1,1,1,1,1,1,0]
+	},
+	"ingredients":{
+		"portions":"4 Portioner",
+		"subIngredients":[
+			{
+				"title":"Huvudingredienser",
+				"ingredients":[
+					{
+						"unit":"1 paket",
+						"ingredient":"Gyoza- eller dumplingskal"
+					},
+					{
+						"unit":"800 gram",
+						"ingredient":"Fläsk- eller blandfärs"
+					},
+					{
+						"unit":"1 st",
+						"ingredient":"Salladslök"
+					},
+					{
+						"unit":"2 msk",
+						"ingredient":"Japansk Soya"
+					},
+					{
+						"unit":"1 klyfta",
+						"ingredient":"Vitlök"
+					},
+					{
+						"unit":"1 st",
+						"ingredient":"Purjulök"
+					},
+					{
+						"unit":"1 st",
+						"ingredient":"Isbergssallad / Kinesisk kålhuvud"
+					}
+				]
+			},
+			{
+				"title":"Gyozasås",
+				"ingredients":[
+					{
+						"unit":"1 del",
+						"ingredient":"Japansk soya"
+					},
+					{
+						"unit":"1 ½ del",
+						"ingredient":"Sweet chilli"
+					},
+					{
+						"unit":"1 del",
+						"ingredient":"Citronjuice"
+					},
+					{
+						"unit":"½ del",
+						"ingredient":"Ris- eller Vitvinsvinäger"
+					},
+					{
+						"unit":"½ del",
+						"ingredient":"Ketchup"
+					}
+				]
+			},
+			{
+				"title":"Tillagningsvatten",
+				"ingredients":[
+					{
+						"unit":"2 deciliter",
+						"ingredient":"Vatten"
+					},
+					{
+						"unit":"1 matsked",
+						"ingredient":"Vetemjöl"
+					}
+				]
+			}
+		]
+	},
+	"subInstructions":[
+		{
+			"title":"Gyozasås",
+			"instructions":[
+				"Blanda alla ingredienserna i en liten skål",
+				"Smaka av med extra sweet chilli och citronjuice efter smak"
+			]
+		},
+		{
+			"title":"Gyozafyllning",
+			"instructions":[
+				"Finhacka vitlöken, purjulöken, salladshuvudet och salladslöken.",
+				"Lägg all färsen i en bunke tillsammans med de hackade grönsakerna och 2 matskedar japansk soya.",
+				"Knåda ihop väl med båda händerna.",
+				"Häll i salt och peppar."
+			]
+		},
+		{
+			"title":"Vikning av Gyozas",
+			"instructions":[
+				"Se till att ha en liten skål vatten tillgänglig, en mjölad arbetsyta och ett fat eller en ugnsskiva vid sidan om.",
+				"Tag ett gyozaskal i vänstra handen.",
+				"Lägg på en liten boll av gyozafyllningen och platta ut till en cirkel i mitten av skalet.",
+				"Doppa ditt högra pekfinger i vatten och rita en linje längst kanten av skalet som är närmast dig.",
+				"Vik skalet över fyllningen och stäng igen det.",
+				"(Sök upp 'Gyoza no tsukurikata' för videodemonstration.)",
+				"Lägg den vikta gyozan på ditt fat och strö lite mjöl över den.",
+				"Fortsätt tills fyllningen tar slut."
+			]
+		},
+		{
+			"title":"Tillagningsvatten",
+			"instructions":[
+				"Blanda vattnet och vetemjölet väl i en liten skål."
+			]
+		},
+		{
+			"title":"Tillagning",
+			"instructions":[
+				"Häll i rikligt med olja i en stekpanna som du sedan skall kunna sätta ett lock över. Låt oljan bli varm.",
+				"Lägg i dina färdiga gyozas och fyll stekytan så gott det går. Lägg alla på samma håll.",
+				"Efter att de har börjat brynas, häll i tillagningsvattnet och sätt på locket fort därpå.",
+				"När vattnet nästan helt försvunnit, ta av locket och vänd på alla gyozas. Låt steka tills de blivit lätt brynta på den andra sidan med.",
+				"Gör om för resten av alla gyozas.",
+				"Servera med pinnar och gyozasåsen vid sidan om."
+			]
+		}
+	]
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sorting</title>
+</head>
+<body>
+    <script src="https://koda.nu/simple.js">
+        let ARRAY = new Array(2330)
+        for(let i = 0; i < ARRAY.length; i++) {
+            ARRAY[i] = i
+        }
+
+        shuffleArray(ARRAY)
+
+        let I = 0;
+        updatesPerSecond = 200
+
+        function insertionSort(list) {
+            let i = I
+
+            if(i < list.length) {
+                example4(43.6 + (i/list.length)*366, "triangle")
+            }
+
+            if (list[i] < list[0]) {
+                // move current element to the first position
+                list.unshift(list.splice(i,1)[0])
+            } else if (list[i] > list[i-1]) {
+                // maintain element position
+                
+            } else {
+                // find where element should go
+                for (let j = 1; j < i; j++) {
+                    if (list[i] > list[j-1] && list[i] < list[j]) {
+                    // move element
+                        list.splice(j, 0, list.splice(i,1)[0])
+                    }
+                }
+            }
+
+            I++
+            if (I == list.length + 80) {
+                shuffleArray(ARRAY)
+                I = 0
+            }
+            return list
+        }
+
+        function update() {
+            //clearScreen()
+            fill("rgba(25, 25, 25, 1)")
+            visualizeArray(ARRAY)
+            ARRAY = insertionSort(ARRAY)
+        }
+
+        function visualizeArray(array) {
+            let w = totalWidth/9 * 8
+            let h = totalHeight/2
+            let l = array.length;
+            //line(totalWidth/2 - w/2, (totalHeight/3)*2.4, totalWidth/2 + w/2, -h/l, 1, "white")
+
+            for(let i in array) {
+                save()
+                translate(totalWidth/2 - w/2 + (i/l)*w, (totalHeight/3)*2.4)
+                let color = HSVtoRGB(array[i]/l, 0.8, 0.9)
+                let c = `rgba(${color.r}, ${color.g}, ${color.b}, 0.9)`
+                // console.log(color);
+                let h1 = -array[i]*(h/l)
+                line(0, 0, 0, h1, w/l + 1, i == I ? "white" : c);
+                // circle(0, h1, -h1/10, c);
+                restore();
+            }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        var context = new AudioContext()
+        var o = null
+        var g = null
+
+        function example4(frequency, type) {
+            o=context.createOscillator()
+            g = context.createGain()
+            o.type=type
+            o.connect(g)
+            o.frequency.value=frequency
+            g.connect(context.destination)
+            o.start(0)
+            g.gain.exponentialRampToValueAtTime(0.00001,context.currentTime+1)
+        }
+
+        function HSVtoRGB(h, s, v) {
+            var r, g, b, i, f, p, q, t;
+            if (arguments.length === 1) {
+                s = h.s, v = h.v, h = h.h;
+            }
+            i = Math.floor(h * 6);
+            f = h * 6 - i;
+            p = v * (1 - s);
+            q = v * (1 - f * s);
+            t = v * (1 - (1 - f) * s);
+            switch (i % 6) {
+                case 0: r = v, g = t, b = p; break;
+                case 1: r = q, g = v, b = p; break;
+                case 2: r = p, g = v, b = t; break;
+                case 3: r = p, g = q, b = v; break;
+                case 4: r = t, g = p, b = v; break;
+                case 5: r = v, g = p, b = q; break;
+            }
+            return {
+                r: Math.round(r * 255),
+                g: Math.round(g * 255),
+                b: Math.round(b * 255)
+            };
+        }
+    </script>
+</body>
+</html>

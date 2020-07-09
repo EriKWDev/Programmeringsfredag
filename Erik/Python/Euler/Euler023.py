@@ -20,4 +20,4 @@ for n in range (1, 28123) :
     if ProperDivisorSum (n) > n :
         listOfNumbers.append (n)
 
-print listOfNumbers
+print(listOfNumbers)

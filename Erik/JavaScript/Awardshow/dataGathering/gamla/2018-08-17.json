@@ -1,0 +1,120 @@
+[
+    {
+        "client_msg_id": "a4661cae-f69d-4287-9e28-ba4f5943bd84",
+        "type": "message",
+        "text": "\"Skål för att  allamobbaralbin\" \n\n- Daniel, Calle och <@UBUJED9R8>\n\n#allamobbaralbin\n#kräftskivaisingulariteten\n#isingulariteten",
+        "user": "UBUJED9R8",
+        "ts": "1534535906.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBUJED9R8",
+            "ts": "1535870485.000000"
+        },
+        "thread_ts": "1534535906.000100",
+        "reply_count": 3,
+        "reply_users_count": 2,
+        "latest_reply": "1534569162.000100",
+        "reply_users": [
+            "UBU5S0SPN",
+            "UBUJED9R8"
+        ],
+        "replies": [
+            {
+                "user": "UBU5S0SPN",
+                "ts": "1534536045.000100"
+            },
+            {
+                "user": "UBUJED9R8",
+                "ts": "1534548178.000100"
+            },
+            {
+                "user": "UBU5S0SPN",
+                "ts": "1534569162.000100"
+            }
+        ],
+        "subscribed": true,
+        "last_read": "1534569162.000100"
+    },
+    {
+        "client_msg_id": "5638a2ec-b20c-48d3-988e-16222855f8df",
+        "type": "message",
+        "text": "Kräftskiva eller kräftskiba? #hurfulläremil?",
+        "user": "UBU5S0SPN",
+        "ts": "1534536045.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1534535906.000100",
+        "parent_user_id": "UBUJED9R8"
+    },
+    {
+        "client_msg_id": "f97a6dc8-e780-4f8b-b455-2c60e58a4a03",
+        "type": "message",
+        "text": "#emilärfaktisktgabdkafull...",
+        "user": "UBUJED9R8",
+        "ts": "1534548178.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1534535906.000100",
+        "parent_user_id": "UBUJED9R8"
+    },
+    {
+        "client_msg_id": "b54f1499-5b08-4a4d-a60f-cb6da1eb986b",
+        "type": "message",
+        "text": "#emilkanintestava",
+        "user": "UBU5S0SPN",
+        "ts": "1534569162.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1534535906.000100",
+        "parent_user_id": "UBUJED9R8"
+    }
+]

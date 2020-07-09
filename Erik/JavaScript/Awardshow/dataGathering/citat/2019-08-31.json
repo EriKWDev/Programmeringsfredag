@@ -1,0 +1,121 @@
+[
+    {
+        "client_msg_id": "aca0702b-4b31-4bf8-9ea2-319d2fb21b20",
+        "type": "message",
+        "text": "\"Du anar inte hur ofta man blir erbjuden sprit som student på en vecka\"\n\n- <@UBUJED9R8> \n\n#emilärnykterist\n#varjedagräknas\n#carpediem \n#AA\n#inspirational\n#helenasfirande2k19\n#31augusti2k19\n#mittpåenåker",
+        "user": "UBVFTJHPZ",
+        "ts": "1567271032.003300",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "eec8c81111d3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-24\/404043855141_eec8c81111d338e01f57_72.jpg",
+            "first_name": "Olof",
+            "real_name": "Olof Linge",
+            "display_name": "Herr Ordförande",
+            "team": "TBTRZ9WDP",
+            "name": "olof.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1567271032.003300",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1567271947.000100",
+        "reply_users": [
+            "UBUJED9R8"
+        ],
+        "replies": [
+            {
+                "user": "UBUJED9R8",
+                "ts": "1567271947.000100"
+            }
+        ],
+        "subscribed": false
+    },
+    {
+        "type": "message",
+        "text": "Så, nu var det åtgärdat!\n#itwasahardweek",
+        "files": [
+            {
+                "id": "FMWR0EL2Z",
+                "created": 1567271947,
+                "timestamp": 1567271947,
+                "name": "20190831_191810.jpg",
+                "title": "20190831_191810.jpg",
+                "mimetype": "image\/jpeg",
+                "filetype": "jpg",
+                "pretty_type": "JPEG",
+                "user": "UBUJED9R8",
+                "editable": false,
+                "size": 272569,
+                "mode": "hosted",
+                "is_external": false,
+                "external_type": "",
+                "is_public": true,
+                "public_url_shared": false,
+                "display_as_bot": false,
+                "username": "",
+                "url_private": "https:\/\/files.slack.com\/files-pri\/TBTRZ9WDP-FMWR0EL2Z\/20190831_191810.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "url_private_download": "https:\/\/files.slack.com\/files-pri\/TBTRZ9WDP-FMWR0EL2Z\/download\/20190831_191810.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_64": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FMWR0EL2Z-befa18e328\/20190831_191810_64.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_80": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FMWR0EL2Z-befa18e328\/20190831_191810_80.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_360": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FMWR0EL2Z-befa18e328\/20190831_191810_360.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_360_w": 176,
+                "thumb_360_h": 360,
+                "thumb_480": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FMWR0EL2Z-befa18e328\/20190831_191810_480.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_480_w": 234,
+                "thumb_480_h": 480,
+                "thumb_160": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FMWR0EL2Z-befa18e328\/20190831_191810_160.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_720": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FMWR0EL2Z-befa18e328\/20190831_191810_720.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_720_w": 351,
+                "thumb_720_h": 720,
+                "thumb_800": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FMWR0EL2Z-befa18e328\/20190831_191810_800.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_800_w": 800,
+                "thumb_800_h": 1640,
+                "thumb_960": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FMWR0EL2Z-befa18e328\/20190831_191810_960.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_960_w": 468,
+                "thumb_960_h": 960,
+                "thumb_1024": "https:\/\/files.slack.com\/files-tmb\/TBTRZ9WDP-FMWR0EL2Z-befa18e328\/20190831_191810_1024.jpg?t=xoxe-401883336465-918109455682-930897274976-ddc24bdbc2d2f34c28f3663e16d36e4d",
+                "thumb_1024_w": 499,
+                "thumb_1024_h": 1024,
+                "image_exif_rotation": 8,
+                "original_w": 3264,
+                "original_h": 1592,
+                "permalink": "https:\/\/klubbenfordrygajavlar.slack.com\/files\/UBUJED9R8\/FMWR0EL2Z\/20190831_191810.jpg",
+                "permalink_public": "https:\/\/slack-files.com\/TBTRZ9WDP-FMWR0EL2Z-8da865a677",
+                "is_starred": false,
+                "has_rich_preview": false
+            }
+        ],
+        "upload": true,
+        "user": "UBUJED9R8",
+        "display_as_bot": false,
+        "ts": "1567271947.000100",
+        "client_msg_id": "b618ae28-60a3-4f73-91ce-a5187bd8c16c",
+        "thread_ts": "1567271032.003300",
+        "parent_user_id": "UBVFTJHPZ"
+    },
+    {
+        "client_msg_id": "694b90e2-1866-4030-afa2-c42a38ec45fa",
+        "type": "message",
+        "text": "<@UBUJED9R8>: Landet längtat ner i Europa, öar österut med blå och vit flagga\n<@UE5JTPBEU>: Gotland\n\n#intedrygkangeografi\n#hintärcharaderaliaspictionaryochnynnaiett\n#helenasfirande2k19\n#31augusti2k19\n#mittpåenåker",
+        "user": "UBU5S0SPN",
+        "ts": "1567276097.003900",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    }
+]

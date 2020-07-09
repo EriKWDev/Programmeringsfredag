@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/main.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Pick a Name!</h1>
+        <div id="error-box"></div>
+        <input id="username-input" type="text" placeholder="Username"><br>
+        <input id="room-input" type="text" placeholder="Room ID"><br>
+        <button id="login-button" onclick="checkForm()">Go!</button>
+        <p>Leave Room ID empty for overview of available games</p>
+        <h3>UTTT Beta 4.3.1 by Erik Gren</h3>
+    </div>
+
+    <script>
+
+        let errorBox = document.getElementById("error-box")
+
+        const formError = (message) => {
+            errorBox.innerHTML += `<p>${message}</p>`
+        }
+    
+        const checkForm = () => {
+            let userNameInput = document.getElementById("username-input")
+            let roomInput = document.getElementById("room-input")
+            let error = false
+
+            errorBox.innerHTML = ``
+
+            if(userNameInput.value.length < 4) {
+                formError(`Username is too short (${userNameInput.value.length} < 4)`)
+                error = true
+            }
+
+            if(error == false) {
+                login(userNameInput.value, roomInput.value)
+            }
+        }
+
+        const login = (username, roomId) => {
+            if(roomId.length == 0) {
+                window.location.href = `${window.location.origin}/${username}/`
+            } else {
+                window.location.href = `${window.location.origin}/${username}/${roomId}/`
+                // window.location.replace(`/${username}/${roomId}/`)
+                //window.open(`/${username}/${roomId}/`, "", "height=700,width=450")
+            }
+        }
+
+    </script>
+</body>
+</html>

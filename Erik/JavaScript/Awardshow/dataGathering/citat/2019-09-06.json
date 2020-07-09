@@ -1,0 +1,27 @@
+[
+    {
+        "client_msg_id": "a8c579fa-b4db-4715-ba51-699a23eeb47b",
+        "type": "message",
+        "text": "If soap tasted like coriander, I'd eat a lot more soap\n\n- Simon, kollega till <@UBU5S0SPN>\n\n#koriandersmakarpäckelmensimonhållerintemed\n#korianderidagenslunch\n#undvekdagenssalladdådeninnehöllkoriander\n#vuxnasteregistrerarallhonäterochdrickerunderfyradygnpågrundavforskningsstudie\n#fredagslunch\n#6september2k19\n#studiohusetvästrahamnennäracentralenimalmönäraköpenhamn",
+        "user": "UBU5S0SPN",
+        "ts": "1567806426.000900",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBU5S0SPN",
+            "ts": "1567806631.000000"
+        }
+    }
+]

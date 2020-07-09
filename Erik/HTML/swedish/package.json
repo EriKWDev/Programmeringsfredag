@@ -1,0 +1,19 @@
+{
+  "name": "swedish",
+  "version": "1.0.0",
+  "description": "Simple webplace to learn about Sweden and Swedish grammar",
+  "main": "main.js",
+  "dependencies": {
+    "markdown-it": "^9.1.0",
+    "markdown-it-abbr": "^1.0.4",
+    "markdown-it-container": "^2.0.0",
+    "markdown-it-footnote": "^3.0.2",
+    "markdown-it-mark": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ErikWDev",
+  "license": "ISC"
+}

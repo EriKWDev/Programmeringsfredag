@@ -1,0 +1,136 @@
+[
+    {
+        "client_msg_id": "ef3b08de-ece9-4533-8806-8e2b4adb5090",
+        "type": "message",
+        "text": "\"jag kan inga städer förutom London\"\n\n- <@UC2AMV7DW>\n\n#elinakangeografi\n#lingescyckelsemester\n#därgudbor\n#8augusti2k18\n",
+        "user": "UBVFTJHPZ",
+        "ts": "1533743546.000052",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "eec8c81111d3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-24\/404043855141_eec8c81111d338e01f57_72.jpg",
+            "first_name": "Olof",
+            "real_name": "Olof Linge",
+            "display_name": "Herr Ordförande",
+            "team": "TBTRZ9WDP",
+            "name": "olof.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "bb5f1667-b23f-43ec-8a67-c48a820c5c87",
+        "type": "message",
+        "text": "\"är det inte i citatgruppen är det inte sant\"\n\n- <@UBU7M4P4L> \n\n#truenews\n#källapådet\n#lingescyckelsemester\n#därgudbor\n#8augusti2k18",
+        "user": "UBVFTJHPZ",
+        "ts": "1533751290.000127",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "eec8c81111d3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-24\/404043855141_eec8c81111d338e01f57_72.jpg",
+            "first_name": "Olof",
+            "real_name": "Olof Linge",
+            "display_name": "Herr Ordförande",
+            "team": "TBTRZ9WDP",
+            "name": "olof.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1533751290.000127",
+        "reply_count": 3,
+        "reply_users_count": 2,
+        "latest_reply": "1533752848.000521",
+        "reply_users": [
+            "UBUJED9R8",
+            "UBVFTJHPZ"
+        ],
+        "replies": [
+            {
+                "user": "UBUJED9R8",
+                "ts": "1533751806.000400"
+            },
+            {
+                "user": "UBUJED9R8",
+                "ts": "1533751840.000341"
+            },
+            {
+                "user": "UBVFTJHPZ",
+                "ts": "1533752848.000521"
+            }
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "3b9bd331-e109-401b-ab9c-44370ff56713",
+        "type": "message",
+        "text": "#amentothat ",
+        "user": "UBUJED9R8",
+        "ts": "1533751806.000400",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1533751290.000127",
+        "parent_user_id": "UBVFTJHPZ"
+    },
+    {
+        "client_msg_id": "d91e513b-48dd-435e-b3de-d31349a66488",
+        "type": "message",
+        "text": "Jag föreställer mig förresten att ni cyklar omkring i en kyrka... ",
+        "user": "UBUJED9R8",
+        "ts": "1533751840.000341",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1533751290.000127",
+        "parent_user_id": "UBVFTJHPZ"
+    },
+    {
+        "client_msg_id": "2eb3ac2c-0d3d-4e16-8643-adfed5acc3d6",
+        "type": "message",
+        "text": "Nära, vi är i staden Gudshjem",
+        "user": "UBVFTJHPZ",
+        "ts": "1533752848.000521",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "eec8c81111d3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-24\/404043855141_eec8c81111d338e01f57_72.jpg",
+            "first_name": "Olof",
+            "real_name": "Olof Linge",
+            "display_name": "Herr Ordförande",
+            "team": "TBTRZ9WDP",
+            "name": "olof.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1533751290.000127",
+        "parent_user_id": "UBVFTJHPZ"
+    }
+]

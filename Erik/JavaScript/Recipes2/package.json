@@ -1,0 +1,17 @@
+{
+  "name": "recipes2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  },
+  "author": "ErikWDev",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "html5-to-pdf": "^3.2.0",
+    "markdown-it": "^10.0.0",
+    "yaml": "^1.7.2"
+  }
+}

@@ -1,0 +1,48 @@
+[
+    {
+        "type": "message",
+        "subtype": "channel_join",
+        "ts": "1532116193.000047",
+        "user": "UBU5S0SPN",
+        "text": "<@UBU5S0SPN> has joined the channel"
+    },
+    {
+        "type": "message",
+        "subtype": "channel_join",
+        "ts": "1532123825.000227",
+        "user": "UBVFTJHPZ",
+        "text": "<@UBVFTJHPZ> has joined the channel"
+    },
+    {
+        "type": "message",
+        "subtype": "channel_join",
+        "ts": "1532123945.000215",
+        "user": "UBU7M4P4L",
+        "text": "<@UBU7M4P4L> has joined the channel"
+    },
+    {
+        "type": "message",
+        "subtype": "channel_topic",
+        "ts": "1532124063.000235",
+        "user": "UBU5S0SPN",
+        "text": "<@UBU5S0SPN> set the channel topic: Citat och dumma kommentarer",
+        "topic": "Citat och dumma kommentarer"
+    },
+    {
+        "type": "message",
+        "subtype": "channel_name",
+        "ts": "1532124063.000246",
+        "user": "UBU5S0SPN",
+        "text": "<@UBU5S0SPN> has renamed the channel from \"random\" to \"citat\"",
+        "old_name": "random",
+        "name": "citat"
+    },
+    {
+        "type": "message",
+        "subtype": "channel_purpose",
+        "ts": "1532124063.000270",
+        "user": "UBU5S0SPN",
+        "text": "<@UBU5S0SPN> set the channel purpose: Samling av våra citat",
+        "purpose": "Samling av våra citat"
+    }
+]

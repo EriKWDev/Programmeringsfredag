@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/main.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ultimate Tic Tac Toe</title>
+</head>
+<body>
+    <div id="main-container">
+        <div id="info">
+            <h1 class="title">UTTT</h1>
+            <div id="info-box">
+
+            </div>
+            <div id="error-box">
+
+            </div>
+        </div>
+
+        <div id="game">
+            <br>
+            <div id="uttt">
+                
+            </div>
+        </div>
+
+         <div id="chat-container">
+            <h1 class="title">Chat</h1>
+            <textarea id="chat-input" rows="5" cols="30" type="text" placeholder="Message"></textarea><br>
+            <button onClick="sendChatMessage()">Send</button>
+            <div id="chat">
+
+            </div>
+         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+        <script src="/static/client.js"></script>
+    </div>
+</body>
+</html>

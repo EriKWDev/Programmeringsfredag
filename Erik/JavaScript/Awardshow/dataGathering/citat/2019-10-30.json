@@ -1,0 +1,37 @@
+[
+    {
+        "client_msg_id": "3b70b1f1-b5fc-4c7f-96b6-a941e0f49557",
+        "type": "message",
+        "text": "\"Kan inte ta med mig datorn hem har för mycket alkohol i väskan.\"\n\n- <@UBUJED9R8>\n\n#emiläralkolist\n#efterenkvällpårydbergs\n#30oktober2k19\n#däremilkännersigviktig",
+        "user": "UBU7M4P4L",
+        "ts": "1572477039.004000",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "9e6107a69690",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/403948118455_9e6107a69690d0733369_72.png",
+            "first_name": "Albin",
+            "real_name": "Albin Linge",
+            "display_name": "Mobboffer",
+            "team": "TBTRZ9WDP",
+            "name": "gitarr.abbe",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1572477039.004000",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1572554443.000100",
+        "reply_users": [
+            "UBUJED9R8"
+        ],
+        "replies": [
+            {
+                "user": "UBUJED9R8",
+                "ts": "1572554443.000100"
+            }
+        ],
+        "subscribed": false
+    }
+]

@@ -1,0 +1,81 @@
+[
+    {
+        "client_msg_id": "8a827144-4644-47a6-840a-7f6dfa8617fd",
+        "type": "message",
+        "text": "<@UBVFTJHPZ>: \"Jag är inte så dum som min bror ser ut\"\n<@UBUJED9R8>: \"Nä...\"\n\n#allamobbaralbin\n#underelledningen\n#15sep2k18",
+        "user": "UBUJED9R8",
+        "ts": "1537038241.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "5b1ba8d09820",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402811974898_5b1ba8d09820e7161b7d_72.jpg",
+            "first_name": "Emil",
+            "real_name": "Emil Andersson",
+            "display_name": "Missade jag något",
+            "team": "TBTRZ9WDP",
+            "name": "emil.a.privat",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1537038241.000100",
+        "reply_count": 1,
+        "reply_users_count": 1,
+        "latest_reply": "1537038327.000100",
+        "reply_users": [
+            "UBU7M4P4L"
+        ],
+        "replies": [
+            {
+                "user": "UBU7M4P4L",
+                "ts": "1537038327.000100"
+            }
+        ],
+        "subscribed": false
+    },
+    {
+        "client_msg_id": "239e27ed-3285-4d5a-96cb-57811c0bb82c",
+        "type": "message",
+        "text": "Tur att vi är trillingar :wink:",
+        "user": "UBU7M4P4L",
+        "ts": "1537038327.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "9e6107a69690",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/403948118455_9e6107a69690d0733369_72.png",
+            "first_name": "Albin",
+            "real_name": "Albin Linge",
+            "display_name": "Mobboffer",
+            "team": "TBTRZ9WDP",
+            "name": "gitarr.abbe",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "thread_ts": "1537038241.000100",
+        "parent_user_id": "UBUJED9R8"
+    },
+    {
+        "client_msg_id": "6e7f6cf6-7f47-473f-8c57-fc8c3a3788ee",
+        "type": "message",
+        "text": "<@UBU5S0SPN>: vet ni var ni är och vart ni ska?\nEn av mina äventyrsscouter: vi ska framåt och vi är här\n\n#vadåkartläsning\n#smugglarhajk\n#skogenmellanbrösarpochhavet\n#15sep2k18",
+        "user": "UBU5S0SPN",
+        "ts": "1537039096.000100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    }
+]

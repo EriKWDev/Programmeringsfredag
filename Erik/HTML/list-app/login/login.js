@@ -21,7 +21,11 @@ firebase.auth().onAuthStateChanged((user) => {
 
 const loginGoogle = () => {
     baseProvider = new firebase.auth.GoogleAuthProvider()
-    firebase.auth().signInWithPopup(baseProvider).catch((error) => {
+    loginWithProvider(baseProvider)
+}
+
+const loginWithProvider = (baseProvider) => {
+    firebase.auth().signInWithRedirect(baseProvider).catch((error) => {
         console.error(error.message)
     })
 }

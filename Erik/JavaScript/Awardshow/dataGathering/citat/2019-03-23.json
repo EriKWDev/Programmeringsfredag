@@ -1,0 +1,90 @@
+[
+    {
+        "client_msg_id": "db6feb6c-8b6c-46c3-9514-3938cdde022b",
+        "type": "message",
+        "text": "\"Ni är mina enda vänner\" \n\n- <@UBUJED9R8> \n\n#emilmissarvänner\n#albinochjesus34årskalas\n#23mars2k19",
+        "user": "UBVFTJHPZ",
+        "ts": "1553369058.001800",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "eec8c81111d3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-24\/404043855141_eec8c81111d338e01f57_72.jpg",
+            "first_name": "Olof",
+            "real_name": "Olof Linge",
+            "display_name": "Herr Ordförande",
+            "team": "TBTRZ9WDP",
+            "name": "olof.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBVFTJHPZ",
+            "ts": "1553370641.000000"
+        }
+    },
+    {
+        "client_msg_id": "9695d0ba-6ef2-4848-8d3a-9361b358ba28",
+        "type": "message",
+        "text": "\"vem smeker mina tår? Det känns inte som Albins tår?\"\n\n- <@UBUJED9R8> \n\n#pedalhångel\n#emilmissadethea\n#albinochjesus34årskalas\n#23mars2k19",
+        "user": "UBVFTJHPZ",
+        "ts": "1553369233.004100",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "eec8c81111d3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-24\/404043855141_eec8c81111d338e01f57_72.jpg",
+            "first_name": "Olof",
+            "real_name": "Olof Linge",
+            "display_name": "Herr Ordförande",
+            "team": "TBTRZ9WDP",
+            "name": "olof.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "ce76da27-4f47-4b68-991b-76942f27c0d7",
+        "type": "message",
+        "text": "\"jag skrev inte fel. Jag skrev vad jag hörde\"\n\n- <@UBVFTJHPZ> \n\n#ingetjävhärinte\n#endainteända\n#albinochjesus34årskalas\n#23mars2k19",
+        "user": "UBVFTJHPZ",
+        "ts": "1553375854.001900",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "eec8c81111d3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-24\/404043855141_eec8c81111d338e01f57_72.jpg",
+            "first_name": "Olof",
+            "real_name": "Olof Linge",
+            "display_name": "Herr Ordförande",
+            "team": "TBTRZ9WDP",
+            "name": "olof.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "e109087b-1458-4cee-8738-1969122cdd2b",
+        "type": "message",
+        "text": "\"ibland vill man bara spy\"\n\n- <@UBUJED9R8> \n\n#emilrelaterar\n#vademilochhanssystersonhargemensamt\n#albinochjesus34årskalas\n#23mars2k19",
+        "user": "UBVFTJHPZ",
+        "ts": "1553382460.002300",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "eec8c81111d3",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-24\/404043855141_eec8c81111d338e01f57_72.jpg",
+            "first_name": "Olof",
+            "real_name": "Olof Linge",
+            "display_name": "Herr Ordförande",
+            "team": "TBTRZ9WDP",
+            "name": "olof.linge",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    }
+]

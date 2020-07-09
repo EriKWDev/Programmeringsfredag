@@ -1,0 +1,16 @@
+{
+  "name": "recipes3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "nodemon ."
+  },
+  "author": "ErikWDev",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "js-yaml": "^3.13.1",
+    "puppeteer": "^2.0.0"
+  }
+}

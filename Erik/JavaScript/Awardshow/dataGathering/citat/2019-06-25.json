@@ -1,0 +1,76 @@
+[
+    {
+        "client_msg_id": "cbd2d6e6-7069-45ba-bd08-14cd171e09be",
+        "type": "message",
+        "text": "\"Jag har ont i huvudet, för jag dragit upp för mycket snor i hjärnan\"\n\n- <@UBUJUN49J> \n\n#jesushasblessedthisquote\n#jesusbörjarblisjuk\n#jesusfårhelasigsjälv\n#magnussonochanderssontilllondon\n#25juni2k19\n#askItalianbredvidprimarkpåoxfordstreetnärabakerstreet\n#london",
+        "user": "UBU5S0SPN",
+        "ts": "1561471112.000700",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    },
+    {
+        "client_msg_id": "7b141c5e-10f5-44b0-9164-2c98fe9e0eb5",
+        "type": "message",
+        "text": "\"Jag sa fel på att Emil är Caspians farbror, fuck morbror\"\n\n- <@UBUJUN49J> \n\n#jesushargjortförmycketvattentillvin\n#jesusberättaromgamlacitat\n#jesuskanfortfarandeinteemilsochcaspianssläktskap\n#jesuslärsigaldrig\n#jesusharfortfarandeintelärtsigemilssysterskön\n#25juni2k19\n#bar+blocksteakhouseutanförkingscrossnärahotellet\n#london",
+        "user": "UBU5S0SPN",
+        "ts": "1561492962.004800",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "455b3a6c4671",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-07-22\/402106681232_455b3a6c46713daedab5_72.jpg",
+            "first_name": "Therese",
+            "real_name": "Therese Magnusson",
+            "display_name": "Vuxnaste",
+            "team": "TBTRZ9WDP",
+            "name": "dragonthestral",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        },
+        "edited": {
+            "user": "UBU5S0SPN",
+            "ts": "1561493759.000000"
+        }
+    },
+    {
+        "type": "message",
+        "subtype": "slackbot_response",
+        "text": "Go home Emil, you're drunk",
+        "user": "USLACKBOT",
+        "ts": "1561492963.004900"
+    },
+    {
+        "client_msg_id": "e57fe096-4e35-4470-a83b-57960874c56f",
+        "type": "message",
+        "text": "\"Varför har jag inte cancer?\"\n\n- <@UBUJUN49J> \n\n#jesushargjortförmycketvattentillvin\n#jesusbotarallt\n#jesustrorattfeberärcancer\n#25juni2k19\n#bar+blocksteakhouseutanförkingscrossnärahotellet\n#london",
+        "user": "UEZC1KXL5",
+        "ts": "1561493636.007700",
+        "team": "TBTRZ9WDP",
+        "user_team": "TBTRZ9WDP",
+        "source_team": "TBTRZ9WDP",
+        "user_profile": {
+            "avatar_hash": "097ddaf3ce38",
+            "image_72": "https:\/\/avatars.slack-edge.com\/2018-12-20\/508617771697_097ddaf3ce38a7f676df_72.jpg",
+            "first_name": "Erik",
+            "real_name": "Erik W Gren",
+            "display_name": "Han med rösträtt",
+            "team": "TBTRZ9WDP",
+            "name": "erikwilhelmgren",
+            "is_restricted": false,
+            "is_ultra_restricted": false
+        }
+    }
+]
