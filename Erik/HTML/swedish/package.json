@@ -4,7 +4,7 @@
   "description": "Simple webplace to learn about Sweden and Swedish grammar",
   "main": "main.js",
   "dependencies": {
-    "markdown-it": "^9.1.0",
+    "markdown-it": "^12.3.2",
     "markdown-it-abbr": "^1.0.4",
     "markdown-it-container": "^2.0.0",
     "markdown-it-footnote": "^3.0.2",
